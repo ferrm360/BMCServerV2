@@ -5,9 +5,9 @@ using System;
 
 namespace Service.Factories
 {
-    public class EntityFactory : IEntityFactory
+    public static class EntityFactory
     {
-        public Player CreatePlayerEntity(PlayerDTO playerDto, string passwordHash)
+        public static Player CreatePlayerEntity(PlayerDTO playerDto, string passwordHash)
         {
             return new Player
             {
@@ -17,7 +17,7 @@ namespace Service.Factories
             };
         }
 
-        public Profile CreateProfileEntity(int playerId)
+        public static Profile CreateProfileEntity(int playerId)
         {
             return new Profile
             {
@@ -31,7 +31,7 @@ namespace Service.Factories
             };
         }
 
-        public PlayerScores CreatePlayerScoresEntity(int playerId)
+        public static PlayerScores CreatePlayerScoresEntity(int playerId)
         {
             return new PlayerScores
             {
@@ -41,7 +41,7 @@ namespace Service.Factories
             };
         }
 
-        public FriendRequest CreateFriendRequest(int senderId, int receiverId)
+        public static FriendRequest CreateFriendRequest(int senderId, int receiverId)
         {
             return new FriendRequest
             {
@@ -51,7 +51,7 @@ namespace Service.Factories
             };
         }
 
-        public ChatMessages CreateChatMessage(int senderId, int receiverId, string messageText)
+        public static ChatMessages CreateChatMessage(int senderId, int receiverId, string messageText)
         {
             return new ChatMessages
             {
@@ -62,7 +62,7 @@ namespace Service.Factories
             };
         }
 
-        public GameLobby CreateGameLobby(string lobbyName, int hostId, string password = null)
+        public static GameLobby CreateGameLobby(string lobbyName, int hostId, string password = null)
         {
             return new GameLobby
             {
@@ -72,7 +72,7 @@ namespace Service.Factories
             };
         }
 
-        public GuestPlayers CreateGuestPlayer(string username, int statusId)
+        public static GuestPlayers CreateGuestPlayer(string username, int statusId)
         {
             return new GuestPlayers
             {
@@ -82,7 +82,7 @@ namespace Service.Factories
             };
         }
 
-        public PasswordResetRequests CreatePasswordResetRequest(int playerId, string resetCode)
+        public static PasswordResetRequests CreatePasswordResetRequest(int playerId, string resetCode)
         {
             return new PasswordResetRequests
             {

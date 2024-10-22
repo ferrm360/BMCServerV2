@@ -5,14 +5,10 @@ using Service.DTO;
 using Service.Results;
 using Service.Utilities.Constans;
 using Service.Utilities.Helpers;
-using Service.Utilities.Mapper;
+using Service.Utilities;
 using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Implements
 {
@@ -22,11 +18,17 @@ namespace Service.Implements
         private readonly IProfileRepository _profileRepository;
         private readonly string _imageFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "uploads", "avatars");
 
-        public ProfileService(IPlayerRepository playerRepository, IProfileRepository profileRepository)
+        // Constructor sin parámetros: Inicializa los repositorios directamente
+        public ProfileService()
         {
-            _playerRepository = playerRepository;
-            _profileRepository = profileRepository;
+            // Crear instancia del contexto de Entity Framework
+            var context = new BMCEntities();
 
+            // Inicializar los repositorios directamente
+            _playerRepository = new PlayerRepository(context);
+            _profileRepository = new ProfileRepository(context);
+
+            // Crear la carpeta para las imágenes si no existe
             if (!Directory.Exists(_imageFolderPath))
             {
                 Directory.CreateDirectory(_imageFolderPath);
@@ -43,23 +45,22 @@ namespace Service.Implements
                 {
                     return OperationResult.Failure(ErrorMessages.DifferentPassword);
                 }
-                PlayerDTO playerDTO = new PlayerDTO();
-                playerDTO.Password = newPassword;
+
                 string passwordHash = PasswordHelper.HashPassword(newPassword);
                 _playerRepository.UpdatePasswordHash(username, passwordHash);
                 return OperationResult.SuccessResult();
-
             }
             catch (SqlException ex)
             {
+                CustomLogger.Error("", ex);
                 string errorMessage = SqlErrorHandler.GetErrorMessage(ex);
                 return OperationResult.Failure(errorMessage);
             }
             catch (Exception ex)
             {
+                CustomLogger.Error("", ex);
                 return OperationResult.Failure(ErrorMessages.GeneralException);
             }
-            
         }
 
         public OperationResult UpdateProfilePicture(string username, byte[] imageBytes, string fileName)
@@ -93,11 +94,13 @@ namespace Service.Implements
             }
             catch (SqlException ex)
             {
+                CustomLogger.Error("", ex);
                 string errorMessage = SqlErrorHandler.GetErrorMessage(ex);
                 return OperationResult.Failure(errorMessage);
             }
             catch (Exception ex)
             {
+                CustomLogger.Error("", ex);
                 return OperationResult.Failure("Error while updating profile picture: " + ex.Message);
             }
         }
@@ -125,6 +128,7 @@ namespace Service.Implements
             }
             catch (Exception ex)
             {
+                CustomLogger.Error("", ex);
                 return OperationResult.Failure(ErrorMessages.GeneralException);
             }
         }

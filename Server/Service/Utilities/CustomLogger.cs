@@ -5,11 +5,11 @@ using System.IO;
 
 namespace Service.Utilities
 {
-    public static class Logger
+    public static class CustomLogger
     {
-        private static readonly ILog logger = LogManager.GetLogger(typeof(Logger));
+        private static readonly ILog logger = LogManager.GetLogger(typeof(CustomLogger));
 
-        static Logger()
+        static CustomLogger()
         {
             XmlConfigurator.Configure();
         }

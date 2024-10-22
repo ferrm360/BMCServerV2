@@ -4,12 +4,17 @@ using DataAccess;
 using DataAccess.Repositories;
 using Service.Contracts;
 using Service.DTO;
+
+
+
 using Service.Results;
 using Service.Utilities.Helpers;
 using Service.Utilities;
 using Service.Utilities.Constans;
 using Service.Factories;
 using Service.Utilities.Validators;
+using log4net.Repository.Hierarchy;
+using Service.Utilities.Mapper;
 
 namespace Service.Implements
 {
@@ -18,43 +23,51 @@ namespace Service.Implements
         private readonly IPlayerRepository _playerRepository;
         private readonly IProfileRepository _profileRepository;
         private readonly IPlayerScoresRepository _scoreRepository;
-        private readonly IEntityFactory _entityFactory;
-        private readonly ValidationAccountService _validationService;
 
-        public AccountService(IPlayerRepository playerRepository,
-                              IProfileRepository profileRepository,
-                              IPlayerScoresRepository scoreRepository,
-        IEntityFactory entityFactory,
-                              ValidationAccountService validationService)
+        public AccountService()
+        {
+            var context = new BMCEntities();
+            _playerRepository = new PlayerRepository(context);
+            _profileRepository = new ProfileRepository(context);
+            _scoreRepository = new PlayerScoresRepository(context);
+        }
+
+        public AccountService(IPlayerRepository playerRepository, IProfileRepository profileRepository, IPlayerScoresRepository scoreRepository)
         {
             _playerRepository = playerRepository;
             _profileRepository = profileRepository;
             _scoreRepository = scoreRepository;
-            _entityFactory = entityFactory;
-            _validationService = validationService;
         }
 
         public OperationResult Register(PlayerDTO player)
         {
             try
             {
-                var validationResult = _validationService.ValidatePlayerRegistration(player);
-                if (!validationResult.IsSuccess)
+                // Validar si el nombre de usuario o email ya existen
+                if (_playerRepository.GetByUsername(player.Username) != null)
                 {
-                    return validationResult;
+                    return OperationResult.Failure(ErrorMessages.DuplicateUsername);
                 }
 
+                if (_playerRepository.GetByEmail(player.Email) != null)
+                {
+                    return OperationResult.Failure(ErrorMessages.DuplicateEmail);
+                }
+
+                // Hash del password
                 string passwordHash = PasswordHelper.HashPassword(player.Password);
 
-                var playerEntity = _entityFactory.CreatePlayerEntity(player, passwordHash);
+                // Usar EntityFactory estático para crear las entidades
+                var playerEntity = EntityFactory.CreatePlayerEntity(player, passwordHash);
+                var profileEntity = EntityFactory.CreateProfileEntity(playerEntity.PlayerID);
+                var playerScoresEntity = EntityFactory.CreatePlayerScoresEntity(playerEntity.PlayerID);
 
-                var profileEntity = _entityFactory.CreateProfileEntity(playerEntity.PlayerID);
-                var playerScoresEntity = _entityFactory.CreatePlayerScoresEntity(playerEntity.PlayerID);
-
+                // Insertar las entidades en la base de datos
                 _playerRepository.Add(playerEntity);
                 _profileRepository.Add(profileEntity);
                 _scoreRepository.Add(playerScoresEntity);
 
+                // Guardar cambios en la base de datos
                 _playerRepository.Save();
                 _profileRepository.Save();
                 _scoreRepository.Save();
@@ -68,7 +81,7 @@ namespace Service.Implements
             }
             catch (Exception ex)
             {
-                Logger.Error("", ex);
+                CustomLogger.Fatal("Unexpected error during registration", ex);
                 return OperationResult.Failure(ErrorMessages.GeneralException);
             }
         }
@@ -77,31 +90,30 @@ namespace Service.Implements
         {
             try
             {
-                var validationResult = _validationService.ValidatePlayerLogin(username, password);
-                if (!validationResult.IsSuccess)
+                var player = _playerRepository.GetByUsername(username);
+                if (player == null)
                 {
-                    return validationResult;
+                    return OperationResult.Failure(ErrorMessages.UserNotFound);
                 }
 
-                var player = validationResult.Data as Player;
-                var playerDTO = new PlayerDTO
+                bool isPasswordValid = PasswordHelper.VerifyPassword(password, player.PasswordHash);
+                if (!isPasswordValid)
                 {
-                    PlayerID = player.PlayerID,
-                    Username = player.Username,
-                    Email = player.Email
-                };
+                    return OperationResult.Failure(ErrorMessages.InvalidPassword);
+                }
 
-                return OperationResult.SuccessResult(playerDTO);
+                var playerDTO = PlayerMapper.ToDTO(player);
+                return OperationResult.SuccessResult();
             }
             catch (SqlException ex)
             {
-                Logger.Error("SQL error during login", ex);
+                CustomLogger.Error("SQL error during login", ex);
                 string errorMessage = SqlErrorHandler.GetErrorMessage(ex);
                 return OperationResult.Failure(errorMessage);
             }
             catch (Exception ex)
             {
-                Logger.Error("Unexpected error during login", ex);
+                CustomLogger.Error("Unexpected error during login", ex);
                 return OperationResult.Failure(ErrorMessages.GeneralException);
             }
         }

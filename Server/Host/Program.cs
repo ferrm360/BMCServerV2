@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.IO;
 using System.ServiceModel;
 using log4net;
@@ -24,6 +25,8 @@ namespace Host
             {
                 using (ServiceHost accountServiceHost = new ServiceHost(typeof(AccountService)))
                 using (ServiceHost chatServiceHost = new ServiceHost(typeof(ChatService)))
+                using (ServiceHost profileServiceHost = new ServiceHost(typeof(ProfileService)))
+                using (ServiceHost friendshipServiceHost = new ServiceHost(typeof(FriendshipService)))
                 {
                     accountServiceHost.Open();
                     Console.WriteLine("AccountService is running...");
@@ -31,6 +34,14 @@ namespace Host
                     chatServiceHost.Open();
                     logger.Info("ChatService started successfully.");
                     Console.WriteLine("ChatService is running...");
+
+                    profileServiceHost.Open();
+                    logger.Info("ProfileService started successfully.");
+                    Console.WriteLine("ProfileService is running...");
+
+                    friendshipServiceHost.Open();
+                    logger.Info("friendshipService started successfully.");
+                    Console.WriteLine("friendshipService is running...");
 
                     logger.Info("Both services are up and running.");
                     Console.WriteLine("Services are up and running.");
@@ -55,7 +66,7 @@ namespace Host
             }
             catch (Exception ex)
             {
-                logger.Fatal("Unexpected error in the host. "+ ex.ToString());
+                logger.Fatal("Unexpected error in the host. " + ex.ToString());
                 Console.WriteLine("Fatal error: " + ex.ToString());
             }
             finally
