@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DataAccess.Repositories
 {
@@ -12,7 +8,7 @@ namespace DataAccess.Repositories
         PlayerScores GetScoresByPlayerId(int playerId);
         void IncrementWins(int playerId);
         void IncrementLosses(int playerId);
-        void AddPlayerScores(PlayerScores playerScores);
-
+        void Add(PlayerScores playerScores);
+        void Save();
     }
 }

@@ -3,11 +3,13 @@ using DataAccess.Repositories;
 using Service.Contracts;
 using Service.DTO;
 using Service.Results;
+using Service.Utilities.Constans;
 using Service.Utilities.Helpers;
 using Service.Utilities.Mapper;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,14 +19,19 @@ namespace Service.Implements
     public class ProfileService : IProfileService
     {
         private readonly IPlayerRepository _playerRepository;
+        private readonly IProfileRepository _profileRepository;
+        private readonly string _imageFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "uploads", "avatars");
 
-        public ProfileService() 
+        public ProfileService(IPlayerRepository playerRepository, IProfileRepository profileRepository)
         {
-            var context = new BMCEntities();
-            _playerRepository = new PlayerRepository(context);
-        }
+            _playerRepository = playerRepository;
+            _profileRepository = profileRepository;
 
-       
+            if (!Directory.Exists(_imageFolderPath))
+            {
+                Directory.CreateDirectory(_imageFolderPath);
+            }
+        }
 
         public OperationResult UpdatePassword(string username, string newPassword, string oldPassword)
         {
@@ -34,7 +41,7 @@ namespace Service.Implements
                 bool isPasswordValid = PasswordHelper.VerifyPassword(oldPassword, player.PasswordHash);
                 if (!isPasswordValid)
                 {
-                    return OperationResult.Failure("Error.InvalidPassword");
+                    return OperationResult.Failure(ErrorMessages.DifferentPassword);
                 }
                 PlayerDTO playerDTO = new PlayerDTO();
                 playerDTO.Password = newPassword;
@@ -43,23 +50,83 @@ namespace Service.Implements
                 return OperationResult.SuccessResult();
 
             }
-            catch (SqlException ex) 
+            catch (SqlException ex)
             {
                 string errorMessage = SqlErrorHandler.GetErrorMessage(ex);
                 return OperationResult.Failure(errorMessage);
-
+            }
+            catch (Exception ex)
+            {
+                return OperationResult.Failure(ErrorMessages.GeneralException);
             }
             
         }
 
-        public OperationResult UpdateProfilePicture(string url)
+        public OperationResult UpdateProfilePicture(string username, byte[] imageBytes, string fileName)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var player = _playerRepository.GetByUsername(username);
+                if (player == null)
+                {
+                    return OperationResult.Failure(ErrorMessages.UserNotFound);
+                }
+
+                var profile = _profileRepository.GetProfileByPlayerId(player.PlayerID);
+                if (profile == null)
+                {
+                    return OperationResult.Failure(ErrorMessages.ProfileNotFound);
+                }
+
+                string uniqueFileName = $"{player.Username}_{Guid.NewGuid()}{Path.GetExtension(fileName)}";
+                string filePath = Path.Combine(_imageFolderPath, uniqueFileName);
+
+                File.WriteAllBytes(filePath, imageBytes);
+
+                string imageUrl = Path.Combine("/uploads/avatars", uniqueFileName);
+
+                profile.AvatarURL = imageUrl;
+                _profileRepository.Update(profile);
+                _profileRepository.Save();
+
+                return OperationResult.SuccessResult();
+            }
+            catch (SqlException ex)
+            {
+                string errorMessage = SqlErrorHandler.GetErrorMessage(ex);
+                return OperationResult.Failure(errorMessage);
+            }
+            catch (Exception ex)
+            {
+                return OperationResult.Failure("Error while updating profile picture: " + ex.Message);
+            }
         }
 
         public OperationResult UpdateUsername(string currentUsername, string newUsername)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (_playerRepository.GetByUsername(newUsername) != null)
+                {
+                    return OperationResult.Failure(ErrorMessages.DuplicateUsername);
+                }
+
+                var player = _playerRepository.GetByUsername(currentUsername);
+                if (player == null)
+                {
+                    return OperationResult.Failure(ErrorMessages.UserNotFound);
+                }
+
+                player.Username = newUsername;
+                _playerRepository.Update(player);
+                _playerRepository.Save();
+
+                return OperationResult.SuccessResult();
+            }
+            catch (Exception ex)
+            {
+                return OperationResult.Failure(ErrorMessages.GeneralException);
+            }
         }
     }
 }

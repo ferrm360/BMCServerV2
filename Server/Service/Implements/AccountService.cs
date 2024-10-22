@@ -6,10 +6,10 @@ using Service.Contracts;
 using Service.DTO;
 using Service.Results;
 using Service.Utilities.Helpers;
-using Service.Utilities.Mapper;
 using Service.Utilities;
-using System.Web.UI.WebControls;
 using Service.Utilities.Constans;
+using Service.Factories;
+using Service.Utilities.Validators;
 
 namespace Service.Implements
 {
@@ -18,36 +18,46 @@ namespace Service.Implements
         private readonly IPlayerRepository _playerRepository;
         private readonly IProfileRepository _profileRepository;
         private readonly IPlayerScoresRepository _scoreRepository;
+        private readonly IEntityFactory _entityFactory;
+        private readonly ValidationAccountService _validationService;
 
-        public AccountService()
-        {
-            var context = new BMCEntities();
-            _playerRepository = new PlayerRepository(context);
-        }
-
-        public AccountService(IPlayerRepository playerRepository)
+        public AccountService(IPlayerRepository playerRepository,
+                              IProfileRepository profileRepository,
+                              IPlayerScoresRepository scoreRepository,
+        IEntityFactory entityFactory,
+                              ValidationAccountService validationService)
         {
             _playerRepository = playerRepository;
+            _profileRepository = profileRepository;
+            _scoreRepository = scoreRepository;
+            _entityFactory = entityFactory;
+            _validationService = validationService;
         }
 
         public OperationResult Register(PlayerDTO player)
         {
             try
             {
-                if (_playerRepository.GetByUsername(player.Username) != null)
+                var validationResult = _validationService.ValidatePlayerRegistration(player);
+                if (!validationResult.IsSuccess)
                 {
-                    return OperationResult.Failure(ErrorMessages.DuplicateUsername);
+                    return validationResult;
                 }
-
-                if (_playerRepository.GetByEmail(player.Email) != null)
-                {
-                    return OperationResult.Failure(ErrorMessages.DuplicateEmail);
-                }
-
 
                 string passwordHash = PasswordHelper.HashPassword(player.Password);
-                var playerEntity = PlayerMapper.ToEntity(player, passwordHash);
+
+                var playerEntity = _entityFactory.CreatePlayerEntity(player, passwordHash);
+
+                var profileEntity = _entityFactory.CreateProfileEntity(playerEntity.PlayerID);
+                var playerScoresEntity = _entityFactory.CreatePlayerScoresEntity(playerEntity.PlayerID);
+
                 _playerRepository.Add(playerEntity);
+                _profileRepository.Add(profileEntity);
+                _scoreRepository.Add(playerScoresEntity);
+
+                _playerRepository.Save();
+                _profileRepository.Save();
+                _scoreRepository.Save();
 
                 return OperationResult.SuccessResult();
             }
@@ -58,7 +68,7 @@ namespace Service.Implements
             }
             catch (Exception ex)
             {
-                Logger.Fatal("Unexpected error during login", ex);
+                Logger.Error("", ex);
                 return OperationResult.Failure(ErrorMessages.GeneralException);
             }
         }
@@ -67,20 +77,21 @@ namespace Service.Implements
         {
             try
             {
-                var player = _playerRepository.GetByUsername(username);
-                if (player == null)
+                var validationResult = _validationService.ValidatePlayerLogin(username, password);
+                if (!validationResult.IsSuccess)
                 {
-                    return OperationResult.Failure(ErrorMessages.UserNotFound);
+                    return validationResult;
                 }
 
-                bool isPasswordValid = PasswordHelper.VerifyPassword(password, player.PasswordHash);
-                if (!isPasswordValid)
+                var player = validationResult.Data as Player;
+                var playerDTO = new PlayerDTO
                 {
-                    return OperationResult.Failure(ErrorMessages.InvalidPassword);
-                }
+                    PlayerID = player.PlayerID,
+                    Username = player.Username,
+                    Email = player.Email
+                };
 
-                var playerDTO = PlayerMapper.ToDTO(player);
-                return OperationResult.SuccessResult();
+                return OperationResult.SuccessResult(playerDTO);
             }
             catch (SqlException ex)
             {

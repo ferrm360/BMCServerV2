@@ -15,7 +15,7 @@ namespace Service.Contracts
         [OperationContract]
         OperationResult UpdatePassword(string username, string newPassword, string oldPassword);
         [OperationContract]
-        OperationResult UpdateProfilePicture(string url);
+        OperationResult UpdateProfilePicture(string username, byte[] imageBytes, string fileName);
         [OperationContract]
         OperationResult UpdateUsername(string currentUsername, string newUsername);
     }

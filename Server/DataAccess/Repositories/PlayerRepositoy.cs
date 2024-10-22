@@ -106,5 +106,37 @@ namespace DataAccess.Repositories
         {
             _context.SaveChanges();
         }
+
+        public void Update(Player player)
+        {
+            if (player == null)
+            {
+                throw new ArgumentNullException(nameof(player), "Player entity cannot be null.");
+            }
+
+            try
+            {
+                _context.Entry(player).State = EntityState.Modified;
+
+                _context.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new DataAccessException("An error occurred while updating the database during the player update.", ex);
+            }
+            catch (DbEntityValidationException ex)
+            {
+                throw new DataAccessException("Entity validation failed while updating the player.", ex);
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new DataAccessException("An invalid operation occurred while updating the player.", ex);
+            }
+        }
+
     }
 }

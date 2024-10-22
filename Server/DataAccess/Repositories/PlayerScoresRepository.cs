@@ -29,7 +29,7 @@ namespace DataAccess.Repositories
             }
             catch (SqlException)
             {
-                throw new;
+                throw;
             }
             catch (Exception ex)
             {
@@ -114,7 +114,7 @@ namespace DataAccess.Repositories
             }
         }
 
-        public void AddPlayerScores(PlayerScores playerScores)
+        public void Add(PlayerScores playerScores)
         {
             if (playerScores == null)
             {
@@ -124,7 +124,6 @@ namespace DataAccess.Repositories
             try
             {
                 _context.UserScores.Add(playerScores);
-                Save();
             }
             catch (DbUpdateException ex)
             {
@@ -145,7 +144,7 @@ namespace DataAccess.Repositories
             _context.Entry(scores).State = System.Data.Entity.EntityState.Modified;
         }
 
-        private void Save()
+        public void Save()
         {
             _context.SaveChanges();
         }

@@ -13,5 +13,7 @@ namespace Service.Utilities.Constans
         public const string DuplicateEmail = "Error.DuplicateEmail";
         public const string UserNotFound = "Error.UserNotFound";
         public const string InvalidPassword = "Error.InvalidPassword";
+        public const string DifferentPassword = "Error.DifferentPassword";
+        public const string ProfileNotFound = "Error.ProfileNotFound";
     }
 }
