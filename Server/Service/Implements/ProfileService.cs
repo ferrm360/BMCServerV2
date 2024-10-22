@@ -128,5 +128,32 @@ namespace Service.Implements
                 return OperationResult.Failure(ErrorMessages.GeneralException);
             }
         }
+
+        public OperationResult UpdateProfile(string username, Profile profile)
+        {
+            try
+            {
+                if (profile == null)
+                {
+                    return OperationResult.Failure("Invalid profile data.");
+                }
+
+                var player = _playerRepository.GetByUsername(username);
+                if (player == null)
+                {
+                    return OperationResult.Failure("User not found.");
+                }
+
+                profile.PlayerID = player.PlayerID;
+
+                _profileRepository.Update(profile);
+
+                return OperationResult.SuccessResult();
+            }
+            catch (Exception ex)
+            {
+                return OperationResult.Failure("Error while updating profile: " + ex.Message);
+            }
+        }
     }
 }

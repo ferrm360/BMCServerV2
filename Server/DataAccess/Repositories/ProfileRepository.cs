@@ -1,6 +1,7 @@
 ﻿using DataAccess.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Linq;
@@ -68,24 +69,32 @@ namespace DataAccess.Repositories
         {
             if (profile == null)
             {
-                throw new ArgumentNullException(nameof(profile), "Profile cannot be null.");
+                throw new ArgumentNullException(nameof(profile), "Profile entity cannot be null.");
             }
 
             try
             {
-                _context.Entry(profile).State = System.Data.Entity.EntityState.Modified;
-            }
-            catch (DbUpdateException ex)
-            {
-                throw new DataAccessException("Error occurred while updating the profile.", ex);
+                var existingProfile = GetProfileByPlayerId(profile.PlayerID);
+                if (existingProfile == null)
+                {
+                    throw new DataAccessException("Profile not found.");
+                }
+
+                existingProfile.FullName = profile.FullName;
+                existingProfile.Bio = profile.Bio;
+                existingProfile.LastUpdated = DateTime.Now;
+
+                _context.Entry(existingProfile).State = EntityState.Modified;
+
+                _context.SaveChanges();
             }
             catch (SqlException ex)
             {
-                throw new DataAccessException("SQL error occurred while updating the profile.", ex);
+                throw new DataAccessException("SQL error while updating the profile.", ex);
             }
             catch (Exception ex)
             {
-                throw new DataAccessException("Unexpected error while updating the profile.", ex);
+                throw new DataAccessException("An error occurred while updating the profile.", ex);
             }
         }
 
