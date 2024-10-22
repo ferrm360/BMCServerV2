@@ -1,5 +1,6 @@
 ﻿using DataAccess.Utilities;
 using System;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
@@ -7,7 +8,6 @@ using System.Linq;
 
 namespace DataAccess.Repositories
 {
-    // TODO recordar que cuando se crea un player en player profile se pone la fecha en la que se unio.
     public class PlayerRepository : IPlayerRepository
     {
         private readonly BMCEntities _context;
@@ -70,7 +70,6 @@ namespace DataAccess.Repositories
             try
             {
                 _context.Player.Add(player);
-                _context.SaveChanges();
             }
             catch (DbUpdateException ex)
             {
@@ -101,6 +100,11 @@ namespace DataAccess.Repositories
             _context.SaveChanges();
          }
             
+        }
+
+        public void Save()
+        {
+            _context.SaveChanges();
         }
     }
 }

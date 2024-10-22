@@ -110,10 +110,12 @@
     <Compile Include="Repositories\PlayerRepositoy.cs" />
     <Compile Include="Repositories\IPlayerRepository.cs" />
     <Compile Include="Repositories\PlayerScoresRepository.cs" />
+    <Compile Include="Repositories\ProfileRepository.cs" />
     <Compile Include="StatusPlayer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Utilities\DataAccessException.cs" />
+    <Compile Include="Utilities\ErrorMessagecs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

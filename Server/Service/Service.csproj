@@ -61,7 +61,7 @@
     <Compile Include="Implements\ProfileService.cs" />
     <Compile Include="Implements\UserConnectionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Results\ResultGeneric.cs" />
+    <Compile Include="Results\OperationResult.cs" />
     <Compile Include="Utilities\Email\EmailConfigHelper.cs" />
     <Compile Include="Utilities\Email\EmailService.cs" />
     <Compile Include="Utilities\Email\EmailServiceFactory.cs" />

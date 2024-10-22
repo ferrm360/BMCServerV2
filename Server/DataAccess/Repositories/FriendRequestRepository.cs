@@ -29,7 +29,6 @@ namespace DataAccess.Repositories
                 }
 
                 request.RequestStatus = "Accepted";
-                _context.SaveChanges();
             }
             catch (DbUpdateException ex)
             {
@@ -138,7 +137,6 @@ namespace DataAccess.Repositories
                 }
 
                 request.RequestStatus = "Rejected";
-                _context.SaveChanges();
             }
             catch (DbUpdateException ex)
             {
@@ -170,7 +168,6 @@ namespace DataAccess.Repositories
                 }
 
                 _context.FriendRequest.Remove(acceptedRequest);
-                _context.SaveChanges();
             }
             catch (DbUpdateException ex)
             {
@@ -186,6 +183,11 @@ namespace DataAccess.Repositories
             }
         }
 
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
+
         public void SendFriendRequest(int senderPlayerId, int receiverPlayerId)
         {
             try
@@ -198,7 +200,6 @@ namespace DataAccess.Repositories
                 };
 
                 _context.FriendRequest.Add(newRequest);
-                _context.SaveChanges();
             }
             catch (DbUpdateException ex)
             {

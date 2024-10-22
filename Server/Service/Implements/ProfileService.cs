@@ -1,6 +1,5 @@
 ﻿using DataAccess;
 using DataAccess.Repositories;
-using DataAccess.Repostitories;
 using Service.Contracts;
 using Service.DTO;
 using Service.Results;
@@ -25,12 +24,9 @@ namespace Service.Implements
             _playerRepository = new PlayerRepository(context);
         }
 
-        public OperationResult<PlayerDTO> updateEmail(string email, string confirmationCode)
-        {
-            throw new NotImplementedException();
-        }
+       
 
-        public OperationResult<PlayerDTO> updatePassword(string username, string newPassword, string oldPassword)
+        public OperationResult UpdatePassword(string username, string newPassword, string oldPassword)
         {
             try
             {
@@ -38,25 +34,30 @@ namespace Service.Implements
                 bool isPasswordValid = PasswordHelper.VerifyPassword(oldPassword, player.PasswordHash);
                 if (!isPasswordValid)
                 {
-                    return OperationResult<PlayerDTO>.Failure("Error.InvalidPassword");
+                    return OperationResult.Failure("Error.InvalidPassword");
                 }
                 PlayerDTO playerDTO = new PlayerDTO();
                 playerDTO.Password = newPassword;
                 string passwordHash = PasswordHelper.HashPassword(newPassword);
                 _playerRepository.UpdatePasswordHash(username, passwordHash);
-                return OperationResult<PlayerDTO>.SuccessResult();
+                return OperationResult.SuccessResult();
 
             }
             catch (SqlException ex) 
             {
                 string errorMessage = SqlErrorHandler.GetErrorMessage(ex);
-                return OperationResult<PlayerDTO>.Failure(errorMessage);
+                return OperationResult.Failure(errorMessage);
 
             }
             
         }
 
-        public OperationResult<PlayerDTO> updateProfilePicture(string url)
+        public OperationResult UpdateProfilePicture(string url)
+        {
+            throw new NotImplementedException();
+        }
+
+        public OperationResult UpdateUsername(string currentUsername, string newUsername)
         {
             throw new NotImplementedException();
         }

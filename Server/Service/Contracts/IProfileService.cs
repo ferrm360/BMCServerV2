@@ -13,10 +13,10 @@ namespace Service.Contracts
     internal interface IProfileService
     {
         [OperationContract]
-        OperationResult<PlayerDTO> updatePassword(string username, string newPassword, string oldPassword);
+        OperationResult UpdatePassword(string username, string newPassword, string oldPassword);
         [OperationContract]
-        OperationResult<PlayerDTO> updateProfilePicture(string url);
+        OperationResult UpdateProfilePicture(string url);
         [OperationContract]
-        OperationResult<PlayerDTO> updateEmail(string email, string confirmationCode);
+        OperationResult UpdateUsername(string currentUsername, string newUsername);
     }
 }

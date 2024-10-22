@@ -12,5 +12,6 @@ namespace DataAccess.Repositories
         Player GetByEmail(string email);
         void Add(Player player);
         void UpdatePasswordHash(string username,  string passwordHash);
+        void Save();
     }
 }
