@@ -4,30 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6522e242278e4f32bf8e67bd990ece6b" Name="Diagram1">
-        <EntityTypeShape EntityType="BMCModel.ChatMessages" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BMCModel.FriendRequest" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="BMCModel.GameLobby" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BMCModel.GuestPlayers" Width="1.5" PointX="3" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BMCModel.LobbyPlayers" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BMCModel.PasswordResetRequests" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BMCModel.Player" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="BMCModel.Profile" Width="1.5" PointX="6" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BMCModel.StatusPlayer" Width="1.5" PointX="3.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BMCModel.PlayerScores" Width="1.5" PointX="3" PointY="19.875" IsExpanded="true" />
+      <Diagram DiagramId="f86cc674aa994078b0c3e7b517d66b53" Name="Diagram1">
+        <EntityTypeShape EntityType="BMCModel.ChatMessages" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMCModel.FriendRequest" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMCModel.GameLobby" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMCModel.GuestPlayers" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMCModel.LobbyPlayers" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMCModel.PasswordResetRequests" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMCModel.Player" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMCModel.Profile" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BMCModel.UserScores" Width="1.5" PointX="3" PointY="18.875" IsExpanded="true" />
         <AssociationConnector Association="BMCModel.FK__ChatMessa__Recei__5165187F" ManuallyRouted="false" />
         <AssociationConnector Association="BMCModel.FK__ChatMessa__Sende__52593CB8" ManuallyRouted="false" />
         <AssociationConnector Association="BMCModel.FK__FriendReq__Recei__534D60F1" ManuallyRouted="false" />
         <AssociationConnector Association="BMCModel.FK__FriendReq__Sende__5441852A" ManuallyRouted="false" />
         <AssociationConnector Association="BMCModel.FK__GameLobby__HostI__5535A963" ManuallyRouted="false" />
         <AssociationConnector Association="BMCModel.FK__LobbyPlay__Lobby__5812160E" ManuallyRouted="false" />
-        <AssociationConnector Association="BMCModel.FK__GuestPlay__Statu__5629CD9C" ManuallyRouted="false" />
         <AssociationConnector Association="BMCModel.FK__LobbyPlay__Guest__571DF1D5" ManuallyRouted="false" />
         <AssociationConnector Association="BMCModel.FK__LobbyPlay__Playe__59063A47" ManuallyRouted="false" />
         <AssociationConnector Association="BMCModel.FK__PasswordR__Playe__59FA5E80" ManuallyRouted="false" />
         <AssociationConnector Association="BMCModel.FK__Profile__PlayerI__5AEE82B9" ManuallyRouted="false" />
         <AssociationConnector Association="BMCModel.FK__UserScore__Playe__5CD6CB2B" ManuallyRouted="false" />
-        <AssociationConnector Association="BMCModel.FK__Profile__StatusI__5BE2A6F2" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
