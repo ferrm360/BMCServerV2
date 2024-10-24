@@ -1,4 +1,5 @@
-﻿using Service.Results;
+﻿using Service.DTO;
+using Service.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,10 @@ namespace Service.Contracts
         [OperationContract]
         OperationResult RejectFriendResponse(int idResponse);
         [OperationContract]
-        OperationResult GetFriendList (string username);
+        List<PlayerDTO> GetFriendList (string username);
         [OperationContract]
         OperationResult GetFriendRequestList(string username);
+        [OperationContract]
+        string TestConnection();
     }
 }

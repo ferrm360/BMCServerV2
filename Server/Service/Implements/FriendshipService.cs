@@ -21,12 +21,15 @@ namespace Service.Implements
 
         public FriendshipService()
         {
-            // Crear instancia del contexto de Entity Framework
             var context = new BMCEntities();
 
-            // Inicializar los repositorios directamente
             _playerRepository = new PlayerRepository(context);
             _friendRequestRepository = new FriendRequestRepository(context);
+        }
+
+        public string TestConnection()
+        {
+            return "Connection successful";
         }
 
         public OperationResult AcceptFriendRequest(int idRequest)
@@ -45,17 +48,27 @@ namespace Service.Implements
             }
         }
 
-        public OperationResult GetFriendList(string username)
+        public List<PlayerDTO> GetFriendList(string username)
         {
             try
             {
+                CustomLogger.Info($"[GetFriendList] Starting GetFriendList for user: {username}");
+
                 var player = _playerRepository.GetByUsername(username);
                 if (player == null)
                 {
-                    return OperationResult.Failure("User not found.");
+                    CustomLogger.Warn($"[GetFriendList] Player with username '{username}' not found.");
+                    return new List<PlayerDTO>();
                 }
 
+                CustomLogger.Info($"[GetFriendList] Fetching accepted friends for PlayerID: {player.PlayerID}");
                 var friends = _friendRequestRepository.GetAcceptedFriends(player.PlayerID);
+
+                if (friends == null || !friends.Any())
+                {
+                    CustomLogger.Info($"[GetFriendList] No friends found for user '{username}' (PlayerID: {player.PlayerID}).");
+                    return new List<PlayerDTO>();
+                }
 
                 var friendDTOs = friends.Select(friend => new PlayerDTO
                 {
@@ -64,14 +77,18 @@ namespace Service.Implements
                     Email = friend.Email
                 }).ToList();
 
-                return OperationResult.SuccessResult(friendDTOs);
+                CustomLogger.Info($"[GetFriendList] Found {friendDTOs.Count} friends for user '{username}'.");
+
+                return friendDTOs;
             }
             catch (Exception ex)
             {
-                CustomLogger.Error("Error in GetFriendList", ex);
-                return OperationResult.Failure(ErrorMessages.GeneralException);
+                CustomLogger.Error($"[GetFriendList] Error while retrieving friend list for user '{username}': {ex.Message}", ex);
+                return new List<PlayerDTO>();
             }
         }
+
+
 
         public OperationResult GetFriendRequestList(string username)
         {
