@@ -4,11 +4,11 @@ namespace DataAccess.Repositories
 {
     public interface IPlayerScoresRepository
     {
-        IEnumerable<PlayerScores> GetTopScores(int top);
-        PlayerScores GetScoresByPlayerId(int playerId);
+        IEnumerable<UserScores> GetTopScores(int top);
+        UserScores GetScoresByPlayerId(int playerId);
         void IncrementWins(int playerId);
         void IncrementLosses(int playerId);
-        void Add(PlayerScores playerScores);
+        void Add(UserScores playerScores);
         void Save();
     }
 }

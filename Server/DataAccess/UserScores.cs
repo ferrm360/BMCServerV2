@@ -12,7 +12,7 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class PlayerScores
+    public partial class UserScores
     {
         public int ScoreID { get; set; }
         public int PlayerID { get; set; }

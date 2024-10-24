@@ -33,7 +33,6 @@ namespace DataAccess
         public virtual DbSet<PasswordResetRequests> PasswordResetRequests { get; set; }
         public virtual DbSet<Player> Player { get; set; }
         public virtual DbSet<Profile> Profile { get; set; }
-        public virtual DbSet<StatusPlayer> StatusPlayer { get; set; }
-        public virtual DbSet<PlayerScores> UserScores { get; set; }
+        public virtual DbSet<UserScores> UserScores { get; set; }
     }
 }

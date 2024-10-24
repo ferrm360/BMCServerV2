@@ -7,7 +7,7 @@ namespace Service.Factories
     {
         Player CreatePlayerEntity(PlayerDTO playerDto, string passwordHash);
         Profile CreateProfileEntity(int playerId);
-        PlayerScores CreatePlayerScoresEntity(int playerId);
+        UserScores CreatePlayerScoresEntity(int playerId);
         FriendRequest CreateFriendRequest(int senderId, int receiverId);
         ChatMessages CreateChatMessage(int senderId, int receiverId, string messageText);
         GameLobby CreateGameLobby(string lobbyName, int hostId, string password = null);

@@ -40,7 +40,6 @@
           <Property Name="GuestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Username" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="JoinDate" Type="datetime" />
-          <Property Name="StatusID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="LobbyPlayers">
           <Key>
@@ -81,18 +80,10 @@
           <Property Name="FullName" Type="varchar" MaxLength="255" />
           <Property Name="AvatarURL" Type="varchar" MaxLength="255" />
           <Property Name="Bio" Type="text" />
-          <Property Name="StatusID" Type="int" Nullable="false" />
           <Property Name="JoinDate" Type="datetime" />
           <Property Name="SignUpDate" Type="date" />
           <Property Name="LastVisit" Type="date" />
           <Property Name="LastUpdated" Type="date" />
-        </EntityType>
-        <EntityType Name="StatusPlayer">
-          <Key>
-            <PropertyRef Name="StatusID" />
-          </Key>
-          <Property Name="StatusID" Type="int" Nullable="false" />
-          <Property Name="StatusName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="UserScores">
           <Key>
@@ -163,18 +154,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GuestPlay__Statu__5629CD9C">
-          <End Role="StatusPlayer" Type="Self.StatusPlayer" Multiplicity="1" />
-          <End Role="GuestPlayers" Type="Self.GuestPlayers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StatusPlayer">
-              <PropertyRef Name="StatusID" />
-            </Principal>
-            <Dependent Role="GuestPlayers">
-              <PropertyRef Name="StatusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__LobbyPlay__Guest__571DF1D5">
           <End Role="GuestPlayers" Type="Self.GuestPlayers" Multiplicity="1" />
           <End Role="LobbyPlayers" Type="Self.LobbyPlayers" Multiplicity="*" />
@@ -237,18 +216,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Profile__StatusI__5BE2A6F2">
-          <End Role="StatusPlayer" Type="Self.StatusPlayer" Multiplicity="1" />
-          <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StatusPlayer">
-              <PropertyRef Name="StatusID" />
-            </Principal>
-            <Dependent Role="Profile">
-              <PropertyRef Name="StatusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__UserScore__Playe__5CD6CB2B">
           <End Role="Player" Type="Self.Player" Multiplicity="1" />
           <End Role="UserScores" Type="Self.UserScores" Multiplicity="*" />
@@ -270,7 +237,6 @@
           <EntitySet Name="PasswordResetRequests" EntityType="Self.PasswordResetRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Player" EntityType="Self.Player" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="StatusPlayer" EntityType="Self.StatusPlayer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserScores" EntityType="Self.UserScores" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__ChatMessa__Recei__5165187F" Association="Self.FK__ChatMessa__Recei__5165187F">
             <End Role="Player" EntitySet="Player" />
@@ -292,10 +258,6 @@
             <End Role="Player" EntitySet="Player" />
             <End Role="GameLobby" EntitySet="GameLobby" />
           </AssociationSet>
-          <AssociationSet Name="FK__GuestPlay__Statu__5629CD9C" Association="Self.FK__GuestPlay__Statu__5629CD9C">
-            <End Role="StatusPlayer" EntitySet="StatusPlayer" />
-            <End Role="GuestPlayers" EntitySet="GuestPlayers" />
-          </AssociationSet>
           <AssociationSet Name="FK__LobbyPlay__Guest__571DF1D5" Association="Self.FK__LobbyPlay__Guest__571DF1D5">
             <End Role="GuestPlayers" EntitySet="GuestPlayers" />
             <End Role="LobbyPlayers" EntitySet="LobbyPlayers" />
@@ -314,10 +276,6 @@
           </AssociationSet>
           <AssociationSet Name="FK__Profile__PlayerI__5AEE82B9" Association="Self.FK__Profile__PlayerI__5AEE82B9">
             <End Role="Player" EntitySet="Player" />
-            <End Role="Profile" EntitySet="Profile" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Profile__StatusI__5BE2A6F2" Association="Self.FK__Profile__StatusI__5BE2A6F2">
-            <End Role="StatusPlayer" EntitySet="StatusPlayer" />
             <End Role="Profile" EntitySet="Profile" />
           </AssociationSet>
           <AssociationSet Name="FK__UserScore__Playe__5CD6CB2B" Association="Self.FK__UserScore__Playe__5CD6CB2B">
@@ -371,8 +329,6 @@
           <Property Name="GuestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="JoinDate" Type="DateTime" Precision="3" />
-          <Property Name="StatusID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="StatusPlayer" Relationship="Self.FK__GuestPlay__Statu__5629CD9C" FromRole="GuestPlayers" ToRole="StatusPlayer" />
           <NavigationProperty Name="LobbyPlayers" Relationship="Self.FK__LobbyPlay__Guest__571DF1D5" FromRole="GuestPlayers" ToRole="LobbyPlayers" />
         </EntityType>
         <EntityType Name="LobbyPlayers">
@@ -427,24 +383,13 @@
           <Property Name="FullName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="AvatarURL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Bio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="StatusID" Type="Int32" Nullable="false" />
           <Property Name="JoinDate" Type="DateTime" Precision="3" />
           <Property Name="SignUpDate" Type="DateTime" Precision="0" />
           <Property Name="LastVisit" Type="DateTime" Precision="0" />
           <Property Name="LastUpdated" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Player" Relationship="Self.FK__Profile__PlayerI__5AEE82B9" FromRole="Profile" ToRole="Player" />
-          <NavigationProperty Name="StatusPlayer" Relationship="Self.FK__Profile__StatusI__5BE2A6F2" FromRole="Profile" ToRole="StatusPlayer" />
         </EntityType>
-        <EntityType Name="StatusPlayer">
-          <Key>
-            <PropertyRef Name="StatusID" />
-          </Key>
-          <Property Name="StatusID" Type="Int32" Nullable="false" />
-          <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="GuestPlayers" Relationship="Self.FK__GuestPlay__Statu__5629CD9C" FromRole="StatusPlayer" ToRole="GuestPlayers" />
-          <NavigationProperty Name="Profile" Relationship="Self.FK__Profile__StatusI__5BE2A6F2" FromRole="StatusPlayer" ToRole="Profile" />
-        </EntityType>
-        <EntityType Name="PlayerScores">
+        <EntityType Name="UserScores">
           <Key>
             <PropertyRef Name="ScoreID" />
           </Key>
@@ -528,18 +473,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GuestPlay__Statu__5629CD9C">
-          <End Role="StatusPlayer" Type="Self.StatusPlayer" Multiplicity="1" />
-          <End Role="GuestPlayers" Type="Self.GuestPlayers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StatusPlayer">
-              <PropertyRef Name="StatusID" />
-            </Principal>
-            <Dependent Role="GuestPlayers">
-              <PropertyRef Name="StatusID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__LobbyPlay__Guest__571DF1D5">
           <End Role="GuestPlayers" Type="Self.GuestPlayers" Multiplicity="1" />
           <End Role="LobbyPlayers" Type="Self.LobbyPlayers" Multiplicity="*" />
@@ -590,25 +523,13 @@
         </Association>
         <Association Name="FK__UserScore__Playe__5CD6CB2B">
           <End Role="Player" Type="Self.Player" Multiplicity="1" />
-          <End Role="UserScores" Type="BMCModel.PlayerScores" Multiplicity="*" />
+          <End Role="UserScores" Type="Self.UserScores" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Player">
               <PropertyRef Name="PlayerID" />
             </Principal>
             <Dependent Role="UserScores">
               <PropertyRef Name="PlayerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Profile__StatusI__5BE2A6F2">
-          <End Role="StatusPlayer" Type="Self.StatusPlayer" Multiplicity="1" />
-          <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StatusPlayer">
-              <PropertyRef Name="StatusID" />
-            </Principal>
-            <Dependent Role="Profile">
-              <PropertyRef Name="StatusID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -621,8 +542,7 @@
           <EntitySet Name="PasswordResetRequests" EntityType="Self.PasswordResetRequests" />
           <EntitySet Name="Player" EntityType="Self.Player" />
           <EntitySet Name="Profile" EntityType="Self.Profile" />
-          <EntitySet Name="StatusPlayer" EntityType="Self.StatusPlayer" />
-          <EntitySet Name="UserScores" EntityType="BMCModel.PlayerScores" />
+          <EntitySet Name="UserScores" EntityType="Self.UserScores" />
           <AssociationSet Name="FK__ChatMessa__Recei__5165187F" Association="Self.FK__ChatMessa__Recei__5165187F">
             <End Role="Player" EntitySet="Player" />
             <End Role="ChatMessages" EntitySet="ChatMessages" />
@@ -647,10 +567,6 @@
             <End Role="GameLobby" EntitySet="GameLobby" />
             <End Role="LobbyPlayers" EntitySet="LobbyPlayers" />
           </AssociationSet>
-          <AssociationSet Name="FK__GuestPlay__Statu__5629CD9C" Association="Self.FK__GuestPlay__Statu__5629CD9C">
-            <End Role="StatusPlayer" EntitySet="StatusPlayer" />
-            <End Role="GuestPlayers" EntitySet="GuestPlayers" />
-          </AssociationSet>
           <AssociationSet Name="FK__LobbyPlay__Guest__571DF1D5" Association="Self.FK__LobbyPlay__Guest__571DF1D5">
             <End Role="GuestPlayers" EntitySet="GuestPlayers" />
             <End Role="LobbyPlayers" EntitySet="LobbyPlayers" />
@@ -670,10 +586,6 @@
           <AssociationSet Name="FK__UserScore__Playe__5CD6CB2B" Association="Self.FK__UserScore__Playe__5CD6CB2B">
             <End Role="Player" EntitySet="Player" />
             <End Role="UserScores" EntitySet="UserScores" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Profile__StatusI__5BE2A6F2" Association="Self.FK__Profile__StatusI__5BE2A6F2">
-            <End Role="StatusPlayer" EntitySet="StatusPlayer" />
-            <End Role="Profile" EntitySet="Profile" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -719,7 +631,6 @@
                 <ScalarProperty Name="GuestID" ColumnName="GuestID" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -762,7 +673,6 @@
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="AvatarURL" ColumnName="AvatarURL" />
                 <ScalarProperty Name="Bio" ColumnName="Bio" />
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
                 <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
                 <ScalarProperty Name="SignUpDate" ColumnName="SignUpDate" />
                 <ScalarProperty Name="LastVisit" ColumnName="LastVisit" />
@@ -770,16 +680,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="StatusPlayer">
-            <EntityTypeMapping TypeName="BMCModel.StatusPlayer">
-              <MappingFragment StoreEntitySet="StatusPlayer">
-                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
-                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserScores">
-            <EntityTypeMapping TypeName="BMCModel.PlayerScores">
+            <EntityTypeMapping TypeName="BMCModel.UserScores">
               <MappingFragment StoreEntitySet="UserScores">
                 <ScalarProperty Name="ScoreID" ColumnName="ScoreID" />
                 <ScalarProperty Name="PlayerID" ColumnName="PlayerID" />

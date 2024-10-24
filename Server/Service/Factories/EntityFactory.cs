@@ -25,15 +25,14 @@ namespace Service.Factories
                 FullName = "Default Name",
                 AvatarURL = "default_avatar.png",
                 Bio = "Default Bio",
-                StatusID = 1,
                 JoinDate = DateTime.Now,
                 LastVisit = DateTime.Now
             };
         }
 
-        public static PlayerScores CreatePlayerScoresEntity(int playerId)
+        public static UserScores CreatePlayerScoresEntity(int playerId)
         {
-            return new PlayerScores
+            return new UserScores
             {
                 PlayerID = playerId,
                 Wins = 0,
@@ -77,7 +76,6 @@ namespace Service.Factories
             return new GuestPlayers
             {
                 Username = username,
-                StatusID = statusId,
                 JoinDate = DateTime.Now
             };
         }

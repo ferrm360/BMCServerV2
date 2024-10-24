@@ -120,28 +120,6 @@ namespace DataAccess.Repositories
             }
         }
 
-        public void SetStatus(int playerId, int statusId)
-        {
-            if (playerId <= 0)
-            {
-                throw new ArgumentException("Player ID must be greater than zero.", nameof(playerId));
-            }
-
-            try
-            {
-                var profile = GetProfileByPlayerId(playerId);
-                if (profile != null)
-                {
-                    profile.StatusID = statusId;
-                    Update(profile);
-                }
-            }
-            catch (SqlException ex)
-            {
-                throw new DataAccessException("Error occurred while setting status ID.", ex);
-            }
-        }
-
         public void Save()
         {
             _context.SaveChanges();

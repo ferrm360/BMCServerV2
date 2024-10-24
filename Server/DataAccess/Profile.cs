@@ -19,13 +19,11 @@ namespace DataAccess
         public string FullName { get; set; }
         public string AvatarURL { get; set; }
         public string Bio { get; set; }
-        public int StatusID { get; set; }
         public Nullable<System.DateTime> JoinDate { get; set; }
         public Nullable<System.DateTime> SignUpDate { get; set; }
         public Nullable<System.DateTime> LastVisit { get; set; }
         public Nullable<System.DateTime> LastUpdated { get; set; }
     
         public virtual Player Player { get; set; }
-        public virtual StatusPlayer StatusPlayer { get; set; }
     }
 }
