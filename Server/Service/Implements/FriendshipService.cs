@@ -45,14 +45,14 @@ namespace Service.Implements
             }
         }
 
-        public OperationResult GetFriendList(string username)
+        public List<PlayerDTO> GetFriendList(string username)
         {
             try
             {
                 var player = _playerRepository.GetByUsername(username);
                 if (player == null)
                 {
-                    return OperationResult.Failure("User not found.");
+                    throw new ArgumentException();
                 }
 
                 var friends = _friendRequestRepository.GetAcceptedFriends(player.PlayerID);
@@ -64,12 +64,12 @@ namespace Service.Implements
                     Email = friend.Email
                 }).ToList();
 
-                return OperationResult.SuccessResult(friendDTOs);
+                return friendDTOs;
             }
             catch (Exception ex)
             {
                 CustomLogger.Error("Error in GetFriendList", ex);
-                return OperationResult.Failure(ErrorMessages.GeneralException);
+                throw new ArgumentException();
             }
         }
 
