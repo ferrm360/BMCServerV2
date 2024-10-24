@@ -20,27 +20,27 @@ namespace Service.Utilities.Validators
             _friendRequestRepository = friendRequestRepository;
         }
 
-        public OperationResult ValidateFriendRequestDoesNotExist(int senderPlayerId, int receiverPlayerId)
+        public OperationResponse ValidateFriendRequestDoesNotExist(int senderPlayerId, int receiverPlayerId)
         {
             if (_friendRequestRepository.IsFriendRequestPending(senderPlayerId, receiverPlayerId))
             {
-                return OperationResult.Failure("A friend request is already pending between these users.");
+                return OperationResponse.Failure("A friend request is already pending between these users.");
             }
 
-            return OperationResult.SuccessResult();
+            return OperationResponse.SuccessResult();
         }
 
-        public OperationResult ValidateFriendRequestExists(int requestId)
+        public OperationResponse ValidateFriendRequestExists(int requestId)
         {
             var receivedRequests = _friendRequestRepository.GetReceivedRequests(requestId);
             var sentRequests = _friendRequestRepository.GetSentRequests(requestId);
 
             if (receivedRequests == null && sentRequests == null)
             {
-                return OperationResult.Failure("Friend request not found.");
+                return OperationResponse.Failure("Friend request not found.");
             }
 
-            return OperationResult.SuccessResult();
+            return OperationResponse.SuccessResult();
         }
 
 

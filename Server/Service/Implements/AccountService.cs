@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Data.SqlClient;
-using DataAccess;
 using DataAccess.Repositories;
 using Service.Contracts;
 using Service.DTO;
-
-
-
 using Service.Results;
 using Service.Utilities.Helpers;
 using Service.Utilities;
 using Service.Utilities.Constans;
 using Service.Factories;
-using Service.Utilities.Validators;
-using log4net.Repository.Hierarchy;
 using Service.Utilities.Mapper;
 
 namespace Service.Implements
@@ -24,14 +18,6 @@ namespace Service.Implements
         private readonly IProfileRepository _profileRepository;
         private readonly IPlayerScoresRepository _scoreRepository;
 
-        public AccountService()
-        {
-            var context = new BMCEntities();
-            _playerRepository = new PlayerRepository(context);
-            _profileRepository = new ProfileRepository(context);
-            _scoreRepository = new PlayerScoresRepository(context);
-        }
-
         public AccountService(IPlayerRepository playerRepository, IProfileRepository profileRepository, IPlayerScoresRepository scoreRepository)
         {
             _playerRepository = playerRepository;
@@ -39,18 +25,18 @@ namespace Service.Implements
             _scoreRepository = scoreRepository;
         }
 
-        public OperationResult Register(PlayerDTO player)
+        public OperationResponse Register(PlayerDTO player)
         {
             try
             {
                 if (_playerRepository.GetByUsername(player.Username) != null)
                 {
-                    return OperationResult.Failure(ErrorMessages.DuplicateUsername);
+                    return OperationResponse.Failure(ErrorMessages.DuplicateUsername);
                 }
 
                 if (_playerRepository.GetByEmail(player.Email) != null)
                 {
-                    return OperationResult.Failure(ErrorMessages.DuplicateEmail);
+                    return OperationResponse.Failure(ErrorMessages.DuplicateEmail);
                 }
 
                 string passwordHash = PasswordHelper.HashPassword(player.Password);
@@ -67,49 +53,49 @@ namespace Service.Implements
                 _profileRepository.Save();
                 _scoreRepository.Save();
 
-                return OperationResult.SuccessResult();
+                return OperationResponse.SuccessResult();
             }
             catch (SqlException ex)
             {
                 string errorMessage = SqlErrorHandler.GetErrorMessage(ex);
-                return OperationResult.Failure(errorMessage);
+                return OperationResponse.Failure(errorMessage);
             }
             catch (Exception ex)
             {
                 CustomLogger.Fatal("Unexpected error during registration", ex);
-                return OperationResult.Failure(ErrorMessages.GeneralException);
+                return OperationResponse.Failure(ErrorMessages.GeneralException);
             }
         }
 
-        public OperationResult Login(string username, string password)
+        public OperationResponse Login(string username, string password)
         {
             try
             {
                 var player = _playerRepository.GetByUsername(username);
                 if (player == null)
                 {
-                    return OperationResult.Failure(ErrorMessages.UserNotFound);
+                    return OperationResponse.Failure(ErrorMessages.UserNotFound);
                 }
 
                 bool isPasswordValid = PasswordHelper.VerifyPassword(password, player.PasswordHash);
                 if (!isPasswordValid)
                 {
-                    return OperationResult.Failure(ErrorMessages.InvalidPassword);
+                    return OperationResponse.Failure(ErrorMessages.InvalidPassword);
                 }
 
                 var playerDTO = PlayerMapper.ToDTO(player);
-                return OperationResult.SuccessResult();
+                return OperationResponse.SuccessResult();
             }
             catch (SqlException ex)
             {
                 CustomLogger.Error("SQL error during login", ex);
                 string errorMessage = SqlErrorHandler.GetErrorMessage(ex);
-                return OperationResult.Failure(errorMessage);
+                return OperationResponse.Failure(errorMessage);
             }
             catch (Exception ex)
             {
                 CustomLogger.Error("Unexpected error during login", ex);
-                return OperationResult.Failure(ErrorMessages.GeneralException);
+                return OperationResponse.Failure(ErrorMessages.GeneralException);
             }
         }
     }

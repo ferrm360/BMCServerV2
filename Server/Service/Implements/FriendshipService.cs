@@ -9,6 +9,7 @@ using System;
 using Service.Utilities;
 using System.Linq;
 using System.Collections.Generic;
+using Service.Utilities.Results;
 
 namespace Service.Implements
 {
@@ -19,12 +20,11 @@ namespace Service.Implements
         private readonly IFriendRequestRepository _friendRequestRepository;
         private readonly ValidationFriendshipService _validationService;
 
-        public FriendshipService()
+        public FriendshipService(IPlayerRepository playerRepository, IFriendRequestRepository friendRequestRepository, ValidationFriendshipService validationService)
         {
-            var context = new BMCEntities();
-
-            _playerRepository = new PlayerRepository(context);
-            _friendRequestRepository = new FriendRequestRepository(context);
+            _playerRepository = playerRepository;
+            _friendRequestRepository = friendRequestRepository;
+            _validationService = validationService;
         }
 
         public string TestConnection()
@@ -32,23 +32,23 @@ namespace Service.Implements
             return "Connection successful";
         }
 
-        public OperationResult AcceptFriendRequest(int idRequest)
+        public OperationResponse AcceptFriendRequest(int idRequest)
         {
             try
             {
                 _friendRequestRepository.AcceptRequest(idRequest);
                 _friendRequestRepository.Save();
 
-                return OperationResult.SuccessResult();
+                return OperationResponse.SuccessResult();
             }
             catch (Exception ex)
             {
                 CustomLogger.Error("", ex);
-                return OperationResult.Failure(ErrorMessages.GeneralException);
+                return OperationResponse.Failure(ErrorMessages.GeneralException);
             }
         }
 
-        public List<PlayerDTO> GetFriendList(string username)
+        public FriendListResponse GetFriendList(string username)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace Service.Implements
                 if (player == null)
                 {
                     CustomLogger.Warn($"[GetFriendList] Player with username '{username}' not found.");
-                    return new List<PlayerDTO>();
+                    return FriendListResponse.Failure("UserNotFound");
                 }
 
                 CustomLogger.Info($"[GetFriendList] Fetching accepted friends for PlayerID: {player.PlayerID}");
@@ -67,7 +67,7 @@ namespace Service.Implements
                 if (friends == null || !friends.Any())
                 {
                     CustomLogger.Info($"[GetFriendList] No friends found for user '{username}' (PlayerID: {player.PlayerID}).");
-                    return new List<PlayerDTO>();
+                    return FriendListResponse.SuccessResult(new List<PlayerDTO>());
                 }
 
                 var friendDTOs = friends.Select(friend => new PlayerDTO
@@ -79,25 +79,25 @@ namespace Service.Implements
 
                 CustomLogger.Info($"[GetFriendList] Found {friendDTOs.Count} friends for user '{username}'.");
 
-                return friendDTOs;
+                return FriendListResponse.SuccessResult(friendDTOs);
             }
             catch (Exception ex)
             {
                 CustomLogger.Error($"[GetFriendList] Error while retrieving friend list for user '{username}': {ex.Message}", ex);
-                return new List<PlayerDTO>();
+                return FriendListResponse.Failure(ErrorMessages.GeneralException);
             }
         }
 
 
 
-        public OperationResult GetFriendRequestList(string username)
+        public OperationResponse GetFriendRequestList(string username)
         {
             try
             {
                 var player = _playerRepository.GetByUsername(username);
                 if (player == null)
                 {
-                    return OperationResult.Failure("User not found.");
+                    return OperationResponse.Failure("User not found.");
                 }
 
                 var requests = _friendRequestRepository.GetReceivedRequests(player.PlayerID);
@@ -110,32 +110,32 @@ namespace Service.Implements
                     Status = request.RequestStatus.ToString()
                 }).ToList();
 
-                return OperationResult.SuccessResult(requestDTOs);
+                return OperationResponse.SuccessResult(requestDTOs);
             }
             catch (Exception ex)
             {
                 CustomLogger.Error("", ex);
-                return OperationResult.Failure(ErrorMessages.GeneralException);
+                return OperationResponse.Failure(ErrorMessages.GeneralException);
             }
         }
 
-        public OperationResult RejectFriendResponse(int idResponse)
+        public OperationResponse RejectFriendResponse(int idResponse)
         {
             try
             {
                 _friendRequestRepository.RejectRequest(idResponse);
                 _friendRequestRepository.Save();
 
-                return OperationResult.SuccessResult();
+                return OperationResponse.SuccessResult();
             }
             catch (Exception ex)
             {
                 CustomLogger.Error("", ex);
-                return OperationResult.Failure(ErrorMessages.GeneralException);
+                return OperationResponse.Failure(ErrorMessages.GeneralException);
             }
         }
 
-        public OperationResult SendFriendRequest(string senderUsername, string receiverUsername)
+        public OperationResponse SendFriendRequest(string senderUsername, string receiverUsername)
         {
             try
             {
@@ -145,12 +145,12 @@ namespace Service.Implements
                 _friendRequestRepository.SendFriendRequest(sender.PlayerID, receiver.PlayerID);
                 _friendRequestRepository.Save();
 
-                return OperationResult.SuccessResult();
+                return OperationResponse.SuccessResult();
             }
             catch (Exception ex)
             {
                 CustomLogger.Error("", ex);
-                return OperationResult.Failure(ErrorMessages.GeneralException);
+                return OperationResponse.Failure(ErrorMessages.GeneralException);
             }
         }
     }

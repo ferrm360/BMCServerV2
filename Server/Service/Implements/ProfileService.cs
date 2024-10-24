@@ -9,6 +9,7 @@ using Service.Utilities;
 using System;
 using System.Data.SqlClient;
 using System.IO;
+using Service.Utilities.Results;
 
 namespace Service.Implements
 {
@@ -16,14 +17,13 @@ namespace Service.Implements
     {
         private readonly IPlayerRepository _playerRepository;
         private readonly IProfileRepository _profileRepository;
-        private readonly string _imageFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "uploads", "avatars");
+        private readonly string _imageFolderPath;
 
-        public ProfileService()
+        public ProfileService(IPlayerRepository playerRepository, IProfileRepository profileRepository)
         {
-            var context = new BMCEntities();
-
-            _playerRepository = new PlayerRepository(context);
-            _profileRepository = new ProfileRepository(context);
+            _playerRepository = playerRepository;
+            _profileRepository = profileRepository;
+            _imageFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "uploads", "avatars");
 
             if (!Directory.Exists(_imageFolderPath))
             {
@@ -31,7 +31,7 @@ namespace Service.Implements
             }
         }
 
-        public OperationResult UpdatePassword(string username, string newPassword, string oldPassword)
+        public OperationResponse UpdatePassword(string username, string newPassword, string oldPassword)
         {
             try
             {
@@ -39,40 +39,40 @@ namespace Service.Implements
                 bool isPasswordValid = PasswordHelper.VerifyPassword(oldPassword, player.PasswordHash);
                 if (!isPasswordValid)
                 {
-                    return OperationResult.Failure(ErrorMessages.DifferentPassword);
+                    return OperationResponse.Failure(ErrorMessages.DifferentPassword);
                 }
 
                 string passwordHash = PasswordHelper.HashPassword(newPassword);
                 _playerRepository.UpdatePasswordHash(username, passwordHash);
-                return OperationResult.SuccessResult();
+                return OperationResponse.SuccessResult();
             }
             catch (SqlException ex)
             {
                 CustomLogger.Error("", ex);
                 string errorMessage = SqlErrorHandler.GetErrorMessage(ex);
-                return OperationResult.Failure(errorMessage);
+                return OperationResponse.Failure(errorMessage);
             }
             catch (Exception ex)
             {
                 CustomLogger.Error("", ex);
-                return OperationResult.Failure(ErrorMessages.GeneralException);
+                return OperationResponse.Failure(ErrorMessages.GeneralException);
             }
         }
 
-        public OperationResult UpdateProfilePicture(string username, byte[] imageBytes, string fileName)
+        public OperationResponse UpdateProfilePicture(string username, byte[] imageBytes, string fileName)
         {
             try
             {
                 var player = _playerRepository.GetByUsername(username);
                 if (player == null)
                 {
-                    return OperationResult.Failure(ErrorMessages.UserNotFound);
+                    return OperationResponse.Failure(ErrorMessages.UserNotFound);
                 }
 
                 var profile = _profileRepository.GetProfileByPlayerId(player.PlayerID);
                 if (profile == null)
                 {
-                    return OperationResult.Failure(ErrorMessages.ProfileNotFound);
+                    return OperationResponse.Failure(ErrorMessages.ProfileNotFound);
                 }
 
                 string uniqueFileName = $"{player.Username}_{Guid.NewGuid()}{Path.GetExtension(fileName)}";
@@ -86,73 +86,163 @@ namespace Service.Implements
                 _profileRepository.Update(profile);
                 _profileRepository.Save();
 
-                return OperationResult.SuccessResult();
+                return OperationResponse.SuccessResult();
             }
             catch (SqlException ex)
             {
                 CustomLogger.Error("", ex);
                 string errorMessage = SqlErrorHandler.GetErrorMessage(ex);
-                return OperationResult.Failure(errorMessage);
+                return OperationResponse.Failure(errorMessage);
             }
             catch (Exception ex)
             {
                 CustomLogger.Error("", ex);
-                return OperationResult.Failure("Error while updating profile picture: " + ex.Message);
+                return OperationResponse.Failure("Error while updating profile picture: " + ex.Message);
             }
         }
 
-        public OperationResult UpdateUsername(string currentUsername, string newUsername)
+        public OperationResponse UpdateUsername(string currentUsername, string newUsername)
         {
             try
             {
                 if (_playerRepository.GetByUsername(newUsername) != null)
                 {
-                    return OperationResult.Failure(ErrorMessages.DuplicateUsername);
+                    return OperationResponse.Failure(ErrorMessages.DuplicateUsername);
                 }
 
                 var player = _playerRepository.GetByUsername(currentUsername);
                 if (player == null)
                 {
-                    return OperationResult.Failure(ErrorMessages.UserNotFound);
+                    return OperationResponse.Failure(ErrorMessages.UserNotFound);
                 }
 
                 player.Username = newUsername;
                 _playerRepository.Update(player);
                 _playerRepository.Save();
 
-                return OperationResult.SuccessResult();
+                return OperationResponse.SuccessResult();
             }
             catch (Exception ex)
             {
                 CustomLogger.Error("", ex);
-                return OperationResult.Failure(ErrorMessages.GeneralException);
+                return OperationResponse.Failure(ErrorMessages.GeneralException);
             }
         }
 
-        public OperationResult UpdateProfile(string username, Profile profile)
+        public OperationResponse UpdateProfile(string username, Profile profile)
         {
             try
             {
                 if (profile == null)
                 {
-                    return OperationResult.Failure("Invalid profile data.");
+                    return OperationResponse.Failure("Invalid profile data.");
                 }
 
                 var player = _playerRepository.GetByUsername(username);
                 if (player == null)
                 {
-                    return OperationResult.Failure("User not found.");
+                    return OperationResponse.Failure("User not found.");
                 }
 
                 profile.PlayerID = player.PlayerID;
 
                 _profileRepository.Update(profile);
 
-                return OperationResult.SuccessResult();
+                return OperationResponse.SuccessResult();
             }
             catch (Exception ex)
             {
-                return OperationResult.Failure("Error while updating profile: " + ex.Message);
+                return OperationResponse.Failure("Error while updating profile: " + ex.Message);
+            }
+        }
+
+        public ProfileResponse GetProfileByUsername(string username)
+        {
+            try
+            {
+                var player = _playerRepository.GetByUsername(username);
+                if (player == null)
+                {
+                    return ProfileResponse.Failure("User not found.");
+                }
+
+                var profile = _profileRepository.GetProfileByPlayerId(player.PlayerID);
+                if (profile == null)
+                {
+                    return ProfileResponse.Failure("Profile not found.");
+                }
+
+                byte[] imageBytes = ConvertImageUrlToBytes(profile.AvatarURL) ?? Array.Empty<byte>();
+
+                var profileDTO = new PlayerProfileDTO
+                {
+                    FullName = profile.FullName ?? "Anonymous",
+                    Bio = profile.Bio ?? "No bio available",
+                    JoinDate = profile.JoinDate ?? DateTime.MinValue,
+                    SingUpDate = profile.SignUpDate ?? DateTime.MinValue,
+                    LastVisit = profile.LastVisit ?? DateTime.MinValue,
+                    ProfileImage = imageBytes
+                };
+
+                return ProfileResponse.SuccessResult(profileDTO);
+            }
+            catch (Exception ex)
+            {
+                CustomLogger.Error("Error retrieving profile by username", ex);
+                return ProfileResponse.Failure("An unexpected error occurred.");
+            }
+        }
+
+
+        public ImageResponse GetProfileImage(string username)
+        {
+            try
+            {
+                var player = _playerRepository.GetByUsername(username);
+                if (player == null)
+                {
+                    return ImageResponse.Failure("User not found.");
+                }
+
+                var profile = _profileRepository.GetProfileByPlayerId(player.PlayerID);
+                if (profile == null || string.IsNullOrEmpty(profile.AvatarURL))
+                {
+                    return ImageResponse.Failure("Profile or Avatar not found.");
+                }
+
+                var imageBytes = ConvertImageUrlToBytes(profile.AvatarURL);
+                if (imageBytes == null || imageBytes.Length == 0)
+                {
+                    return ImageResponse.Failure("Image not found or is empty.");
+                }
+
+                return ImageResponse.Success(imageBytes, Path.GetFileName(profile.AvatarURL), "image/jpeg");
+            }
+            catch (Exception ex)
+            {
+                CustomLogger.Error("Error retrieving profile image", ex);
+                return ImageResponse.Failure("Error retrieving profile image.");
+            }
+        }
+
+        private byte[] ConvertImageUrlToBytes(string imageUrl)
+        {
+            try
+            {
+                string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, imageUrl);
+                if (File.Exists(filePath))
+                {
+                    return File.ReadAllBytes(filePath);
+                }
+                else
+                {
+                    throw new FileNotFoundException("Image file not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                CustomLogger.Error("Error converting image to bytes", ex);
+                throw new Exception("Error converting image.");
             }
         }
     }

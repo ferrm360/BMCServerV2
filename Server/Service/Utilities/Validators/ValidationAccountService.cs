@@ -20,36 +20,36 @@ namespace Service.Utilities.Validators
             _playerRepository = playerRepository;
         }
 
-        public OperationResult ValidatePlayerRegistration(PlayerDTO player)
+        public OperationResponse ValidatePlayerRegistration(PlayerDTO player)
         {
             if (_playerRepository.GetByUsername(player.Username) != null)
             {
-                return OperationResult.Failure(ErrorMessages.DuplicateUsername);
+                return OperationResponse.Failure(ErrorMessages.DuplicateUsername);
             }
 
             if (_playerRepository.GetByEmail(player.Email) != null)
             {
-                return OperationResult.Failure(ErrorMessages.DuplicateEmail);
+                return OperationResponse.Failure(ErrorMessages.DuplicateEmail);
             }
 
-            return OperationResult.SuccessResult();
+            return OperationResponse.SuccessResult();
         }
 
-        public OperationResult ValidatePlayerLogin(string username, string password)
+        public OperationResponse ValidatePlayerLogin(string username, string password)
         {
             var player = _playerRepository.GetByUsername(username);
 
             if (player == null)
             {
-                return OperationResult.Failure(ErrorMessages.UserNotFound);
+                return OperationResponse.Failure(ErrorMessages.UserNotFound);
             }
 
             if (!PasswordHelper.VerifyPassword(password, player.PasswordHash))
             {
-                return OperationResult.Failure(ErrorMessages.InvalidPassword);
+                return OperationResponse.Failure(ErrorMessages.InvalidPassword);
             }
 
-            return OperationResult.SuccessResult(player);
+            return OperationResponse.SuccessResult(player);
         }
     }
 }

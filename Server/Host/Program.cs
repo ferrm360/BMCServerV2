@@ -1,11 +1,12 @@
-﻿
-using System;
-using System.IO;
+﻿using System;
 using System.ServiceModel;
+using Autofac;
+using Autofac.Integration.Wcf;
 using log4net;
 using log4net.Config;
+using Service;
+using Service.Contracts;
 using Service.Implements;
-
 
 namespace Host
 {
@@ -15,59 +16,88 @@ namespace Host
 
         static void Main(string[] args)
         {
+            // Configuración del log4net
             XmlConfigurator.Configure();
-
             logger.Info("Initializing the service host.");
             Console.WriteLine("Initializing services, press Enter to continue...");
             Console.ReadLine();
 
+            // Configurar Autofac
+            var container = ConfigureAutofac();
+
+            // Iniciar los servicios con el container de Autofac
             try
             {
-                using (ServiceHost accountServiceHost = new ServiceHost(typeof(AccountService)))
-                using (ServiceHost chatServiceHost = new ServiceHost(typeof(ChatService)))
-                using (ServiceHost profileServiceHost = new ServiceHost(typeof(ProfileService)))
-                using (ServiceHost friendshipServiceHost = new ServiceHost(typeof(FriendshipService)))
+                using (var scope = container.BeginLifetimeScope())
                 {
-                    accountServiceHost.Open();
-                    Console.WriteLine("AccountService is running...");
+                    // Inicializar y abrir AccountService
+                    try
+                    {
+                        var accountServiceHost = new ServiceHost(typeof(AccountService));
+                        accountServiceHost.AddDependencyInjectionBehavior<IAccountService>(scope);
+                        accountServiceHost.Open();
+                        Console.WriteLine("AccountService is running...");
+                        logger.Info("AccountService started successfully.");
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error("AccountService failed to start: " + ex.Message);
+                        Console.WriteLine("AccountService failed to start: " + ex.Message);
+                    }
 
-                    chatServiceHost.Open();
-                    logger.Info("ChatService started successfully.");
-                    Console.WriteLine("ChatService is running...");
+                    // Inicializar y abrir ProfileService
+                    try
+                    {
+                        var profileServiceHost = new ServiceHost(typeof(ProfileService));
+                        profileServiceHost.AddDependencyInjectionBehavior<IProfileService>(scope);
+                        profileServiceHost.Open();
+                        Console.WriteLine("ProfileService is running...");
+                        logger.Info("ProfileService started successfully.");
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error("ProfileService failed to start: " + ex.Message);
+                        Console.WriteLine("ProfileService failed to start: " + ex.Message);
+                    }
 
-                    profileServiceHost.Open();
-                    logger.Info("ProfileService started successfully.");
-                    Console.WriteLine("ProfileService is running...");
+                    // Inicializar y abrir FriendshipService
+                    try
+                    {
+                        var friendshipServiceHost = new ServiceHost(typeof(FriendshipService));
+                        friendshipServiceHost.AddDependencyInjectionBehavior<IFriendshipService>(scope);
+                        friendshipServiceHost.Open();
+                        Console.WriteLine("FriendshipService is running...");
+                        logger.Info("FriendshipService started successfully.");
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error("FriendshipService failed to start: " + ex.Message);
+                        Console.WriteLine("FriendshipService failed to start: " + ex.Message);
+                    }
 
-                    friendshipServiceHost.Open();
-                    logger.Info("friendshipService started successfully.");
-                    Console.WriteLine("friendshipService is running...");
+                    // Inicializar y abrir ChatService
+                    try
+                    {
+                        var chatServiceHost = new ServiceHost(typeof(ChatService));
+                        chatServiceHost.AddDependencyInjectionBehavior<IChatService>(scope);
+                        chatServiceHost.Open();
+                        Console.WriteLine("ChatService is running...");
+                        logger.Info("ChatService started successfully.");
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error("ChatService failed to start: " + ex.Message);
+                        Console.WriteLine("ChatService failed to start: " + ex.Message);
+                    }
 
-                    logger.Info("Both services are up and running.");
-                    Console.WriteLine("Services are up and running.");
-                    Console.WriteLine("Press Enter to terminate the services.");
+                    Console.WriteLine("All services that could be started are running. Press Enter to stop the services.");
                     Console.ReadLine();
                 }
             }
-            catch (AddressAccessDeniedException ex)
-            {
-                logger.Error("Address access error. Make sure the application has the necessary permissions." + ex.ToString());
-                Console.WriteLine("Error: " + ex.ToString());
-            }
-            catch (CommunicationObjectFaultedException ex)
-            {
-                logger.Error("Communication object faulted." + ex.ToString());
-                Console.WriteLine("Error: " + ex.ToString());
-            }
-            catch (TimeoutException ex)
-            {
-                logger.Error("Timeout while opening ChatService." + ex.ToString());
-                Console.WriteLine("Timeout: " + ex.Message);
-            }
             catch (Exception ex)
             {
-                logger.Fatal("Unexpected error in the host. " + ex.ToString());
-                Console.WriteLine("Fatal error: " + ex.ToString());
+                logger.Fatal("An unexpected error occurred: " + ex);
+                Console.WriteLine("Error: " + ex.Message);
             }
             finally
             {
@@ -75,6 +105,14 @@ namespace Host
                 Console.WriteLine("Services terminated. Press Enter to exit.");
                 Console.ReadLine();
             }
+        }
+
+        // Método para configurar Autofac
+        private static IContainer ConfigureAutofac()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterModule<ServiceModule>(); 
+            return builder.Build();
         }
     }
 }
