@@ -22,75 +22,63 @@ namespace Host
             Console.WriteLine("Initializing services, press Enter to continue...");
             Console.ReadLine();
 
-            // Configurar Autofac
             var container = ConfigureAutofac();
 
-            // Iniciar los servicios con el container de Autofac
             try
             {
                 using (var scope = container.BeginLifetimeScope())
                 {
-                    // Inicializar y abrir AccountService
+                    // Utilizamos Lazy<T> para iniciar solo cuando el servicio sea llamado
                     try
                     {
-                        var accountServiceHost = new ServiceHost(typeof(AccountService));
-                        accountServiceHost.AddDependencyInjectionBehavior<IAccountService>(scope);
-                        accountServiceHost.Open();
-                        Console.WriteLine("AccountService is running...");
-                        logger.Info("AccountService started successfully.");
+                        var lazyAccountService = new Lazy<ServiceHost>(() =>
+                        {
+                            var host = new ServiceHost(typeof(AccountService));
+                            host.AddDependencyInjectionBehavior<IAccountService>(scope);
+                            host.Open();
+                            return host;
+                        });
+                        Console.WriteLine("AccountService will be started when accessed.");
                     }
                     catch (Exception ex)
                     {
-                        logger.Error("AccountService failed to start: " + ex.Message);
-                        Console.WriteLine("AccountService failed to start: " + ex.Message);
+                        logger.Error("Error setting up AccountService: " + ex.Message);
                     }
 
-                    // Inicializar y abrir ProfileService
                     try
                     {
-                        var profileServiceHost = new ServiceHost(typeof(ProfileService));
-                        profileServiceHost.AddDependencyInjectionBehavior<IProfileService>(scope);
-                        profileServiceHost.Open();
-                        Console.WriteLine("ProfileService is running...");
-                        logger.Info("ProfileService started successfully.");
+                        var lazyProfileService = new Lazy<ServiceHost>(() =>
+                        {
+                            var host = new ServiceHost(typeof(ProfileService));
+                            host.AddDependencyInjectionBehavior<IProfileService>(scope);
+                            host.Open();
+                            return host;
+                        });
+                        Console.WriteLine("ProfileService will be started when accessed.");
                     }
                     catch (Exception ex)
                     {
-                        logger.Error("ProfileService failed to start: " + ex.Message);
-                        Console.WriteLine("ProfileService failed to start: " + ex.Message);
+                        logger.Error("Error setting up ProfileService: " + ex.Message);
                     }
 
-                    // Inicializar y abrir FriendshipService
                     try
                     {
-                        var friendshipServiceHost = new ServiceHost(typeof(FriendshipService));
-                        friendshipServiceHost.AddDependencyInjectionBehavior<IFriendshipService>(scope);
-                        friendshipServiceHost.Open();
-                        Console.WriteLine("FriendshipService is running...");
-                        logger.Info("FriendshipService started successfully.");
+                        var lazyFriendshipService = new Lazy<ServiceHost>(() =>
+                        {
+                            var host = new ServiceHost(typeof(FriendshipService));
+                            host.AddDependencyInjectionBehavior<IFriendshipService>(scope);
+                            host.Open();
+                            return host;
+                        });
+                        Console.WriteLine("FriendshipService will be started when accessed.");
                     }
                     catch (Exception ex)
                     {
-                        logger.Error("FriendshipService failed to start: " + ex.Message);
-                        Console.WriteLine("FriendshipService failed to start: " + ex.Message);
+                        logger.Error("Error setting up FriendshipService: " + ex.Message);
                     }
 
-                    // Inicializar y abrir ChatService
-                    try
-                    {
-                        var chatServiceHost = new ServiceHost(typeof(ChatService));
-                        chatServiceHost.AddDependencyInjectionBehavior<IChatService>(scope);
-                        chatServiceHost.Open();
-                        Console.WriteLine("ChatService is running...");
-                        logger.Info("ChatService started successfully.");
-                    }
-                    catch (Exception ex)
-                    {
-                        logger.Error("ChatService failed to start: " + ex.Message);
-                        Console.WriteLine("ChatService failed to start: " + ex.Message);
-                    }
-
-                    Console.WriteLine("All services that could be started are running. Press Enter to stop the services.");
+                    // Mantener el host ejecutándose hasta que el usuario decida detenerlo
+                    Console.WriteLine("Services are ready. Press Enter to stop the services.");
                     Console.ReadLine();
                 }
             }
@@ -107,7 +95,6 @@ namespace Host
             }
         }
 
-        // Método para configurar Autofac
         private static IContainer ConfigureAutofac()
         {
             var builder = new ContainerBuilder();
