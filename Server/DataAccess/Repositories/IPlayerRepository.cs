@@ -1,4 +1,6 @@
-﻿namespace DataAccess.Repositories
+﻿using System.Collections.Generic;
+
+namespace DataAccess.Repositories
 {
     public interface IPlayerRepository
     {
@@ -8,5 +10,7 @@
         void Update(Player player);
         void UpdatePasswordHash(string username,  string passwordHash);
         void Save();
+        IEnumerable<Player> GetPlayersByUsername(string username, int playerId);
+        IEnumerable<Player> GetPlayers(string username);    
     }
 }

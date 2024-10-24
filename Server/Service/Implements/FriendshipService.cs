@@ -153,5 +153,45 @@ namespace Service.Implements
                 return OperationResponse.Failure(ErrorMessages.GeneralException);
             }
         }
+
+        public FriendListResponse GetPlayersList(string playerUsername, string username)
+        {
+            try
+            {
+                CustomLogger.Info($"[GetFriendList] Starting GetFriendList for user: {username}");
+
+                var player = _playerRepository.GetByUsername(username);
+                if (player == null)
+                {
+                    CustomLogger.Warn($"[GetFriendList] Player with username '{playerUsername}' not found.");
+                    return FriendListResponse.Failure("UserNotFound");
+                }
+
+                CustomLogger.Info($"[GetFriendList] Fetching players by username: { player.PlayerID}");
+                var players = _playerRepository.GetPlayersByUsername(username, player.PlayerID);
+
+                if (players == null || !players.Any())
+                {
+                    CustomLogger.Info($"[GetFriendList] No player found for user '{username}' (PlayerID: {player.PlayerID}).");
+                    return FriendListResponse.SuccessResult(new List<PlayerDTO>());
+                }
+
+                var playerDtos = players.Select(friend => new PlayerDTO
+                {
+                    PlayerID = friend.PlayerID,
+                    Username = friend.Username,
+                    Email = friend.Email
+                }).ToList();
+
+                CustomLogger.Info($"[GetFriendList] Found {playerDtos.Count} players for user '{username}'.");
+
+                return FriendListResponse.SuccessResult(playerDtos);
+            }
+            catch (Exception ex)
+            {
+                CustomLogger.Error($"[GetFriendList] Error while retrieving friend list for user '{username}': {ex.Message}", ex);
+                return FriendListResponse.Failure(ErrorMessages.GeneralException);
+            }
+        }
     }
 }
