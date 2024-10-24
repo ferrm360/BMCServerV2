@@ -1,5 +1,6 @@
 ﻿using DataAccess.Utilities;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
@@ -135,6 +136,62 @@ namespace DataAccess.Repositories
             catch (InvalidOperationException ex)
             {
                 throw new DataAccessException("An invalid operation occurred while updating the player.", ex);
+            }
+        }
+
+        public IEnumerable<Player> GetPlayersByUsername(string username, int playerId)
+        {
+            if (playerId <= 0)
+            {
+                throw new ArgumentException("Player ID must be greater than zero.", nameof(playerId));
+            }
+
+            try
+            {
+                var players = _context.Player
+                .Where(p => p.Username.Contains(username) && p.PlayerID != playerId)
+                .ToList();
+
+                return players;
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new DataAccessException("Invalid operation while retrieving accepted friends.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessException("An unexpected error occurred while retrieving accepted friends.", ex);
+            }
+        }
+
+        public IEnumerable<Player> GetPlayers(string username)
+        {
+            if (!string.IsNullOrEmpty(username))
+            {
+                throw new ArgumentException("User string cannot be null", username);
+            }
+
+            try
+            {
+                var players = _context.Player
+                .Where(p => p.Username != username)  
+                .ToList();
+                return players;
+            } catch (SqlException)
+            {
+                throw;
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new DataAccessException("Invalid operation while retrieving accepted friends.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessException("An unexpected error occurred while retrieving accepted friends.", ex);
             }
         }
 

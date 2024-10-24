@@ -28,7 +28,6 @@ namespace Host
             {
                 using (var scope = container.BeginLifetimeScope())
                 {
-                    // Utilizamos Lazy<T> para iniciar solo cuando el servicio sea llamado
                     try
                     {
                         var lazyAccountService = new Lazy<ServiceHost>(() =>
@@ -77,7 +76,6 @@ namespace Host
                         logger.Error("Error setting up FriendshipService: " + ex.Message);
                     }
 
-                    // Mantener el host ejecutándose hasta que el usuario decida detenerlo
                     Console.WriteLine("Services are ready. Press Enter to stop the services.");
                     Console.ReadLine();
                 }
