@@ -1,8 +1,9 @@
 ﻿using Autofac;
 using DataAccess.Repositories;
 using Service.Implements;
-using DataAccess;
 using Service.Contracts;
+using DataAccess;
+using Service.Utilities.Validators;
 
 namespace Service
 {
@@ -10,19 +11,20 @@ namespace Service
     {
         protected override void Load(ContainerBuilder builder)
         {
-            // Registrar el contexto de Entity Framework
-            builder.RegisterType<BMCEntities>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<ProfileService>().As<IProfileService>().InstancePerLifetimeScope();
+            builder.RegisterType<AccountService>().As<IAccountService>().InstancePerLifetimeScope();
+            builder.RegisterType<FriendshipService>().As<IFriendshipService>().InstancePerLifetimeScope();
+            builder.RegisterType<ChatService>().As<IChatService>().SingleInstance();
 
-            // Registrar los repositorios
+
             builder.RegisterType<PlayerRepository>().As<IPlayerRepository>().InstancePerLifetimeScope();
             builder.RegisterType<ProfileRepository>().As<IProfileRepository>().InstancePerLifetimeScope();
             builder.RegisterType<PlayerScoresRepository>().As<IPlayerScoresRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<FriendRequestRepository>().As<IFriendRequestRepository>().InstancePerLifetimeScope();
 
-            // Registrar los servicios
-            builder.RegisterType<AccountService>().As<IAccountService>().InstancePerLifetimeScope();
+            builder.RegisterType<ValidationFriendshipService>().AsSelf().InstancePerLifetimeScope();
 
-            // Registrar cualquier otro servicio
-            // builder.RegisterType<OtherService>().As<IOtherService>().InstancePerLifetimeScope();
+            builder.RegisterType<BMCEntities>().AsSelf().InstancePerLifetimeScope();
         }
     }
 }

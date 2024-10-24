@@ -1,4 +1,6 @@
-﻿using Service.Results;
+﻿using Service.DTO;
+using Service.Results;
+using Service.Utilities.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +14,16 @@ namespace Service.Contracts
     public interface IFriendshipService
     {
         [OperationContract]
-        OperationResult SendFriendRequest(string senderUsername, string reciveUsername);
+        OperationResponse SendFriendRequest(string senderUsername, string reciveUsername);
         [OperationContract]
-        OperationResult AcceptFriendRequest(int idRequest);
+        OperationResponse AcceptFriendRequest(int idRequest);
         [OperationContract]
-        OperationResult RejectFriendResponse(int idResponse);
+        OperationResponse RejectFriendResponse(int idResponse);
         [OperationContract]
-        OperationResult GetFriendList (string username);
+        FriendListResponse GetFriendList (string username);
         [OperationContract]
-        OperationResult GetFriendRequestList(string username);
+        OperationResponse GetFriendRequestList(string username);
+        [OperationContract]
+        string TestConnection();
     }
 }

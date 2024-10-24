@@ -83,6 +83,7 @@
     <Compile Include="DTO\FriendRequestDTO.cs" />
     <Compile Include="DTO\MessageDTO.cs" />
     <Compile Include="DTO\PlayerDTO.cs" />
+    <Compile Include="DTO\PlayerProfileDTO.cs" />
     <Compile Include="Factories\EntityFactory.cs" />
     <Compile Include="Factories\IEntityFactory.cs" />
     <Compile Include="Implements\AccountService.cs" />
@@ -94,7 +95,9 @@
     <Compile Include="ServiceModule.cs" />
     <Compile Include="Utilities\Constans\ErrorMessages.cs" />
     <Compile Include="Utilities\Enumerations\FriendRequestStatus.cs" />
-    <Compile Include="Utilities\Results\OperationResult.cs" />
+    <Compile Include="Utilities\Results\FriendListResponse.cs" />
+    <Compile Include="Utilities\Results\ImageResponse.cs" />
+    <Compile Include="Utilities\Results\OperationResponse.cs" />
     <Compile Include="Utilities\Email\EmailConfigHelper.cs" />
     <Compile Include="Utilities\Email\EmailService.cs" />
     <Compile Include="Utilities\Email\EmailServiceFactory.cs" />
@@ -104,6 +107,7 @@
     <Compile Include="Utilities\CustomLogger.cs" />
     <Compile Include="Utilities\Mapper\PlayerMapper.cs" />
     <Compile Include="Utilities\NotificationService.cs" />
+    <Compile Include="Utilities\Results\ProfileResponse.cs" />
     <Compile Include="Utilities\Validators\ValidationAccountService.cs" />
     <Compile Include="Utilities\Validators\ValidationFriendshipService.cs" />
   </ItemGroup>

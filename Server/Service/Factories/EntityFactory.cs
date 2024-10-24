@@ -26,6 +26,7 @@ namespace Service.Factories
                 AvatarURL = "default_avatar.png",
                 Bio = "Default Bio",
                 JoinDate = DateTime.Now,
+                SignUpDate = DateTime.Now,
                 LastVisit = DateTime.Now
             };
         }

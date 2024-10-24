@@ -1,5 +1,6 @@
 ﻿using Service.DTO;
 using Service.Results;
+using Service.Utilities.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,17 @@ using System.Threading.Tasks;
 namespace Service.Contracts
 {
     [ServiceContract]
-    internal interface IProfileService
+    public interface IProfileService
     {
         [OperationContract]
-        OperationResult UpdatePassword(string username, string newPassword, string oldPassword);
+        OperationResponse UpdatePassword(string username, string newPassword, string oldPassword);
         [OperationContract]
-        OperationResult UpdateProfilePicture(string username, byte[] imageBytes, string fileName);
+        OperationResponse UpdateProfilePicture(string username, byte[] imageBytes, string fileName);
         [OperationContract]
-        OperationResult UpdateUsername(string currentUsername, string newUsername);
+        OperationResponse UpdateUsername(string currentUsername, string newUsername);
+        [OperationContract]
+        ProfileResponse GetProfileByUsername(string username);
+        [OperationContract]
+        ImageResponse GetProfileImage(string username);
     }
 }
