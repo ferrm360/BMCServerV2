@@ -43,7 +43,6 @@ namespace Service.Implements
         {
             try
             {
-                // Validar si el nombre de usuario o email ya existen
                 if (_playerRepository.GetByUsername(player.Username) != null)
                 {
                     return OperationResult.Failure(ErrorMessages.DuplicateUsername);
@@ -54,20 +53,16 @@ namespace Service.Implements
                     return OperationResult.Failure(ErrorMessages.DuplicateEmail);
                 }
 
-                // Hash del password
                 string passwordHash = PasswordHelper.HashPassword(player.Password);
 
-                // Usar EntityFactory estático para crear las entidades
                 var playerEntity = EntityFactory.CreatePlayerEntity(player, passwordHash);
                 var profileEntity = EntityFactory.CreateProfileEntity(playerEntity.PlayerID);
                 var playerScoresEntity = EntityFactory.CreatePlayerScoresEntity(playerEntity.PlayerID);
 
-                // Insertar las entidades en la base de datos
                 _playerRepository.Add(playerEntity);
                 _profileRepository.Add(profileEntity);
                 _scoreRepository.Add(playerScoresEntity);
 
-                // Guardar cambios en la base de datos
                 _playerRepository.Save();
                 _profileRepository.Save();
                 _scoreRepository.Save();

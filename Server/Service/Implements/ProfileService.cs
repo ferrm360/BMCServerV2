@@ -18,17 +18,13 @@ namespace Service.Implements
         private readonly IProfileRepository _profileRepository;
         private readonly string _imageFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "uploads", "avatars");
 
-        // Constructor sin parámetros: Inicializa los repositorios directamente
         public ProfileService()
         {
-            // Crear instancia del contexto de Entity Framework
             var context = new BMCEntities();
 
-            // Inicializar los repositorios directamente
             _playerRepository = new PlayerRepository(context);
             _profileRepository = new ProfileRepository(context);
 
-            // Crear la carpeta para las imágenes si no existe
             if (!Directory.Exists(_imageFolderPath))
             {
                 Directory.CreateDirectory(_imageFolderPath);
