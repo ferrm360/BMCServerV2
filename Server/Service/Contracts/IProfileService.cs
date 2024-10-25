@@ -20,6 +20,8 @@ namespace Service.Contracts
         [OperationContract]
         OperationResponse UpdateUsername(string currentUsername, string newUsername);
         [OperationContract]
+        OperationResponse UpdateBio(string bio, string username);
+        [OperationContract]
         ProfileResponse GetProfileByUsername(string username);
         [OperationContract]
         ImageResponse GetProfileImage(string username);
