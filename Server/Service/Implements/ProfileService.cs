@@ -226,9 +226,23 @@ namespace Service.Implements
 
                 var imageBytes = File.ReadAllBytes(imagePath);
 
+                string normalizedAvatarUrl = profile.AvatarURL.Replace('\\', '/');
+
+                string fileName = Path.GetFileName(normalizedAvatarUrl);
+
+                string imagePath = Path.Combine(_imageFolderPath, fileName);
+
+                if (!File.Exists(imagePath))
+                {
+                    return ImageResponse.Failure("Image file not found.");
+                }
+
+                var imageBytes = File.ReadAllBytes(imagePath);
+
                 if (imageBytes == null || imageBytes.Length == 0)
                 {
                     return ImageResponse.Failure(ErrorMessages.EmptyImage);
+                    return ImageResponse.Failure("Image is empty.");
                 }
 
                 return ImageResponse.Success(imageBytes, fileName, "image/jpeg");
@@ -285,5 +299,36 @@ namespace Service.Implements
                 return OperationResponse.Failure(ErrorMessages.GeneralException);
             }
         }
+
+        public string GetBioByUsername(string username)
+        {
+            try
+            {
+                // Buscar al jugador por username
+                var player = _playerRepository.GetByUsername(username);
+                if (player == null)
+                {
+                    return "User not found.";
+                }
+
+                // Buscar el perfil asociado al jugador
+                var profile = _profileRepository.GetProfileByPlayerId(player.PlayerID);
+                if (profile == null)
+                {
+                    return "Profile not found.";
+                }
+
+                // Devolver la biografía si está disponible
+                return profile.Bio ?? "No biography available.";
+            }
+            catch (Exception ex)
+            {
+                // Loggear el error y devolver un mensaje de error genérico
+                CustomLogger.Error("Error retrieving biography", ex);
+                return "Error retrieving biography.";
+            }
+        }
+
+
     }
 }

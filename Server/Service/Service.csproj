@@ -96,6 +96,7 @@
     <Compile Include="Utilities\Constans\ErrorMessages.cs" />
     <Compile Include="Utilities\Enumerations\FriendRequestStatus.cs" />
     <Compile Include="Utilities\Results\FriendListResponse.cs" />
+    <Compile Include="Utilities\Results\FriendRequestListReponse.cs" />
     <Compile Include="Utilities\Results\ImageResponse.cs" />
     <Compile Include="Utilities\Results\OperationResponse.cs" />
     <Compile Include="Utilities\Email\EmailConfigHelper.cs" />
