@@ -25,5 +25,7 @@ namespace Service.Contracts
         ProfileResponse GetProfileByUsername(string username);
         [OperationContract]
         ImageResponse GetProfileImage(string username);
+        [OperationContract]
+        string GetBioByUsername(string username);
     }
 }

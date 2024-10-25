@@ -94,14 +94,14 @@ namespace Service.Implements
 
 
 
-        public OperationResponse GetFriendRequestList(string username)
+        public FriendRequestListReponse GetFriendRequestList(string username)
         {
             try
             {
                 var player = _playerRepository.GetByUsername(username);
                 if (player == null)
                 {
-                    return OperationResponse.Failure("User not found.");
+                    return FriendRequestListReponse.Failure("User not found.");
                 }
 
                 var requests = _friendRequestRepository.GetReceivedRequests(player.PlayerID);
@@ -114,12 +114,12 @@ namespace Service.Implements
                     Status = request.RequestStatus.ToString()
                 }).ToList();
 
-                return OperationResponse.SuccessResult(requestDTOs);
+                return FriendRequestListReponse.SuccessResult(requestDTOs);
             }
             catch (Exception ex)
             {
                 CustomLogger.Error("", ex);
-                return OperationResponse.Failure(ErrorMessages.GeneralException);
+                return FriendRequestListReponse.Failure(ErrorMessages.GeneralException);
             }
         }
 

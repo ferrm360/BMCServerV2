@@ -78,7 +78,7 @@ namespace DataAccess.Repositories
         {
             try
             {
-                return _context.FriendRequest.Where(r => r.ReceiverPlayerID == receiverPlayerId).ToList();
+                return _context.FriendRequest.Where(r => r.ReceiverPlayerID == receiverPlayerId && r.RequestStatus == "Pending").ToList();
             }
             catch (SqlException)
             {

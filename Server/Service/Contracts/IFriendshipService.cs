@@ -22,7 +22,7 @@ namespace Service.Contracts
         [OperationContract]
         FriendListResponse GetFriendList (string username);
         [OperationContract]
-        OperationResponse GetFriendRequestList(string username);
+        FriendRequestListReponse GetFriendRequestList(string username);
         [OperationContract]
         FriendListResponse GetPlayersList(string username);
         [OperationContract]
