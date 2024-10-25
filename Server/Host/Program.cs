@@ -16,7 +16,6 @@ namespace Host
 
         static void Main(string[] args)
         {
-            // Configuración del log4net
             XmlConfigurator.Configure();
             logger.Info("Initializing the service host.");
             Console.WriteLine("Initializing services, press Enter to continue...");

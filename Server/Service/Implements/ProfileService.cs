@@ -81,8 +81,10 @@ namespace Service.Implements
                 File.WriteAllBytes(filePath, imageBytes);
 
                 string imageUrl = Path.Combine("/uploads/avatars", uniqueFileName);
+                string absolutePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, imageUrl.Replace('\\', '/'));
 
-                profile.AvatarURL = imageUrl;
+
+                profile.AvatarURL = absolutePath;
                 _profileRepository.Update(profile);
                 _profileRepository.Save();
 
@@ -225,7 +227,8 @@ namespace Service.Implements
             }
         }
 
-        private byte[] ConvertImageUrlToBytes(string imageUrl)
+        // TODO: Poner en utilidades
+        public byte[] ConvertImageUrlToBytes(string imageUrl)
         {
             try
             {
@@ -245,5 +248,33 @@ namespace Service.Implements
                 throw new Exception("Error converting image.");
             }
         }
+
+        public OperationResponse UpdateBio(string bio, string username)
+        {
+            try
+            {
+                
+
+                var player = _playerRepository.GetByUsername(username);
+                var profile = _profileRepository.GetProfileByPlayerId(player.PlayerID);
+                if (player == null)
+                {
+                    return OperationResponse.Failure(ErrorMessages.UserNotFound);
+                }
+
+                profile.Bio = bio;
+                _profileRepository.Update(profile);
+                _profileRepository.Save();
+
+                return OperationResponse.SuccessResult();
+            }
+            catch (Exception ex)
+            {
+                CustomLogger.Error("", ex);
+                return OperationResponse.Failure(ErrorMessages.GeneralException);
+            }
+        }
+
+
     }
 }

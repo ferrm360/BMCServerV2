@@ -170,7 +170,7 @@ namespace DataAccess.Repositories
 
         public IEnumerable<Player> GetPlayers(string username)
         {
-            if (!string.IsNullOrEmpty(username))
+            if (string.IsNullOrEmpty(username))
             {
                 throw new ArgumentException("User string cannot be null", username);
             }

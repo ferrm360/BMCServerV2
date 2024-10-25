@@ -107,6 +107,7 @@
     <Compile Include="Utilities\CustomLogger.cs" />
     <Compile Include="Utilities\Mapper\PlayerMapper.cs" />
     <Compile Include="Utilities\NotificationService.cs" />
+    <Compile Include="Utilities\Results\PlayerProfileResponse.cs" />
     <Compile Include="Utilities\Results\ProfileResponse.cs" />
     <Compile Include="Utilities\Validators\ValidationAccountService.cs" />
     <Compile Include="Utilities\Validators\ValidationFriendshipService.cs" />
