@@ -11,8 +11,6 @@ namespace Service.Utilities.Results
     [DataContract]
     public class ProfileResponse
     {
-        internal PlayerDTO Player;
-
         [DataMember]
         public bool IsSuccess { get; set; }
 

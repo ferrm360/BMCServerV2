@@ -48,7 +48,7 @@ namespace DataAccess.Repositories
             {
                 return _context.UserScores.OrderByDescending(us => us.Wins).Take(top).ToList();
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
                 throw;
             }

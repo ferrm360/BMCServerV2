@@ -23,7 +23,6 @@ namespace Service.Utilities.Email
                     ConfigurationManager.AppSettings["SmtpPassword"]
                 )
             };
-
             return smtpClient;
         }
     }

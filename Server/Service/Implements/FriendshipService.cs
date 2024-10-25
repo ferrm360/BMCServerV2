@@ -164,7 +164,6 @@ namespace Service.Implements
             {
                 CustomLogger.Info($"[GetPlayersListByUsername] Starting GetPlayersListByUsername for user: {ownerUsername}");
 
-                // Obtener información del usuario que consulta (propietario)
                 var player = _playerRepository.GetByUsername(ownerUsername);
                 if (player == null)
                 {
@@ -172,7 +171,6 @@ namespace Service.Implements
                     return PlayerProfileResponse.Failure("OwnerNotFound");
                 }
 
-                // Buscar jugadores cuyo username coincida (usando LIKE, por ejemplo)
                 var players = _playerRepository.GetPlayersByUsername(playerUsername, player.PlayerID);
 
                 if (players == null || !players.Any())
@@ -181,13 +179,11 @@ namespace Service.Implements
                     return PlayerProfileResponse.SuccessResult(new List<PlayerProfileDTO>(), new List<PlayerDTO>());
                 }
 
-                // Crear las listas para devolver tanto jugadores como perfiles
                 var playerDtos = new List<PlayerDTO>();
                 var profileDtos = new List<PlayerProfileDTO>();
 
                 foreach (var friend in players)
                 {
-                    // Asignar los datos del jugador encontrado
                     var playerDto = new PlayerDTO
                     {
                         PlayerID = friend.PlayerID,
@@ -196,7 +192,6 @@ namespace Service.Implements
                     };
                     playerDtos.Add(playerDto);
 
-                    // Obtener el perfil correspondiente y asignarlo a PlayerProfileDTO
                     var profile = _profileRepository.GetProfileByPlayerId(friend.PlayerID);
                     if (profile != null)
                     {
@@ -218,7 +213,6 @@ namespace Service.Implements
 
                 CustomLogger.Info($"[GetPlayersListByUsername] Found {playerDtos.Count} players for user '{ownerUsername}'.");
 
-                // Devuelve ambas listas: los jugadores y sus perfiles
                 return PlayerProfileResponse.SuccessResult(profileDtos, playerDtos);
             }
             catch (Exception ex)
