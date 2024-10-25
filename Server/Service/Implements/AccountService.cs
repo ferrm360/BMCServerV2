@@ -27,6 +27,24 @@ namespace Service.Implements
 
         public OperationResponse Register(PlayerDTO player)
         {
+            // TODO crear una clase validatorPlayerDTO para reducir la complejidad.
+            // TODO validar longitud y que cumpla con los requisitos
+            if (string.IsNullOrWhiteSpace(player.Username))
+            {
+                return OperationResponse.Failure(ErrorMessages.InvalidUsername);
+            }
+
+            // TODO Validar que sea correo
+            if (string.IsNullOrWhiteSpace(player.Email))
+            {
+                return OperationResponse.Failure(ErrorMessages.InvalidEmail);
+            }
+
+            // TODO validar politicas de contrasena
+            if (string.IsNullOrWhiteSpace(player.Password))
+            {
+                return OperationResponse.Failure(ErrorMessages.InvalidPassword);
+            }
             try
             {
                 if (_playerRepository.GetByUsername(player.Username) != null)
@@ -69,6 +87,16 @@ namespace Service.Implements
 
         public OperationResponse Login(string username, string password)
         {
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                return OperationResponse.Failure(ErrorMessages.InvalidUsername);
+            }
+
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                return OperationResponse.Failure(ErrorMessages.InvalidPassword);
+            }
+
             try
             {
                 var player = _playerRepository.GetByUsername(username);

@@ -10,6 +10,7 @@ using System;
 using System.Data.SqlClient;
 using System.IO;
 using Service.Utilities.Results;
+using DataAccess.Utilities;
 
 namespace Service.Implements
 {
@@ -99,7 +100,7 @@ namespace Service.Implements
             catch (Exception ex)
             {
                 CustomLogger.Error("", ex);
-                return OperationResponse.Failure("Error while updating profile picture: " + ex.Message);
+                return OperationResponse.Failure(ErrorMessages.ErrorWhileUpdatingProfilePicture);
             }
         }
 
@@ -137,13 +138,13 @@ namespace Service.Implements
             {
                 if (profile == null)
                 {
-                    return OperationResponse.Failure("Invalid profile data.");
+                    return OperationResponse.Failure(ErrorMessages.UserNotFound);
                 }
 
                 var player = _playerRepository.GetByUsername(username);
                 if (player == null)
                 {
-                    return OperationResponse.Failure("User not found.");
+                    return OperationResponse.Failure(ErrorMessages.ProfileNotFound);
                 }
 
                 profile.PlayerID = player.PlayerID;
@@ -154,7 +155,8 @@ namespace Service.Implements
             }
             catch (Exception ex)
             {
-                return OperationResponse.Failure("Error while updating profile: " + ex.Message);
+                CustomLogger.Error("Error retrieving profile by username", ex);
+                return OperationResponse.Failure(ErrorMessages.GeneralException);
             }
         }
 
@@ -165,13 +167,13 @@ namespace Service.Implements
                 var player = _playerRepository.GetByUsername(username);
                 if (player == null)
                 {
-                    return ProfileResponse.Failure("User not found.");
+                    return ProfileResponse.Failure(ErrorMessages.UserNotFound);
                 }
 
                 var profile = _profileRepository.GetProfileByPlayerId(player.PlayerID);
                 if (profile == null)
                 {
-                    return ProfileResponse.Failure("Profile not found.");
+                    return ProfileResponse.Failure(ErrorMessages.ProfileNotFound);
                 }
 
                 byte[] imageBytes = ConvertImageUrlToBytes(profile.AvatarURL) ?? Array.Empty<byte>();
@@ -191,10 +193,9 @@ namespace Service.Implements
             catch (Exception ex)
             {
                 CustomLogger.Error("Error retrieving profile by username", ex);
-                return ProfileResponse.Failure("An unexpected error occurred.");
+                return ProfileResponse.Failure(ErrorMessages.GeneralException);
             }
         }
-
 
         public ImageResponse GetProfileImage(string username)
         {
@@ -203,27 +204,39 @@ namespace Service.Implements
                 var player = _playerRepository.GetByUsername(username);
                 if (player == null)
                 {
-                    return ImageResponse.Failure("User not found.");
+                    return ImageResponse.Failure(ErrorMessages.UserNotFound);
                 }
 
                 var profile = _profileRepository.GetProfileByPlayerId(player.PlayerID);
                 if (profile == null || string.IsNullOrEmpty(profile.AvatarURL))
                 {
-                    return ImageResponse.Failure("Profile or Avatar not found.");
+                    return ImageResponse.Failure(ErrorMessages.ProfileNotFound);
                 }
 
-                var imageBytes = ConvertImageUrlToBytes(profile.AvatarURL);
+                string normalizedAvatarUrl = profile.AvatarURL.Replace('\\', '/');
+
+                string fileName = Path.GetFileName(normalizedAvatarUrl);
+
+                string imagePath = Path.Combine(_imageFolderPath, fileName);
+
+                if (!File.Exists(imagePath))
+                {
+                    return ImageResponse.Failure(ErrorMessages.ImageNotFound);
+                }
+
+                var imageBytes = File.ReadAllBytes(imagePath);
+
                 if (imageBytes == null || imageBytes.Length == 0)
                 {
-                    return ImageResponse.Failure("Image not found or is empty.");
+                    return ImageResponse.Failure(ErrorMessages.EmptyImage);
                 }
 
-                return ImageResponse.Success(imageBytes, Path.GetFileName(profile.AvatarURL), "image/jpeg");
+                return ImageResponse.Success(imageBytes, fileName, "image/jpeg");
             }
             catch (Exception ex)
             {
                 CustomLogger.Error("Error retrieving profile image", ex);
-                return ImageResponse.Failure("Error retrieving profile image.");
+                return ImageResponse.Failure(ErrorMessages.GeneralException);
             }
         }
 
@@ -239,13 +252,13 @@ namespace Service.Implements
                 }
                 else
                 {
-                    throw new FileNotFoundException("Image file not found.");
+                    throw new FileNotFoundException(ErrorMessages.ImageNotFound);
                 }
             }
             catch (Exception ex)
             {
                 CustomLogger.Error("Error converting image to bytes", ex);
-                throw new Exception("Error converting image.");
+                throw new Exception(ErrorMessages.GeneralException);
             }
         }
 
@@ -253,8 +266,6 @@ namespace Service.Implements
         {
             try
             {
-                
-
                 var player = _playerRepository.GetByUsername(username);
                 var profile = _profileRepository.GetProfileByPlayerId(player.PlayerID);
                 if (player == null)
@@ -274,7 +285,5 @@ namespace Service.Implements
                 return OperationResponse.Failure(ErrorMessages.GeneralException);
             }
         }
-
-
     }
 }

@@ -27,55 +27,59 @@ namespace Host
             {
                 using (var scope = container.BeginLifetimeScope())
                 {
+                    // Iniciar AccountService
                     try
                     {
-                        var lazyAccountService = new Lazy<ServiceHost>(() =>
-                        {
-                            var host = new ServiceHost(typeof(AccountService));
-                            host.AddDependencyInjectionBehavior<IAccountService>(scope);
-                            host.Open();
-                            return host;
-                        });
-                        Console.WriteLine("AccountService will be started when accessed.");
+                        var accountServiceHost = new ServiceHost(typeof(AccountService));
+                        accountServiceHost.AddDependencyInjectionBehavior<IAccountService>(scope);
+                        accountServiceHost.Open();
+                        Console.WriteLine("AccountService is running.");
                     }
                     catch (Exception ex)
                     {
                         logger.Error("Error setting up AccountService: " + ex.Message);
                     }
 
+                    // Iniciar ProfileService
                     try
                     {
-                        var lazyProfileService = new Lazy<ServiceHost>(() =>
-                        {
-                            var host = new ServiceHost(typeof(ProfileService));
-                            host.AddDependencyInjectionBehavior<IProfileService>(scope);
-                            host.Open();
-                            return host;
-                        });
-                        Console.WriteLine("ProfileService will be started when accessed.");
+                        var profileServiceHost = new ServiceHost(typeof(ProfileService));
+                        profileServiceHost.AddDependencyInjectionBehavior<IProfileService>(scope);
+                        profileServiceHost.Open();
+                        Console.WriteLine("ProfileService is running.");
                     }
                     catch (Exception ex)
                     {
                         logger.Error("Error setting up ProfileService: " + ex.Message);
                     }
 
+                    // Iniciar FriendshipService
                     try
                     {
-                        var lazyFriendshipService = new Lazy<ServiceHost>(() =>
-                        {
-                            var host = new ServiceHost(typeof(FriendshipService));
-                            host.AddDependencyInjectionBehavior<IFriendshipService>(scope);
-                            host.Open();
-                            return host;
-                        });
-                        Console.WriteLine("FriendshipService will be started when accessed.");
+                        var friendshipServiceHost = new ServiceHost(typeof(FriendshipService));
+                        friendshipServiceHost.AddDependencyInjectionBehavior<IFriendshipService>(scope);
+                        friendshipServiceHost.Open();
+                        Console.WriteLine("FriendshipService is running.");
                     }
                     catch (Exception ex)
                     {
                         logger.Error("Error setting up FriendshipService: " + ex.Message);
                     }
 
-                    Console.WriteLine("Services are ready. Press Enter to stop the services.");
+                    // Iniciar ChatService
+                    try
+                    {
+                        var chatServiceHost = new ServiceHost(typeof(ChatService));
+                        chatServiceHost.AddDependencyInjectionBehavior<IChatService>(scope);
+                        chatServiceHost.Open();
+                        Console.WriteLine("ChatService is running.");
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error("Error setting up ChatService: " + ex.Message);
+                    }
+
+                    Console.WriteLine("All services are running. Press Enter to stop the services.");
                     Console.ReadLine();
                 }
             }
@@ -95,7 +99,7 @@ namespace Host
         private static IContainer ConfigureAutofac()
         {
             var builder = new ContainerBuilder();
-            builder.RegisterModule<ServiceModule>(); 
+            builder.RegisterModule<ServiceModule>();
             return builder.Build();
         }
     }
