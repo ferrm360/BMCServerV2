@@ -27,6 +27,8 @@
         public const string DuplicateLobbyName = "Error.DuplicateLobbyName";
         public const string IncorrectPassword = "Error.IncorrectPassword";
         public const string UserNotConnected = "Error.UserNotConnected";
+        public const string NotLobbyHost = "Error.NotLobbyHost";
+        public const string PlayerNotInLobby = "Error.PlayerNotInLobby";
 
     }
 }

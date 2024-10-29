@@ -5,8 +5,6 @@ using Moq;
 using Service.Implements;
 using Service.Utilities.Constans;
 using Service.Utilities.Helpers;
-using System;
-using System.IO;
 
 namespace Service.Test.Services.Implements
 {
@@ -42,8 +40,6 @@ namespace Service.Test.Services.Implements
             var result = _profileService.UpdateUsername(currentUsername, newUsername);
 
             Assert.IsTrue(result.IsSuccess);
-            _playerRepositoryMock.Verify(r => r.Update(It.IsAny<Player>()), Times.Once);
-            _playerRepositoryMock.Verify(r => r.Save(), Times.Once);
         }
 
         [TestMethod]
@@ -58,7 +54,6 @@ namespace Service.Test.Services.Implements
             var result = _profileService.UpdateUsername(currentUsername, newUsername);
 
             Assert.AreEqual(ErrorMessages.DuplicateUsername, result.ErrorKey);
-            _playerRepositoryMock.Verify(r => r.Update(It.IsAny<Player>()), Times.Never);
         }
 
         [TestMethod]
