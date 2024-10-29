@@ -16,6 +16,7 @@ namespace Service
             builder.RegisterType<AccountService>().As<IAccountService>().InstancePerLifetimeScope();
             builder.RegisterType<FriendshipService>().As<IFriendshipService>().InstancePerLifetimeScope();
             builder.RegisterType<ChatService>().As<IChatService>().SingleInstance();
+            builder.RegisterType<LobbyService>().As<ILobbyService>().SingleInstance();
 
 
             builder.RegisterType<PlayerRepository>().As<IPlayerRepository>().InstancePerLifetimeScope();

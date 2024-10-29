@@ -79,8 +79,22 @@ namespace Host
                         logger.Error("Error setting up ChatService: " + ex.Message);
                     }
 
+                    try
+                    {
+                        var lobbyServiceHost = new ServiceHost(typeof(LobbyService));
+                        lobbyServiceHost.AddDependencyInjectionBehavior<ILobbyService>(scope);
+                        lobbyServiceHost.Open();
+                        Console.WriteLine("LobbyService is running.");
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error("Error setting up LobbyService: " + ex.Message);
+                    }
+
                     Console.WriteLine("All services are running. Press Enter to stop the services.");
                     Console.ReadLine();
+
+                    
                 }
             }
             catch (Exception ex)
