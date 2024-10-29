@@ -20,5 +20,9 @@ namespace Service.DTO
         public int CurrentPlayers { get; set; }
         [DataMember]
         public int MaxPlayers { get; set; } = 2;
+        [DataMember]
+        public string Host { get; set; }
+        [DataMember]
+        public List<string> Players { get; set; } = new List<string>();
     }
 }
