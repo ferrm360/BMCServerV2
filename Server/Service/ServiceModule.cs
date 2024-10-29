@@ -4,6 +4,7 @@ using Service.Implements;
 using Service.Contracts;
 using DataAccess;
 using Service.Utilities.Validators;
+using Service.Connection.Managers;
 
 namespace Service
 {
@@ -25,6 +26,10 @@ namespace Service
             builder.RegisterType<ValidationFriendshipService>().AsSelf().InstancePerLifetimeScope();
 
             builder.RegisterType<BMCEntities>().AsSelf().InstancePerLifetimeScope();
+
+            builder.RegisterType<ConnectionManager>().AsSelf().SingleInstance();
+
+            builder.RegisterType<ConnectionEventHandler>().AsSelf().SingleInstance();
         }
     }
 }
