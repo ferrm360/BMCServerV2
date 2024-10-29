@@ -195,7 +195,7 @@ namespace Service.Implements
                     var profile = _profileRepository.GetProfileByPlayerId(friend.PlayerID);
                     if (profile != null)
                     {
-                        byte[] imageBytes = ConvertImageUrlToBytes(profile.AvatarURL) ?? Array.Empty<byte>();
+                        //byte[] imageBytes = ConvertImageUrlToBytes(profile.AvatarURL) ?? Array.Empty<byte>();
 
                         var profileDto = new PlayerProfileDTO
                         {
@@ -204,7 +204,7 @@ namespace Service.Implements
                             JoinDate = profile.JoinDate ?? DateTime.MinValue,
                             SingUpDate = profile.SignUpDate ?? DateTime.MinValue,
                             LastVisit = profile.LastVisit ?? DateTime.MinValue,
-                            ProfileImage = imageBytes
+                            //ProfileImage = imageBytes
                         };
 
                         profileDtos.Add(profileDto);
