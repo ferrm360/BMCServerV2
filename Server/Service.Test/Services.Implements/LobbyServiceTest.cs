@@ -72,7 +72,7 @@ namespace Service.Test.Services.Implements
         [TestMethod]
         public void JoinLobby_Success_PublicLobby()
         {
-            var createRequest = new CreateLobbyRequestDTO { Name = "PublicLobby", IsPrivate = false };
+            var createRequest = new CreateLobbyRequestDTO { Name = "PublicLobby", IsPrivate = false, Username = "HostUser" };
             var createResponse = _lobbyService.CreateLobby(createRequest);
 
             var joinRequest = new JoinLobbyRequestDTO
@@ -83,8 +83,9 @@ namespace Service.Test.Services.Implements
 
             var joinResponse = _lobbyService.JoinLobby(joinRequest);
 
-            Assert.AreEqual(1, joinResponse.Lobby.CurrentPlayers);
+            Assert.IsTrue(joinResponse.Lobby.Players.Contains("HostUser") && joinResponse.Lobby.Players.Contains("Player1"));
         }
+
 
         [TestMethod]
         public void JoinLobby_Failure_PrivateLobby_IncorrectPassword()
@@ -139,8 +140,26 @@ namespace Service.Test.Services.Implements
 
             var leaveResponse = _lobbyService.LeaveLobby(createResponse.Lobby.LobbyId, "Player1");
 
-            Assert.AreEqual(0, leaveResponse.Lobby.CurrentPlayers);
+            Assert.AreEqual(1, leaveResponse.Lobby.CurrentPlayers);
         }
+
+        [TestMethod]
+        public void LeaveLobby_RemovesLobbyIfEmpty()
+        {
+            var createRequest = new CreateLobbyRequestDTO { Name = "TemporaryLobby", IsPrivate = false, Username = "HostUser" };
+            var createResponse = _lobbyService.CreateLobby(createRequest);
+
+            var joinRequest = new JoinLobbyRequestDTO { LobbyId = createResponse.Lobby.LobbyId, Username = "Player1" };
+            _lobbyService.JoinLobby(joinRequest);
+
+            _lobbyService.LeaveLobby(createResponse.Lobby.LobbyId, "Player1");
+
+            var leaveResponse = _lobbyService.LeaveLobby(createResponse.Lobby.LobbyId, "HostUser");
+
+            var allLobbies = _lobbyService.GetAllLobbies();
+            Assert.IsFalse(allLobbies.Any(l => l.LobbyId == createResponse.Lobby.LobbyId));
+        }
+
 
         [TestMethod]
         public void LeaveLobby_Failure_LobbyNotFound()
@@ -149,21 +168,6 @@ namespace Service.Test.Services.Implements
 
             Assert.IsFalse(leaveResponse.IsSuccess);
             Assert.AreEqual(ErrorMessages.LobbyNotFound, leaveResponse.ErrorKey);
-        }
-
-        [TestMethod]
-        public void LeaveLobby_RemovesLobbyIfEmpty()
-        {
-            var createRequest = new CreateLobbyRequestDTO { Name = "TemporaryLobby", IsPrivate = false };
-            var createResponse = _lobbyService.CreateLobby(createRequest);
-
-            var joinRequest = new JoinLobbyRequestDTO { LobbyId = createResponse.Lobby.LobbyId, Username = "Player1" };
-            _lobbyService.JoinLobby(joinRequest);
-
-            _lobbyService.LeaveLobby(createResponse.Lobby.LobbyId, "Player1");
-
-            var allLobbies = _lobbyService.GetAllLobbies();
-            Assert.IsFalse(allLobbies.Any(l => l.LobbyId == createResponse.Lobby.LobbyId));
         }
 
         #endregion
@@ -192,5 +196,52 @@ namespace Service.Test.Services.Implements
         }
 
         #endregion
+
+
+        [TestMethod]
+        public void KickPlayer_Success()
+        {
+            // Crear la lobby y agregar jugadores
+            var createRequest = new CreateLobbyRequestDTO { Name = "KickableLobby", IsPrivate = false, Username = "HostUser" };
+            var createResponse = _lobbyService.CreateLobby(createRequest);
+
+            var joinRequest = new JoinLobbyRequestDTO { LobbyId = createResponse.Lobby.LobbyId, Username = "PlayerToKick" };
+            _lobbyService.JoinLobby(joinRequest);
+
+            // Expulsar al jugador
+            var kickResponse = _lobbyService.KickPlayer(createResponse.Lobby.LobbyId, "HostUser", "PlayerToKick");
+
+            Assert.IsTrue(kickResponse.IsSuccess);
+            Assert.IsFalse(createResponse.Lobby.Players.Contains("PlayerToKick"));
+        }
+
+        [TestMethod]
+        public void KickPlayer_Failure_NotHost()
+        {
+            var createRequest = new CreateLobbyRequestDTO { Name = "KickableLobby", IsPrivate = false, Username = "HostUser" };
+            var createResponse = _lobbyService.CreateLobby(createRequest);
+
+            var joinRequest = new JoinLobbyRequestDTO { LobbyId = createResponse.Lobby.LobbyId, Username = "PlayerToKick" };
+            _lobbyService.JoinLobby(joinRequest);
+
+            // Intento de expulsar por un usuario que no es el host
+            var kickResponse = _lobbyService.KickPlayer(createResponse.Lobby.LobbyId, "NotHostUser", "PlayerToKick");
+
+            Assert.IsFalse(kickResponse.IsSuccess);
+            Assert.AreEqual(ErrorMessages.NotLobbyHost, kickResponse.ErrorKey);
+        }
+
+        [TestMethod]
+        public void KickPlayer_Failure_PlayerNotInLobby()
+        {
+            var createRequest = new CreateLobbyRequestDTO { Name = "KickableLobby", IsPrivate = false, Username = "HostUser" };
+            var createResponse = _lobbyService.CreateLobby(createRequest);
+
+            // Intento de expulsar a un jugador que no está en la lobby
+            var kickResponse = _lobbyService.KickPlayer(createResponse.Lobby.LobbyId, "HostUser", "NonExistentPlayer");
+
+            Assert.IsFalse(kickResponse.IsSuccess);
+            Assert.AreEqual(ErrorMessages.PlayerNotInLobby, kickResponse.ErrorKey);
+        }
     }
 }
