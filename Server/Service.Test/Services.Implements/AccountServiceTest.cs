@@ -2,11 +2,13 @@
 using DataAccess.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Service.Connection.Managers;
 using Service.Contracts;
 using Service.DTO;
 using Service.Implements;
 using Service.Utilities.Helpers;
 using System;
+using System.ServiceModel;
 
 namespace Service.Test.Services.Implements
 {
@@ -16,6 +18,8 @@ namespace Service.Test.Services.Implements
         private Mock<IPlayerRepository> _playerRepositoryMock;
         private Mock<IProfileRepository> _profileRepositoryMock;
         private Mock<IPlayerScoresRepository> _scoreRepositoryMock;
+        private ConnectionManager _connectionManager;
+        private ConnectionEventHandler _connectionEventHandler;
         private IAccountService _accountService;
 
         [TestInitialize]
@@ -25,10 +29,15 @@ namespace Service.Test.Services.Implements
             _profileRepositoryMock = new Mock<IProfileRepository>();
             _scoreRepositoryMock = new Mock<IPlayerScoresRepository>();
 
+            _connectionManager = new ConnectionManager();
+            _connectionEventHandler = new ConnectionEventHandler(_connectionManager);
+
             _accountService = new AccountService(
                 _playerRepositoryMock.Object,
                 _profileRepositoryMock.Object,
-                _scoreRepositoryMock.Object);
+                _scoreRepositoryMock.Object,
+                _connectionManager,
+                _connectionEventHandler);
         }
 
         [TestMethod]
@@ -156,6 +165,24 @@ namespace Service.Test.Services.Implements
             var result = _accountService.Login(username, password);
 
             Assert.AreEqual("Error.InvalidPassword", result.ErrorKey);
+        }
+
+        [TestMethod]
+        public void Login_ShouldReturnFailure_WhenUserAlreadyConnected()
+        {
+            _connectionManager.RegisterUser("FerRMZ", Mock.Of<IContextChannel>());
+
+            var username = "FerRMZ";
+            var password = "12345";
+            _playerRepositoryMock.Setup(r => r.GetByUsername(It.IsAny<string>())).Returns(new Player
+            {
+                Username = username,
+                PasswordHash = PasswordHelper.HashPassword(password)
+            });
+
+            var result = _accountService.Login(username, password);
+
+            Assert.AreEqual("Error.UserAlreadyConnected", result.ErrorKey);
         }
     }
 }
