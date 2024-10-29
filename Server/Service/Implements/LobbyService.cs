@@ -9,6 +9,7 @@ using System.ServiceModel;
 
 namespace Service.Implements
 {
+    // TODO ver si se va el host que pasa.
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class LobbyService : ILobbyService
     {
@@ -25,8 +26,11 @@ namespace Service.Implements
             {
                 Name = request.Name,
                 IsPrivate = request.IsPrivate,
-                Password = request.IsPrivate ? request.Password : null
+                Password = request.IsPrivate ? request.Password : null,
+                Host = request.Username
             };
+
+            lobby.AddPlayer(request.Username);
 
             _activeLobbies[lobby.LobbyId] = lobby;
 
@@ -36,11 +40,14 @@ namespace Service.Implements
                 Name = lobby.Name,
                 IsPrivate = lobby.IsPrivate,
                 CurrentPlayers = lobby.Players.Count,
-                MaxPlayers = lobby.MaxPlayers
+                MaxPlayers = lobby.MaxPlayers,
+                Host = lobby.Host,
+                Players = new List<string>(lobby.Players)
             };
 
             return LobbyResponse.SuccessResult(lobbyDto);
         }
+
 
         public LobbyResponse JoinLobby(JoinLobbyRequestDTO request)
         {
@@ -67,11 +74,14 @@ namespace Service.Implements
                 Name = lobby.Name,
                 IsPrivate = lobby.IsPrivate,
                 CurrentPlayers = lobby.Players.Count,
-                MaxPlayers = lobby.MaxPlayers
+                MaxPlayers = lobby.MaxPlayers,
+                Host = lobby.Host,
+                Players = new List<string>(lobby.Players)
             };
 
             return LobbyResponse.SuccessResult(lobbyDto);
         }
+
 
         public LobbyResponse LeaveLobby(string lobbyId, string username)
         {
@@ -93,7 +103,43 @@ namespace Service.Implements
                 Name = lobby.Name,
                 IsPrivate = lobby.IsPrivate,
                 CurrentPlayers = lobby.Players.Count,
-                MaxPlayers = lobby.MaxPlayers
+                MaxPlayers = lobby.MaxPlayers,
+                Host = lobby.Host,
+                Players = new List<string>(lobby.Players)
+            };
+
+            return LobbyResponse.SuccessResult(lobbyDto);
+        }
+
+
+        public LobbyResponse KickPlayer(string lobbyId, string hostUsername, string targetUsername)
+        {
+            if (!_activeLobbies.TryGetValue(lobbyId, out var lobby))
+            {
+                return LobbyResponse.Failure(ErrorMessages.LobbyNotFound);
+            }
+
+            if (lobby.Host != hostUsername)
+            {
+                return LobbyResponse.Failure(ErrorMessages.NotLobbyHost);
+            }
+
+            if (!lobby.Players.Contains(targetUsername))
+            {
+                return LobbyResponse.Failure(ErrorMessages.PlayerNotInLobby);
+            }
+
+            lobby.RemovePlayer(targetUsername);
+
+            var lobbyDto = new LobbyDTO
+            {
+                LobbyId = lobby.LobbyId,
+                Name = lobby.Name,
+                IsPrivate = lobby.IsPrivate,
+                CurrentPlayers = lobby.Players.Count,
+                MaxPlayers = lobby.MaxPlayers,
+                Host = lobby.Host,
+                Players = new List<string>(lobby.Players)
             };
 
             return LobbyResponse.SuccessResult(lobbyDto);
@@ -107,7 +153,9 @@ namespace Service.Implements
                 Name = lobby.Name,
                 IsPrivate = lobby.IsPrivate,
                 CurrentPlayers = lobby.Players.Count,
-                MaxPlayers = lobby.MaxPlayers
+                MaxPlayers = lobby.MaxPlayers,
+                Host = lobby.Host,
+                Players = new List<string>(lobby.Players)
             }).ToList();
         }
     }

@@ -16,5 +16,9 @@ namespace Service.DTO
         public bool IsPrivate { get; set; }
         [DataMember]
         public string Password { get; set; }
+        [DataMember]
+        public string Username { get; set; }
+        [DataMember]
+        public string Host { get; set; }
     }
 }

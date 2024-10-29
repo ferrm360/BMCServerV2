@@ -17,5 +17,7 @@ namespace Service.Contracts
         List<LobbyDTO> GetAllLobbies();
         [OperationContract]
         LobbyResponse LeaveLobby(string lobbyId, string username);
+        [OperationContract]
+        LobbyResponse KickPlayer(string lobbyId, string hostUsername, string targetUsername);
     }
 }
