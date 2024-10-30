@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Mail;
 
-namespace Service.Utilities.Email
+namespace Service.Email
 {
     public class EmailService : IEmailService
     {

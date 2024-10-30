@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Service.Utilities.Constans
+﻿namespace Service.Utilities.Constans
 {
     public static class ErrorMessages
     {
@@ -23,5 +17,18 @@ namespace Service.Utilities.Constans
         public const string ErrorWhileUpdatingProfile = "Error.ErrorWhileUpdatingProfile";
         public const string ErrorWhileUpdatingProfilePicture = "Error.ErrorWhileUpdatingProfilePicture";
         public const string InvalidBio = "Error.InvalidBio";
+        public const string UserAlreadyConnected = "Error.UserAlreadyConnected";
+
+        public const string LobbyNotFound = "Error.LobbyNotFound";
+        public const string LobbyFull = "Error.LobbyFull";
+        public const string InvalidLobbyPassword = "Error.InvalidLobbyPassword";
+        public const string LobbyAlreadyExists = "Error.LobbyAlreadyExists";
+        public const string UnauthorizedAccess = "Error.UnauthorizedAccess";
+        public const string DuplicateLobbyName = "Error.DuplicateLobbyName";
+        public const string IncorrectPassword = "Error.IncorrectPassword";
+        public const string UserNotConnected = "Error.UserNotConnected";
+        public const string NotLobbyHost = "Error.NotLobbyHost";
+        public const string PlayerNotInLobby = "Error.PlayerNotInLobby";
+
     }
 }

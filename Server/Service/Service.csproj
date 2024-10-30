@@ -126,21 +126,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Connection\Managers\ConnectionEventHandler.cs" />
+    <Compile Include="Connection\Managers\ConnectionManager.cs" />
     <Compile Include="Contracts\IAccountService.cs" />
     <Compile Include="Contracts\IChatService.cs" />
     <Compile Include="Contracts\IFriendshipService.cs" />
+    <Compile Include="Contracts\ILobbyService.cs" />
     <Compile Include="Contracts\IProfileService.cs" />
     <Compile Include="Contracts\IUserConnectionManager.cs" />
     <Compile Include="DTO\FriendRequestDTO.cs" />
+    <Compile Include="DTO\JoinLobbyRequestDTO.cs" />
+    <Compile Include="DTO\LobbyDTO.cs" />
+    <Compile Include="DTO\CreateLobbyRequestDTO.cs" />
     <Compile Include="DTO\MessageDTO.cs" />
     <Compile Include="DTO\PlayerDTO.cs" />
     <Compile Include="DTO\PlayerProfileDTO.cs" />
+    <Compile Include="Entities\Lobby.cs" />
     <Compile Include="Factories\EntityFactory.cs" />
     <Compile Include="Factories\IEntityFactory.cs" />
     <Compile Include="Implements\AccountService.cs" />
     <Compile Include="Implements\ChatService.cs" />
     <Compile Include="Implements\FriendshipService.cs" />
+    <Compile Include="Implements\LobbyService.cs" />
     <Compile Include="Implements\ProfileService.cs" />
     <Compile Include="Implements\UserConnectionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -150,11 +157,12 @@
     <Compile Include="Utilities\Results\FriendListResponse.cs" />
     <Compile Include="Utilities\Results\FriendRequestListReponse.cs" />
     <Compile Include="Utilities\Results\ImageResponse.cs" />
+    <Compile Include="Utilities\Results\LobbyResponse.cs" />
     <Compile Include="Utilities\Results\OperationResponse.cs" />
-    <Compile Include="Utilities\Email\EmailConfigHelper.cs" />
-    <Compile Include="Utilities\Email\EmailService.cs" />
-    <Compile Include="Utilities\Email\EmailServiceFactory.cs" />
-    <Compile Include="Utilities\Email\IEmailService.cs" />
+    <Compile Include="Email\EmailConfigHelper.cs" />
+    <Compile Include="Email\EmailService.cs" />
+    <Compile Include="Email\EmailServiceFactory.cs" />
+    <Compile Include="Email\IEmailService.cs" />
     <Compile Include="Utilities\Helpers\PasswordHelper.cs" />
     <Compile Include="Utilities\Helpers\SqlErrorHandler.cs" />
     <Compile Include="Utilities\CustomLogger.cs" />
@@ -174,6 +182,9 @@
       <Project>{d36bd91c-0a4f-43cc-b01c-0665410f30f7}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Email\EmailTemplates\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
