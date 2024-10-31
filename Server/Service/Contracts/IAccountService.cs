@@ -11,5 +11,7 @@ namespace Service.Contracts
         OperationResponse Register(PlayerDTO player);
         [OperationContract]
         OperationResponse Login(string username, string password);
-    }
+        [OperationContract]
+        OperationResponse Logout(string username); 
+     }
 }

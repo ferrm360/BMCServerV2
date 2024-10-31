@@ -184,5 +184,27 @@ namespace Service.Test.Services.Implements
 
             Assert.AreEqual("Error.UserAlreadyConnected", result.ErrorKey);
         }
+
+        [TestMethod]
+        public void Logout_ShouldReturnSuccess_WhenUserIsRegistered()
+        {
+            var username = "FerRMZ";
+            _connectionManager.RegisterUser(username, Mock.Of<IContextChannel>());
+
+            var result = _accountService.Logout(username);
+
+            Assert.IsTrue(result.IsSuccess);
+        }
+
+        [TestMethod]
+        public void Logout_ShouldReturnFailure_WhenUserIsNotRegistered()
+        {
+            var username = "NonExistentUser";
+
+            var result = _accountService.Logout(username);
+
+            Assert.IsFalse(result.IsSuccess);
+            Assert.AreEqual("Error.UserNotConnected", result.ErrorKey);
+        }
     }
 }
