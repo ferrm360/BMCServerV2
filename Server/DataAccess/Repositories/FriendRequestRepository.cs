@@ -90,6 +90,25 @@ namespace DataAccess.Repositories
             }
         }
 
+        public bool AreFriends(int player1Id, int player2Id)
+        {
+            try
+            {
+                return _context.FriendRequest.Any(r =>
+                    ((r.SenderPlayerID == player1Id && r.ReceiverPlayerID == player2Id) ||
+                     (r.SenderPlayerID == player2Id && r.ReceiverPlayerID == player1Id)) &&
+                    r.RequestStatus == "Accepted");
+            }
+            catch (SqlException ex)
+            {
+                throw new DataAccessException("Error occurred while checking friendship status.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessException("An unexpected error occurred while checking friendship status.", ex);
+            }
+        }
+
         public IEnumerable<FriendRequest> GetSentRequests(int senderPlayerId)
         {
             try

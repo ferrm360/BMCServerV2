@@ -1,11 +1,6 @@
 ﻿using DataAccess.Repositories;
 using Service.Results;
 using Service.Utilities.Constans;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Utilities.Validators
 {
@@ -26,7 +21,16 @@ namespace Service.Utilities.Validators
             {
                 return OperationResponse.Failure("A friend request is already pending between these users.");
             }
+            return OperationResponse.SuccessResult();
+        }
 
+        public OperationResponse ValidateUserExists(string username)
+        {
+            var player = _playerRepository.GetByUsername(username);
+            if (player == null)
+            {
+                return OperationResponse.Failure(ErrorMessages.UserNotFound);
+            }
             return OperationResponse.SuccessResult();
         }
 
@@ -39,10 +43,7 @@ namespace Service.Utilities.Validators
             {
                 return OperationResponse.Failure("Friend request not found.");
             }
-
             return OperationResponse.SuccessResult();
         }
-
-
     }
 }

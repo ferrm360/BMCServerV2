@@ -28,12 +28,6 @@ namespace Service.Implements
             _friendRequestRepository = friendRequestRepository;
             _validationService = validationService;
             _profileRepository = profileRepository;
-
-        }
-
-        public string TestConnection()
-        {
-            return "Connection successful";
         }
 
         public OperationResponse AcceptFriendRequest(int idRequest)
@@ -56,21 +50,16 @@ namespace Service.Implements
         {
             try
             {
-                CustomLogger.Info($"[GetFriendList] Starting GetFriendList for user: {username}");
-
                 var player = _playerRepository.GetByUsername(username);
                 if (player == null)
                 {
-                    CustomLogger.Warn($"[GetFriendList] Player with username '{username}' not found.");
                     return FriendListResponse.Failure("UserNotFound");
                 }
 
-                CustomLogger.Info($"[GetFriendList] Fetching accepted friends for PlayerID: {player.PlayerID}");
                 var friends = _friendRequestRepository.GetAcceptedFriends(player.PlayerID);
 
                 if (friends == null || !friends.Any())
                 {
-                    CustomLogger.Info($"[GetFriendList] No friends found for user '{username}' (PlayerID: {player.PlayerID}).");
                     return FriendListResponse.SuccessResult(new List<PlayerDTO>());
                 }
 
@@ -80,8 +69,6 @@ namespace Service.Implements
                     Username = friend.Username,
                     Email = friend.Email
                 }).ToList();
-
-                CustomLogger.Info($"[GetFriendList] Found {friendDTOs.Count} friends for user '{username}'.");
 
                 return FriendListResponse.SuccessResult(friendDTOs);
             }
@@ -141,19 +128,32 @@ namespace Service.Implements
 
         public OperationResponse SendFriendRequest(string senderUsername, string receiverUsername)
         {
+            var senderValidation = _validationService.ValidateUserExists(senderUsername);
+            if (!senderValidation.IsSuccess) {
+                return senderValidation;
+            }
+
+            var receiverValidation = _validationService.ValidateUserExists(receiverUsername);
+            if (!receiverValidation.IsSuccess) {
+                return receiverValidation; 
+            }
+
+            var sender = _playerRepository.GetByUsername(senderUsername);
+            var receiver = _playerRepository.GetByUsername(receiverUsername);
+            var requestValidation = _validationService.ValidateFriendRequestDoesNotExist(sender.PlayerID, receiver.PlayerID);
+            if (!requestValidation.IsSuccess) 
+            { 
+                return requestValidation; 
+            }
             try
             {
-                var sender = _playerRepository.GetByUsername(senderUsername);
-                var receiver = _playerRepository.GetByUsername(receiverUsername);
-
                 _friendRequestRepository.SendFriendRequest(sender.PlayerID, receiver.PlayerID);
                 _friendRequestRepository.Save();
-
                 return OperationResponse.SuccessResult();
             }
             catch (Exception ex)
             {
-                CustomLogger.Error("", ex);
+                CustomLogger.Error("Failed to send friend request.", ex);
                 return OperationResponse.Failure(ErrorMessages.GeneralException);
             }
         }
@@ -162,12 +162,9 @@ namespace Service.Implements
         {
             try
             {
-                CustomLogger.Info($"[GetPlayersListByUsername] Starting GetPlayersListByUsername for user: {ownerUsername}");
-
                 var player = _playerRepository.GetByUsername(ownerUsername);
                 if (player == null)
                 {
-                    CustomLogger.Warn($"[GetPlayersListByUsername] Player with username '{ownerUsername}' not found.");
                     return PlayerProfileResponse.Failure("OwnerNotFound");
                 }
 
@@ -175,7 +172,6 @@ namespace Service.Implements
 
                 if (players == null || !players.Any())
                 {
-                    CustomLogger.Info($"[GetPlayersListByUsername] No players found for user '{ownerUsername}' (PlayerID: {player.PlayerID}).");
                     return PlayerProfileResponse.SuccessResult(new List<PlayerProfileDTO>(), new List<PlayerDTO>());
                 }
 
@@ -210,9 +206,6 @@ namespace Service.Implements
                         profileDtos.Add(profileDto);
                     }
                 }
-
-                CustomLogger.Info($"[GetPlayersListByUsername] Found {playerDtos.Count} players for user '{ownerUsername}'.");
-
                 return PlayerProfileResponse.SuccessResult(profileDtos, playerDtos);
             }
             catch (Exception ex)
@@ -227,21 +220,16 @@ namespace Service.Implements
         {
             try
             {
-                CustomLogger.Info($"[GetFriendList] Starting GetFriendList for user: {username}");
-
                 var player = _playerRepository.GetByUsername(username);
                 if (player == null)
                 {
-                    CustomLogger.Warn($"[GetFriendList] Player with username '{username}' not found.");
                     return FriendListResponse.Failure("UserNotFound");
                 }
 
-                CustomLogger.Info($"[GetFriendList] Fetching players by username: {player.PlayerID}");
                 var players = _playerRepository.GetPlayers(username);
 
                 if (players == null || !players.Any())
                 {
-                    CustomLogger.Info($"[GetFriendList] No player found for user '{username}' (PlayerID: {player.PlayerID}).");
                     return FriendListResponse.SuccessResult(new List<PlayerDTO>());
                 }
 
@@ -251,8 +239,6 @@ namespace Service.Implements
                     Username = friend.Username,
                     Email = friend.Email
                 }).ToList();
-
-                CustomLogger.Info($"[GetFriendList] Found {playerDtos.Count} players for user '{username}'.");
 
                 return FriendListResponse.SuccessResult(playerDtos);
             }

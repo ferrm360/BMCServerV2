@@ -27,7 +27,5 @@ namespace Service.Contracts
         FriendListResponse GetPlayersList(string username);
         [OperationContract]
         PlayerProfileResponse GetPlayersListByUsername(string playerUsername, string loggedUsername);
-        [OperationContract]
-        string TestConnection();
     }
 }

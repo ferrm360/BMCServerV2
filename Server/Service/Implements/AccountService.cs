@@ -139,5 +139,18 @@ namespace Service.Implements
                 return OperationResponse.Failure(ErrorMessages.GeneralException);
             }
         }
+
+        public OperationResponse Logout(string username)
+        {
+            if (_connectionManager.IsUserRegistered(username))
+            {
+                _connectionManager.UnregisterUser(username);
+                return OperationResponse.SuccessResult();
+            }
+            else
+            {
+                return OperationResponse.Failure(ErrorMessages.UserNotConnected);
+            }
+        }
     }
 }
