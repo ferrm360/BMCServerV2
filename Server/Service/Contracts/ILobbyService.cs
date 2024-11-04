@@ -5,7 +5,7 @@ using System.ServiceModel;
 
 namespace Service.Contracts
 {
-    [ServiceContract]
+    [ServiceContract(CallbackContract = typeof(ILobbyCallback))]
     public interface ILobbyService
     {
         [OperationContract]
@@ -18,5 +18,11 @@ namespace Service.Contracts
         LobbyResponse LeaveLobby(string lobbyId, string username);
         [OperationContract]
         LobbyResponse KickPlayer(string lobbyId, string hostUsername, string targetUsername);
+    }
+
+    public interface ILobbyCallback
+    {
+        [OperationContract(IsOneWay = true)]
+        void NotifyPlayerJoined(string playerName, string lobbyId);
     }
 }

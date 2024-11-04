@@ -1,8 +1,11 @@
 ﻿using Service.Contracts;
 using Service.DTO;
 using Service.Entities;
+using Service.Utilities;
 using Service.Utilities.Constans;
 using Service.Utilities.Results;
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -14,6 +17,8 @@ namespace Service.Implements
     public class LobbyService : ILobbyService
     {
         private readonly Dictionary<string, Lobby> _activeLobbies = new Dictionary<string, Lobby>();
+        private readonly ConcurrentDictionary<string, ILobbyCallback> _callbacks = new ConcurrentDictionary<string, ILobbyCallback>();
+
 
         public LobbyResponse CreateLobby(CreateLobbyRequestDTO request)
         {
@@ -30,8 +35,15 @@ namespace Service.Implements
                 Host = request.Username
             };
 
-            lobby.AddPlayer(request.Username);
+            // Registrar el canal de callback del jugador que crea la lobby (el host)
+            var callback = OperationContext.Current.GetCallbackChannel<ILobbyCallback>();
+            if (!_callbacks.ContainsKey(request.Username))
+            {
+                _callbacks.TryAdd(request.Username, callback);
+                Console.WriteLine($"Callback registrado para el host de la lobby: {request.Username}");
+            }
 
+            lobby.AddPlayer(request.Username);
             _activeLobbies[lobby.LobbyId] = lobby;
 
             var lobbyDto = new LobbyDTO
@@ -47,6 +59,7 @@ namespace Service.Implements
 
             return LobbyResponse.SuccessResult(lobbyDto);
         }
+
 
 
         public LobbyResponse JoinLobby(JoinLobbyRequestDTO request)
@@ -68,7 +81,41 @@ namespace Service.Implements
 
             lobby.AddPlayer(request.Username);
 
-            var lobbyDto = new LobbyDTO
+            // Capturar el canal de callback actual y registrarlo
+            var callback = OperationContext.Current.GetCallbackChannel<ILobbyCallback>();
+            _callbacks.TryAdd(request.Username, callback);
+
+            // Notificar a todos los jugadores de la lobby que un nuevo jugador se ha unido
+            foreach (var player in lobby.Players)
+            {
+                // Evitar enviar la notificación al jugador que se acaba de unir
+                if (player != request.Username)
+                {
+                    try
+                    {
+                        Console.WriteLine("Intentando notificar a: " + player);
+                        // Verificar si el callback está disponible para el jugador
+                        if (_callbacks.TryGetValue(player, out var playerCallback))
+                        {
+                            playerCallback.NotifyPlayerJoined(request.Username, request.LobbyId);
+                            Console.WriteLine("Notificación enviada a: " + player);
+                            CustomLogger.Info($"Player '{request.Username}' successfully joined the lobby '{request.LobbyId}' and notification sent.");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"No se encontró callback para el jugador: {player}");
+                            CustomLogger.Warn($"No callback found for player '{player}' to notify join.");
+                        }
+                    }
+                    catch (CommunicationException ex)
+                    {
+                        CustomLogger.Error($"Error notifying player '{player}' about join to the lobby '{request.LobbyId}': {ex.Message}");
+                        _callbacks.TryRemove(player, out _);
+                    }
+                }
+            }
+
+            return LobbyResponse.SuccessResult(new LobbyDTO
             {
                 LobbyId = lobby.LobbyId,
                 Name = lobby.Name,
@@ -77,10 +124,9 @@ namespace Service.Implements
                 MaxPlayers = lobby.MaxPlayers,
                 Host = lobby.Host,
                 Players = new List<string>(lobby.Players)
-            };
-
-            return LobbyResponse.SuccessResult(lobbyDto);
+            });
         }
+
 
 
         public LobbyResponse LeaveLobby(string lobbyId, string username)
