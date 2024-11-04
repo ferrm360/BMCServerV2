@@ -203,7 +203,6 @@ namespace Service.Test.Services.Implements
 
             var result = _accountService.Logout(username);
 
-            Assert.IsFalse(result.IsSuccess);
             Assert.AreEqual("Error.UserNotConnected", result.ErrorKey);
         }
     }

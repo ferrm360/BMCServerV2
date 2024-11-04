@@ -3,7 +3,6 @@ using Service.Utilities.Results;
 using System.Collections.Generic;
 using System.ServiceModel;
 
-
 namespace Service.Contracts
 {
     [ServiceContract]

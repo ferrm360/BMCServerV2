@@ -77,6 +77,7 @@
     <Compile Include="Connection\Managers\ConnectionEventHandler.cs" />
     <Compile Include="Connection\Managers\ConnectionManager.cs" />
     <Compile Include="Contracts\IAccountService.cs" />
+    <Compile Include="Contracts\IChatFriendService.cs" />
     <Compile Include="Contracts\IChatService.cs" />
     <Compile Include="Contracts\IFriendshipService.cs" />
     <Compile Include="Contracts\ILobbyService.cs" />
@@ -87,12 +88,14 @@
     <Compile Include="DTO\LobbyDTO.cs" />
     <Compile Include="DTO\CreateLobbyRequestDTO.cs" />
     <Compile Include="DTO\MessageDTO.cs" />
+    <Compile Include="DTO\MessageFriendDTO.cs" />
     <Compile Include="DTO\PlayerDTO.cs" />
     <Compile Include="DTO\PlayerProfileDTO.cs" />
     <Compile Include="Entities\Lobby.cs" />
     <Compile Include="Factories\EntityFactory.cs" />
     <Compile Include="Factories\IEntityFactory.cs" />
     <Compile Include="Implements\AccountService.cs" />
+    <Compile Include="Implements\ChatFriendService.cs" />
     <Compile Include="Implements\ChatService.cs" />
     <Compile Include="Implements\FriendshipService.cs" />
     <Compile Include="Implements\LobbyService.cs" />
@@ -102,6 +105,7 @@
     <Compile Include="ServiceModule.cs" />
     <Compile Include="Utilities\Constans\ErrorMessages.cs" />
     <Compile Include="Utilities\Enumerations\FriendRequestStatus.cs" />
+    <Compile Include="Utilities\Results\ChatFriendResponse.cs" />
     <Compile Include="Utilities\Results\FriendListResponse.cs" />
     <Compile Include="Utilities\Results\FriendRequestListReponse.cs" />
     <Compile Include="Utilities\Results\ImageResponse.cs" />
