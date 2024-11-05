@@ -19,11 +19,14 @@ namespace Service
             builder.RegisterType<LobbyService>().As<ILobbyService>().SingleInstance();
             builder.RegisterType<ChatFriendService>().As<IChatFriendService>().SingleInstance();
 
+
+
             builder.RegisterType<PlayerRepository>().As<IPlayerRepository>().InstancePerLifetimeScope();
             builder.RegisterType<ProfileRepository>().As<IProfileRepository>().InstancePerLifetimeScope();
             builder.RegisterType<PlayerScoresRepository>().As<IPlayerScoresRepository>().InstancePerLifetimeScope();
             builder.RegisterType<FriendRequestRepository>().As<IFriendRequestRepository>().InstancePerLifetimeScope();
             builder.RegisterType<ChatMessagesRepository>().As<IChatMessagesRepository>().InstancePerLifetimeScope();
+
 
             builder.RegisterType<ValidationFriendshipService>().AsSelf().InstancePerLifetimeScope();
 

@@ -14,6 +14,8 @@ namespace Service.Connection.Managers
 
         public void RegisterChannelEvents(string username, IContextChannel channel)
         {
+            Console.WriteLine($"User {username} has been register.");
+
             channel.Closed += (sender, args) => HandleDisconnection(username);
             channel.Faulted += (sender, args) => HandleDisconnection(username);
         }

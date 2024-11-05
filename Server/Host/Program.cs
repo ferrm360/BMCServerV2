@@ -96,7 +96,7 @@ namespace Host
                         var chatFriendServiceHost = new ServiceHost(typeof(ChatFriendService));
                         chatFriendServiceHost.AddDependencyInjectionBehavior<IChatFriendService>(scope);
                         chatFriendServiceHost.Open();
-                        Console.WriteLine("Friend chat service is running.");
+                        Console.WriteLine("ChatFriendService is running.");
                     }
                     catch (Exception ex)
                     {
@@ -104,9 +104,7 @@ namespace Host
                     }
 
                     Console.WriteLine("All services are running. Press Enter to stop the services.");
-                    Console.ReadLine();
-
-                    
+                    Console.ReadLine();   
                 }
             }
             catch (Exception ex)
