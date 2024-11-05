@@ -91,10 +91,20 @@ namespace Host
                         logger.Error("Error setting up LobbyService: " + ex.Message);
                     }
 
-                    Console.WriteLine("All services are running. Press Enter to stop the services.");
-                    Console.ReadLine();
+                    try
+                    {
+                        var chatFriendServiceHost = new ServiceHost(typeof(ChatFriendService));
+                        chatFriendServiceHost.AddDependencyInjectionBehavior<IChatFriendService>(scope);
+                        chatFriendServiceHost.Open();
+                        Console.WriteLine("ChatFriendService is running.");
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error("Error setting up ChatFriendService: " + ex.Message);
+                    }
 
-                    
+                    Console.WriteLine("All services are running. Press Enter to stop the services.");
+                    Console.ReadLine();   
                 }
             }
             catch (Exception ex)
