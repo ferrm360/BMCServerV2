@@ -81,6 +81,7 @@
     <Compile Include="Contracts\IChatService.cs" />
     <Compile Include="Contracts\IFriendshipService.cs" />
     <Compile Include="Contracts\ILobbyService.cs" />
+    <Compile Include="Contracts\IPlayerScoresService.cs" />
     <Compile Include="Contracts\IProfileService.cs" />
     <Compile Include="Contracts\IUserConnectionManager.cs" />
     <Compile Include="DTO\FriendRequestDTO.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="DTO\MessageFriendDTO.cs" />
     <Compile Include="DTO\PlayerDTO.cs" />
     <Compile Include="DTO\PlayerProfileDTO.cs" />
+    <Compile Include="DTO\PlayerScoresDTO.cs" />
     <Compile Include="Entities\Lobby.cs" />
     <Compile Include="Factories\EntityFactory.cs" />
     <Compile Include="Factories\IEntityFactory.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="Implements\ChatService.cs" />
     <Compile Include="Implements\FriendshipService.cs" />
     <Compile Include="Implements\LobbyService.cs" />
+    <Compile Include="Implements\PlayerScoresService.cs" />
     <Compile Include="Implements\ProfileService.cs" />
     <Compile Include="Implements\UserConnectionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -121,6 +124,7 @@
     <Compile Include="Utilities\Mapper\PlayerMapper.cs" />
     <Compile Include="Utilities\NotificationService.cs" />
     <Compile Include="Utilities\Results\PlayerProfileResponse.cs" />
+    <Compile Include="Utilities\Results\PlayerScoresResponse.cs" />
     <Compile Include="Utilities\Results\ProfileResponse.cs" />
     <Compile Include="Utilities\Validators\ValidationAccountService.cs" />
     <Compile Include="Utilities\Validators\ValidationFriendshipService.cs" />

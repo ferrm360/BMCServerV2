@@ -27,84 +27,21 @@ namespace Host
             {
                 using (var scope = container.BeginLifetimeScope())
                 {
-                    // Iniciar AccountService
-                    try
+                    var services = new[]
                     {
-                        var accountServiceHost = new ServiceHost(typeof(AccountService));
-                        accountServiceHost.AddDependencyInjectionBehavior<IAccountService>(scope);
-                        accountServiceHost.Open();
-                        Console.WriteLine("AccountService is running.");
-                    }
-                    catch (Exception ex)
-                    {
-                        logger.Error("Error setting up AccountService: " + ex.Message);
-                    }
+                        new ServiceDefinition(typeof(AccountService), typeof(IAccountService), "AccountService"),
+                        new ServiceDefinition(typeof(ProfileService), typeof(IProfileService), "ProfileService"),
+                        new ServiceDefinition(typeof(FriendshipService), typeof(IFriendshipService), "FriendshipService"),
+                        new ServiceDefinition(typeof(ChatService), typeof(IChatService), "ChatService"),
+                        new ServiceDefinition(typeof(LobbyService), typeof(ILobbyService), "LobbyService"),
+                        new ServiceDefinition(typeof(ChatFriendService), typeof(IChatFriendService), "ChatFriendService"),
+                        new ServiceDefinition(typeof(PlayerScoresService), typeof(IPlayerScoresService), "PlayerScoresService")
+                    };
 
-                    // Iniciar ProfileService
-                    try
-                    {
-                        var profileServiceHost = new ServiceHost(typeof(ProfileService));
-                        profileServiceHost.AddDependencyInjectionBehavior<IProfileService>(scope);
-                        profileServiceHost.Open();
-                        Console.WriteLine("ProfileService is running.");
-                    }
-                    catch (Exception ex)
-                    {
-                        logger.Error("Error setting up ProfileService: " + ex.Message);
-                    }
-
-                    // Iniciar FriendshipService
-                    try
-                    {
-                        var friendshipServiceHost = new ServiceHost(typeof(FriendshipService));
-                        friendshipServiceHost.AddDependencyInjectionBehavior<IFriendshipService>(scope);
-                        friendshipServiceHost.Open();
-                        Console.WriteLine("FriendshipService is running.");
-                    }
-                    catch (Exception ex)
-                    {
-                        logger.Error("Error setting up FriendshipService: " + ex.Message);
-                    }
-
-                    // Iniciar ChatService
-                    try
-                    {
-                        var chatServiceHost = new ServiceHost(typeof(ChatService));
-                        chatServiceHost.AddDependencyInjectionBehavior<IChatService>(scope);
-                        chatServiceHost.Open();
-                        Console.WriteLine("ChatService is running.");
-                    }
-                    catch (Exception ex)
-                    {
-                        logger.Error("Error setting up ChatService: " + ex.Message);
-                    }
-
-                    try
-                    {
-                        var lobbyServiceHost = new ServiceHost(typeof(LobbyService));
-                        lobbyServiceHost.AddDependencyInjectionBehavior<ILobbyService>(scope);
-                        lobbyServiceHost.Open();
-                        Console.WriteLine("LobbyService is running.");
-                    }
-                    catch (Exception ex)
-                    {
-                        logger.Error("Error setting up LobbyService: " + ex.Message);
-                    }
-
-                    try
-                    {
-                        var chatFriendServiceHost = new ServiceHost(typeof(ChatFriendService));
-                        chatFriendServiceHost.AddDependencyInjectionBehavior<IChatFriendService>(scope);
-                        chatFriendServiceHost.Open();
-                        Console.WriteLine("ChatFriendService is running.");
-                    }
-                    catch (Exception ex)
-                    {
-                        logger.Error("Error setting up ChatFriendService: " + ex.Message);
-                    }
+                    StartServices(services, scope);
 
                     Console.WriteLine("All services are running. Press Enter to stop the services.");
-                    Console.ReadLine();   
+                    Console.ReadLine();
                 }
             }
             catch (Exception ex)
@@ -120,11 +57,45 @@ namespace Host
             }
         }
 
+        private static void StartServices(ServiceDefinition[] services, ILifetimeScope scope)
+        {
+            foreach (var service in services)
+            {
+                try
+                {
+                    var serviceHost = new ServiceHost(service.ServiceType);
+                    serviceHost.AddDependencyInjectionBehavior(service.ContractType, scope);
+                    serviceHost.Open();
+
+                    Console.WriteLine($"{service.DisplayName} is running. ✓");
+                }
+                catch (Exception ex)
+                {
+                    logger.Error($"Error setting up {service.DisplayName}: {ex.Message}");
+                    Console.WriteLine($"{service.DisplayName} failed to start. ✗");
+                }
+            }
+        }
+
         private static IContainer ConfigureAutofac()
         {
             var builder = new ContainerBuilder();
             builder.RegisterModule<ServiceModule>();
             return builder.Build();
+        }
+
+        private class ServiceDefinition
+        {
+            public Type ServiceType { get; }
+            public Type ContractType { get; }
+            public string DisplayName { get; }
+
+            public ServiceDefinition(Type serviceType, Type contractType, string displayName)
+            {
+                ServiceType = serviceType;
+                ContractType = contractType;
+                DisplayName = displayName;
+            }
         }
     }
 }

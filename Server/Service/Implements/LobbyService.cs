@@ -1,6 +1,7 @@
 ﻿using Service.Contracts;
 using Service.DTO;
 using Service.Entities;
+using Service.Results;
 using Service.Utilities.Constans;
 using Service.Utilities.Results;
 using System;
@@ -243,6 +244,41 @@ namespace Service.Implements
             };
 
             return LobbyResponse.SuccessResult(lobbyDto);
+        }
+
+        public OperationResponse StartGame(string lobbyId, string hostUsername)
+        {
+            if (!_activeLobbies.TryGetValue(lobbyId, out var lobby))
+            {
+                return OperationResponse.Failure("Lobby not found.");
+            }
+
+            if (lobby.Host != hostUsername)
+            {
+                return OperationResponse.Failure("Only the host can start the game.");
+            }
+
+            if (lobby.Players.Count < 2)
+            {
+                return OperationResponse.Failure("Not enough players to start the game.");
+            }
+
+            foreach (var player in lobby.Players)
+            {
+                if (_connectedPlayers.TryGetValue(player, out var callback))
+                {
+                    try
+                    {
+                        callback.StartGameNotification(lobbyId);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error notifying player {player}: {ex.Message}");
+                        HandleClientDisconnect(player);
+                    }
+                }
+            }
+            return OperationResponse.SuccessResult("Game started successfully.");
         }
     }
 }

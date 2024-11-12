@@ -34,5 +34,8 @@ namespace Service.Contracts
 
         [OperationContract(IsOneWay = true)]
         void NotifyPlayerLeftMessage(string message);
+
+        [OperationContract(IsOneWay = true)]
+        void StartGameNotification(string lobbyId);
     }
 }
