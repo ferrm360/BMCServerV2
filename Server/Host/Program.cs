@@ -39,7 +39,6 @@ namespace Host
                     };
 
                     StartServices(services, scope);
-
                     Console.WriteLine("All services are running. Press Enter to stop the services.");
                     Console.ReadLine();
                 }
