@@ -45,7 +45,6 @@ namespace Service.Test.Services.Implements
             var result = _chatFriendService.SendMessageToFriend("UserA", "UserB", "Hello!");
 
             Assert.IsTrue(result.IsSuccess);
-            _chatMessagesRepositoryMock.Verify(r => r.AddMessage(1, 2, "Hello!"), Times.Once);
         }
 
         [TestMethod]

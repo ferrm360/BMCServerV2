@@ -30,5 +30,7 @@
         public const string NotLobbyHost = "Error.NotLobbyHost";
         public const string PlayerNotInLobby = "Error.PlayerNotInLobby";
 
+        public const string ScoreNotFound = "Error.ScoreNotFound";
+
     }
 }
