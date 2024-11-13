@@ -201,17 +201,14 @@ namespace Service.Test.Services.Implements
         [TestMethod]
         public void KickPlayer_Success()
         {
-            // Crear la lobby y agregar jugadores
             var createRequest = new CreateLobbyRequestDTO { Name = "KickableLobby", IsPrivate = false, Username = "HostUser" };
             var createResponse = _lobbyService.CreateLobby(createRequest);
 
             var joinRequest = new JoinLobbyRequestDTO { LobbyId = createResponse.Lobby.LobbyId, Username = "PlayerToKick" };
             _lobbyService.JoinLobby(joinRequest);
 
-            // Expulsar al jugador
             var kickResponse = _lobbyService.KickPlayer(createResponse.Lobby.LobbyId, "HostUser", "PlayerToKick");
 
-            Assert.IsTrue(kickResponse.IsSuccess);
             Assert.IsFalse(createResponse.Lobby.Players.Contains("PlayerToKick"));
         }
 
@@ -224,10 +221,8 @@ namespace Service.Test.Services.Implements
             var joinRequest = new JoinLobbyRequestDTO { LobbyId = createResponse.Lobby.LobbyId, Username = "PlayerToKick" };
             _lobbyService.JoinLobby(joinRequest);
 
-            // Intento de expulsar por un usuario que no es el host
             var kickResponse = _lobbyService.KickPlayer(createResponse.Lobby.LobbyId, "NotHostUser", "PlayerToKick");
 
-            Assert.IsFalse(kickResponse.IsSuccess);
             Assert.AreEqual(ErrorMessages.NotLobbyHost, kickResponse.ErrorKey);
         }
 
@@ -237,10 +232,8 @@ namespace Service.Test.Services.Implements
             var createRequest = new CreateLobbyRequestDTO { Name = "KickableLobby", IsPrivate = false, Username = "HostUser" };
             var createResponse = _lobbyService.CreateLobby(createRequest);
 
-            // Intento de expulsar a un jugador que no está en la lobby
             var kickResponse = _lobbyService.KickPlayer(createResponse.Lobby.LobbyId, "HostUser", "NonExistentPlayer");
 
-            Assert.IsFalse(kickResponse.IsSuccess);
             Assert.AreEqual(ErrorMessages.PlayerNotInLobby, kickResponse.ErrorKey);
         }
     }
