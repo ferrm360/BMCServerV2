@@ -78,8 +78,10 @@
     <Compile Include="Connection\Managers\ConnectionManager.cs" />
     <Compile Include="Contracts\IAccountService.cs" />
     <Compile Include="Contracts\IChatFriendService.cs" />
+    <Compile Include="Contracts\IChatLobbyService.cs" />
     <Compile Include="Contracts\IChatService.cs" />
     <Compile Include="Contracts\IFriendshipService.cs" />
+    <Compile Include="Contracts\IGameService.cs" />
     <Compile Include="Contracts\ILobbyService.cs" />
     <Compile Include="Contracts\IPlayerScoresService.cs" />
     <Compile Include="Contracts\IProfileService.cs" />
@@ -93,13 +95,16 @@
     <Compile Include="DTO\PlayerDTO.cs" />
     <Compile Include="DTO\PlayerProfileDTO.cs" />
     <Compile Include="DTO\PlayerScoresDTO.cs" />
+    <Compile Include="Entities\GameSession.cs" />
     <Compile Include="Entities\Lobby.cs" />
     <Compile Include="Factories\EntityFactory.cs" />
     <Compile Include="Factories\IEntityFactory.cs" />
     <Compile Include="Implements\AccountService.cs" />
     <Compile Include="Implements\ChatFriendService.cs" />
+    <Compile Include="Implements\ChatLobbyService.cs" />
     <Compile Include="Implements\ChatService.cs" />
     <Compile Include="Implements\FriendshipService.cs" />
+    <Compile Include="Implements\GameService.cs" />
     <Compile Include="Implements\LobbyService.cs" />
     <Compile Include="Implements\PlayerScoresService.cs" />
     <Compile Include="Implements\ProfileService.cs" />
