@@ -139,6 +139,7 @@
     <Compile Include="Contracts\IProfileService.cs" />
     <Compile Include="Contracts\IUserConnectionManager.cs" />
     <Compile Include="DTO\FriendRequestDTO.cs" />
+    <Compile Include="DTO\GameBoardDTO.cs" />
     <Compile Include="DTO\JoinLobbyRequestDTO.cs" />
     <Compile Include="DTO\LobbyDTO.cs" />
     <Compile Include="DTO\CreateLobbyRequestDTO.cs" />

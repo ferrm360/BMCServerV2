@@ -246,7 +246,6 @@ namespace Service.Implements
 
             return LobbyResponse.SuccessResult(lobbyDto);
         }
-
         public OperationResponse StartGame(string lobbyId, string hostUsername)
         {
             if (!_activeLobbies.TryGetValue(lobbyId, out var lobby))
@@ -264,22 +263,42 @@ namespace Service.Implements
                 return OperationResponse.Failure("Not enough players to start the game.");
             }
 
+            bool success = NotifyPlayersStartGame(lobby);
+
+            if (!success)
+            {
+                return OperationResponse.Failure("Error starting the game. Some players may not have been notified.");
+            }
+
+            return OperationResponse.SuccessResult("Game started successfully.");
+        }
+
+        private bool NotifyPlayersStartGame(Lobby lobby)
+        {
+            bool allNotificationsSuccessful = true;
+
             foreach (var player in lobby.Players)
             {
+                if (player == lobby.Host) continue;
+
                 if (_connectedPlayers.TryGetValue(player, out var callback))
                 {
                     try
                     {
-                        callback.StartGameNotification(lobbyId);
+                        Console.WriteLine($"Notifying player {player} to start the game in lobby {lobby.LobbyId}");
+                        callback.StartGameNotification(lobby.LobbyId);
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"Error notifying player {player}: {ex.Message}");
+                        Console.WriteLine($"Error notifying player {player} of game start: {ex.Message}");
                         HandleClientDisconnect(player);
+                        allNotificationsSuccessful = false;
                     }
                 }
             }
-            return OperationResponse.SuccessResult("Game started successfully.");
+
+            return allNotificationsSuccessful;
         }
+
     }
 }
