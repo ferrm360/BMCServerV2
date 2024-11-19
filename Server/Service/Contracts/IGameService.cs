@@ -1,4 +1,5 @@
-﻿using Service.Results;
+﻿using Service.DTO;
+using Service.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +13,13 @@ namespace Service.Contracts
     public interface IGameService
     {
         [OperationContract]
-        OperationResponse InitializeGame(string lobbyId, string player1, string player2);
+        OperationResponse InitializeGame(string lobbyId, List<string> players);
 
         [OperationContract]
-        OperationResponse SubmitInitialMatrix(string lobbyId, string player, List<List<int>> matrix);
+        OperationResponse SubmitInitialMatrix(string lobbyId, string player, GameBoardDTO board);
 
         [OperationContract]
-        OperationResponse StartGame(string lobbyId, string player);
+        OperationResponse StartGame(string lobbyId);
     }
 
     public interface IGameCallback

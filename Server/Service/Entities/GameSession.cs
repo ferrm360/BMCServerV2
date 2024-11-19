@@ -1,54 +1,45 @@
-﻿using Service.Contracts;
+﻿using Service.DTO;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Entities
 {
     public class GameSession
     {
-        public string Player1 { get; }
-        public string Player2 { get; }
-        private bool _player1Ready;
-        private bool _player2Ready;
-        private List<List<int>> _matrixPlayer1;
-        private List<List<int>> _matrixPlayer2;
-        private readonly IGameCallback _callbackPlayer1;
-        private readonly IGameCallback _callbackPlayer2;
+        private readonly Dictionary<string, GameBoardDTO> _playerBoards = new Dictionary<string, GameBoardDTO>();
 
-        public GameSession(string player1, string player2)
+        public void AddPlayer(string player)
         {
-            Player1 = player1;
-            Player2 = player2;
-            _callbackPlayer1 = OperationContext.Current.GetCallbackChannel<IGameCallback>();
-            _callbackPlayer2 = OperationContext.Current.GetCallbackChannel<IGameCallback>();
+            if (_playerBoards.ContainsKey(player))
+                throw new InvalidOperationException($"Player {player} is already in the session.");
+
+            _playerBoards[player] = null;
         }
 
-        public void SetMatrix(string player, List<List<int>> matrix)
+        public void SetMatrix(string player, GameBoardDTO board)
         {
-            if (player == Player1)
-                _matrixPlayer1 = matrix;
-            else if (player == Player2)
-                _matrixPlayer2 = matrix;
+            if (!_playerBoards.ContainsKey(player))
+                throw new InvalidOperationException($"Player {player} is not part of this session.");
+
+            _playerBoards[player] = board;
         }
 
-        public bool SetPlayerReady(string player)
+        public GameBoardDTO GetPlayerBoard(string player)
         {
-            if (player == Player1)
-                _player1Ready = true;
-            else if (player == Player2)
-                _player2Ready = true;
+            if (!_playerBoards.TryGetValue(player, out var board))
+                throw new InvalidOperationException($"Player {player} is not part of this session.");
 
-            return _player1Ready && _player2Ready;
+            return board;
         }
 
-        public void NotifyPlayersGameStarted()
+        public bool AreAllBoardsSet()
         {
-            _callbackPlayer1?.OnGameStarted();
-            _callbackPlayer2?.OnGameStarted();
+            foreach (var board in _playerBoards.Values)
+            {
+                if (board == null)
+                    return false;
+            }
+            return true;
         }
     }
 }

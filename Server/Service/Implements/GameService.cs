@@ -1,13 +1,11 @@
 ﻿using Service.Contracts;
+using Service.DTO;
 using Service.Entities;
 using Service.Results;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Implements
 {
@@ -15,46 +13,54 @@ namespace Service.Implements
     public class GameService : IGameService
     {
         private static readonly ConcurrentDictionary<string, GameSession> _activeGames = new ConcurrentDictionary<string, GameSession>();
-        private readonly IGameCallback _callback;
 
-        public GameService()
-        {
-            _callback = OperationContext.Current.GetCallbackChannel<IGameCallback>();
-        }
-
-        public OperationResponse InitializeGame(string lobbyId, string player1, string player2)
+        public OperationResponse InitializeGame(string lobbyId, List<string> players)
         {
             if (_activeGames.ContainsKey(lobbyId))
                 return OperationResponse.Failure("Game already exists for this lobby.");
 
-            var gameSession = new GameSession(player1, player2);
+            var gameSession = new GameSession();
+            foreach (var player in players)
+            {
+                try
+                {
+                    gameSession.AddPlayer(player);
+                }
+                catch (Exception ex)
+                {
+                    return OperationResponse.Failure($"Error adding player {player}: {ex.Message}");
+                }
+            }
+
             _activeGames[lobbyId] = gameSession;
 
             return OperationResponse.SuccessResult();
         }
 
-        public OperationResponse SubmitInitialMatrix(string lobbyId, string player, List<List<int>> matrix)
+        public OperationResponse SubmitInitialMatrix(string lobbyId, string player, GameBoardDTO board)
         {
             if (!_activeGames.TryGetValue(lobbyId, out var gameSession))
                 return OperationResponse.Failure("Game session not found.");
 
-            gameSession.SetMatrix(player, matrix);
+            try
+            {
+                gameSession.SetMatrix(player, board);
+            }
+            catch (Exception ex)
+            {
+                return OperationResponse.Failure($"Error setting matrix for player {player}: {ex.Message}");
+            }
 
             return OperationResponse.SuccessResult();
         }
 
-
-        public OperationResponse StartGame(string lobbyId, string player)
+        public OperationResponse StartGame(string lobbyId)
         {
             if (!_activeGames.TryGetValue(lobbyId, out var gameSession))
                 return OperationResponse.Failure("Game session not found.");
 
-            bool bothPlayersReady = gameSession.SetPlayerReady(player);
-
-            if (bothPlayersReady)
-            {
-                gameSession.NotifyPlayersGameStarted();
-            }
+            if (!gameSession.AreAllBoardsSet())
+                return OperationResponse.Failure("Not all players have submitted their boards.");
 
             return OperationResponse.SuccessResult();
         }
