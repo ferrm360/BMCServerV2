@@ -1,5 +1,6 @@
 ﻿using Service.DTO;
 using Service.Entities;
+using Service.Results;
 using Service.Utilities.Results;
 using System.Collections.Generic;
 using System.ServiceModel;
@@ -19,6 +20,8 @@ namespace Service.Contracts
         LobbyResponse LeaveLobby(string lobbyId, string username);
         [OperationContract]
         LobbyResponse KickPlayer(string lobbyId, string hostUsername, string targetUsername);
+        [OperationContract]
+        OperationResponse StartGame(string lobbyId, string hostUsername);
     }
 
     public interface ILobbyCallback
