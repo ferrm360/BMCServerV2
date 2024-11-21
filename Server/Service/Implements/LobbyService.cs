@@ -245,6 +245,7 @@ namespace Service.Implements
 
             return LobbyResponse.SuccessResult(lobbyDto);
         }
+
         public OperationResponse StartGame(string lobbyId, string hostUsername)
         {
             if (!_activeLobbies.TryGetValue(lobbyId, out var lobby))
@@ -295,7 +296,6 @@ namespace Service.Implements
                     }
                 }
             }
-
             return allNotificationsSuccessful;
         }
 

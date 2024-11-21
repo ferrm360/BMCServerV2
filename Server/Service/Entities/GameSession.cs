@@ -41,5 +41,10 @@ namespace Service.Entities
             }
             return true;
         }
+
+        public IEnumerable<string> GetPlayers()
+        {
+            return _playerBoards.Keys;
+        }
     }
 }
