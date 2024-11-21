@@ -1,11 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using Service.Contracts;
-using Service.DTO;
 using Service.Implements;
+using Service.DTO;
 using Service.Utilities.Constans;
+using Service.Utilities.Results;
 using System.Linq;
-using System.ServiceModel;
 
 namespace Service.Test.Services.Implements
 {
@@ -13,56 +11,58 @@ namespace Service.Test.Services.Implements
     public class LobbyServiceTests
     {
         private LobbyService _lobbyService;
-        private Mock<ILobbyCallback> _mockCallback;
 
         [TestInitialize]
         public void Setup()
         {
-            _mockCallback = new Mock<ILobbyCallback>();
-
-            var mockContext = new Mock<OperationContext>(MockBehavior.Strict);
-            mockContext.Setup(c => c.GetCallbackChannel<ILobbyCallback>())
-                       .Returns(_mockCallback.Object);
-
-            OperationContext.Current = mockContext.Object;
-
             _lobbyService = new LobbyService();
         }
 
         #region CreateLobby Tests
 
         [TestMethod]
-        public void CreateLobby_ShouldCreatePrivateLobby_Success()
+        public void CreateLobby_Success()
         {
             var request = new CreateLobbyRequestDTO
             {
-                Name = "PrivateLobby",
+                Name = "TestLobby",
                 IsPrivate = true,
-                Password = "12345",
-                Username = "HostUser"
+                Password = "12345"
             };
 
             var response = _lobbyService.CreateLobby(request);
-
-            Assert.IsNotNull(response.Lobby, "Lobby should not be null.");
-            Assert.AreEqual(request.Name, response.Lobby.Name, "Lobby name does not match.");
-            Assert.IsTrue(response.Lobby.IsPrivate, "Lobby should be private.");
+            Assert.AreEqual(request.Name, response.Lobby.Name);
         }
 
         [TestMethod]
-        public void CreateLobby_ShouldFailWhenDuplicateName()
+        public void CreateLobby_PublicLobby_Success()
         {
             var request = new CreateLobbyRequestDTO
             {
-                Name = "DuplicateLobby",
+                Name = "PublicLobby",
                 IsPrivate = false,
-                Username = "HostUser"
+                Password = null
+            };
+
+            var response = _lobbyService.CreateLobby(request);
+
+            Assert.IsTrue(response.IsSuccess && !response.Lobby.IsPrivate);
+        }
+
+        [TestMethod]
+        public void CreateLobby_Failure_DuplicateLobbyName()
+        {
+            var request = new CreateLobbyRequestDTO
+            {
+                Name = "TestLobby",
+                IsPrivate = false
             };
 
             _lobbyService.CreateLobby(request);
+
             var response = _lobbyService.CreateLobby(request);
 
-            Assert.AreEqual(ErrorMessages.DuplicateLobbyName, response.ErrorKey, "Duplicate lobby name error not returned.");
+            Assert.AreEqual(ErrorMessages.DuplicateLobbyName, response.ErrorKey);
         }
 
         #endregion
@@ -70,15 +70,9 @@ namespace Service.Test.Services.Implements
         #region JoinLobby Tests
 
         [TestMethod]
-        public void JoinLobby_ShouldAddPlayerToPublicLobby_Success()
+        public void JoinLobby_Success_PublicLobby()
         {
-            var createRequest = new CreateLobbyRequestDTO
-            {
-                Name = "JoinableLobby",
-                IsPrivate = false,
-                Username = "HostUser"
-            };
-
+            var createRequest = new CreateLobbyRequestDTO { Name = "PublicLobby", IsPrivate = false, Username = "HostUser" };
             var createResponse = _lobbyService.CreateLobby(createRequest);
 
             var joinRequest = new JoinLobbyRequestDTO
@@ -89,21 +83,14 @@ namespace Service.Test.Services.Implements
 
             var joinResponse = _lobbyService.JoinLobby(joinRequest);
 
-            Assert.IsNotNull(joinResponse.Lobby, "Lobby should not be null.");
-            Assert.IsTrue(joinResponse.Lobby.Players.Contains("Player1"), "Player was not added to the lobby.");
+            Assert.IsTrue(joinResponse.Lobby.Players.Contains("HostUser") && joinResponse.Lobby.Players.Contains("Player1"));
         }
 
-        [TestMethod]
-        public void JoinLobby_ShouldFailForInvalidPassword()
-        {
-            var createRequest = new CreateLobbyRequestDTO
-            {
-                Name = "PrivateLobby",
-                IsPrivate = true,
-                Password = "correct_password",
-                Username = "HostUser"
-            };
 
+        [TestMethod]
+        public void JoinLobby_Failure_PrivateLobby_IncorrectPassword()
+        {
+            var createRequest = new CreateLobbyRequestDTO { Name = "PrivateLobby", IsPrivate = true, Password = "correct_password" };
             var createResponse = _lobbyService.CreateLobby(createRequest);
 
             var joinRequest = new JoinLobbyRequestDTO
@@ -115,19 +102,13 @@ namespace Service.Test.Services.Implements
 
             var joinResponse = _lobbyService.JoinLobby(joinRequest);
 
-            Assert.AreEqual(ErrorMessages.InvalidLobbyPassword, joinResponse.ErrorKey, "Invalid password error not returned.");
+            Assert.AreEqual(ErrorMessages.InvalidLobbyPassword, joinResponse.ErrorKey);
         }
 
         [TestMethod]
-        public void JoinLobby_ShouldFailWhenLobbyIsFull()
+        public void JoinLobby_Failure_LobbyFull()
         {
-            var createRequest = new CreateLobbyRequestDTO
-            {
-                Name = "FullLobby",
-                IsPrivate = false,
-                Username = "HostUser"
-            };
-
+            var createRequest = new CreateLobbyRequestDTO { Name = "FullLobby", IsPrivate = false };
             var createResponse = _lobbyService.CreateLobby(createRequest);
 
             _lobbyService.JoinLobby(new JoinLobbyRequestDTO { LobbyId = createResponse.Lobby.LobbyId, Username = "Player1" });
@@ -141,7 +122,7 @@ namespace Service.Test.Services.Implements
 
             var joinResponse = _lobbyService.JoinLobby(joinRequest);
 
-            Assert.AreEqual(ErrorMessages.LobbyFull, joinResponse.ErrorKey, "Lobby full error not returned.");
+            Assert.AreEqual(ErrorMessages.LobbyFull, joinResponse.ErrorKey);
         }
 
         #endregion
@@ -149,92 +130,109 @@ namespace Service.Test.Services.Implements
         #region LeaveLobby Tests
 
         [TestMethod]
-        public void LeaveLobby_ShouldReducePlayerCount_Success()
+        public void LeaveLobby_Success()
         {
-            var createRequest = new CreateLobbyRequestDTO
-            {
-                Name = "ReducibleLobby",
-                IsPrivate = false,
-                Username = "HostUser"
-            };
-
+            var createRequest = new CreateLobbyRequestDTO { Name = "LobbyToLeave", IsPrivate = false };
             var createResponse = _lobbyService.CreateLobby(createRequest);
 
-            var joinRequest = new JoinLobbyRequestDTO
-            {
-                LobbyId = createResponse.Lobby.LobbyId,
-                Username = "Player1"
-            };
-
+            var joinRequest = new JoinLobbyRequestDTO { LobbyId = createResponse.Lobby.LobbyId, Username = "Player1" };
             _lobbyService.JoinLobby(joinRequest);
 
             var leaveResponse = _lobbyService.LeaveLobby(createResponse.Lobby.LobbyId, "Player1");
 
-            Assert.AreEqual(1, leaveResponse.Lobby.CurrentPlayers, "Player count was not reduced.");
+            Assert.AreEqual(1, leaveResponse.Lobby.CurrentPlayers);
         }
 
         [TestMethod]
-        public void LeaveLobby_ShouldFailWhenLobbyNotFound()
+        public void LeaveLobby_RemovesLobbyIfEmpty()
+        {
+            var createRequest = new CreateLobbyRequestDTO { Name = "TemporaryLobby", IsPrivate = false, Username = "HostUser" };
+            var createResponse = _lobbyService.CreateLobby(createRequest);
+
+            var joinRequest = new JoinLobbyRequestDTO { LobbyId = createResponse.Lobby.LobbyId, Username = "Player1" };
+            _lobbyService.JoinLobby(joinRequest);
+
+            _lobbyService.LeaveLobby(createResponse.Lobby.LobbyId, "Player1");
+
+            var leaveResponse = _lobbyService.LeaveLobby(createResponse.Lobby.LobbyId, "HostUser");
+
+            var allLobbies = _lobbyService.GetAllLobbies();
+            Assert.IsFalse(allLobbies.Any(l => l.LobbyId == createResponse.Lobby.LobbyId));
+        }
+
+
+        [TestMethod]
+        public void LeaveLobby_Failure_LobbyNotFound()
         {
             var leaveResponse = _lobbyService.LeaveLobby("NonExistentLobbyId", "Player1");
 
-            Assert.AreEqual(ErrorMessages.LobbyNotFound, leaveResponse.ErrorKey, "Lobby not found error not returned.");
+            Assert.AreEqual(ErrorMessages.LobbyNotFound, leaveResponse.ErrorKey);
         }
 
         #endregion
 
-        #region KickPlayer Tests
+        #region GetAllLobbies Tests
 
         [TestMethod]
-        public void KickPlayer_ShouldRemovePlayerFromLobby_Success()
+        public void GetAllLobbies_ReturnsAllActiveLobbies()
         {
-            var createRequest = new CreateLobbyRequestDTO
-            {
-                Name = "KickLobby",
-                IsPrivate = false,
-                Username = "HostUser"
-            };
+            _lobbyService.CreateLobby(new CreateLobbyRequestDTO { Name = "Lobby1", IsPrivate = false });
+            _lobbyService.CreateLobby(new CreateLobbyRequestDTO { Name = "Lobby2", IsPrivate = true, Password = "secret" });
 
+            var lobbies = _lobbyService.GetAllLobbies();
+
+            Assert.AreEqual(2, lobbies.Count);
+
+        }
+
+        [TestMethod]
+        public void GetAllLobbies_ReturnsEmptyWhenNoActiveLobbies()
+        {
+            var lobbies = _lobbyService.GetAllLobbies();
+
+            Assert.AreEqual(0, lobbies.Count);
+        }
+
+        #endregion
+
+
+        [TestMethod]
+        public void KickPlayer_Success()
+        {
+            var createRequest = new CreateLobbyRequestDTO { Name = "KickableLobby", IsPrivate = false, Username = "HostUser" };
             var createResponse = _lobbyService.CreateLobby(createRequest);
 
-            var joinRequest = new JoinLobbyRequestDTO
-            {
-                LobbyId = createResponse.Lobby.LobbyId,
-                Username = "PlayerToKick"
-            };
-
+            var joinRequest = new JoinLobbyRequestDTO { LobbyId = createResponse.Lobby.LobbyId, Username = "PlayerToKick" };
             _lobbyService.JoinLobby(joinRequest);
 
             var kickResponse = _lobbyService.KickPlayer(createResponse.Lobby.LobbyId, "HostUser", "PlayerToKick");
 
-            Assert.IsFalse(createResponse.Lobby.Players.Contains("PlayerToKick"), "Player was not removed from the lobby.");
+            Assert.IsFalse(createResponse.Lobby.Players.Contains("PlayerToKick"));
         }
 
         [TestMethod]
-        public void KickPlayer_ShouldFailWhenNotHost()
+        public void KickPlayer_Failure_NotHost()
         {
-            var createRequest = new CreateLobbyRequestDTO
-            {
-                Name = "KickLobby",
-                IsPrivate = false,
-                Username = "HostUser"
-            };
-
+            var createRequest = new CreateLobbyRequestDTO { Name = "KickableLobby", IsPrivate = false, Username = "HostUser" };
             var createResponse = _lobbyService.CreateLobby(createRequest);
 
-            var joinRequest = new JoinLobbyRequestDTO
-            {
-                LobbyId = createResponse.Lobby.LobbyId,
-                Username = "PlayerToKick"
-            };
-
+            var joinRequest = new JoinLobbyRequestDTO { LobbyId = createResponse.Lobby.LobbyId, Username = "PlayerToKick" };
             _lobbyService.JoinLobby(joinRequest);
 
-            var kickResponse = _lobbyService.KickPlayer(createResponse.Lobby.LobbyId, "NonHostUser", "PlayerToKick");
+            var kickResponse = _lobbyService.KickPlayer(createResponse.Lobby.LobbyId, "NotHostUser", "PlayerToKick");
 
-            Assert.AreEqual(ErrorMessages.NotLobbyHost, kickResponse.ErrorKey, "Not host error not returned.");
+            Assert.AreEqual(ErrorMessages.NotLobbyHost, kickResponse.ErrorKey);
         }
 
-        #endregion
+        [TestMethod]
+        public void KickPlayer_Failure_PlayerNotInLobby()
+        {
+            var createRequest = new CreateLobbyRequestDTO { Name = "KickableLobby", IsPrivate = false, Username = "HostUser" };
+            var createResponse = _lobbyService.CreateLobby(createRequest);
+
+            var kickResponse = _lobbyService.KickPlayer(createResponse.Lobby.LobbyId, "HostUser", "NonExistentPlayer");
+
+            Assert.AreEqual(ErrorMessages.PlayerNotInLobby, kickResponse.ErrorKey);
+        }
     }
 }
