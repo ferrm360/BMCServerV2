@@ -503,32 +503,7 @@ qC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\R
 ««& 6
 
 ¯¯0 1
-¯¯J K¢
-tC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\ChatMessagesRepository.cs
-
-
-
- '<
-% -  :: `` aa 
-2 9 
-
-) B(
-G P 1 :O X(
-V _" +O X1 :2
- " $> @" $> @
- # %
-
-,,) :2
-,,? G.. 00[ c;;2 :;;M U(
-,,M R33 55W \== 
-;; ;;! #;;> @
-<<' )<<- /
-
-JJ 
-JJ# +LL ZZ '
-JJ1 ;LL! +[[! +
-JJD OQQ* 5\\" -
-XX ``* 1à
+¯¯J Kà
 
 uC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\FriendRequestRepository.cs
 
@@ -624,7 +599,32 @@ uC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\R
 ÙÙ' 7
 
 ÖÖ 
-ÝÝ+ 5j
+ÝÝ+ 5¢
+tC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\ChatMessagesRepository.cs
+
+
+
+ '<
+% -  :: `` aa 
+2 9 
+
+) B(
+G P 1 :O X(
+V _" +O X1 :2
+ " $> @" $> @
+ # %
+
+,,) :2
+,,? G.. 00[ c;;2 :;;M U(
+,,M R33 55W \== 
+;; ;;! #;;> @
+<<' )<<- /
+
+JJ 
+JJ# +LL ZZ '
+JJ1 ;LL! +[[! +
+JJD OQQ* 5\\" -
+XX ``* 1j
 hC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Properties\AssemblyInfo.cse
 WC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Class1.cs
 

@@ -165,9 +165,9 @@
               "resultFile": {
                 "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/DataAccess/Repositories/PlayerRepositoy.cs",
                 "region": {
-                  "startLine": 54,
+                  "startLine": 33,
                   "startColumn": 13,
-                  "endLine": 57,
+                  "endLine": 36,
                   "endColumn": 14
                 }
               }
@@ -186,9 +186,9 @@
               "resultFile": {
                 "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/DataAccess/Repositories/PlayerRepositoy.cs",
                 "region": {
-                  "startLine": 33,
+                  "startLine": 54,
                   "startColumn": 13,
-                  "endLine": 36,
+                  "endLine": 57,
                   "endColumn": 14
                 }
               }

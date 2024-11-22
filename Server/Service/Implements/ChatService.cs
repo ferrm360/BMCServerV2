@@ -11,7 +11,6 @@ using DataAccess;
 namespace Service.Implements
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
-    //[ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Reentrant)]
     public class ChatService : IChatService
     {
         private readonly Dictionary<string, IChatServiceCallback> _connectedUsers = new Dictionary<string, IChatServiceCallback>();

@@ -1,4 +1,5 @@
-﻿C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\Email\EmailServiceTests.cs
+﻿C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\DTO\GameBoardDTOTests.cs
+C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\Email\EmailServiceTests.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\Service.Connection\Managers\ConnectionEventHandlerTest.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\Service.Connection\Managers\ConnectionManagerTest.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\Services.Implements\AccountServiceTest.cs
@@ -6,6 +7,7 @@ C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\Services.Implements\ChatFriendServiceTests.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\Services.Implements\LobbyServiceTest.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\Services.Implements\ProfileServiceTest.cs
+C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\Utilities\TestOperationContextScope.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\packages\MSTest.TestAdapter.2.2.10\build\_common\es\Microsoft.TestPlatform.AdapterUtilities.resources.dll
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\packages\MSTest.TestAdapter.2.2.10\build\_common\es\Microsoft.TestPlatform.CoreUtilities.resources.dll
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\packages\MSTest.TestAdapter.2.2.10\build\_common\es\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.resources.dll

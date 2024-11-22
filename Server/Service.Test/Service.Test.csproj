@@ -72,7 +72,6 @@
     <Compile Include="Services.Implements\ChatFriendServiceTests.cs" />
     <Compile Include="Services.Implements\LobbyServiceTest.cs" />
     <Compile Include="Services.Implements\ProfileServiceTest.cs" />
-    <Compile Include="Utilities\TestOperationContextScope.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -2303,7 +2303,47 @@ xC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Util
 , 
 Rejected 
 } 
-} Â
+} è
+rC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Constans\MessageChatFriend.cs
+	namespace 	
+Service
+ 
+. 
+	Utilities 
+. 
+Constans $
+{ 
+public		 
+
+static		 
+class		 
+MessageChatFriend		 )
+{
+
+ 
+public 
+const 
+string 
+SenderNotFound *
+=+ ,
+$str- C
+;C D
+public 
+const 
+string 
+NoAreFriend '
+=( )
+$str* =
+;= >
+public 
+const 
+string 
+CantSendMessages ,
+=- .
+$str/ G
+;G H
+} 
+} Â
 nC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Constans\ErrorMessages.cs
 	namespace 	
 Service
@@ -2525,7 +2565,118 @@ InvalidBio &
 $str!!, A
 ;!!A B
 }## 
-}$$ ˝8
+}$$ ¢
+mC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Constans\GameMessages.cs
+	namespace 	
+Service
+ 
+. 
+	Utilities 
+. 
+Constans $
+{ 
+public		 
+
+static		 
+class		 
+GameMessages		 $
+{
+
+ 
+public 
+const 
+string 
+GameNotFound (
+=) *
+$str+ >
+;> ?
+public 
+const 
+string %
+PlayerDontSummitGameBoard 5
+=6 7
+$str8 X
+;X Y
+public 
+const 
+string 
+CantSummitMatrix ,
+=- .
+$str/ G
+;G H
+public 
+const 
+string 
+GameAlredyExist +
+=, -
+$str. F
+;F G
+public 
+const 
+string 
+CantAddingPlayer ,
+=- .
+$str/ G
+;G H
+} 
+} É
+nC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Constans\LobbyMessages.cs
+	namespace 	
+Service
+ 
+. 
+	Utilities 
+. 
+Constans $
+{		 
+public
+
+ 
+
+class
+
+ 
+LobbyMessages
+
+ 
+{ 
+public 
+const 
+string 
+LobbyNotFound )
+=* +
+$str, A
+;A B
+public 
+const 
+string 
+OnlyHostStart )
+=* +
+$str, @
+;@ A
+public 
+const 
+string 
+NotEnoughPlayer +
+=, -
+$str. D
+;D E
+public 
+const 
+string 
+NotificationMissing /
+=0 1
+$str2 O
+;O P
+public 
+const 
+string 
+GameStarted '
+=( )
+$str* <
+;< =
+} 
+} ˝8
 [C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\ServiceModule.cs
 	namespace		 	
 Service		
@@ -5255,448 +5406,448 @@ imageBytes
 ΩΩ 
 }ææ éB
 lC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\PlayerScoresService.cs
-	namespace 	
-Service
+	namespace 	
+Service
  
-. 
+. 
 
-Implements 
-{ 
-public 
+Implements 
+{ 
+public 
 
-class 
-PlayerScoresService $
-:% & 
-IPlayerScoresService' ;
-{ 
-private 
-readonly #
-IPlayerScoresRepository 0
-_scoreRepository1 A
-;A B
-private 
-readonly 
-IPlayerRepository *
-_playerRepository+ <
-;< =
-public 
-PlayerScoresService "
-(" ##
-IPlayerScoresRepository #
-scoreRepository$ 3
-,3 4
-IPlayerRepository 
-playerRepository .
-). /
-{ 	
-_scoreRepository 
-= 
-scoreRepository .
-;. /
-_playerRepository 
-= 
-playerRepository  0
-;0 1
-} 	
-public  
-PlayerScoresResponse #
-GetScoresByUsername$ 7
-(7 8
-string8 >
-username? G
-)G H
-{ 	
-try   
-{!! 
-var"" 
-player"" 
-="" 
-_playerRepository"" .
-."". /
-GetByUsername""/ <
-(""< =
-username""= E
-)""E F
-;""F G
-if## 
-(## 
-player## 
-==## 
-null## "
-)##" #
-{$$ 
-return%%  
-PlayerScoresResponse%% /
-.%%/ 0
-Failure%%0 7
-(%%7 8
-ErrorMessages%%8 E
-.%%E F
-UserNotFound%%F R
-)%%R S
-;%%S T
-}&& 
-var(( 
-scores(( 
-=(( 
-_scoreRepository(( -
-.((- .
-GetScoresByPlayerId((. A
-(((A B
-player((B H
-.((H I
-PlayerID((I Q
-)((Q R
-;((R S
-if)) 
-()) 
-scores)) 
-==)) 
-null)) "
-)))" #
-{** 
-return++  
-PlayerScoresResponse++ /
-.++/ 0
-Failure++0 7
-(++7 8
-ErrorMessages++8 E
-.++E F
-ScoreNotFound++F S
-)++S T
-;++T U
-},, 
-var.. 
-	scoresDto.. 
-=.. 
-new..  #
-PlayerScoresDTO..$ 3
-{// 
-PlayerId00 
-=00 
-scores00 %
-.00% &
-PlayerID00& .
-,00. /
-Wins11 
-=11 
-scores11 !
-.11! "
-Wins11" &
-,11& '
-Losses22 
-=22 
-scores22 #
-.22# $
-Losses22$ *
-}33 
-;33 
-return55  
-PlayerScoresResponse55 +
-.55+ ,
-SuccessResult55, 9
-(559 :
-	scoresDto55: C
-)55C D
-;55D E
-}66 
-catch77 
-(77 
-SqlException77 
-ex77  "
-)77" #
-{88 
-string99 
-errorMessage99 #
-=99$ %
-SqlErrorHandler99& 5
-.995 6
-GetErrorMessage996 E
-(99E F
-ex99F H
-)99H I
-;99I J
-return::  
-PlayerScoresResponse:: +
-.::+ ,
-Failure::, 3
-(::3 4
-errorMessage::4 @
-)::@ A
-;::A B
-};; 
-catch<< 
-(<< 
-	Exception<< 
-ex<< 
-)<<  
-{== 
-Console>> 
-.>> 
-	WriteLine>> !
-(>>! "
-$">>" $
-$str>>$ 6
-{>>6 7
-ex>>7 9
-.>>9 :
-Message>>: A
-}>>A B
-">>B C
-)>>C D
-;>>D E
-return??  
-PlayerScoresResponse?? +
-.??+ ,
-Failure??, 3
-(??3 4
-ErrorMessages??4 A
-.??A B
-GeneralException??B R
-)??R S
-;??S T
-}@@ 
-}AA 	
-publicCC 
-OperationResponseCC  
-IncrementWinsCC! .
-(CC. /
-stringCC/ 5
-usernameCC6 >
-)CC> ?
-{DD 	
-tryEE 
-{FF 
-varGG 
-playerGG 
-=GG 
-_playerRepositoryGG .
-.GG. /
-GetByUsernameGG/ <
-(GG< =
-usernameGG= E
-)GGE F
-;GGF G
-ifHH 
-(HH 
-playerHH 
-==HH 
-nullHH "
-)HH" #
-{II 
-returnJJ 
-OperationResponseJJ ,
-.JJ, -
-FailureJJ- 4
-(JJ4 5
-ErrorMessagesJJ5 B
-.JJB C
-UserNotFoundJJC O
-)JJO P
-;JJP Q
-}KK 
-_scoreRepositoryMM  
-.MM  !
-IncrementWinsMM! .
-(MM. /
-playerMM/ 5
-.MM5 6
-PlayerIDMM6 >
-)MM> ?
-;MM? @
-_scoreRepositoryNN  
-.NN  !
-SaveNN! %
-(NN% &
-)NN& '
-;NN' (
-returnPP 
-OperationResponsePP (
-.PP( )
-SuccessResultPP) 6
-(PP6 7
-$strPP7 V
-)PPV W
-;PPW X
-}QQ 
-catchRR 
-(RR 
-SqlExceptionRR 
-exRR  "
-)RR" #
-{SS 
-stringTT 
-errorMessageTT #
-=TT$ %
-SqlErrorHandlerTT& 5
-.TT5 6
-GetErrorMessageTT6 E
-(TTE F
-exTTF H
-)TTH I
-;TTI J
-returnUU 
-OperationResponseUU (
-.UU( )
-FailureUU) 0
-(UU0 1
-errorMessageUU1 =
-)UU= >
-;UU> ?
-}VV 
-catchWW 
-(WW 
-	ExceptionWW 
-exWW 
-)WW  
-{XX 
-ConsoleYY 
-.YY 
-	WriteLineYY !
-(YY! "
-$"YY" $
-$strYY$ 6
-{YY6 7
-exYY7 9
-.YY9 :
-MessageYY: A
-}YYA B
-"YYB C
-)YYC D
-;YYD E
-returnZZ 
-OperationResponseZZ (
-.ZZ( )
-FailureZZ) 0
-(ZZ0 1
-ErrorMessagesZZ1 >
-.ZZ> ?
-GeneralExceptionZZ? O
-)ZZO P
-;ZZP Q
-}[[ 
-}\\ 	
-public^^ 
-OperationResponse^^  
-IncrementLosses^^! 0
-(^^0 1
-string^^1 7
-username^^8 @
-)^^@ A
-{__ 	
-try`` 
-{aa 
-varbb 
-playerbb 
-=bb 
-_playerRepositorybb .
-.bb. /
-GetByUsernamebb/ <
-(bb< =
-usernamebb= E
-)bbE F
-;bbF G
-ifcc 
-(cc 
-playercc 
-==cc 
-nullcc "
-)cc" #
-{dd 
-returnee 
-OperationResponseee ,
-.ee, -
-Failureee- 4
-(ee4 5
-ErrorMessagesee5 B
-.eeB C
-UserNotFoundeeC O
-)eeO P
-;eeP Q
-}ff 
-_scoreRepositoryhh  
-.hh  !
-IncrementLosseshh! 0
-(hh0 1
-playerhh1 7
-.hh7 8
-PlayerIDhh8 @
-)hh@ A
-;hhA B
-_scoreRepositoryii  
-.ii  !
-Saveii! %
-(ii% &
-)ii& '
-;ii' (
-returnkk 
-OperationResponsekk (
-.kk( )
-SuccessResultkk) 6
-(kk6 7
-$strkk7 W
-)kkW X
-;kkX Y
-}ll 
-catchmm 
-(mm 
-SqlExceptionmm 
-exmm  "
-)mm" #
-{nn 
-stringoo 
-errorMessageoo #
-=oo$ %
-SqlErrorHandleroo& 5
-.oo5 6
-GetErrorMessageoo6 E
-(ooE F
-exooF H
-)ooH I
-;ooI J
-returnpp 
-OperationResponsepp (
-.pp( )
-Failurepp) 0
-(pp0 1
-errorMessagepp1 =
-)pp= >
-;pp> ?
-}qq 
-catchrr 
-(rr 
-	Exceptionrr 
-exrr 
-)rr  
-{ss 
-Consolett 
-.tt 
-	WriteLinett !
-(tt! "
-$"tt" $
-$strtt$ 6
-{tt6 7
-extt7 9
-.tt9 :
-Messagett: A
-}ttA B
-"ttB C
-)ttC D
-;ttD E
-returnuu 
-OperationResponseuu (
-.uu( )
-Failureuu) 0
-(uu0 1
-ErrorMessagesuu1 >
-.uu> ?
-GeneralExceptionuu? O
-)uuO P
-;uuP Q
-}vv 
-}ww 	
-}xx 
-}yy Ó€
+class 
+PlayerScoresService $
+:% & 
+IPlayerScoresService' ;
+{ 
+private 
+readonly #
+IPlayerScoresRepository 0
+_scoreRepository1 A
+;A B
+private 
+readonly 
+IPlayerRepository *
+_playerRepository+ <
+;< =
+public 
+PlayerScoresService "
+(" ##
+IPlayerScoresRepository #
+scoreRepository$ 3
+,3 4
+IPlayerRepository 
+playerRepository .
+). /
+{ 	
+_scoreRepository 
+= 
+scoreRepository .
+;. /
+_playerRepository 
+= 
+playerRepository  0
+;0 1
+} 	
+public  
+PlayerScoresResponse #
+GetScoresByUsername$ 7
+(7 8
+string8 >
+username? G
+)G H
+{ 	
+try 
+{ 
+var 
+player 
+= 
+_playerRepository .
+.. /
+GetByUsername/ <
+(< =
+username= E
+)E F
+;F G
+if 
+( 
+player 
+== 
+null "
+)" #
+{   
+return!!  
+PlayerScoresResponse!! /
+.!!/ 0
+Failure!!0 7
+(!!7 8
+ErrorMessages!!8 E
+.!!E F
+UserNotFound!!F R
+)!!R S
+;!!S T
+}"" 
+var$$ 
+scores$$ 
+=$$ 
+_scoreRepository$$ -
+.$$- .
+GetScoresByPlayerId$$. A
+($$A B
+player$$B H
+.$$H I
+PlayerID$$I Q
+)$$Q R
+;$$R S
+if%% 
+(%% 
+scores%% 
+==%% 
+null%% "
+)%%" #
+{&& 
+return''  
+PlayerScoresResponse'' /
+.''/ 0
+Failure''0 7
+(''7 8
+ErrorMessages''8 E
+.''E F
+ScoreNotFound''F S
+)''S T
+;''T U
+}(( 
+var** 
+	scoresDto** 
+=** 
+new**  #
+PlayerScoresDTO**$ 3
+{++ 
+PlayerId,, 
+=,, 
+scores,, %
+.,,% &
+PlayerID,,& .
+,,,. /
+Wins-- 
+=-- 
+scores-- !
+.--! "
+Wins--" &
+,--& '
+Losses.. 
+=.. 
+scores.. #
+...# $
+Losses..$ *
+}// 
+;// 
+return11  
+PlayerScoresResponse11 +
+.11+ ,
+SuccessResult11, 9
+(119 :
+	scoresDto11: C
+)11C D
+;11D E
+}22 
+catch33 
+(33 
+SqlException33 
+ex33  "
+)33" #
+{44 
+string55 
+errorMessage55 #
+=55$ %
+SqlErrorHandler55& 5
+.555 6
+GetErrorMessage556 E
+(55E F
+ex55F H
+)55H I
+;55I J
+return66  
+PlayerScoresResponse66 +
+.66+ ,
+Failure66, 3
+(663 4
+errorMessage664 @
+)66@ A
+;66A B
+}77 
+catch88 
+(88 
+	Exception88 
+ex88 
+)88  
+{99 
+Console:: 
+.:: 
+	WriteLine:: !
+(::! "
+$"::" $
+$str::$ 6
+{::6 7
+ex::7 9
+.::9 :
+Message::: A
+}::A B
+"::B C
+)::C D
+;::D E
+return;;  
+PlayerScoresResponse;; +
+.;;+ ,
+Failure;;, 3
+(;;3 4
+ErrorMessages;;4 A
+.;;A B
+GeneralException;;B R
+);;R S
+;;;S T
+}<< 
+}== 	
+public?? 
+OperationResponse??  
+IncrementWins??! .
+(??. /
+string??/ 5
+username??6 >
+)??> ?
+{@@ 	
+tryAA 
+{BB 
+varCC 
+playerCC 
+=CC 
+_playerRepositoryCC .
+.CC. /
+GetByUsernameCC/ <
+(CC< =
+usernameCC= E
+)CCE F
+;CCF G
+ifDD 
+(DD 
+playerDD 
+==DD 
+nullDD "
+)DD" #
+{EE 
+returnFF 
+OperationResponseFF ,
+.FF, -
+FailureFF- 4
+(FF4 5
+ErrorMessagesFF5 B
+.FFB C
+UserNotFoundFFC O
+)FFO P
+;FFP Q
+}GG 
+_scoreRepositoryII  
+.II  !
+IncrementWinsII! .
+(II. /
+playerII/ 5
+.II5 6
+PlayerIDII6 >
+)II> ?
+;II? @
+_scoreRepositoryJJ  
+.JJ  !
+SaveJJ! %
+(JJ% &
+)JJ& '
+;JJ' (
+returnLL 
+OperationResponseLL (
+.LL( )
+SuccessResultLL) 6
+(LL6 7
+$strLL7 V
+)LLV W
+;LLW X
+}MM 
+catchNN 
+(NN 
+SqlExceptionNN 
+exNN  "
+)NN" #
+{OO 
+stringPP 
+errorMessagePP #
+=PP$ %
+SqlErrorHandlerPP& 5
+.PP5 6
+GetErrorMessagePP6 E
+(PPE F
+exPPF H
+)PPH I
+;PPI J
+returnQQ 
+OperationResponseQQ (
+.QQ( )
+FailureQQ) 0
+(QQ0 1
+errorMessageQQ1 =
+)QQ= >
+;QQ> ?
+}RR 
+catchSS 
+(SS 
+	ExceptionSS 
+exSS 
+)SS  
+{TT 
+ConsoleUU 
+.UU 
+	WriteLineUU !
+(UU! "
+$"UU" $
+$strUU$ 6
+{UU6 7
+exUU7 9
+.UU9 :
+MessageUU: A
+}UUA B
+"UUB C
+)UUC D
+;UUD E
+returnVV 
+OperationResponseVV (
+.VV( )
+FailureVV) 0
+(VV0 1
+ErrorMessagesVV1 >
+.VV> ?
+GeneralExceptionVV? O
+)VVO P
+;VVP Q
+}WW 
+}XX 	
+publicZZ 
+OperationResponseZZ  
+IncrementLossesZZ! 0
+(ZZ0 1
+stringZZ1 7
+usernameZZ8 @
+)ZZ@ A
+{[[ 	
+try\\ 
+{]] 
+var^^ 
+player^^ 
+=^^ 
+_playerRepository^^ .
+.^^. /
+GetByUsername^^/ <
+(^^< =
+username^^= E
+)^^E F
+;^^F G
+if__ 
+(__ 
+player__ 
+==__ 
+null__ "
+)__" #
+{`` 
+returnaa 
+OperationResponseaa ,
+.aa, -
+Failureaa- 4
+(aa4 5
+ErrorMessagesaa5 B
+.aaB C
+UserNotFoundaaC O
+)aaO P
+;aaP Q
+}bb 
+_scoreRepositorydd  
+.dd  !
+IncrementLossesdd! 0
+(dd0 1
+playerdd1 7
+.dd7 8
+PlayerIDdd8 @
+)dd@ A
+;ddA B
+_scoreRepositoryee  
+.ee  !
+Saveee! %
+(ee% &
+)ee& '
+;ee' (
+returngg 
+OperationResponsegg (
+.gg( )
+SuccessResultgg) 6
+(gg6 7
+$strgg7 W
+)ggW X
+;ggX Y
+}hh 
+catchii 
+(ii 
+SqlExceptionii 
+exii  "
+)ii" #
+{jj 
+stringkk 
+errorMessagekk #
+=kk$ %
+SqlErrorHandlerkk& 5
+.kk5 6
+GetErrorMessagekk6 E
+(kkE F
+exkkF H
+)kkH I
+;kkI J
+returnll 
+OperationResponsell (
+.ll( )
+Failurell) 0
+(ll0 1
+errorMessagell1 =
+)ll= >
+;ll> ?
+}mm 
+catchnn 
+(nn 
+	Exceptionnn 
+exnn 
+)nn  
+{oo 
+Consolepp 
+.pp 
+	WriteLinepp !
+(pp! "
+$"pp" $
+$strpp$ 6
+{pp6 7
+expp7 9
+.pp9 :
+Messagepp: A
+}ppA B
+"ppB C
+)ppC D
+;ppD E
+returnqq 
+OperationResponseqq (
+.qq( )
+Failureqq) 0
+(qq0 1
+ErrorMessagesqq1 >
+.qq> ?
+GeneralExceptionqq? O
+)qqO P
+;qqP Q
+}rr 
+}ss 	
+}tt 
+}uu Õ◊
 eC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\LobbyService.cs
 	namespace 	
 Service
@@ -5879,2247 +6030,2160 @@ DictionaryO Y
 ]''( )
 =''* +
 lobby'', 1
-;''1 2
-Console)) 
-.)) 
-	WriteLine)) 
-()) 
-$"))  
-$str))  )
-{))) *
-request))* 1
-.))1 2
-Username))2 :
-})): ;
-$str)); d
-{))d e
-lobby))e j
-.))j k
-Name))k o
-}))o p
-$str	))p Å
-"
-))Å Ç
-)
-))Ç É
-;
-))É Ñ
-var++ 
-lobbyDto++ 
-=++ 
-new++ 
-LobbyDTO++ '
-{,, 
-LobbyId-- 
-=-- 
-lobby-- 
-.--  
-LobbyId--  '
-,--' (
-Name.. 
-=.. 
-lobby.. 
-... 
-Name.. !
-,..! "
-	IsPrivate// 
-=// 
-lobby// !
-.//! "
-	IsPrivate//" +
-,//+ ,
-CurrentPlayers00 
-=00  
-lobby00! &
-.00& '
-Players00' .
-.00. /
-Count00/ 4
-,004 5
+;''1 2
+var)) 
+lobbyDto)) 
+=)) 
+new)) 
+LobbyDTO)) '
+{** 
+LobbyId++ 
+=++ 
+lobby++ 
+.++  
+LobbyId++  '
+,++' (
+Name,, 
+=,, 
+lobby,, 
+.,, 
+Name,, !
+,,,! "
+	IsPrivate-- 
+=-- 
+lobby-- !
+.--! "
+	IsPrivate--" +
+,--+ ,
+CurrentPlayers.. 
+=..  
+lobby..! &
+...& '
+Players..' .
+.... /
+Count../ 4
+,..4 5
 
-MaxPlayers11 
-=11 
-lobby11 "
-.11" #
+MaxPlayers// 
+=// 
+lobby// "
+.//" #
 
-MaxPlayers11# -
-,11- .
-Host22 
-=22 
-lobby22 
-.22 
-Host22 !
-,22! "
-Players33 
-=33 
-new33 
-List33 "
-<33" #
-string33# )
->33) *
-(33* +
-lobby33+ 0
-.330 1
-Players331 8
-)338 9
-}44 
-;44 
-return66 
-LobbyResponse66  
-.66  !
-SuccessResult66! .
-(66. /
-lobbyDto66/ 7
-)667 8
-;668 9
-}77 	
-public:: 
-LobbyResponse:: 
-	JoinLobby:: &
-(::& '
-JoinLobbyRequestDTO::' :
-request::; B
-)::B C
-{;; 	
-if<< 
-(<< 
-!<< 
-_activeLobbies<< 
-.<<  
-TryGetValue<<  +
-(<<+ ,
-request<<, 3
-.<<3 4
-LobbyId<<4 ;
-,<<; <
-out<<= @
-var<<A D
-lobby<<E J
-)<<J K
-)<<K L
-{== 
-return>> 
-LobbyResponse>> $
-.>>$ %
-Failure>>% ,
-(>>, -
-ErrorMessages>>- :
-.>>: ;
-LobbyNotFound>>; H
-)>>H I
-;>>I J
-}?? 
-ifAA 
-(AA 
-lobbyAA 
-.AA 
-	IsPrivateAA 
-&&AA  "
-lobbyAA# (
-.AA( )
-PasswordAA) 1
-!=AA2 4
-requestAA5 <
-.AA< =
-PasswordAA= E
-)AAE F
-{BB 
-returnCC 
-LobbyResponseCC $
-.CC$ %
-FailureCC% ,
-(CC, -
-ErrorMessagesCC- :
-.CC: ; 
-InvalidLobbyPasswordCC; O
-)CCO P
-;CCP Q
-}DD 
-ifFF 
-(FF 
-!FF 
-lobbyFF 
-.FF 
-CanJoinFF 
-(FF 
-requestFF &
-.FF& '
-UsernameFF' /
-,FF/ 0
-requestFF1 8
-.FF8 9
-PasswordFF9 A
-)FFA B
-)FFB C
-{GG 
-returnHH 
-LobbyResponseHH $
-.HH$ %
-FailureHH% ,
-(HH, -
-ErrorMessagesHH- :
-.HH: ;
-	LobbyFullHH; D
-)HHD E
-;HHE F
-}II 
-lobbyKK 
-.KK 
-	AddPlayerKK 
-(KK 
-requestKK #
-.KK# $
-UsernameKK$ ,
-)KK, -
-;KK- .
-RegisterCallbackLL 
-(LL 
-requestLL $
-.LL$ %
-UsernameLL% -
-)LL- .
-;LL. / 
-NotifyPlayersInLobbyNN  
-(NN  !
-lobbyNN! &
-,NN& '
-requestNN( /
-.NN/ 0
-UsernameNN0 8
-)NN8 9
-;NN9 :
-varPP 
-lobbyDtoPP 
-=PP 
-newPP 
-LobbyDTOPP '
-{QQ 
-LobbyIdRR 
-=RR 
-lobbyRR 
-.RR  
-LobbyIdRR  '
-,RR' (
-NameSS 
-=SS 
-lobbySS 
-.SS 
-NameSS !
-,SS! "
-	IsPrivateTT 
-=TT 
-lobbyTT !
-.TT! "
-	IsPrivateTT" +
-,TT+ ,
-CurrentPlayersUU 
-=UU  
-lobbyUU! &
-.UU& '
-PlayersUU' .
-.UU. /
-CountUU/ 4
-,UU4 5
+MaxPlayers//# -
+,//- .
+Host00 
+=00 
+lobby00 
+.00 
+Host00 !
+,00! "
+Players11 
+=11 
+new11 
+List11 "
+<11" #
+string11# )
+>11) *
+(11* +
+lobby11+ 0
+.110 1
+Players111 8
+)118 9
+}22 
+;22 
+return44 
+LobbyResponse44  
+.44  !
+SuccessResult44! .
+(44. /
+lobbyDto44/ 7
+)447 8
+;448 9
+}55 	
+public88 
+LobbyResponse88 
+	JoinLobby88 &
+(88& '
+JoinLobbyRequestDTO88' :
+request88; B
+)88B C
+{99 	
+if:: 
+(:: 
+!:: 
+_activeLobbies:: 
+.::  
+TryGetValue::  +
+(::+ ,
+request::, 3
+.::3 4
+LobbyId::4 ;
+,::; <
+out::= @
+var::A D
+lobby::E J
+)::J K
+)::K L
+{;; 
+return<< 
+LobbyResponse<< $
+.<<$ %
+Failure<<% ,
+(<<, -
+ErrorMessages<<- :
+.<<: ;
+LobbyNotFound<<; H
+)<<H I
+;<<I J
+}== 
+if?? 
+(?? 
+lobby?? 
+.?? 
+	IsPrivate?? 
+&&??  "
+lobby??# (
+.??( )
+Password??) 1
+!=??2 4
+request??5 <
+.??< =
+Password??= E
+)??E F
+{@@ 
+returnAA 
+LobbyResponseAA $
+.AA$ %
+FailureAA% ,
+(AA, -
+ErrorMessagesAA- :
+.AA: ; 
+InvalidLobbyPasswordAA; O
+)AAO P
+;AAP Q
+}BB 
+ifDD 
+(DD 
+!DD 
+lobbyDD 
+.DD 
+CanJoinDD 
+(DD 
+requestDD &
+.DD& '
+UsernameDD' /
+,DD/ 0
+requestDD1 8
+.DD8 9
+PasswordDD9 A
+)DDA B
+)DDB C
+{EE 
+returnFF 
+LobbyResponseFF $
+.FF$ %
+FailureFF% ,
+(FF, -
+ErrorMessagesFF- :
+.FF: ;
+	LobbyFullFF; D
+)FFD E
+;FFE F
+}GG 
+lobbyII 
+.II 
+	AddPlayerII 
+(II 
+requestII #
+.II# $
+UsernameII$ ,
+)II, -
+;II- .
+RegisterCallbackJJ 
+(JJ 
+requestJJ $
+.JJ$ %
+UsernameJJ% -
+)JJ- .
+;JJ. / 
+NotifyPlayersInLobbyLL  
+(LL  !
+lobbyLL! &
+,LL& '
+requestLL( /
+.LL/ 0
+UsernameLL0 8
+)LL8 9
+;LL9 :
+varNN 
+lobbyDtoNN 
+=NN 
+newNN 
+LobbyDTONN '
+{OO 
+LobbyIdPP 
+=PP 
+lobbyPP 
+.PP  
+LobbyIdPP  '
+,PP' (
+NameQQ 
+=QQ 
+lobbyQQ 
+.QQ 
+NameQQ !
+,QQ! "
+	IsPrivateRR 
+=RR 
+lobbyRR !
+.RR! "
+	IsPrivateRR" +
+,RR+ ,
+CurrentPlayersSS 
+=SS  
+lobbySS! &
+.SS& '
+PlayersSS' .
+.SS. /
+CountSS/ 4
+,SS4 5
 
-MaxPlayersVV 
-=VV 
-lobbyVV "
-.VV" #
+MaxPlayersTT 
+=TT 
+lobbyTT "
+.TT" #
 
-MaxPlayersVV# -
-,VV- .
-HostWW 
-=WW 
-lobbyWW 
-.WW 
-HostWW !
-,WW! "
-PlayersXX 
-=XX 
-newXX 
-ListXX "
-<XX" #
-stringXX# )
->XX) *
-(XX* +
-lobbyXX+ 0
-.XX0 1
-PlayersXX1 8
-)XX8 9
-}YY 
-;YY 
-return[[ 
-LobbyResponse[[  
-.[[  !
-SuccessResult[[! .
-([[. /
-lobbyDto[[/ 7
-)[[7 8
-;[[8 9
-}\\ 	
-public^^ 
-LobbyResponse^^ 
+MaxPlayersTT# -
+,TT- .
+HostUU 
+=UU 
+lobbyUU 
+.UU 
+HostUU !
+,UU! "
+PlayersVV 
+=VV 
+newVV 
+ListVV "
+<VV" #
+stringVV# )
+>VV) *
+(VV* +
+lobbyVV+ 0
+.VV0 1
+PlayersVV1 8
+)VV8 9
+}WW 
+;WW 
+returnYY 
+LobbyResponseYY  
+.YY  !
+SuccessResultYY! .
+(YY. /
+lobbyDtoYY/ 7
+)YY7 8
+;YY8 9
+}ZZ 	
+public\\ 
+LobbyResponse\\ 
 
-LeaveLobby^^ '
-(^^' (
-string^^( .
-lobbyId^^/ 6
-,^^6 7
-string^^8 >
-username^^? G
-)^^G H
-{__ 	
-if`` 
-(`` 
-!`` 
-_activeLobbies`` 
-.``  
-TryGetValue``  +
-(``+ ,
-lobbyId``, 3
-,``3 4
-out``5 8
-var``9 <
-lobby``= B
-)``B C
-)``C D
-{aa 
-returnbb 
-LobbyResponsebb $
-.bb$ %
-Failurebb% ,
-(bb, -
-ErrorMessagesbb- :
-.bb: ;
-LobbyNotFoundbb; H
-)bbH I
-;bbI J
-}cc 
-lobbyee 
-.ee 
-RemovePlayeree 
-(ee 
-usernameee '
-)ee' (
-;ee( )
-_connectedPlayersff 
-.ff 
-	TryRemoveff '
-(ff' (
-usernameff( 0
-,ff0 1
-outff2 5
-_ff6 7
-)ff7 8
-;ff8 9
-NotifyPlayerLefthh 
-(hh 
-lobbyhh "
-,hh" #
-usernamehh$ ,
-)hh, -
-;hh- .
-ifjj 
-(jj 
-lobbyjj 
-.jj 
-IsEmptyjj 
-(jj 
-)jj 
-)jj  
-{kk 
-_activeLobbiesll 
-.ll 
-Removell %
-(ll% &
-lobbyIdll& -
-)ll- .
-;ll. /
-}mm 
-varoo 
-lobbyDtooo 
-=oo 
-newoo 
-LobbyDTOoo '
-{pp 
-LobbyIdqq 
-=qq 
-lobbyqq 
-.qq  
-LobbyIdqq  '
-,qq' (
-Namerr 
-=rr 
-lobbyrr 
-.rr 
-Namerr !
-,rr! "
-	IsPrivatess 
-=ss 
-lobbyss !
-.ss! "
-	IsPrivatess" +
-,ss+ ,
-CurrentPlayerstt 
-=tt  
-lobbytt! &
-.tt& '
-Playerstt' .
-.tt. /
-Counttt/ 4
-,tt4 5
+LeaveLobby\\ '
+(\\' (
+string\\( .
+lobbyId\\/ 6
+,\\6 7
+string\\8 >
+username\\? G
+)\\G H
+{]] 	
+if^^ 
+(^^ 
+!^^ 
+_activeLobbies^^ 
+.^^  
+TryGetValue^^  +
+(^^+ ,
+lobbyId^^, 3
+,^^3 4
+out^^5 8
+var^^9 <
+lobby^^= B
+)^^B C
+)^^C D
+{__ 
+return`` 
+LobbyResponse`` $
+.``$ %
+Failure``% ,
+(``, -
+ErrorMessages``- :
+.``: ;
+LobbyNotFound``; H
+)``H I
+;``I J
+}aa 
+lobbycc 
+.cc 
+RemovePlayercc 
+(cc 
+usernamecc '
+)cc' (
+;cc( )
+_connectedPlayersdd 
+.dd 
+	TryRemovedd '
+(dd' (
+usernamedd( 0
+,dd0 1
+outdd2 5
+_dd6 7
+)dd7 8
+;dd8 9
+NotifyPlayerLeftff 
+(ff 
+lobbyff "
+,ff" #
+usernameff$ ,
+)ff, -
+;ff- .
+ifhh 
+(hh 
+lobbyhh 
+.hh 
+IsEmptyhh 
+(hh 
+)hh 
+)hh  
+{ii 
+_activeLobbiesjj 
+.jj 
+Removejj %
+(jj% &
+lobbyIdjj& -
+)jj- .
+;jj. /
+}kk 
+varmm 
+lobbyDtomm 
+=mm 
+newmm 
+LobbyDTOmm '
+{nn 
+LobbyIdoo 
+=oo 
+lobbyoo 
+.oo  
+LobbyIdoo  '
+,oo' (
+Namepp 
+=pp 
+lobbypp 
+.pp 
+Namepp !
+,pp! "
+	IsPrivateqq 
+=qq 
+lobbyqq !
+.qq! "
+	IsPrivateqq" +
+,qq+ ,
+CurrentPlayersrr 
+=rr  
+lobbyrr! &
+.rr& '
+Playersrr' .
+.rr. /
+Countrr/ 4
+,rr4 5
 
-MaxPlayersuu 
-=uu 
-lobbyuu "
-.uu" #
+MaxPlayersss 
+=ss 
+lobbyss "
+.ss" #
 
-MaxPlayersuu# -
-,uu- .
-Hostvv 
-=vv 
-lobbyvv 
-.vv 
-Hostvv !
-,vv! "
-Playersww 
-=ww 
-newww 
-Listww "
-<ww" #
-stringww# )
->ww) *
-(ww* +
-lobbyww+ 0
-.ww0 1
-Playersww1 8
-)ww8 9
-}xx 
-;xx 
-returnzz 
-LobbyResponsezz  
-.zz  !
-SuccessResultzz! .
-(zz. /
-lobbyDtozz/ 7
-)zz7 8
-;zz8 9
-}{{ 	
-private}} 
-void}} 
-RegisterCallback}} %
-(}}% &
-string}}& ,
-username}}- 5
-)}}5 6
-{~~ 	
-var 
-callback 
-= 
-OperationContext +
-.+ ,
-Current, 3
-.3 4
-GetCallbackChannel4 F
-<F G
-ILobbyCallbackG U
->U V
-(V W
-)W X
-;X Y
-_connectedPlayers
-ÄÄ 
-.
-ÄÄ 
-TryAdd
-ÄÄ $
-(
-ÄÄ$ %
-username
-ÄÄ% -
-,
-ÄÄ- .
-callback
-ÄÄ/ 7
-)
-ÄÄ7 8
-;
-ÄÄ8 9
+MaxPlayersss# -
+,ss- .
+Hosttt 
+=tt 
+lobbytt 
+.tt 
+Hosttt !
+,tt! "
+Playersuu 
+=uu 
+newuu 
+Listuu "
+<uu" #
+stringuu# )
+>uu) *
+(uu* +
+lobbyuu+ 0
+.uu0 1
+Playersuu1 8
+)uu8 9
+}vv 
+;vv 
+returnxx 
+LobbyResponsexx  
+.xx  !
+SuccessResultxx! .
+(xx. /
+lobbyDtoxx/ 7
+)xx7 8
+;xx8 9
+}yy 	
+private{{ 
+void{{ 
+RegisterCallback{{ %
+({{% &
+string{{& ,
+username{{- 5
+){{5 6
+{|| 	
+var}} 
+callback}} 
+=}} 
+OperationContext}} +
+.}}+ ,
+Current}}, 3
+.}}3 4
+GetCallbackChannel}}4 F
+<}}F G
+ILobbyCallback}}G U
+>}}U V
+(}}V W
+)}}W X
+;}}X Y
+_connectedPlayers~~ 
+.~~ 
+TryAdd~~ $
+(~~$ %
+username~~% -
+,~~- .
+callback~~/ 7
+)~~7 8
+;~~8 9
 var
-ÇÇ 
+ÄÄ 
 contextChannel
-ÇÇ 
+ÄÄ 
 =
-ÇÇ  
+ÄÄ  
 (
-ÇÇ! "
+ÄÄ! "
 IContextChannel
-ÇÇ" 1
+ÄÄ" 1
 )
-ÇÇ1 2
+ÄÄ1 2
 callback
-ÇÇ2 :
+ÄÄ2 :
 ;
-ÇÇ: ;
+ÄÄ: ;
 contextChannel
-ÉÉ 
+ÅÅ 
 .
-ÉÉ 
+ÅÅ 
 Closed
-ÉÉ !
+ÅÅ !
 +=
-ÉÉ" $
+ÅÅ" $
 (
-ÉÉ% &
+ÅÅ% &
 sender
-ÉÉ& ,
+ÅÅ& ,
 ,
-ÉÉ, -
+ÅÅ, -
 args
-ÉÉ. 2
+ÅÅ. 2
 )
-ÉÉ2 3
+ÅÅ2 3
 =>
-ÉÉ4 6$
+ÅÅ4 6$
 HandleClientDisconnect
-ÉÉ7 M
+ÅÅ7 M
 (
-ÉÉM N
+ÅÅM N
 username
-ÉÉN V
+ÅÅN V
 )
-ÉÉV W
+ÅÅV W
 ;
-ÉÉW X
+ÅÅW X
 contextChannel
-ÑÑ 
+ÇÇ 
 .
-ÑÑ 
+ÇÇ 
 Faulted
-ÑÑ "
+ÇÇ "
 +=
-ÑÑ# %
+ÇÇ# %
 (
-ÑÑ& '
+ÇÇ& '
 sender
-ÑÑ' -
+ÇÇ' -
 ,
-ÑÑ- .
+ÇÇ- .
 args
-ÑÑ/ 3
+ÇÇ/ 3
 )
-ÑÑ3 4
+ÇÇ3 4
 =>
-ÑÑ5 7$
+ÇÇ5 7$
 HandleClientDisconnect
-ÑÑ8 N
+ÇÇ8 N
 (
-ÑÑN O
+ÇÇN O
 username
-ÑÑO W
+ÇÇO W
 )
-ÑÑW X
+ÇÇW X
 ;
-ÑÑX Y
+ÇÇX Y
 }
-ÖÖ 	
+ÉÉ 	
 private
-áá 
+ÖÖ 
 void
-áá $
+ÖÖ $
 HandleClientDisconnect
-áá +
+ÖÖ +
 (
-áá+ ,
+ÖÖ+ ,
 string
-áá, 2
+ÖÖ, 2
 username
-áá3 ;
+ÖÖ3 ;
+)
+ÖÖ; <
+{
+ÜÜ 	
+if
+áá 
+(
+áá 
+_connectedPlayers
+áá !
+.
+áá! "
+	TryRemove
+áá" +
+(
+áá+ ,
+username
+áá, 4
+,
+áá4 5
+out
+áá6 9
+_
+áá: ;
 )
 áá; <
-{
-àà 	
-if
-ââ 
-(
-ââ 
-_connectedPlayers
-ââ !
-.
-ââ! "
-	TryRemove
-ââ" +
-(
-ââ+ ,
-username
-ââ, 4
-,
-ââ4 5
-out
-ââ6 9
-_
-ââ: ;
 )
-ââ; <
-)
-ââ< =
+áá< =
 {
-ää 
+àà 
 var
-ãã 
+ââ 
 lobby
-ãã 
+ââ 
 =
-ãã 
+ââ 
 _activeLobbies
-ãã *
+ââ *
 .
-ãã* +
+ââ* +
 Values
-ãã+ 1
+ââ+ 1
 .
-ãã1 2
+ââ1 2
 FirstOrDefault
-ãã2 @
+ââ2 @
 (
-ãã@ A
+ââ@ A
 l
-ããA B
+ââA B
 =>
-ããC E
+ââC E
 l
-ããF G
+ââF G
 .
-ããG H
+ââG H
 Players
-ããH O
+ââH O
 .
-ããO P
+ââO P
 Contains
-ããP X
+ââP X
 (
-ããX Y
+ââX Y
 username
-ããY a
+ââY a
 )
-ããa b
+ââa b
 )
-ããb c
+ââb c
 ;
-ããc d
+ââc d
 if
-åå 
+ää 
 (
-åå 
+ää 
 lobby
-åå 
+ää 
 !=
-åå 
+ää 
 null
-åå !
+ää !
 )
-åå! "
+ää! "
 {
-çç 
+ãã 
 lobby
-éé 
+åå 
 .
-éé 
+åå 
 RemovePlayer
-éé &
+åå &
 (
-éé& '
+åå& '
 username
-éé' /
+åå' /
 )
-éé/ 0
+åå/ 0
 ;
-éé0 1
+åå0 1
 NotifyPlayerLeft
-èè $
+çç $
 (
-èè$ %
+çç$ %
 lobby
-èè% *
+çç% *
 ,
-èè* +
+çç* +
 username
-èè, 4
+çç, 4
 )
-èè4 5
+çç4 5
 ;
-èè5 6
+çç5 6
 if
-ëë 
+èè 
 (
-ëë 
+èè 
 lobby
-ëë 
+èè 
 .
-ëë 
+èè 
 IsEmpty
-ëë %
+èè %
 (
-ëë% &
+èè% &
 )
-ëë& '
+èè& '
 )
-ëë' (
+èè' (
 {
-íí 
+êê 
 _activeLobbies
-ìì &
+ëë &
 .
-ìì& '
+ëë& '
 Remove
-ìì' -
+ëë' -
 (
-ìì- .
+ëë- .
 lobby
-ìì. 3
+ëë. 3
 .
-ìì3 4
+ëë3 4
 LobbyId
-ìì4 ;
+ëë4 ;
 )
-ìì; <
+ëë; <
 ;
-ìì< =
+ëë< =
 }
-îî 
+íí 
 }
-ïï 
+ìì 
 }
-ññ 
+îî 
 }
-óó 	
+ïï 	
 private
-ôô 
+óó 
 void
-ôô "
+óó "
 NotifyPlayersInLobby
-ôô )
+óó )
 (
-ôô) *
+óó) *
 Lobby
-ôô* /
+óó* /
 lobby
-ôô0 5
+óó0 5
 ,
-ôô5 6
+óó5 6
 string
-ôô7 =
+óó7 =
 	newPlayer
-ôô> G
+óó> G
 )
-ôôG H
+óóG H
 {
-öö 	
+òò 	
 string
-õõ 
+ôô 
 joinMessage
-õõ 
+ôô 
 =
-õõ  
+ôô  
 $"
-õõ! #
+ôô! #
 {
-õõ# $
+ôô# $
 	newPlayer
-õõ$ -
+ôô$ -
 }
-õõ- .
+ôô- .
 $str
-õõ. D
+ôô. D
 {
-õõD E
+ôôD E
 lobby
-õõE J
+ôôE J
 .
-õõJ K
+ôôJ K
 Name
-õõK O
+ôôK O
 }
-õõO P
+ôôO P
 $str
-õõP Q
+ôôP Q
 "
-õõQ R
+ôôQ R
 ;
-õõR S
+ôôR S
 Console
+öö 
+.
+öö 
+	WriteLine
+öö 
+(
+öö 
+joinMessage
+öö )
+)
+öö) *
+;
+öö* +
+foreach
 úú 
-.
-úú 
-	WriteLine
-úú 
 (
-úú 
-joinMessage
-úú )
-)
-úú) *
-;
-úú* +
-foreach
-ûû 
-(
-ûû 
+úú 
 var
-ûû 
+úú 
 player
-ûû 
+úú 
 in
-ûû  "
+úú  "
 lobby
-ûû# (
+úú# (
 .
-ûû( )
+úú( )
 Players
-ûû) 0
+úú) 0
 )
-ûû0 1
+úú0 1
 {
-üü 
+ùù 
 if
-†† 
+ûû 
 (
-†† 
+ûû 
 player
-†† 
+ûû 
 !=
-†† 
+ûû 
 	newPlayer
-†† '
+ûû '
 &&
-††( *
+ûû( *
 _connectedPlayers
-††+ <
+ûû+ <
 .
-††< =
+ûû< =
 TryGetValue
-††= H
+ûû= H
 (
-††H I
+ûûH I
 player
-††I O
+ûûI O
 ,
-††O P
+ûûO P
 out
-††Q T
+ûûQ T
 var
-††U X
+ûûU X
 callback
-††Y a
+ûûY a
 )
-††a b
+ûûa b
 )
-††b c
+ûûb c
 {
-°° 
+üü 
 try
-¢¢ 
+†† 
 {
-££ 
+°° 
 callback
-§§  
+¢¢  
 .
-§§  ! 
+¢¢  ! 
 NotifyPlayerJoined
-§§! 3
+¢¢! 3
 (
-§§3 4
+¢¢3 4
 	newPlayer
-§§4 =
+¢¢4 =
 ,
-§§= >
+¢¢= >
 lobby
-§§? D
+¢¢? D
 .
-§§D E
+¢¢D E
 LobbyId
-§§E L
+¢¢E L
 )
-§§L M
+¢¢L M
 ;
-§§M N
+¢¢M N
 callback
-••  
+££  
 .
-••  !'
+££  !'
 NotifyPlayerJoinedMessage
-••! :
+££! :
 (
-••: ;
+££: ;
 joinMessage
-••; F
+££; F
 )
-••F G
+££F G
 ;
-••G H
+££G H
 }
-¶¶ 
+§§ 
 catch
-ßß 
+•• 
 (
-ßß 
+•• 
 	Exception
-ßß $
+•• $
 ex
-ßß% '
+••% '
 )
-ßß' (
+••' (
 {
-®® 
+¶¶ 
 Console
-©© 
+ßß 
 .
-©©  
+ßß  
 	WriteLine
-©©  )
+ßß  )
 (
-©©) *
+ßß) *
 $"
-©©* ,
+ßß* ,
 $str
-©©, C
+ßß, C
 {
-©©C D
+ßßC D
 player
-©©D J
+ßßD J
 }
-©©J K
+ßßJ K
 $str
-©©K M
+ßßK M
 {
-©©M N
+ßßM N
 ex
-©©N P
+ßßN P
 .
-©©P Q
+ßßP Q
 Message
-©©Q X
+ßßQ X
 }
-©©X Y
+ßßX Y
 "
-©©Y Z
+ßßY Z
 )
-©©Z [
+ßßZ [
 ;
-©©[ \$
+ßß[ \$
 HandleClientDisconnect
-™™ .
+®® .
 (
-™™. /
+®®. /
 player
-™™/ 5
+®®/ 5
 )
-™™5 6
+®®5 6
 ;
-™™6 7
+®®6 7
 }
-´´ 
+©© 
 }
-¨¨ 
+™™ 
 }
-≠≠ 
+´´ 
 }
-ÆÆ 	
+¨¨ 	
 private
-∞∞ 
+ÆÆ 
 void
-∞∞ 
+ÆÆ 
 NotifyPlayerLeft
-∞∞ %
+ÆÆ %
 (
-∞∞% &
+ÆÆ% &
 Lobby
-∞∞& +
+ÆÆ& +
 lobby
-∞∞, 1
+ÆÆ, 1
 ,
-∞∞1 2
+ÆÆ1 2
 string
-∞∞3 9
+ÆÆ3 9
 
 playerLeft
-∞∞: D
+ÆÆ: D
 )
-∞∞D E
+ÆÆD E
 {
-±± 	
+ØØ 	
 string
-≤≤ 
+∞∞ 
 leaveMessage
-≤≤ 
+∞∞ 
 =
-≤≤  !
+∞∞  !
 $"
-≤≤" $
+∞∞" $
 {
-≤≤$ %
+∞∞$ %
 
 playerLeft
-≤≤% /
+∞∞% /
 }
-≤≤/ 0
+∞∞/ 0
 $str
-≤≤0 D
+∞∞0 D
 {
-≤≤D E
+∞∞D E
 lobby
-≤≤E J
+∞∞E J
 .
-≤≤J K
+∞∞J K
 Name
-≤≤K O
+∞∞K O
 }
-≤≤O P
+∞∞O P
 $str
-≤≤P Q
+∞∞P Q
 "
-≤≤Q R
+∞∞Q R
 ;
-≤≤R S
+∞∞R S
 Console
-≥≥ 
+±± 
 .
-≥≥ 
+±± 
 	WriteLine
-≥≥ 
+±± 
 (
-≥≥ 
+±± 
 leaveMessage
-≥≥ *
+±± *
 )
-≥≥* +
+±±* +
 ;
-≥≥+ ,
+±±+ ,
 foreach
-µµ 
+≥≥ 
 (
-µµ 
+≥≥ 
 var
-µµ 
+≥≥ 
 player
-µµ 
+≥≥ 
 in
-µµ  "
+≥≥  "
 lobby
-µµ# (
+≥≥# (
 .
-µµ( )
+≥≥( )
 Players
-µµ) 0
+≥≥) 0
 )
-µµ0 1
+≥≥0 1
 {
-∂∂ 
+¥¥ 
 if
-∑∑ 
+µµ 
 (
-∑∑ 
+µµ 
 player
-∑∑ 
+µµ 
 !=
-∑∑ 
+µµ 
 
 playerLeft
-∑∑ (
+µµ (
 &&
-∑∑) +
+µµ) +
 _connectedPlayers
-∑∑, =
+µµ, =
 .
-∑∑= >
+µµ= >
 TryGetValue
-∑∑> I
+µµ> I
 (
-∑∑I J
+µµI J
 player
-∑∑J P
+µµJ P
 ,
-∑∑P Q
+µµP Q
 out
-∑∑R U
+µµR U
 var
-∑∑V Y
+µµV Y
 callback
-∑∑Z b
+µµZ b
 )
-∑∑b c
+µµb c
 )
-∑∑c d
+µµc d
 {
-∏∏ 
+∂∂ 
 try
-ππ 
+∑∑ 
 {
-∫∫ 
+∏∏ 
 callback
-ªª  
+ππ  
 .
-ªª  !
+ππ  !
 NotifyPlayerLeft
-ªª! 1
+ππ! 1
 (
-ªª1 2
+ππ1 2
 
 playerLeft
-ªª2 <
+ππ2 <
 ,
-ªª< =
+ππ< =
 lobby
-ªª> C
+ππ> C
 .
-ªªC D
+ππC D
 LobbyId
-ªªD K
+ππD K
 )
-ªªK L
+ππK L
 ;
-ªªL M
+ππL M
 callback
-ºº  
+∫∫  
 .
-ºº  !%
+∫∫  !%
 NotifyPlayerLeftMessage
-ºº! 8
+∫∫! 8
 (
-ºº8 9
+∫∫8 9
 leaveMessage
-ºº9 E
+∫∫9 E
 )
-ººE F
+∫∫E F
 ;
-ººF G
+∫∫F G
 }
-ΩΩ 
+ªª 
 catch
-ææ 
+ºº 
 (
-ææ 
+ºº 
 	Exception
-ææ $
+ºº $
 ex
-ææ% '
+ºº% '
 )
-ææ' (
+ºº' (
 {
-øø 
+ΩΩ 
 Console
-¿¿ 
+ææ 
 .
-¿¿  
+ææ  
 	WriteLine
-¿¿  )
+ææ  )
 (
-¿¿) *
+ææ) *
 $"
-¿¿* ,
+ææ* ,
 $str
-¿¿, C
+ææ, C
 {
-¿¿C D
+ææC D
 player
-¿¿D J
+ææD J
 }
-¿¿J K
+ææJ K
 $str
-¿¿K M
+ææK M
 {
-¿¿M N
+ææM N
 ex
-¿¿N P
+ææN P
 .
-¿¿P Q
+ææP Q
 Message
-¿¿Q X
+ææQ X
 }
-¿¿X Y
+ææX Y
 "
-¿¿Y Z
+ææY Z
 )
-¿¿Z [
+ææZ [
 ;
-¿¿[ \$
+ææ[ \$
 HandleClientDisconnect
-¡¡ .
+øø .
 (
-¡¡. /
+øø. /
 player
-¡¡/ 5
+øø/ 5
 )
-¡¡5 6
+øø5 6
 ;
-¡¡6 7
+øø6 7
 }
-¬¬ 
+¿¿ 
 }
-√√ 
+¡¡ 
 }
-ƒƒ 
+¬¬ 
 }
-≈≈ 	
+√√ 	
 public
-«« 
+≈≈ 
 List
-«« 
+≈≈ 
 <
-«« 
+≈≈ 
 LobbyDTO
-«« 
+≈≈ 
 >
-«« 
+≈≈ 
 GetAllLobbies
-«« +
+≈≈ +
 (
-««+ ,
+≈≈+ ,
 )
-««, -
+≈≈, -
 {
-»» 	
+∆∆ 	
 return
-…… 
+«« 
 _activeLobbies
-…… !
+«« !
 .
-……! "
+««! "
 Values
-……" (
+««" (
 .
-……( )
+««( )
 Select
-……) /
+««) /
 (
-……/ 0
+««/ 0
 lobby
-……0 5
+««0 5
 =>
-……6 8
+««6 8
 new
-……9 <
+««9 <
 LobbyDTO
-……= E
+««= E
 {
-   
+»» 
 LobbyId
-ÀÀ 
+…… 
 =
-ÀÀ 
+…… 
 lobby
-ÀÀ 
+…… 
 .
-ÀÀ  
+……  
 LobbyId
-ÀÀ  '
+……  '
 ,
-ÀÀ' (
+……' (
 Name
-ÃÃ 
+   
 =
-ÃÃ 
+   
 lobby
-ÃÃ 
+   
 .
-ÃÃ 
+   
 Name
-ÃÃ !
+   !
 ,
-ÃÃ! "
+  ! "
 	IsPrivate
-ÕÕ 
+ÀÀ 
 =
-ÕÕ 
+ÀÀ 
 lobby
-ÕÕ !
+ÀÀ !
 .
-ÕÕ! "
+ÀÀ! "
 	IsPrivate
-ÕÕ" +
+ÀÀ" +
 ,
-ÕÕ+ ,
+ÀÀ+ ,
 CurrentPlayers
-ŒŒ 
+ÃÃ 
 =
-ŒŒ  
+ÃÃ  
 lobby
-ŒŒ! &
+ÃÃ! &
 .
-ŒŒ& '
+ÃÃ& '
 Players
-ŒŒ' .
+ÃÃ' .
 .
-ŒŒ. /
+ÃÃ. /
 Count
-ŒŒ/ 4
+ÃÃ/ 4
 ,
-ŒŒ4 5
+ÃÃ4 5
 
 MaxPlayers
-œœ 
+ÕÕ 
 =
-œœ 
+ÕÕ 
 lobby
-œœ "
+ÕÕ "
 .
-œœ" #
+ÕÕ" #
 
 MaxPlayers
-œœ# -
+ÕÕ# -
 ,
-œœ- .
+ÕÕ- .
 Host
-–– 
+ŒŒ 
 =
-–– 
+ŒŒ 
 lobby
-–– 
+ŒŒ 
 .
-–– 
+ŒŒ 
 Host
-–– !
+ŒŒ !
 ,
-––! "
+ŒŒ! "
 Players
-—— 
+œœ 
 =
-—— 
+œœ 
 new
-—— 
+œœ 
 List
-—— "
+œœ "
 <
-——" #
+œœ" #
 string
-——# )
+œœ# )
 >
-——) *
+œœ) *
 (
-——* +
+œœ* +
 lobby
-——+ 0
+œœ+ 0
 .
-——0 1
+œœ0 1
 Players
-——1 8
+œœ1 8
 )
-——8 9
+œœ8 9
 }
-““ 
+–– 
 )
-““ 
+–– 
 .
-““ 
+–– 
 ToList
-““ 
+–– 
 (
-““ 
+–– 
 )
-““ 
+–– 
 ;
-““ 
+–– 
 }
-”” 	
+—— 	
 public
-’’ 
+”” 
 LobbyResponse
-’’ 
+”” 
 
 KickPlayer
-’’ '
+”” '
 (
-’’' (
+””' (
 string
-’’( .
+””( .
 lobbyId
-’’/ 6
+””/ 6
 ,
-’’6 7
+””6 7
 string
-’’8 >
+””8 >
 hostUsername
-’’? K
+””? K
 ,
-’’K L
+””K L
 string
-’’M S
+””M S
 targetUsername
-’’T b
+””T b
 )
-’’b c
+””b c
 {
-÷÷ 	
+‘‘ 	
 if
-◊◊ 
+’’ 
 (
-◊◊ 
+’’ 
 !
-◊◊ 
+’’ 
 _activeLobbies
-◊◊ 
+’’ 
 .
-◊◊  
+’’  
 TryGetValue
-◊◊  +
+’’  +
 (
-◊◊+ ,
+’’+ ,
 lobbyId
-◊◊, 3
+’’, 3
 ,
-◊◊3 4
+’’3 4
 out
-◊◊5 8
+’’5 8
 var
-◊◊9 <
+’’9 <
 lobby
-◊◊= B
+’’= B
 )
-◊◊B C
+’’B C
 )
-◊◊C D
+’’C D
 {
-ÿÿ 
+÷÷ 
 return
-ŸŸ 
+◊◊ 
 LobbyResponse
-ŸŸ $
+◊◊ $
 .
-ŸŸ$ %
+◊◊$ %
 Failure
-ŸŸ% ,
+◊◊% ,
 (
-ŸŸ, -
+◊◊, -
 ErrorMessages
-ŸŸ- :
+◊◊- :
 .
-ŸŸ: ;
+◊◊: ;
 LobbyNotFound
-ŸŸ; H
+◊◊; H
 )
-ŸŸH I
+◊◊H I
 ;
-ŸŸI J
+◊◊I J
 }
-⁄⁄ 
+ÿÿ 
 if
-‹‹ 
+⁄⁄ 
 (
-‹‹ 
+⁄⁄ 
 lobby
-‹‹ 
+⁄⁄ 
 .
-‹‹ 
+⁄⁄ 
 Host
-‹‹ 
+⁄⁄ 
 !=
-‹‹ 
+⁄⁄ 
 hostUsername
-‹‹ *
+⁄⁄ *
 )
-‹‹* +
+⁄⁄* +
 {
-›› 
+€€ 
 return
-ﬁﬁ 
+‹‹ 
 LobbyResponse
-ﬁﬁ $
+‹‹ $
 .
-ﬁﬁ$ %
+‹‹$ %
 Failure
-ﬁﬁ% ,
+‹‹% ,
 (
-ﬁﬁ, -
+‹‹, -
 ErrorMessages
-ﬁﬁ- :
+‹‹- :
 .
-ﬁﬁ: ;
+‹‹: ;
 NotLobbyHost
-ﬁﬁ; G
+‹‹; G
 )
-ﬁﬁG H
+‹‹G H
 ;
-ﬁﬁH I
+‹‹H I
 }
-ﬂﬂ 
+›› 
 if
-·· 
+ﬂﬂ 
 (
-·· 
+ﬂﬂ 
 !
-·· 
+ﬂﬂ 
 lobby
-·· 
+ﬂﬂ 
 .
-·· 
+ﬂﬂ 
 Players
-·· 
+ﬂﬂ 
 .
-·· 
+ﬂﬂ 
 Contains
-·· '
+ﬂﬂ '
 (
-··' (
+ﬂﬂ' (
 targetUsername
-··( 6
+ﬂﬂ( 6
 )
-··6 7
+ﬂﬂ6 7
 )
-··7 8
+ﬂﬂ7 8
 {
-‚‚ 
+‡‡ 
 return
-„„ 
+·· 
 LobbyResponse
-„„ $
+·· $
 .
-„„$ %
+··$ %
 Failure
-„„% ,
+··% ,
 (
-„„, -
+··, -
 ErrorMessages
-„„- :
+··- :
 .
-„„: ;
+··: ;
 PlayerNotInLobby
-„„; K
+··; K
 )
-„„K L
+··K L
 ;
-„„L M
+··L M
 }
-‰‰ 
+‚‚ 
 lobby
-ÊÊ 
+‰‰ 
 .
-ÊÊ 
+‰‰ 
 RemovePlayer
-ÊÊ 
+‰‰ 
 (
-ÊÊ 
+‰‰ 
 targetUsername
-ÊÊ -
+‰‰ -
 )
-ÊÊ- .
+‰‰- .
 ;
-ÊÊ. /
+‰‰. /
 _connectedPlayers
-ÁÁ 
+ÂÂ 
 .
-ÁÁ 
+ÂÂ 
 	TryRemove
-ÁÁ '
+ÂÂ '
 (
-ÁÁ' (
+ÂÂ' (
 targetUsername
-ÁÁ( 6
+ÂÂ( 6
 ,
-ÁÁ6 7
+ÂÂ6 7
 out
-ÁÁ8 ;
+ÂÂ8 ;
 _
-ÁÁ< =
+ÂÂ< =
 )
-ÁÁ= >
+ÂÂ= >
 ;
-ÁÁ> ?
+ÂÂ> ?
 NotifyPlayerLeft
-ÈÈ 
+ÁÁ 
 (
-ÈÈ 
+ÁÁ 
 lobby
-ÈÈ "
+ÁÁ "
 ,
-ÈÈ" #
+ÁÁ" #
 targetUsername
-ÈÈ$ 2
+ÁÁ$ 2
 )
-ÈÈ2 3
+ÁÁ2 3
 ;
-ÈÈ3 4
+ÁÁ3 4
 var
-ÎÎ 
+ÈÈ 
 lobbyDto
-ÎÎ 
+ÈÈ 
 =
-ÎÎ 
+ÈÈ 
 new
-ÎÎ 
+ÈÈ 
 LobbyDTO
-ÎÎ '
+ÈÈ '
 {
-ÏÏ 
+ÍÍ 
 LobbyId
-ÌÌ 
+ÎÎ 
 =
-ÌÌ 
+ÎÎ 
 lobby
-ÌÌ 
+ÎÎ 
 .
-ÌÌ  
+ÎÎ  
 LobbyId
-ÌÌ  '
+ÎÎ  '
 ,
-ÌÌ' (
+ÎÎ' (
 Name
-ÓÓ 
+ÏÏ 
 =
-ÓÓ 
+ÏÏ 
 lobby
-ÓÓ 
+ÏÏ 
 .
-ÓÓ 
+ÏÏ 
 Name
-ÓÓ !
+ÏÏ !
 ,
-ÓÓ! "
+ÏÏ! "
 	IsPrivate
-ÔÔ 
+ÌÌ 
 =
-ÔÔ 
+ÌÌ 
 lobby
-ÔÔ !
+ÌÌ !
 .
-ÔÔ! "
+ÌÌ! "
 	IsPrivate
-ÔÔ" +
+ÌÌ" +
 ,
-ÔÔ+ ,
+ÌÌ+ ,
 CurrentPlayers
- 
+ÓÓ 
 =
-  
+ÓÓ  
 lobby
-! &
+ÓÓ! &
 .
-& '
+ÓÓ& '
 Players
-' .
+ÓÓ' .
 .
-. /
+ÓÓ. /
 Count
-/ 4
+ÓÓ/ 4
 ,
-4 5
+ÓÓ4 5
 
 MaxPlayers
-ÒÒ 
+ÔÔ 
 =
-ÒÒ 
+ÔÔ 
 lobby
-ÒÒ "
+ÔÔ "
 .
-ÒÒ" #
+ÔÔ" #
 
 MaxPlayers
-ÒÒ# -
+ÔÔ# -
 ,
-ÒÒ- .
+ÔÔ- .
 Host
-ÚÚ 
+ 
 =
-ÚÚ 
+ 
 lobby
-ÚÚ 
+ 
 .
-ÚÚ 
+ 
 Host
-ÚÚ !
+ !
 ,
-ÚÚ! "
+! "
 Players
-ÛÛ 
+ÒÒ 
 =
-ÛÛ 
+ÒÒ 
 new
-ÛÛ 
+ÒÒ 
 List
-ÛÛ "
+ÒÒ "
 <
-ÛÛ" #
+ÒÒ" #
 string
-ÛÛ# )
+ÒÒ# )
 >
-ÛÛ) *
+ÒÒ) *
 (
-ÛÛ* +
+ÒÒ* +
 lobby
-ÛÛ+ 0
+ÒÒ+ 0
 .
-ÛÛ0 1
+ÒÒ0 1
 Players
-ÛÛ1 8
+ÒÒ1 8
 )
-ÛÛ8 9
+ÒÒ8 9
 }
-ÙÙ 
+ÚÚ 
 ;
-ÙÙ 
+ÚÚ 
 return
-ˆˆ 
+ÙÙ 
 LobbyResponse
-ˆˆ  
+ÙÙ  
 .
-ˆˆ  !
+ÙÙ  !
 SuccessResult
-ˆˆ! .
+ÙÙ! .
 (
-ˆˆ. /
+ÙÙ. /
 lobbyDto
-ˆˆ/ 7
+ÙÙ/ 7
 )
-ˆˆ7 8
+ÙÙ7 8
 ;
-ˆˆ8 9
+ÙÙ8 9
 }
-˜˜ 	
+ıı 	
 public
-¯¯ 
+˜˜ 
 OperationResponse
-¯¯  
+˜˜  
 	StartGame
-¯¯! *
+˜˜! *
 (
-¯¯* +
+˜˜* +
 string
-¯¯+ 1
+˜˜+ 1
 lobbyId
-¯¯2 9
+˜˜2 9
 ,
-¯¯9 :
+˜˜9 :
 string
-¯¯; A
+˜˜; A
 hostUsername
-¯¯B N
+˜˜B N
 )
-¯¯N O
+˜˜N O
 {
-˘˘ 	
+¯¯ 	
 if
-˙˙ 
+˘˘ 
 (
-˙˙ 
+˘˘ 
 !
-˙˙ 
+˘˘ 
 _activeLobbies
-˙˙ 
+˘˘ 
 .
-˙˙  
+˘˘  
 TryGetValue
-˙˙  +
+˘˘  +
 (
-˙˙+ ,
+˘˘+ ,
 lobbyId
-˙˙, 3
+˘˘, 3
 ,
-˙˙3 4
+˘˘3 4
 out
-˙˙5 8
+˘˘5 8
 var
-˙˙9 <
+˘˘9 <
 lobby
-˙˙= B
+˘˘= B
 )
-˙˙B C
+˘˘B C
 )
-˙˙C D
+˘˘C D
 {
-˚˚ 
+˙˙ 
 return
-¸¸ 
+˚˚ 
 OperationResponse
-¸¸ (
+˚˚ (
 .
-¸¸( )
+˚˚( )
 Failure
-¸¸) 0
+˚˚) 0
 (
-¸¸0 1
-$str
-¸¸1 C
-)
-¸¸C D
-;
-¸¸D E
-}
-˝˝ 
-if
-ˇˇ 
-(
-ˇˇ 
-lobby
-ˇˇ 
+˚˚0 1
+LobbyMessages
+˚˚1 >
 .
-ˇˇ 
+˚˚> ?
+LobbyNotFound
+˚˚? L
+)
+˚˚L M
+;
+˚˚M N
+}
+¸¸ 
+if
+˛˛ 
+(
+˛˛ 
+lobby
+˛˛ 
+.
+˛˛ 
 Host
-ˇˇ 
+˛˛ 
 !=
-ˇˇ 
+˛˛ 
 hostUsername
-ˇˇ *
+˛˛ *
 )
-ˇˇ* +
+˛˛* +
 {
-ÄÄ 
+ˇˇ 
 return
-ÅÅ 
+ÄÄ 
 OperationResponse
-ÅÅ (
+ÄÄ (
 .
-ÅÅ( )
+ÄÄ( )
 Failure
-ÅÅ) 0
+ÄÄ) 0
 (
-ÅÅ0 1
-$str
-ÅÅ1 T
-)
-ÅÅT U
-;
-ÅÅU V
-}
-ÇÇ 
-if
-ÑÑ 
-(
-ÑÑ 
-lobby
-ÑÑ 
+ÄÄ0 1
+LobbyMessages
+ÄÄ1 >
 .
-ÑÑ 
+ÄÄ> ?
+OnlyHostStart
+ÄÄ? L
+)
+ÄÄL M
+;
+ÄÄM N
+}
+ÅÅ 
+if
+ÉÉ 
+(
+ÉÉ 
+lobby
+ÉÉ 
+.
+ÉÉ 
 Players
-ÑÑ 
+ÉÉ 
 .
-ÑÑ 
+ÉÉ 
 Count
-ÑÑ #
+ÉÉ #
 <
-ÑÑ$ %
+ÉÉ$ %
 $num
-ÑÑ& '
+ÉÉ& '
 )
-ÑÑ' (
+ÉÉ' (
 {
-ÖÖ 
+ÑÑ 
 return
-ÜÜ 
+ÖÖ 
 OperationResponse
-ÜÜ (
+ÖÖ (
 .
-ÜÜ( )
+ÖÖ( )
 Failure
-ÜÜ) 0
+ÖÖ) 0
 (
-ÜÜ0 1
-$str
-ÜÜ1 X
+ÖÖ0 1
+LobbyMessages
+ÖÖ1 >
+.
+ÖÖ> ?
+NotEnoughPlayer
+ÖÖ? N
 )
-ÜÜX Y
+ÖÖN O
 ;
-ÜÜY Z
+ÖÖO P
 }
-áá 
-bool
-ââ 
-success
-ââ 
-=
-ââ $
-NotifyPlayersStartGame
-ââ 1
-(
-ââ1 2
-lobby
-ââ2 7
-)
-ââ7 8
-;
-ââ8 9
+ÜÜ 
 if
-ãã 
+ââ 
 (
-ãã 
+ââ 
 !
-ãã 
-success
-ãã 
+ââ $
+NotifyPlayersStartGame
+ââ '
+(
+ââ' (
+lobby
+ââ( -
 )
-ãã 
+ââ- .
+)
+ââ. /
 {
+ää 
+return
+ãã 
+OperationResponse
+ãã (
+.
+ãã( )
+Failure
+ãã) 0
+(
+ãã0 1
+LobbyMessages
+ãã1 >
+.
+ãã> ?!
+NotificationMissing
+ãã? R
+)
+ããR S
+;
+ããS T
+}
 åå 
 return
-çç 
+éé 
 OperationResponse
-çç (
+éé $
 .
-çç( )
-Failure
-çç) 0
-(
-çç0 1
-$str
-çç1 t
-)
-ççt u
-;
-ççu v
-}
-éé 
-return
-êê 
-OperationResponse
-êê $
-.
-êê$ %
+éé$ %
 SuccessResult
-êê% 2
+éé% 2
 (
-êê2 3
-$str
-êê3 O
-)
-êêO P
-;
-êêP Q
-}
-ëë 	
-private
-ìì 
-bool
-ìì $
-NotifyPlayersStartGame
-ìì +
-(
-ìì+ ,
-Lobby
-ìì, 1
-lobby
-ìì2 7
-)
-ìì7 8
-{
-îî 	
-bool
-ïï (
-allNotificationsSuccessful
-ïï +
-=
-ïï, -
-true
-ïï. 2
-;
-ïï2 3
-foreach
-óó 
-(
-óó 
-var
-óó 
-player
-óó 
-in
-óó  "
-lobby
-óó# (
+éé2 3
+LobbyMessages
+éé3 @
 .
-óó( )
-Players
-óó) 0
+éé@ A
+GameStarted
+ééA L
 )
-óó0 1
+ééL M
+;
+ééM N
+}
+èè 	
+private
+ëë 
+bool
+ëë $
+NotifyPlayersStartGame
+ëë +
+(
+ëë+ ,
+Lobby
+ëë, 1
+lobby
+ëë2 7
+)
+ëë7 8
 {
-òò 
+íí 	
+bool
+ìì (
+allNotificationsSuccessful
+ìì +
+=
+ìì, -
+true
+ìì. 2
+;
+ìì2 3
+foreach
+ïï 
+(
+ïï 
+var
+ïï 
+player
+ïï 
+in
+ïï  "
+lobby
+ïï# (
+.
+ïï( )
+Players
+ïï) 0
+)
+ïï0 1
+{
+ññ 
+if
+óó 
+(
+óó 
+player
+óó 
+==
+óó 
+lobby
+óó #
+.
+óó# $
+Host
+óó$ (
+)
+óó( )
+continue
+óó* 2
+;
+óó2 3
 if
 ôô 
 (
-ôô 
-player
-ôô 
-==
-ôô 
-lobby
-ôô #
-.
-ôô# $
-Host
-ôô$ (
-)
-ôô( )
-continue
-ôô* 2
-;
-ôô2 3
-if
-õõ 
-(
-õõ 
+ôô 
 _connectedPlayers
-õõ %
+ôô %
 .
-õõ% &
+ôô% &
 TryGetValue
-õõ& 1
+ôô& 1
 (
-õõ1 2
+ôô1 2
 player
-õõ2 8
+ôô2 8
 ,
-õõ8 9
+ôô8 9
 out
-õõ: =
+ôô: =
 var
-õõ> A
+ôô> A
 callback
-õõB J
+ôôB J
 )
-õõJ K
+ôôJ K
 )
-õõK L
+ôôK L
 {
-úú 
+öö 
 try
-ùù 
+õõ 
 {
-ûû 
-Console
-üü 
-.
-üü  
-	WriteLine
-üü  )
-(
-üü) *
-$"
-üü* ,
-$str
-üü, =
-{
-üü= >
-player
-üü> D
-}
-üüD E
-$str
-üüE a
-{
-üüa b
-lobby
-üüb g
-.
-üüg h
-LobbyId
-üüh o
-}
-üüo p
-"
-üüp q
-)
-üüq r
-;
-üür s
+úú 
 callback
-††  
+ùù  
 .
-††  !#
+ùù  !#
 StartGameNotification
-††! 6
+ùù! 6
 (
-††6 7
+ùù6 7
 lobby
-††7 <
+ùù7 <
 .
-††< =
+ùù< =
 LobbyId
-††= D
+ùù= D
 )
-††D E
+ùùD E
 ;
-††E F
+ùùE F
 }
-°° 
+ûû 
 catch
-¢¢ 
+üü 
 (
-¢¢ 
+üü 
 	Exception
-¢¢ $
+üü $
 ex
-¢¢% '
+üü% '
 )
-¢¢' (
+üü' (
 {
-££ 
+†† 
 Console
-§§ 
+°° 
 .
-§§  
+°°  
 	WriteLine
-§§  )
+°°  )
 (
-§§) *
+°°) *
 $"
-§§* ,
+°°* ,
 $str
-§§, C
+°°, C
 {
-§§C D
+°°C D
 player
-§§D J
+°°D J
 }
-§§J K
+°°J K
 $str
-§§K [
+°°K [
 {
-§§[ \
+°°[ \
 ex
-§§\ ^
+°°\ ^
 .
-§§^ _
+°°^ _
 Message
-§§_ f
+°°_ f
 }
-§§f g
+°°f g
 "
-§§g h
+°°g h
 )
-§§h i
+°°h i
 ;
-§§i j$
+°°i j$
 HandleClientDisconnect
-•• .
+¢¢ .
 (
-••. /
+¢¢. /
 player
-••/ 5
+¢¢/ 5
 )
-••5 6
+¢¢5 6
 ;
-••6 7(
+¢¢6 7(
 allNotificationsSuccessful
-¶¶ 2
+££ 2
 =
-¶¶3 4
+££3 4
 false
-¶¶5 :
+££5 :
 ;
-¶¶: ;
+££: ;
 }
-ßß 
+§§ 
 }
-®® 
+•• 
 }
-©© 
+¶¶ 
 return
-´´ (
+ßß (
 allNotificationsSuccessful
-´´ -
+ßß -
 ;
-´´- .
+ßß- .
 }
-¨¨ 	
+®® 	
 }
-ÆÆ 
-}ØØ èK
+™™ 
+}´´ î<
 dC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\GameService.cs
-	namespace 	
-Service
+	namespace 	
+Service
  
-. 
+. 
 
-Implements 
-{ 
-[ 
-ServiceBehavior 
-( 
-InstanceContextMode (
-=) *
-InstanceContextMode+ >
-.> ?
+Implements 
+{ 
+[ 
+ServiceBehavior 
+( 
+InstanceContextMode (
+=) *
+InstanceContextMode+ >
+.> ?
 
-PerSession? I
-,I J
-ConcurrencyModeK Z
-=[ \
-ConcurrencyMode] l
-.l m
-Multiplem u
-)u v
-]v w
-public 
+PerSession? I
+,I J
+ConcurrencyModeK Z
+=[ \
+ConcurrencyMode] l
+.l m
+Multiplem u
+)u v
+]v w
+public 
 
-class 
-GameService 
-: 
-IGameService +
-{ 
-private 
-static 
-readonly  
-ConcurrentDictionary  4
-<4 5
-string5 ;
-,; <
-GameSession= H
->H I
-_activeGamesJ V
-=W X
-newY \ 
-ConcurrentDictionary] q
-<q r
-stringr x
-,x y
-GameSession	z Ö
+class 
+GameService 
+: 
+IGameService +
+{ 
+private 
+static 
+readonly  
+ConcurrentDictionary  4
+<4 5
+string5 ;
+,; <
+GameSession= H
+>H I
+_activeGamesJ V
+=W X
+newY \ 
+ConcurrentDictionary] q
+<q r
+stringr x
+,x y
+GameSession	z Ö
 >
-Ö Ü
+Ö Ü
 (
-Ü á
+Ü á
 )
-á à
+á à
 ;
-à â
-public 
-OperationResponse  
-InitializeGame! /
-(/ 0
-string0 6
-lobbyId7 >
-,> ?
-List@ D
-<D E
-stringE K
->K L
-playersM T
-)T U
-{ 	
-CustomLogger 
-. 
-Info 
-( 
-$"  
-$str  O
-{O P
-lobbyIdP W
-}W X
-$strX h
-{h i
-stringi o
-.o p
-Joinp t
-(t u
-$stru y
-,y z
-players	{ Ç
-)
-Ç É
-}
-É Ñ
-"
-Ñ Ö
-)
-Ö Ü
-;
-Ü á
+à â
+public 
+OperationResponse  
+InitializeGame! /
+(/ 0
+string0 6
+lobbyId7 >
+,> ?
+List@ D
+<D E
+stringE K
+>K L
+playersM T
+)T U
+{ 	
 if 
 ( 
 _activeGames 
@@ -8129,446 +8193,345 @@ PerSession? I
 lobbyId) 0
 )0 1
 )1 2
-{ 
-CustomLogger 
-. 
-Warn !
-(! "
-$"" $
-$str$ Y
-{Y Z
-lobbyIdZ a
-}a b
-"b c
-)c d
-;d e
-return 
-OperationResponse (
-.( )
-Failure) 0
-(0 1
-$str1 V
-)V W
-;W X
-} 
-var 
-gameSession 
-= 
-new !
-GameSession" -
-(- .
-). /
-;/ 0
-foreach 
-( 
-var 
-player 
-in  "
-players# *
-)* +
-{ 
-try 
-{   
-gameSession!! 
-.!!  
-	AddPlayer!!  )
-(!!) *
-player!!* 0
-)!!0 1
-;!!1 2
-CustomLogger""  
-.""  !
-Info""! %
-(""% &
-$"""& (
-$str""( J
-{""J K
-player""K Q
-}""Q R
-$str""R _
-{""_ `
-lobbyId""` g
-}""g h
-"""h i
-)""i j
-;""j k
-}$$ 
-catch%% 
-(%% 
-	Exception%%  
-ex%%! #
-)%%# $
-{&& 
-return'' 
-OperationResponse'' ,
-.'', -
-Failure''- 4
-(''4 5
-$"''5 7
-$str''7 K
-{''K L
-player''L R
-}''R S
-$str''S U
-{''U V
-ex''V X
-.''X Y
-Message''Y `
-}''` a
-"''a b
-)''b c
-;''c d
-}(( 
-})) 
-_activeGames++ 
-[++ 
-lobbyId++  
-]++  !
-=++" #
-gameSession++$ /
-;++/ 0"
-PrintGameSessionsState,, "
-(,," #
-),,# $
-;,,$ %
-return.. 
-OperationResponse.. $
-...$ %
-SuccessResult..% 2
-(..2 3
-)..3 4
-;..4 5
-}// 	
-public11 
-OperationResponse11  
-SubmitInitialMatrix11! 4
-(114 5
-string115 ;
-lobbyId11< C
-,11C D
-string11E K
-player11L R
-,11R S
-GameBoardDTO11T `
-board11a f
-)11f g
-{22 	
-CustomLogger33 
-.33 
-Info33 
-(33 
-$"33  
-$str33  ]
-{33] ^
-player33^ d
-}33d e
-$str33e r
-{33r s
-lobbyId33s z
-}33z {
-"33{ |
-)33| }
-;33} ~
-if44 
-(44 
-!44 
-_activeGames44 
-.44 
-TryGetValue44 )
-(44) *
-lobbyId44* 1
-,441 2
-out443 6
-var447 :
-gameSession44; F
-)44F G
-)44G H
-{55 
-CustomLogger66 
-.66 
-Warn66 !
-(66! "
-$"66" $
-$str66$ e
-{66e f
-lobbyId66f m
-}66m n
-"66n o
-)66o p
-;66p q
-return77 
-OperationResponse77 (
-.77( )
-Failure77) 0
-(770 1
-$str771 J
-)77J K
-;77K L
-}88 
-try:: 
-{;; 
-gameSession<< 
-.<< 
-	SetMatrix<< %
-(<<% &
-player<<& ,
-,<<, -
-board<<. 3
-)<<3 4
-;<<4 5
-CustomLogger== 
-.== 
-Info== !
-(==! "
-$"==" $
-$str==$ V
-{==V W
-player==W ]
-}==] ^
-$str==^ m
-{==m n
-lobbyId==n u
-}==u v
-"==v w
-)==w x
-;==x y
-}?? 
-catch@@ 
-(@@ 
-	Exception@@ 
-ex@@ 
-)@@  
-{AA 
-CustomLoggerBB 
-.BB 
-ErrorBB "
-(BB" #
-$"BB# %
-$strBB% b
-{BBb c
-playerBBc i
-}BBi j
-$strBBj w
-{BBw x
-lobbyIdBBx 
-}	BB Ä
-"
-BBÄ Å
-,
-BBÅ Ç
-ex
-BBÉ Ö
-)
-BBÖ Ü
-;
-BBÜ á
-returnCC 
-OperationResponseCC (
-.CC( )
-FailureCC) 0
-(CC0 1
-$"CC1 3
-$strCC3 S
-{CCS T
-playerCCT Z
-}CCZ [
-$strCC[ ]
-{CC] ^
-exCC^ `
-.CC` a
-MessageCCa h
-}CCh i
-"CCi j
-)CCj k
-;CCk l
-}DD "
-PrintGameSessionsStateFF "
-(FF" #
-)FF# $
-;FF$ %
-returnII 
-OperationResponseII $
-.II$ %
-SuccessResultII% 2
-(II2 3
-)II3 4
-;II4 5
-}JJ 	
-publicLL 
-OperationResponseLL  
-	StartGameLL! *
-(LL* +
-stringLL+ 1
-lobbyIdLL2 9
-)LL9 :
-{MM 	
-ifNN 
-(NN 
-!NN 
-_activeGamesNN 
-.NN 
-TryGetValueNN )
-(NN) *
-lobbyIdNN* 1
-,NN1 2
-outNN3 6
-varNN7 :
-gameSessionNN; F
-)NNF G
-)NNG H
-{OO 
-returnPP 
-OperationResponsePP (
-.PP( )
-FailurePP) 0
-(PP0 1
-$strPP1 J
-)PPJ K
-;PPK L
-}QQ 
-ifSS 
-(SS 
-!SS 
-gameSessionSS 
-.SS 
-AreAllBoardsSetSS ,
-(SS, -
-)SS- .
-)SS. /
-{TT 
-returnUU 
-OperationResponseUU (
-.UU( )
-FailureUU) 0
-(UU0 1
-$strUU1 _
-)UU_ `
-;UU` a
-}VV 
-returnXX 
-OperationResponseXX $
-.XX$ %
-SuccessResultXX% 2
-(XX2 3
-)XX3 4
-;XX4 5
-}YY 	
-private[[ 
-void[[ "
-PrintGameSessionsState[[ +
-([[+ ,
-)[[, -
-{\\ 	
-Console]] 
-.]] 
-	WriteLine]] 
-(]] 
-$str]] E
-)]]E F
-;]]F G
-if__ 
-(__ 
-_activeGames__ 
-.__ 
-IsEmpty__ $
-)__$ %
-{`` 
-Consoleaa 
-.aa 
-	WriteLineaa !
-(aa! "
-$straa" <
-)aa< =
-;aa= >
-returnbb 
-;bb 
-}cc 
-foreachee 
-(ee 
-varee 
-lobbyee 
-inee !
-_activeGamesee" .
-)ee. /
-{ff 
-Consolegg 
-.gg 
-	WriteLinegg !
-(gg! "
-$"gg" $
-$strgg$ -
-{gg- .
-lobbygg. 3
-.gg3 4
-Keygg4 7
-}gg7 8
-"gg8 9
-)gg9 :
-;gg: ;
-varhh 
-gameSessionhh 
-=hh  !
-lobbyhh" '
-.hh' (
-Valuehh( -
-;hh- .
-foreachjj 
-(jj 
-varjj 
-playerjj #
-injj$ &
-gameSessionjj' 2
-.jj2 3
+{ 
+return 
+OperationResponse (
+.( )
+Failure) 0
+(0 1
+GameMessages1 =
+.= >
+GameAlredyExist> M
+)M N
+;N O
+} 
+var 
+gameSession 
+= 
+new !
+GameSession" -
+(- .
+). /
+;/ 0
+foreach 
+( 
+var 
+player 
+in  "
+players# *
+)* +
+{ 
+try 
+{ 
+gameSession   
+.    
+	AddPlayer    )
+(  ) *
+player  * 0
+)  0 1
+;  1 2
+}"" 
+catch## 
+(## 
+	Exception##  
+ex##! #
+)### $
+{$$ 
+CustomLogger%%  
+.%%  !
+Warn%%! %
+(%%% &
+ex%%& (
+.%%( )
+Message%%) 0
+)%%0 1
+;%%1 2
+return&& 
+OperationResponse&& ,
+.&&, -
+Failure&&- 4
+(&&4 5
+GameMessages&&5 A
+.&&A B
+CantAddingPlayer&&B R
+)&&R S
+;&&S T
+}'' 
+}(( 
+_activeGames)) 
+[)) 
+lobbyId))  
+]))  !
+=))" #
+gameSession))$ /
+;))/ 0"
+PrintGameSessionsState** "
+(**" #
+)**# $
+;**$ %
+return++ 
+OperationResponse++ $
+.++$ %
+SuccessResult++% 2
+(++2 3
+)++3 4
+;++4 5
+},, 	
+public.. 
+OperationResponse..  
+SubmitInitialMatrix..! 4
+(..4 5
+string..5 ;
+lobbyId..< C
+,..C D
+string..E K
+player..L R
+,..R S
+GameBoardDTO..T `
+board..a f
+)..f g
+{// 	
+if00 
+(00 
+!00 
+_activeGames00 
+.00 
+TryGetValue00 )
+(00) *
+lobbyId00* 1
+,001 2
+out003 6
+var007 :
+gameSession00; F
+)00F G
+)00G H
+{11 
+return22 
+OperationResponse22 (
+.22( )
+Failure22) 0
+(220 1
+GameMessages221 =
+.22= >
+GameNotFound22> J
+)22J K
+;22K L
+}33 
+try55 
+{66 
+gameSession77 
+.77 
+	SetMatrix77 %
+(77% &
+player77& ,
+,77, -
+board77. 3
+)773 4
+;774 5
+}99 
+catch:: 
+(:: 
+	Exception:: 
+ex:: 
+)::  
+{;; 
+CustomLogger<< 
+.<< 
+Warn<< !
+(<<! "
+ex<<" $
+.<<$ %
+Message<<% ,
+)<<, -
+;<<- .
+return== 
+OperationResponse== (
+.==( )
+Failure==) 0
+(==0 1
+GameMessages==1 =
+.=== >
+CantSummitMatrix==> N
+)==N O
+;==O P
+}>> "
+PrintGameSessionsState@@ "
+(@@" #
+)@@# $
+;@@$ %
+returnAA 
+OperationResponseAA $
+.AA$ %
+SuccessResultAA% 2
+(AA2 3
+)AA3 4
+;AA4 5
+}BB 	
+publicDD 
+OperationResponseDD  
+	StartGameDD! *
+(DD* +
+stringDD+ 1
+lobbyIdDD2 9
+)DD9 :
+{EE 	
+ifFF 
+(FF 
+!FF 
+_activeGamesFF 
+.FF 
+TryGetValueFF )
+(FF) *
+lobbyIdFF* 1
+,FF1 2
+outFF3 6
+varFF7 :
+gameSessionFF; F
+)FFF G
+)FFG H
+{GG 
+returnHH 
+OperationResponseHH (
+.HH( )
+FailureHH) 0
+(HH0 1
+GameMessagesHH1 =
+.HH= >
+GameNotFoundHH> J
+)HHJ K
+;HHK L
+}II 
+ifKK 
+(KK 
+!KK 
+gameSessionKK 
+.KK 
+AreAllBoardsSetKK ,
+(KK, -
+)KK- .
+)KK. /
+{LL 
+returnMM 
+OperationResponseMM (
+.MM( )
+FailureMM) 0
+(MM0 1
+GameMessagesMM1 =
+.MM= >%
+PlayerDontSummitGameBoardMM> W
+)MMW X
+;MMX Y
+}NN 
+returnPP 
+OperationResponsePP $
+.PP$ %
+SuccessResultPP% 2
+(PP2 3
+)PP3 4
+;PP4 5
+}QQ 	
+privateUU 
+voidUU "
+PrintGameSessionsStateUU +
+(UU+ ,
+)UU, -
+{VV 	
+ifWW 
+(WW 
+_activeGamesWW 
+.WW 
+IsEmptyWW $
+)WW$ %
+{XX 
+ConsoleYY 
+.YY 
+	WriteLineYY !
+(YY! "
+$strYY" <
+)YY< =
+;YY= >
+returnZZ 
+;ZZ 
+}[[ 
+foreach]] 
+(]] 
+var]] 
+lobby]] 
+in]] !
+_activeGames]]" .
+)]]. /
+{^^ 
+Console__ 
+.__ 
+	WriteLine__ !
+(__! "
+$"__" $
+$str__$ -
+{__- .
+lobby__. 3
+.__3 4
+Key__4 7
+}__7 8
+"__8 9
+)__9 :
+;__: ;
+var`` 
+gameSession`` 
+=``  !
+lobby``" '
+.``' (
+Value``( -
+;``- .
+foreachbb 
+(bb 
+varbb 
+playerbb #
+inbb$ &
+gameSessionbb' 2
+.bb2 3
 
-GetPlayersjj3 =
-(jj= >
-)jj> ?
-)jj? @
-{kk 
-varll 
-hasBoardll  
-=ll! "
-gameSessionll# .
-.ll. /
-GetPlayerBoardll/ =
-(ll= >
-playerll> D
-)llD E
-!=llF H
-nullllI M
-?llN O
-$strllP T
-:llU V
-$strllW [
-;ll[ \
-Consolemm 
-.mm 
-	WriteLinemm %
-(mm% &
-$"mm& (
-$strmm( 3
-{mm3 4
-playermm4 :
-}mm: ;
-$strmm; P
-{mmP Q
-hasBoardmmQ Y
-}mmY Z
-"mmZ [
-)mm[ \
-;mm\ ]
-}nn 
-}oo 
-Consoleqq 
-.qq 
-	WriteLineqq 
-(qq 
-$strqq E
-)qqE F
-;qqF G
-}rr 	
-}tt 
-}uu §∫
+GetPlayersbb3 =
+(bb= >
+)bb> ?
+)bb? @
+{cc 
+vardd 
+hasBoarddd  
+=dd! "
+gameSessiondd# .
+.dd. /
+GetPlayerBoarddd/ =
+(dd= >
+playerdd> D
+)ddD E
+!=ddF H
+nullddI M
+?ddN O
+$strddP T
+:ddU V
+$strddW [
+;dd[ \
+Consoleee 
+.ee 
+	WriteLineee %
+(ee% &
+$"ee& (
+$stree( 3
+{ee3 4
+playeree4 :
+}ee: ;
+$stree; P
+{eeP Q
+hasBoardeeQ Y
+}eeY Z
+"eeZ [
+)ee[ \
+;ee\ ]
+}ff 
+}gg 
+}hh 	
+}ii 
+}jj §∫
 jC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\FriendshipService.cs
 	namespace 	
 Service
@@ -8683,11 +8646,11 @@ Implements 
 .,, 
 Error,, "
 (,," #
-$str,,# %
-,,,% &
-ex,,' )
-),,) *
-;,,* +
+$str,,# 1
+,,,1 2
+ex,,3 5
+),,5 6
+;,,6 7
 return-- 
 OperationResponse-- (
 .--( )
@@ -10493,335 +10456,45 @@ Implements 
 Single? E
 )E F
 ]F G
-public 
+public 
 
-class 
-ChatService 
-: 
-IChatService +
-{ 
-private 
-readonly 
+class 
+ChatService 
+: 
+IChatService +
+{ 
+private 
+readonly 
 
-Dictionary #
-<# $
-string$ *
-,* + 
-IChatServiceCallback, @
->@ A
-_connectedUsersB Q
-=R S
-newT W
+Dictionary #
+<# $
+string$ *
+,* + 
+IChatServiceCallback, @
+>@ A
+_connectedUsersB Q
+=R S
+newT W
 
-DictionaryX b
-<b c
-stringc i
-,i j 
-IChatServiceCallbackk 
->	 Ä
+DictionaryX b
+<b c
+stringc i
+,i j 
+IChatServiceCallbackk 
+>	 Ä
 (
-Ä Å
+Ä Å
 )
-Å Ç
+Å Ç
 ;
-Ç É
-public 
-void 
-RegisterUser  
-(  !
-string! '
-username( 0
-)0 1
-{ 	
-var 
-callback 
-= 
-OperationContext +
-.+ ,
-Current, 3
-.3 4
-GetCallbackChannel4 F
-<F G 
-IChatServiceCallbackG [
->[ \
-(\ ]
-)] ^
-;^ _
-if 
-( 
-! 
-_connectedUsers  
-.  !
-ContainsKey! ,
-(, -
-username- 5
-)5 6
-)6 7
-{ 
-_connectedUsers 
-.  
-Add  #
-(# $
-username$ ,
-,, -
-callback. 6
-)6 7
-;7 8
-SendMessage 
-( 
-$str $
-,$ %
-$"& (
-{( )
-username) 1
-}1 2
-$str2 G
-"G H
-)H I
-;I J
-IContextChannel 
-contextChannel  .
-=/ 0
-(1 2
-IContextChannel2 A
-)A B
-callbackB J
-;J K
-contextChannel 
-. 
-Closed %
-+=& (
-() *
-sender* 0
-,0 1
-args2 6
-)6 7
-=>8 :
-DisconnectUser; I
-(I J
-usernameJ R
-)R S
-;S T
-contextChannel 
-. 
-Faulted &
-+=' )
-(* +
-sender+ 1
-,1 2
-args3 7
-)7 8
-=>9 ;
-DisconnectUser< J
-(J K
-usernameK S
-)S T
-;T U
-} 
-}   	
-public"" 
-void"" 
-DisconnectUser"" "
-(""" #
-string""# )
-username""* 2
-)""2 3
-{## 	
-if$$ 
-($$ 
-_connectedUsers$$ 
-.$$  
-ContainsKey$$  +
-($$+ ,
-username$$, 4
-)$$4 5
-)$$5 6
-{%% 
-_connectedUsers&& 
-.&&  
-Remove&&  &
-(&&& '
-username&&' /
-)&&/ 0
-;&&0 1
-SendMessage(( 
-((( 
-$str(( $
-,(($ %
-$"((& (
-{((( )
-username(() 1
-}((1 2
-$str((2 E
-"((E F
-)((F G
-;((G H
-})) 
-}** 	
-public,, 
-void,, 
-SendMessage,, 
-(,,  
-string,,  &
-username,,' /
-,,,/ 0
-string,,1 7
-message,,8 ?
-),,? @
-{-- 	
-string.. 
-fullMessage.. 
-=..  
-$"..! #
-{..# $
-username..$ ,
-}.., -
-$str..- /
-{../ 0
-message..0 7
-}..7 8
-"..8 9
-;..9 :
-foreach00 
-(00 
-var00 
-userCallback00 %
-in00& (
-_connectedUsers00) 8
-)008 9
-{11 
-try33 
-{44 
-if55 
-(55 
-userCallback55 $
-.55$ %
-Key55% (
-!=55) +
-username55, 4
-)554 5
-{66 
-userCallback99 $
-.99$ %
-Value99% *
-.99* +
-ReceiveMessage99+ 9
-(999 :
-fullMessage99: E
-)99E F
-;99F G
-}:: 
-};; 
-catch<< 
-(<< 
-	Exception<< $
-ex<<% '
-)<<' (
-{== 
-Console>> 
-.>>  
-	WriteLine>>  )
-(>>) *
-$">>* ,
-$str>>, E
-{>>E F
-username>>F N
-}>>N O
-$str>>O Q
-{>>Q R
-ex>>R T
-.>>T U
-Message>>U \
-}>>\ ]
-">>] ^
-)>>^ _
-;>>_ `
-}?? 
-}BB 
-}CC 	
-}DD 
-}EE ¥
-iC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\ChatLobbyService.cs
-	namespace
-
- 	
-Service
-
-
- 
-.
-
- 
-
-Implements
-
- 
-{ 
-[ 
-ServiceBehavior 
-( 
-InstanceContextMode (
-=) *
-InstanceContextMode+ >
-.> ?
-
-PerSession? I
-,I J
-ConcurrencyModeK Z
-=[ \
-ConcurrencyMode] l
-.l m
-Multiplem u
-)u v
-]v w
-public 
-
-class 
-ChatLobbyService !
-:" #
-IChatLobbyService$ 5
-{ 
-private 
-static 
-readonly  
-ConcurrentDictionary  4
-<4 5
-string5 ;
-,; < 
-ConcurrentDictionary= Q
-<Q R
-stringR X
-,X Y
-IChatLobbyCallbackZ l
->l m
->m n
-_lobbyUserso z
-= 
-new  
-ConcurrentDictionary %
-<% &
-string& ,
-,, - 
-ConcurrentDictionary. B
-<B C
-stringC I
-,I J
-IChatLobbyCallbackK ]
->] ^
->^ _
-(_ `
-)` a
-;a b
+Ç É
 public 
 void 
 RegisterUser  
 (  !
 string! '
 username( 0
-,0 1
-string2 8
-lobbyId9 @
-)@ A
+)0 1
 { 	
 var 
 callback 
@@ -10831,571 +10504,894 @@ PerSession? I
 Current, 3
 .3 4
 GetCallbackChannel4 F
-<F G
-IChatLobbyCallbackG Y
->Y Z
-(Z [
-)[ \
-;\ ]
+<F G 
+IChatServiceCallbackG [
+>[ \
+(\ ]
+)] ^
+;^ _
 if 
 ( 
-! 
-_lobbyUsers 
-. 
-ContainsKey (
-(( )
-lobbyId) 0
-)0 1
-)1 2
-{ 
-_lobbyUsers 
-[ 
-lobbyId #
-]# $
-=% &
-new' * 
-ConcurrentDictionary+ ?
-<? @
-string@ F
-,F G
-IChatLobbyCallbackH Z
->Z [
-([ \
-)\ ]
-;] ^
-} 
-_lobbyUsers 
-[ 
-lobbyId 
-]  
-[  !
-username! )
-]) *
-=+ ,
-callback- 5
-;5 6
-} 	
-public 
-void 
-SendMessage 
-(  
-string  &
-lobbyId' .
-,. /
-string0 6
-username7 ?
-,? @
-stringA G
-messageH O
-)O P
-{ 	
-if   
-(   
-!   
-_lobbyUsers   
-.   
-TryGetValue   (
-(  ( )
-lobbyId  ) 0
-,  0 1
-out  2 5
-var  6 9
-usersInLobby  : F
-)  F G
-)  G H
-return!! 
-;!! 
-foreach## 
-(## 
-var## 
-userCallback## %
-in##& (
-usersInLobby##) 5
-.##5 6
-Values##6 <
-)##< =
-{$$ 
-try%% 
-{&& 
-userCallback''  
-.''  !
-ReceiveMessage''! /
-(''/ 0
-username''0 8
-,''8 9
-message'': A
-)''A B
-;''B C
-}(( 
-catch)) 
-()) 
-	Exception))  
-ex))! #
-)))# $
-{** 
-Console++ 
-.++ 
-	WriteLine++ %
-(++% &
-$"++& (
-$str++( A
-{++A B
-username++B J
-}++J K
-$str++K M
-{++M N
-ex++N P
-.++P Q
-Message++Q X
-}++X Y
-"++Y Z
-)++Z [
-;++[ \
-},, 
-}-- 
-}.. 	
-}// 
-}00 ·B
-jC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\ChatFriendService.cs
-	namespace 	
-Service
+! 
+_connectedUsers  
+.  !
+ContainsKey! ,
+(, -
+username- 5
+)5 6
+)6 7
+{ 
+_connectedUsers 
+.  
+Add  #
+(# $
+username$ ,
+,, -
+callback. 6
+)6 7
+;7 8
+SendMessage 
+( 
+$str $
+,$ %
+$"& (
+{( )
+username) 1
+}1 2
+$str2 G
+"G H
+)H I
+;I J
+IContextChannel 
+contextChannel  .
+=/ 0
+(1 2
+IContextChannel2 A
+)A B
+callbackB J
+;J K
+contextChannel 
+. 
+Closed %
++=& (
+() *
+sender* 0
+,0 1
+args2 6
+)6 7
+=>8 :
+DisconnectUser; I
+(I J
+usernameJ R
+)R S
+;S T
+contextChannel 
+. 
+Faulted &
++=' )
+(* +
+sender+ 1
+,1 2
+args3 7
+)7 8
+=>9 ;
+DisconnectUser< J
+(J K
+usernameK S
+)S T
+;T U
+} 
+} 	
+public!! 
+void!! 
+DisconnectUser!! "
+(!!" #
+string!!# )
+username!!* 2
+)!!2 3
+{"" 	
+if## 
+(## 
+_connectedUsers## 
+.##  
+ContainsKey##  +
+(##+ ,
+username##, 4
+)##4 5
+)##5 6
+{$$ 
+_connectedUsers%% 
+.%%  
+Remove%%  &
+(%%& '
+username%%' /
+)%%/ 0
+;%%0 1
+SendMessage'' 
+('' 
+$str'' $
+,''$ %
+$"''& (
+{''( )
+username'') 1
+}''1 2
+$str''2 E
+"''E F
+)''F G
+;''G H
+}(( 
+})) 	
+public++ 
+void++ 
+SendMessage++ 
+(++  
+string++  &
+username++' /
+,++/ 0
+string++1 7
+message++8 ?
+)++? @
+{,, 	
+string-- 
+fullMessage-- 
+=--  
+$"--! #
+{--# $
+username--$ ,
+}--, -
+$str--- /
+{--/ 0
+message--0 7
+}--7 8
+"--8 9
+;--9 :
+foreach// 
+(// 
+var// 
+userCallback// %
+in//& (
+_connectedUsers//) 8
+)//8 9
+{00 
+try22 
+{33 
+if44 
+(44 
+userCallback44 $
+.44$ %
+Key44% (
+!=44) +
+username44, 4
+)444 5
+{55 
+userCallback88 $
+.88$ %
+Value88% *
+.88* +
+ReceiveMessage88+ 9
+(889 :
+fullMessage88: E
+)88E F
+;88F G
+}99 
+}:: 
+catch;; 
+(;; 
+	Exception;; $
+ex;;% '
+);;' (
+{<< 
+Console== 
+.==  
+	WriteLine==  )
+(==) *
+$"==* ,
+$str==, E
+{==E F
+username==F N
+}==N O
+$str==O Q
+{==Q R
+ex==R T
+.==T U
+Message==U \
+}==\ ]
+"==] ^
+)==^ _
+;==_ `
+}>> 
+}AA 
+}BB 	
+}CC 
+}DD Ì
+iC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\ChatLobbyService.cs
+	namespace 	
+Service
  
-. 
+. 
 
-Implements 
-{ 
-[ 
-ServiceBehavior 
-( 
-InstanceContextMode (
-=) *
-InstanceContextMode+ >
-.> ?
+Implements 
+{ 
+[		 
+ServiceBehavior		 
+(		 
+InstanceContextMode		 (
+=		) *
+InstanceContextMode		+ >
+.		> ?
 
-PerSession? I
-)I J
-]J K
-public 
+PerSession		? I
+,		I J
+ConcurrencyMode		K Z
+=		[ \
+ConcurrencyMode		] l
+.		l m
+Multiple		m u
+)		u v
+]		v w
+public
+
+ 
 
-class 
-ChatFriendService "
-:# $
-IChatFriendService% 7
-{ 
-private 
-readonly #
-IChatMessagesRepository 0#
-_chatMessagesRepository1 H
-;H I
+class
+
+ 
+ChatLobbyService
+
+ !
+:
+
+" #
+IChatLobbyService
+
+$ 5
+{ 
+private 
+static 
+readonly  
+ConcurrentDictionary  4
+<4 5
+string5 ;
+,; < 
+ConcurrentDictionary= Q
+<Q R
+stringR X
+,X Y
+IChatLobbyCallbackZ l
+>l m
+>m n
+_lobbyUserso z
+={ |
+new	} Ä"
+ConcurrentDictionary
+Å ï
+<
+ï ñ
+string
+ñ ú
+,
+ú ù"
+ConcurrentDictionary
+û ≤
+<
+≤ ≥
+string
+≥ π
+,
+π ∫ 
+IChatLobbyCallback
+ª Õ
+>
+Õ Œ
+>
+Œ œ
+(
+œ –
+)
+– —
+;
+— “
+public 
+void 
+RegisterUser  
+(  !
+string! '
+username( 0
+,0 1
+string2 8
+lobbyId9 @
+)@ A
+{ 	
+var 
+callback 
+= 
+OperationContext +
+.+ ,
+Current, 3
+.3 4
+GetCallbackChannel4 F
+<F G
+IChatLobbyCallbackG Y
+>Y Z
+(Z [
+)[ \
+;\ ]
+if 
+( 
+! 
+_lobbyUsers 
+. 
+ContainsKey (
+(( )
+lobbyId) 0
+)0 1
+)1 2
+{ 
+_lobbyUsers 
+[ 
+lobbyId #
+]# $
+=% &
+new' * 
+ConcurrentDictionary+ ?
+<? @
+string@ F
+,F G
+IChatLobbyCallbackH Z
+>Z [
+([ \
+)\ ]
+;] ^
+} 
+_lobbyUsers 
+[ 
+lobbyId 
+]  
+[  !
+username! )
+]) *
+=+ ,
+callback- 5
+;5 6
+} 	
+public 
+void 
+SendMessage 
+(  
+string  &
+lobbyId' .
+,. /
+string0 6
+username7 ?
+,? @
+stringA G
+messageH O
+)O P
+{ 	
+if 
+( 
+! 
+_lobbyUsers 
+. 
+TryGetValue (
+(( )
+lobbyId) 0
+,0 1
+out2 5
+var6 9
+usersInLobby: F
+)F G
+)G H
+return 
+; 
+foreach 
+( 
+var 
+userCallback %
+in& (
+usersInLobby) 5
+.5 6
+Values6 <
+)< =
+{   
+try!! 
+{"" 
+userCallback##  
+.##  !
+ReceiveMessage##! /
+(##/ 0
+username##0 8
+,##8 9
+message##: A
+)##A B
+;##B C
+}$$ 
+catch%% 
+(%% 
+	Exception%%  
+ex%%! #
+)%%# $
+{&& 
+CustomLogger''  
+.''  !
+Warn''! %
+(''% &
+ex''& (
+.''( )
+Message'') 0
+)''0 1
+;''1 2
+Console(( 
+.(( 
+	WriteLine(( %
+(((% &
+$"((& (
+$str((( A
+{((A B
+username((B J
+}((J K
+$str((K M
+{((M N
+ex((N P
+.((P Q
+Message((Q X
+}((X Y
+"((Y Z
+)((Z [
+;(([ \
+})) 
+}** 
+}++ 	
+},, 
+}-- ¿D
+jC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\ChatFriendService.cs
+	namespace 	
+Service
+ 
+. 
+
+Implements 
+{ 
+[ 
+ServiceBehavior 
+( 
+InstanceContextMode (
+=) *
+InstanceContextMode+ >
+.> ?
+
+PerSession? I
+)I J
+]J K
+public 
+
+class 
+ChatFriendService "
+:# $
+IChatFriendService% 7
+{ 
 private 
-readonly $
-IFriendRequestRepository 1$
-_friendRequestRepository2 J
-;J K
+readonly #
+IChatMessagesRepository 0#
+_chatMessagesRepository1 H
+;H I
 private 
-readonly 
-IPlayerRepository *
-_playerRepository+ <
-;< =
+readonly $
+IFriendRequestRepository 1$
+_friendRequestRepository2 J
+;J K
 private 
 readonly 
-ConnectionManager *
-_connectionManager+ =
-;= >
-public 
-ChatFriendService  
-(  !#
-IChatMessagesRepository! 8"
-chatMessagesRepository9 O
-,O P$
-IFriendRequestRepository! 9#
-friendRequestRepository: Q
-,Q R
-IPlayerRepository! 2
-playerRepository3 C
-,C D
-ConnectionManager! 2
-connectionManager3 D
-)D E
-{ 	#
-_chatMessagesRepository #
-=$ %"
-chatMessagesRepository& <
-;< =$
-_friendRequestRepository $
-=% &#
-friendRequestRepository' >
-;> ?
-_playerRepository 
-= 
-playerRepository  0
-;0 1
-_connectionManager 
-=  
-connectionManager! 2
-;2 3
-} 	
-public!! 
-OperationResponse!!  
-SendMessageToFriend!!! 4
-(!!4 5
-string!!5 ;
-senderUsername!!< J
-,!!J K
-string!!L R
-receiverUsername!!S c
-,!!c d
-string!!e k
-message!!l s
-)!!s t
-{"" 	
-var## 
-sender## 
-=## 
-_playerRepository## *
-.##* +
-GetByUsername##+ 8
-(##8 9
-senderUsername##9 G
-)##G H
-;##H I
-var$$ 
-receiver$$ 
-=$$ 
-_playerRepository$$ ,
-.$$, -
-GetByUsername$$- :
-($$: ;
-receiverUsername$$; K
-)$$K L
-;$$L M
-if&& 
-(&& 
-sender&& 
-==&& 
-null&& 
-||&& !
-receiver&&" *
-==&&+ -
-null&&. 2
-)&&2 3
-{'' 
-return(( 
-OperationResponse(( (
-.((( )
-Failure(() 0
-(((0 1
-$str((1 P
-)((P Q
-;((Q R
-})) 
-if++ 
-(++ 
-!++ $
-_friendRequestRepository++ )
-.++) *
+IPlayerRepository *
+_playerRepository+ <
+;< =
+private 
+readonly 
+ConnectionManager *
+_connectionManager+ =
+;= >
+public 
+ChatFriendService  
+(  !#
+IChatMessagesRepository! 8"
+chatMessagesRepository9 O
+,O P$
+IFriendRequestRepository! 9#
+friendRequestRepository: Q
+,Q R
+IPlayerRepository! 2
+playerRepository3 C
+,C D
+ConnectionManager! 2
+connectionManager3 D
+)D E
+{ 	#
+_chatMessagesRepository #
+=$ %"
+chatMessagesRepository& <
+;< =$
+_friendRequestRepository $
+=% &#
+friendRequestRepository' >
+;> ?
+_playerRepository 
+= 
+playerRepository  0
+;0 1
+_connectionManager 
+=  
+connectionManager! 2
+;2 3
+}   	
+public"" 
+OperationResponse""  
+SendMessageToFriend""! 4
+(""4 5
+string""5 ;
+senderUsername""< J
+,""J K
+string""L R
+receiverUsername""S c
+,""c d
+string""e k
+message""l s
+)""s t
+{## 	
+var$$ 
+sender$$ 
+=$$ 
+_playerRepository$$ *
+.$$* +
+GetByUsername$$+ 8
+($$8 9
+senderUsername$$9 G
+)$$G H
+;$$H I
+var%% 
+receiver%% 
+=%% 
+_playerRepository%% ,
+.%%, -
+GetByUsername%%- :
+(%%: ;
+receiverUsername%%; K
+)%%K L
+;%%L M
+if'' 
+('' 
+sender'' 
+=='' 
+null'' 
+||'' !
+receiver''" *
+==''+ -
+null''. 2
+)''2 3
+{(( 
+return)) 
+OperationResponse)) (
+.))( )
+Failure))) 0
+())0 1
+MessageChatFriend))1 B
+.))B C
+SenderNotFound))C Q
+)))Q R
+;))R S
+}** 
+if,, 
+(,, 
+!,, $
+_friendRequestRepository,, )
+.,,) *
 
-AreFriends++* 4
-(++4 5
-sender++5 ;
-.++; <
-PlayerID++< D
-,++D E
-receiver++F N
-.++N O
-PlayerID++O W
-)++W X
-)++X Y
-{,, 
-return-- 
-OperationResponse-- (
-.--( )
-Failure--) 0
-(--0 1
-$str--1 I
-)--I J
-;--J K
-}.. 
-try00 
-{11 #
-_chatMessagesRepository22 '
-.22' (
+AreFriends,,* 4
+(,,4 5
+sender,,5 ;
+.,,; <
+PlayerID,,< D
+,,,D E
+receiver,,F N
+.,,N O
+PlayerID,,O W
+),,W X
+),,X Y
+{-- 
+return.. 
+OperationResponse.. (
+...( )
+Failure..) 0
+(..0 1
+MessageChatFriend..1 B
+...B C
+NoAreFriend..C N
+)..N O
+;..O P
+}// 
+try11 
+{22 #
+_chatMessagesRepository33 '
+.33' (
 
-AddMessage22( 2
-(222 3
-sender223 9
-.229 :
-PlayerID22: B
-,22B C
-receiver22D L
-.22L M
-PlayerID22M U
-,22U V
-message22W ^
-)22^ _
-;22_ `
-var44 
+AddMessage33( 2
+(332 3
+sender333 9
+.339 :
+PlayerID33: B
+,33B C
+receiver33D L
+.33L M
+PlayerID33M U
+,33U V
+message33W ^
+)33^ _
+;33_ `
+var55 
 
-messageDto44 
-=44  
-new44! $
-MessageFriendDTO44% 5
-{55 
-SenderUsername66 "
-=66# $
-senderUsername66% 3
-,663 4
-Message77 
-=77 
-message77 %
-,77% &
-	Timestamp88 
-=88 
-DateTime88  (
-.88( )
-Now88) ,
-}99 
-;99 
-if;; 
-(;; 
-_connectionManager;; &
-.;;& '
-IsUserRegistered;;' 7
-(;;7 8
-receiverUsername;;8 H
-);;H I
-&&;;J L
+messageDto55 
+=55  
+new55! $
+MessageFriendDTO55% 5
+{66 
+SenderUsername77 "
+=77# $
+senderUsername77% 3
+,773 4
+Message88 
+=88 
+message88 %
+,88% &
+	Timestamp99 
+=99 
+DateTime99  (
+.99( )
+Now99) ,
+}:: 
+;:: 
+if<< 
+(<< 
 _connectionManager<< &
-.<<& '
-GetActiveUsers<<' 5
-(<<5 6
-)<<6 7
-.<<7 8
-TryGetValue<<8 C
-(<<C D
-receiverUsername<<D T
-,<<T U
-out<<V Y
-var<<Z ]
-receiverChannel<<^ m
-)<<m n
-)<<n o
-{== 
-var>> 
-receiverCallback>> (
-=>>) *
-receiverChannel>>+ :
-.>>: ;
-GetProperty>>; F
-<>>F G
-IChatFriendCallback>>G Z
->>>Z [
-(>>[ \
-)>>\ ]
-;>>] ^
-receiverCallback?? $
-???$ %
-.??% &
-ReceiveMessage??& 4
-(??4 5
+.<<& '
+IsUserRegistered<<' 7
+(<<7 8
+receiverUsername<<8 H
+)<<H I
+&&<<J L
+_connectionManager== &
+.==& '
+GetActiveUsers==' 5
+(==5 6
+)==6 7
+.==7 8
+TryGetValue==8 C
+(==C D
+receiverUsername==D T
+,==T U
+out==V Y
+var==Z ]
+receiverChannel==^ m
+)==m n
+)==n o
+{>> 
+var?? 
+receiverCallback?? (
+=??) *
+receiverChannel??+ :
+.??: ;
+GetProperty??; F
+<??F G
+IChatFriendCallback??G Z
+>??Z [
+(??[ \
+)??\ ]
+;??] ^
+receiverCallback@@ $
+?@@$ %
+.@@% &
+ReceiveMessage@@& 4
+(@@4 5
 
-messageDto??5 ?
-)??? @
-;??@ A
-}@@ 
-returnBB 
-OperationResponseBB (
-.BB( )
-SuccessResultBB) 6
-(BB6 7
-)BB7 8
-;BB8 9
-}CC 
-catchDD 
-(DD 
-	ExceptionDD 
-exDD 
-)DD  
-{EE 
-ConsoleFF 
-.FF 
-	WriteLineFF !
-(FF! "
-$"FF" $
-$strFF$ =
-{FF= >
-receiverUsernameFF> N
-}FFN O
-$strFFO Q
-{FFQ R
-exFFR T
-.FFT U
-MessageFFU \
-}FF\ ]
-"FF] ^
-)FF^ _
-;FF_ `
-returnGG 
-OperationResponseGG (
-.GG( )
-FailureGG) 0
-(GG0 1
-$strGG1 I
-)GGI J
-;GGJ K
-}HH 
-}II 	
-publicKK 
-ChatFriendResponseKK !
-GetChatHistoryKK" 0
-(KK0 1
-stringKK1 7
-	username1KK8 A
-,KKA B
-stringKKC I
-	username2KKJ S
-)KKS T
-{LL 	
-varMM 
-player1MM 
-=MM 
-_playerRepositoryMM +
-.MM+ ,
-GetByUsernameMM, 9
-(MM9 :
-	username1MM: C
-)MMC D
-;MMD E
+messageDto@@5 ?
+)@@? @
+;@@@ A
+}AA 
+returnCC 
+OperationResponseCC (
+.CC( )
+SuccessResultCC) 6
+(CC6 7
+)CC7 8
+;CC8 9
+}DD 
+catchEE 
+(EE 
+	ExceptionEE 
+exEE 
+)EE  
+{FF 
+ConsoleGG 
+.GG 
+	WriteLineGG !
+(GG! "
+$"GG" $
+$strGG$ =
+{GG= >
+receiverUsernameGG> N
+}GGN O
+$strGGO Q
+{GGQ R
+exGGR T
+.GGT U
+MessageGGU \
+}GG\ ]
+"GG] ^
+)GG^ _
+;GG_ `
+returnHH 
+OperationResponseHH (
+.HH( )
+FailureHH) 0
+(HH0 1
+MessageChatFriendHH1 B
+.HHB C
+CantSendMessagesHHC S
+)HHS T
+;HHT U
+}II 
+}JJ 	
+publicLL 
+ChatFriendResponseLL !
+GetChatHistoryLL" 0
+(LL0 1
+stringLL1 7
+	username1LL8 A
+,LLA B
+stringLLC I
+	username2LLJ S
+)LLS T
+{MM 	
 varNN 
-player2NN 
+player1NN 
 =NN 
 _playerRepositoryNN +
 .NN+ ,
 GetByUsernameNN, 9
 (NN9 :
-	username2NN: C
+	username1NN: C
 )NNC D
-;NND E
-ifPP 
-(PP 
-player1PP 
-==PP 
-nullPP 
-||PP  "
-player2PP# *
-==PP+ -
-nullPP. 2
-)PP2 3
-{QQ 
-returnRR 
-ChatFriendResponseRR )
-.RR) *
-FailureRR* 1
-(RR1 2
-$strRR2 P
-)RRP Q
-;RRQ R
-}SS 
-tryUU 
-{VV 
-varWW 
-messagesWW 
-=WW #
-_chatMessagesRepositoryWW 6
-.WW6 7%
-GetMessagesBetweenPlayersWW7 P
-(WWP Q
-player1WWQ X
-.WWX Y
-PlayerIDWWY a
-,WWa b
-player2WWc j
-.WWj k
-PlayerIDWWk s
-)WWs t
-;WWt u
-varYY 
-messageListYY 
-=YY  !
-messagesYY" *
-.YY* +
-SelectYY+ 1
-(YY1 2
-mYY2 3
-=>YY4 6
-newYY7 :
-MessageFriendDTOYY; K
-{ZZ 
-SenderUsername[[ "
-=[[# $
-m[[% &
-.[[& '
-Player[[' -
-.[[- .
-Username[[. 6
-,[[6 7
-Message\\ 
-=\\ 
-m\\ 
-.\\  
-MessageText\\  +
-,\\+ ,
-	Timestamp]] 
-=]] 
-(]]  !
-DateTime]]! )
-)]]) *
-m]]* +
-.]]+ ,
-	Timestamp]], 5
-}^^ 
-)^^ 
-.^^ 
-ToList^^ 
-(^^ 
-)^^ 
-;^^ 
-return`` 
-ChatFriendResponse`` )
-.``) *
-SuccessResult``* 7
-(``7 8
-messageList``8 C
-)``C D
-;``D E
-}aa 
-catchbb 
-(bb 
-	Exceptionbb 
-exbb 
-)bb  
-{cc 
-Consoledd 
-.dd 
-	WriteLinedd !
-(dd! "
-$"dd" $
-$strdd$ C
-{ddC D
-exddD F
-.ddF G
-MessageddG N
-}ddN O
-"ddO P
-)ddP Q
-;ddQ R
-returnee 
-ChatFriendResponseee )
-.ee) *
-Failureee* 1
-(ee1 2
-$stree2 R
-)eeR S
-;eeS T
-}ff 
-}gg 	
-}hh 
-}ii ≈e
+;NND E
+varOO 
+player2OO 
+=OO 
+_playerRepositoryOO +
+.OO+ ,
+GetByUsernameOO, 9
+(OO9 :
+	username2OO: C
+)OOC D
+;OOD E
+ifQQ 
+(QQ 
+player1QQ 
+==QQ 
+nullQQ 
+||QQ  "
+player2QQ# *
+==QQ+ -
+nullQQ. 2
+)QQ2 3
+{RR 
+returnSS 
+ChatFriendResponseSS )
+.SS) *
+FailureSS* 1
+(SS1 2
+MessageChatFriendSS2 C
+.SSC D
+SenderNotFoundSSD R
+)SSR S
+;SSS T
+}TT 
+tryVV 
+{WW 
+varXX 
+messagesXX 
+=XX #
+_chatMessagesRepositoryXX 6
+.XX6 7%
+GetMessagesBetweenPlayersXX7 P
+(XXP Q
+player1XXQ X
+.XXX Y
+PlayerIDXXY a
+,XXa b
+player2XXc j
+.XXj k
+PlayerIDXXk s
+)XXs t
+;XXt u
+varZZ 
+messageListZZ 
+=ZZ  !
+messagesZZ" *
+.ZZ* +
+SelectZZ+ 1
+(ZZ1 2
+mZZ2 3
+=>ZZ4 6
+newZZ7 :
+MessageFriendDTOZZ; K
+{[[ 
+SenderUsername\\ "
+=\\# $
+m\\% &
+.\\& '
+Player\\' -
+.\\- .
+Username\\. 6
+,\\6 7
+Message]] 
+=]] 
+m]] 
+.]]  
+MessageText]]  +
+,]]+ ,
+	Timestamp^^ 
+=^^ 
+(^^  !
+DateTime^^! )
+)^^) *
+m^^* +
+.^^+ ,
+	Timestamp^^, 5
+}__ 
+)__ 
+.__ 
+ToList__ 
+(__ 
+)__ 
+;__ 
+returnaa 
+ChatFriendResponseaa )
+.aa) *
+SuccessResultaa* 7
+(aa7 8
+messageListaa8 C
+)aaC D
+;aaD E
+}bb 
+catchcc 
+(cc 
+	Exceptioncc 
+excc 
+)cc  
+{dd 
+Consoleee 
+.ee 
+	WriteLineee !
+(ee! "
+$"ee" $
+$stree$ C
+{eeC D
+exeeD F
+.eeF G
+MessageeeG N
+}eeN O
+"eeO P
+)eeP Q
+;eeQ R
+returnff 
+ChatFriendResponseff )
+.ff) *
+Failureff* 1
+(ff1 2
+$strff2 R
+)ffR S
+;ffS T
+}gg 
+}hh 	
+}ii 
+}jj ≈e
 gC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\AccountService.cs
 	namespace 	
 Service
@@ -13671,7 +13667,7 @@ DataMember	 
 ;) *
 }+ ,
 } 
-} ∞
+} Ï
 ^C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\GameBoardDTO.cs
 	namespace 	
 Service
@@ -13747,157 +13743,175 @@ DataMember	 
 ]! "
 matrix# )
 )) *
-{ 	
-Rows 
-= 
-matrix 
-. 
-	GetLength #
-(# $
-$num$ %
-)% &
-;& '
-Columns 
-= 
-matrix 
-. 
-	GetLength &
-(& '
-$num' (
-)( )
-;) *
-Data 
-= 
-new 
-List 
-< 
-int 
->  
-(  !
-)! "
-;" #
-for 
-( 
-int 
-i 
-= 
-$num 
-; 
-i 
-< 
-Rows  $
-;$ %
-i& '
-++' )
-)) *
-{ 
-for 
-( 
-int 
-j 
-= 
-$num 
-; 
-j  !
-<" #
-Columns$ +
-;+ ,
-j- .
-++. 0
-)0 1
-{ 
-Data   
-.   
-Add   
-(   
-matrix   #
-[  # $
-i  $ %
-,  % &
-j  ' (
-]  ( )
-)  ) *
-;  * +
-}!! 
-}"" 
-}## 	
-public%% 
-int%% 
-[%% 
-,%% 
-]%% 
-ToMatrix%% 
-(%% 
-)%%  
-{&& 	
-int'' 
-['' 
-,'' 
-]'' 
-matrix'' 
-='' 
-new'' 
-int''  #
-[''# $
-Rows''$ (
-,''( )
-Columns''* 1
-]''1 2
-;''2 3
-for(( 
-((( 
-int(( 
-i(( 
-=(( 
-$num(( 
-;(( 
-i(( 
-<(( 
-Rows((  $
-;(($ %
-i((& '
-++((' )
-)(() *
-{)) 
-for** 
-(** 
-int** 
-j** 
-=** 
-$num** 
-;** 
-j**  !
-<**" #
-Columns**$ +
-;**+ ,
-j**- .
-++**. 0
-)**0 1
-{++ 
-matrix,, 
-[,, 
-i,, 
-,,, 
-j,, 
-],,  
-=,,! "
-Data,,# '
-[,,' (
-i,,( )
-*,,* +
-Columns,,, 3
-+,,4 5
-j,,6 7
-],,7 8
-;,,8 9
-}-- 
-}.. 
-return// 
-matrix// 
-;// 
-}00 	
-}11 
-}22 µ	
+{ 	
+if 
+( 
+matrix 
+== 
+null 
+) 
+{ 
+throw 
+new !
+ArgumentNullException /
+(/ 0
+nameof0 6
+(6 7
+matrix7 =
+)= >
+)> ?
+;? @
+} 
+Rows 
+= 
+matrix 
+. 
+	GetLength #
+(# $
+$num$ %
+)% &
+;& '
+Columns 
+= 
+matrix 
+. 
+	GetLength &
+(& '
+$num' (
+)( )
+;) *
+Data 
+= 
+new 
+List 
+< 
+int 
+>  
+(  !
+)! "
+;" #
+for!! 
+(!! 
+int!! 
+i!! 
+=!! 
+$num!! 
+;!! 
+i!! 
+<!! 
+Rows!!  $
+;!!$ %
+i!!& '
+++!!' )
+)!!) *
+{"" 
+for## 
+(## 
+int## 
+j## 
+=## 
+$num## 
+;## 
+j##  !
+<##" #
+Columns##$ +
+;##+ ,
+j##- .
+++##. 0
+)##0 1
+{$$ 
+Data%% 
+.%% 
+Add%% 
+(%% 
+matrix%% #
+[%%# $
+i%%$ %
+,%%% &
+j%%' (
+]%%( )
+)%%) *
+;%%* +
+}&& 
+}'' 
+}(( 	
+public** 
+int** 
+[** 
+,** 
+]** 
+ToMatrix** 
+(** 
+)**  
+{++ 	
+int,, 
+[,, 
+,,, 
+],, 
+matrix,, 
+=,, 
+new,, 
+int,,  #
+[,,# $
+Rows,,$ (
+,,,( )
+Columns,,* 1
+],,1 2
+;,,2 3
+for-- 
+(-- 
+int-- 
+i-- 
+=-- 
+$num-- 
+;-- 
+i-- 
+<-- 
+Rows--  $
+;--$ %
+i--& '
+++--' )
+)--) *
+{.. 
+for// 
+(// 
+int// 
+j// 
+=// 
+$num// 
+;// 
+j//  !
+<//" #
+Columns//$ +
+;//+ ,
+j//- .
+++//. 0
+)//0 1
+{00 
+matrix11 
+[11 
+i11 
+,11 
+j11 
+]11  
+=11! "
+Data11# '
+[11' (
+i11( )
+*11* +
+Columns11, 3
++114 5
+j116 7
+]117 8
+;118 9
+}22 
+}33 
+return44 
+matrix44 
+;44 
+}55 	
+}66 
+}77 µ	
 bC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\FriendRequestDTO.cs
 	namespace 	
 Service

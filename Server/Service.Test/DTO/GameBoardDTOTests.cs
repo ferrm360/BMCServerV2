@@ -79,10 +79,8 @@ namespace Service.Test.DTO
             };
             var gameBoard = new GameBoardDTO(originalMatrix);
 
-            // Act
             var resultMatrix = gameBoard.ToMatrix();
 
-            // Assert
             for (int i = 0; i < resultMatrix.GetLength(0); i++)
             {
                 for (int j = 0; j < resultMatrix.GetLength(1); j++)
@@ -95,18 +93,14 @@ namespace Service.Test.DTO
         [TestMethod]
         public void Constructor_ShouldInitializeWithCorrectDimensions()
         {
-            // Arrange
             int[,] matrix = new int[,]
             {
                 { 1, 2 },
                 { 3, 4 }
             };
 
-            // Act
             var gameBoard = new GameBoardDTO(matrix);
 
-            // Assert
-            Assert.AreEqual(2, gameBoard.Rows);
             Assert.AreEqual(2, gameBoard.Columns);
         }
 

@@ -3,6 +3,7 @@ using Service.DTO;
 using Service.Entities;
 using Service.Results;
 using Service.Utilities;
+using Service.Utilities.Constans;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -17,12 +18,10 @@ namespace Service.Implements
 
         public OperationResponse InitializeGame(string lobbyId, List<string> players)
         {
-            CustomLogger.Info($"[InitializeGame] Iniciando juego para lobbyId: {lobbyId} con jugadores: {string.Join(", ", players)}");
 
             if (_activeGames.ContainsKey(lobbyId))
             {
-                CustomLogger.Warn($"[InitializeGame] Ya existe un juego para el lobbyId: {lobbyId}");
-                return OperationResponse.Failure("Game already exists for this lobby.");
+                return OperationResponse.Failure(GameMessages.GameAlredyExist);
             }
 
             var gameSession = new GameSession();
@@ -31,45 +30,38 @@ namespace Service.Implements
                 try
                 {
                     gameSession.AddPlayer(player);
-                    CustomLogger.Info($"[InitializeGame] Jugador añadido: {player} al lobbyId: {lobbyId}");
 
                 }
                 catch (Exception ex)
                 {
-                    return OperationResponse.Failure($"Error adding player {player}: {ex.Message}");
+                    CustomLogger.Warn(ex.Message);
+                    return OperationResponse.Failure(GameMessages.CantAddingPlayer);
                 }
             }
-
             _activeGames[lobbyId] = gameSession;
             PrintGameSessionsState();
-
             return OperationResponse.SuccessResult();
         }
 
         public OperationResponse SubmitInitialMatrix(string lobbyId, string player, GameBoardDTO board)
         {
-            CustomLogger.Info($"[SubmitInitialMatrix] Recibiendo matriz inicial del jugador: {player} en lobbyId: {lobbyId}");
             if (!_activeGames.TryGetValue(lobbyId, out var gameSession))
             {
-                CustomLogger.Warn($"[SubmitInitialMatrix] No se encontró una sesión para el lobbyId: {lobbyId}");
-                return OperationResponse.Failure("Game session not found.");
+                return OperationResponse.Failure(GameMessages.GameNotFound);
             }
 
             try
             {
                 gameSession.SetMatrix(player, board);
-                CustomLogger.Info($"[SubmitInitialMatrix] Tablero asignado al jugador {player} en el lobbyId {lobbyId}");
 
             }
             catch (Exception ex)
             {
-                CustomLogger.Error($"[SubmitInitialMatrix] Error al asignar el tablero al jugador {player} en lobbyId: {lobbyId}", ex);
-                return OperationResponse.Failure($"Error setting matrix for player {player}: {ex.Message}");
+                CustomLogger.Warn(ex.Message);
+                return OperationResponse.Failure(GameMessages.CantSummitMatrix);
             }
 
             PrintGameSessionsState();
-
-
             return OperationResponse.SuccessResult();
         }
 
@@ -77,21 +69,21 @@ namespace Service.Implements
         {
             if (!_activeGames.TryGetValue(lobbyId, out var gameSession))
             {
-                return OperationResponse.Failure("Game session not found.");
+                return OperationResponse.Failure(GameMessages.GameNotFound);
             }
 
             if (!gameSession.AreAllBoardsSet())
             {
-                return OperationResponse.Failure("Not all players have submitted their boards.");
+                return OperationResponse.Failure(GameMessages.PlayerDontSummitGameBoard);
             }
 
             return OperationResponse.SuccessResult();
         }
 
+
+        // FIXME para debbug
         private void PrintGameSessionsState()
         {
-            Console.WriteLine("=== ESTADO ACTUAL DE LAS SESIONES ===");
-
             if (_activeGames.IsEmpty)
             {
                 Console.WriteLine("No hay sesiones activas.");
@@ -109,9 +101,6 @@ namespace Service.Implements
                     Console.WriteLine($"  Jugador: {player} - Tablero asignado: {hasBoard}");
                 }
             }
-
-            Console.WriteLine("=====================================");
         }
-
     }
 }

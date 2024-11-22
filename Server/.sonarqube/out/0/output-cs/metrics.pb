@@ -28,11 +28,11 @@ uC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\R
 ¶
 qC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\GameLobbyRepository.cs: 
 8r‚	
- !"#$&'()+,-./012345679:;<>?@ABCDEFGHIJLMNOPQRSTUVWYZ[\^_`abdefghijlmnopqrstuvwxyz{|}~ÅÇÉÑÜáàâäãåçéèêëíìîïñóòôõúùûü†°¢£§•¶ß®©´¨≠ÆØ∞±≤≥¥µ∂∑∏π∫ªxÇA"()-15;<@DHPQU[\`abdhpqsty}ÉÑàâãåçéìóü£ßØ≥∑á
-tC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\ChatMessagesRepository.cs 8rf	
- !"#$%&'()*,-./01345689:;<=>?@ABCDEFGHJKLMNOQRSTVWXYZ[\]^`abcdefghijklmnopqxÇ$(.035:;<BFLNQS]`aeimö
+ !"#$&'()+,-./012345679:;<>?@ABCDEFGHIJLMNOPQRSTUVWYZ[\^_`abdefghijlmnopqrstuvwxyz{|}~ÅÇÉÑÜáàâäãåçéèêëíìîïñóòôõúùûü†°¢£§•¶ß®©´¨≠ÆØ∞±≤≥¥µ∂∑∏π∫ªxÇA"()-15;<@DHPQU[\`abdhpqsty}ÉÑàâãåçéìóü£ßØ≥∑ö
 uC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\FriendRequestRepository.cs8 8rº	
- !"#$%&'()*+,-/012346789:;=>?@ABCDEFGHIJKMNOPQRSTUVWXYZ[]^_`abcdefghijklmnpqrstuvwxyz{|}~ÄÅÇÉÑÖÜáàâäãåçéèêëìîïñóôöõúûü†°¢£§•¶ß®©™´¨ÆØ∞±≤≥¥µ∂∏π∫ªΩæø¿¡¬√ƒ≈∆«»… ÀÕŒœ–“”‘’÷◊ÿŸ⁄€›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌx)ÇW#'+1389:=AEIQUYabcdhltx|ÑÖÜáãèóôõû¢¶™≤≥¥µ∂∏∫Ω¡≈…œ›·ÂÈâ
+ !"#$%&'()*+,-/012346789:;=>?@ABCDEFGHIJKMNOPQRSTUVWXYZ[]^_`abcdefghijklmnpqrstuvwxyz{|}~ÄÅÇÉÑÖÜáàâäãåçéèêëìîïñóôöõúûü†°¢£§•¶ß®©™´¨ÆØ∞±≤≥¥µ∂∏π∫ªΩæø¿¡¬√ƒ≈∆«»… ÀÕŒœ–“”‘’÷◊ÿŸ⁄€›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌx)ÇW#'+1389:=AEIQUYabcdhltx|ÑÖÜáãèóôõû¢¶™≤≥¥µ∂∏∫Ω¡≈…œ›·ÂÈá
+tC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\ChatMessagesRepository.cs 8rf	
+ !"#$%&'()*,-./01345689:;<=>?@ABCDEFGHJKLMNOQRSTVWXYZ[\]^`abcdefghijklmnopqxÇ$(.035:;<BFLNQS]`aeimâ
 hC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Properties\AssemblyInfo.csjr	
  !h
 WC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Class1.csr	

@@ -77,16 +77,16 @@
         {
           "ruleId": "S2629",
           "level": "warning",
-          "message": "Don't use string concatenation in logging message templates.",
+          "message": "Don't use string interpolation in logging message templates.",
           "locations": [
             {
               "resultFile": {
                 "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Host/Program.cs",
                 "region": {
-                  "startLine": 51,
-                  "startColumn": 30,
-                  "endLine": 51,
-                  "endColumn": 67
+                  "startLine": 76,
+                  "startColumn": 34,
+                  "endLine": 76,
+                  "endColumn": 89
                 }
               }
             }
@@ -98,16 +98,16 @@
         {
           "ruleId": "S2629",
           "level": "warning",
-          "message": "Don't use string interpolation in logging message templates.",
+          "message": "Don't use string concatenation in logging message templates.",
           "locations": [
             {
               "resultFile": {
                 "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Host/Program.cs",
                 "region": {
-                  "startLine": 76,
-                  "startColumn": 34,
-                  "endLine": 76,
-                  "endColumn": 89
+                  "startLine": 51,
+                  "startColumn": 30,
+                  "endLine": 51,
+                  "endColumn": 67
                 }
               }
             }

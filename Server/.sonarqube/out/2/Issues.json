@@ -12,62 +12,23 @@
       },
       "results": [
         {
-          "ruleId": "S2699",
-          "level": "warning",
-          "message": "Add at least one assertion to this test case.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service.Test/Services.Implements/ProfileServiceTest.cs",
-                "region": {
-                  "startLine": 134,
-                  "startColumn": 21,
-                  "endLine": 134,
-                  "endColumn": 85
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S2699",
-          "level": "warning",
-          "message": "Add at least one assertion to this test case.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service.Test/Services.Implements/ProfileServiceTest.cs",
-                "region": {
-                  "startLine": 156,
-                  "startColumn": 21,
-                  "endLine": 156,
-                  "endColumn": 72
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
+          "ruleId": "CS2001",
+          "level": "error",
+          "message": "No se encontró el archivo de origen 'C:\\Users\\neco3\\source\\repos\\RepositorioServidor\\BMCServerV2\\Server\\Service.Test\\Utilities\\TestOperationContextScope.cs'."
         }
       ],
       "rules": {
-        "S2699": {
-          "id": "S2699",
-          "shortDescription": "Tests should include assertions",
-          "fullDescription": "The rule targets test methods that lack an assertion and consist solely of an action and, optionally, a setup.",
-          "defaultLevel": "warning",
-          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-2699",
+        "CS2001": {
+          "id": "CS2001",
+          "defaultLevel": "error",
+          "helpUri": "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS2001)",
           "properties": {
-            "category": "Blocker Code Smell",
+            "category": "Compiler",
             "isEnabledByDefault": true,
             "tags": [
-              "C#",
-              "TestSourceScope",
-              "SonarWay"
+              "Compiler",
+              "Telemetry",
+              "NotConfigurable"
             ]
           }
         }
