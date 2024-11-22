@@ -261,7 +261,6 @@ namespace Service.Implements
                 return OperationResponse.Failure(LobbyMessages.NotEnoughPlayer);
             }
 
-
             if (!NotifyPlayersStartGame(lobby))
             {
                 return OperationResponse.Failure(LobbyMessages.NotificationMissing);

@@ -81,6 +81,8 @@ namespace Service.Implements
         }
 
 
+
+
         // FIXME para debbug
         private void PrintGameSessionsState()
         {
