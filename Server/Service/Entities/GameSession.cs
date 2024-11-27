@@ -1,50 +1,83 @@
-﻿using Service.DTO;
+﻿using Service.Contracts;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace Service.Entities
 {
     public class GameSession
     {
-        private readonly Dictionary<string, GameBoardDTO> _playerBoards = new Dictionary<string, GameBoardDTO>();
+        private readonly ConcurrentDictionary<string, IGameCallback> _callbackChannels = new ConcurrentDictionary<string, IGameCallback>();
+        private readonly HashSet<string> _readyPlayers = new HashSet<string>();
+        private readonly List<string> _players = new List<string>();
 
         public void AddPlayer(string player)
         {
-            if (_playerBoards.ContainsKey(player))
+            if (_players.Contains(player))
                 throw new InvalidOperationException($"Player {player} is already in the session.");
 
-            _playerBoards[player] = null;
+            _players.Add(player);
         }
 
-        public void SetMatrix(string player, GameBoardDTO board)
+        public void RegisterCallback(string player, IGameCallback callback)
         {
-            if (!_playerBoards.ContainsKey(player))
+            if (!_players.Contains(player))
                 throw new InvalidOperationException($"Player {player} is not part of this session.");
 
-            _playerBoards[player] = board;
+            _callbackChannels[player] = callback;
         }
 
-        public GameBoardDTO GetPlayerBoard(string player)
+        public void MarkPlayerReady(string player)
         {
-            if (!_playerBoards.TryGetValue(player, out var board))
+            if (!_players.Contains(player))
                 throw new InvalidOperationException($"Player {player} is not part of this session.");
 
-            return board;
+            _readyPlayers.Add(player);
         }
 
-        public bool AreAllBoardsSet()
+        public bool IsPlayerReady(string player)
         {
-            foreach (var board in _playerBoards.Values)
-            {
-                if (board == null)
-                    return false;
-            }
-            return true;
+            return _readyPlayers.Contains(player);
+        }
+
+        public bool AreAllPlayersReady()
+        {
+            return _players.Count > 0 && _readyPlayers.Count == _players.Count;
         }
 
         public IEnumerable<string> GetPlayers()
         {
-            return _playerBoards.Keys;
+            return _players;
         }
+
+        public IEnumerable<string> GetReadyPlayers()
+        {
+            return _readyPlayers;
+        }
+
+        public void NotifyGameStarted()
+        {
+            foreach (var callback in _callbackChannels.Values)
+            {
+                callback?.OnGameStarted();
+            }
+        }
+
+
+        public IEnumerable<IGameCallback> GetCallbacks()
+        {
+            return _callbackChannels.Values;
+        }
+
+        public bool TryGetCallback(string player, out IGameCallback callback)
+        {
+            return _callbackChannels.TryGetValue(player, out callback);
+        }
+
+        public void RemoveCallback(string player)
+        {
+            _callbackChannels.TryRemove(player, out _);
+        }
+
     }
 }

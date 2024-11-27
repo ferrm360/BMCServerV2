@@ -13,5 +13,6 @@ namespace Service.Utilities.Constans
         public const string CantSummitMatrix = "Error.CantSummitMatrix";
         public const string GameAlredyExist = "Error.GameAlredyExists";
         public const string CantAddingPlayer = "Error.CantAddingPlayer";
+        public const string PlayerNotReady = "Error.PlayerNotReady";
     }
 }
