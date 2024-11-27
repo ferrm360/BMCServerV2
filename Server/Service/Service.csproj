@@ -82,6 +82,7 @@
     <Compile Include="Contracts\IChatService.cs" />
     <Compile Include="Contracts\IFriendshipService.cs" />
     <Compile Include="Contracts\IGameService.cs" />
+    <Compile Include="Contracts\IGuestPlayerService.cs" />
     <Compile Include="Contracts\ILobbyService.cs" />
     <Compile Include="Contracts\IPlayerScoresService.cs" />
     <Compile Include="Contracts\IProfileService.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Implements\ChatService.cs" />
     <Compile Include="Implements\FriendshipService.cs" />
     <Compile Include="Implements\GameService.cs" />
+    <Compile Include="Implements\GuestPlayerService.cs" />
     <Compile Include="Implements\LobbyService.cs" />
     <Compile Include="Implements\PlayerScoresService.cs" />
     <Compile Include="Implements\ProfileService.cs" />
@@ -120,6 +122,7 @@
     <Compile Include="Utilities\Results\ChatFriendResponse.cs" />
     <Compile Include="Utilities\Results\FriendListResponse.cs" />
     <Compile Include="Utilities\Results\FriendRequestListReponse.cs" />
+    <Compile Include="Utilities\Results\GuestPlayerResponse.cs" />
     <Compile Include="Utilities\Results\ImageResponse.cs" />
     <Compile Include="Utilities\Results\LobbyResponse.cs" />
     <Compile Include="Utilities\Results\OperationResponse.cs" />

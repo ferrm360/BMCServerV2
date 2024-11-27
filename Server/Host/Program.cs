@@ -37,7 +37,8 @@ namespace Host
                         new ServiceDefinition(typeof(ChatFriendService), typeof(IChatFriendService), "ChatFriendService"),
                         new ServiceDefinition(typeof(PlayerScoresService), typeof(IPlayerScoresService), "PlayerScoresService"),
                         new ServiceDefinition(typeof(GameService), typeof(IGameService), "GameService"),
-                        new ServiceDefinition(typeof(ChatLobbyService), typeof(IChatLobbyService), "ChatLobbyService")
+                        new ServiceDefinition(typeof(ChatLobbyService), typeof(IChatLobbyService), "ChatLobbyService"),
+                        new ServiceDefinition(typeof(GuestPlayerService), typeof(IGuestPlayerService), "GuestPlayerService")
 
                     };
 
