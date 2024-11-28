@@ -6,11 +6,7 @@ using Service.Utilities.Constans;
 using Service.Utilities.Helpers;
 using Service.Utilities.Results;
 using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Implements
 {

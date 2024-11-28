@@ -3,6 +3,7 @@ using Service.Connection.Managers;
 using Service.Contracts;
 using Service.DTO;
 using Service.Results;
+using Service.Utilities.Constans;
 using Service.Utilities.Results;
 using System;
 using System.Collections.Generic;
@@ -37,12 +38,12 @@ namespace Service.Implements
 
             if (sender == null || receiver == null)
             {
-                return OperationResponse.Failure("Sender or receiver not found.");
+                return OperationResponse.Failure(MessageChatFriend.SenderNotFound);
             }
 
             if (!_friendRequestRepository.AreFriends(sender.PlayerID, receiver.PlayerID))
             {
-                return OperationResponse.Failure("Users are not friends.");
+                return OperationResponse.Failure(MessageChatFriend.NoAreFriend);
             }
 
             try
@@ -68,7 +69,7 @@ namespace Service.Implements
             catch (Exception ex)
             {
                 Console.WriteLine($"Error sending message to {receiverUsername}: {ex.Message}");
-                return OperationResponse.Failure("Error sending message.");
+                return OperationResponse.Failure(MessageChatFriend.CantSendMessages);
             }
         }
 
@@ -79,7 +80,7 @@ namespace Service.Implements
 
             if (player1 == null || player2 == null)
             {
-                return ChatFriendResponse.Failure("One or both users not found.");
+                return ChatFriendResponse.Failure(MessageChatFriend.SenderNotFound);
             }
 
             try

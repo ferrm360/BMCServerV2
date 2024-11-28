@@ -21,6 +21,11 @@ namespace Service.DTO
 
         public GameBoardDTO(int[,] matrix)
         {
+            if (matrix == null)
+            {
+                throw new ArgumentNullException(nameof(matrix));
+            }
+
             Rows = matrix.GetLength(0);
             Columns = matrix.GetLength(1);
             Data = new List<int>();

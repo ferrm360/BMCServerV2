@@ -41,7 +41,7 @@ namespace Service.Implements
             }
             catch (Exception ex)
             {
-                CustomLogger.Error("", ex);
+                CustomLogger.Error("AcceptFriend", ex);
                 return OperationResponse.Failure(ErrorMessages.GeneralException);
             }
         }

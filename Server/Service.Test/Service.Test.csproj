@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\GameBoardDTOTests.cs" />
     <Compile Include="Email\EmailServiceTests.cs" />
     <Compile Include="Service.Connection\Managers\ConnectionEventHandlerTest.cs" />
     <Compile Include="Service.Connection\Managers\ConnectionManagerTest.cs" />

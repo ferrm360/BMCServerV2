@@ -29,6 +29,8 @@ namespace Service
             builder.RegisterType<FriendRequestRepository>().As<IFriendRequestRepository>().InstancePerLifetimeScope();
             builder.RegisterType<ChatMessagesRepository>().As<IChatMessagesRepository>().InstancePerLifetimeScope();
             builder.RegisterType<PlayerScoresRepository>().As<IPlayerScoresRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<GuestPlayerService>().As<IGuestPlayerService>().InstancePerLifetimeScope();
+
 
 
             builder.RegisterType<ValidationFriendshipService>().AsSelf().InstancePerLifetimeScope();

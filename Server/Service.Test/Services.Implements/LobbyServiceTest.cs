@@ -182,7 +182,7 @@ namespace Service.Test.Services.Implements
             var lobbies = _lobbyService.GetAllLobbies();
 
             Assert.AreEqual(2, lobbies.Count);
- 
+
         }
 
         [TestMethod]

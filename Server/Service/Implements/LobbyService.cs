@@ -38,8 +38,6 @@ namespace Service.Implements
             lobby.AddPlayer(request.Username);
             _activeLobbies[lobby.LobbyId] = lobby;
 
-            Console.WriteLine($"[Server] {request.Username} se ha unido automáticamente a la lobby '{lobby.Name}' como anfitrión.");
-
             var lobbyDto = new LobbyDTO
             {
                 LobbyId = lobby.LobbyId,
@@ -246,31 +244,30 @@ namespace Service.Implements
 
             return LobbyResponse.SuccessResult(lobbyDto);
         }
+
         public OperationResponse StartGame(string lobbyId, string hostUsername)
         {
             if (!_activeLobbies.TryGetValue(lobbyId, out var lobby))
             {
-                return OperationResponse.Failure("Lobby not found.");
+                return OperationResponse.Failure(LobbyMessages.LobbyNotFound);
             }
 
             if (lobby.Host != hostUsername)
             {
-                return OperationResponse.Failure("Only the host can start the game.");
+                return OperationResponse.Failure(LobbyMessages.OnlyHostStart);
             }
 
             if (lobby.Players.Count < 2)
             {
-                return OperationResponse.Failure("Not enough players to start the game.");
+                return OperationResponse.Failure(LobbyMessages.NotEnoughPlayer);
             }
 
-            bool success = NotifyPlayersStartGame(lobby);
-
-            if (!success)
+            if (!NotifyPlayersStartGame(lobby))
             {
-                return OperationResponse.Failure("Error starting the game. Some players may not have been notified.");
+                return OperationResponse.Failure(LobbyMessages.NotificationMissing);
             }
 
-            return OperationResponse.SuccessResult("Game started successfully.");
+            return OperationResponse.SuccessResult(LobbyMessages.GameStarted);
         }
 
         private bool NotifyPlayersStartGame(Lobby lobby)
@@ -285,7 +282,6 @@ namespace Service.Implements
                 {
                     try
                     {
-                        Console.WriteLine($"Notifying player {player} to start the game in lobby {lobby.LobbyId}");
                         callback.StartGameNotification(lobby.LobbyId);
                     }
                     catch (Exception ex)
@@ -296,7 +292,6 @@ namespace Service.Implements
                     }
                 }
             }
-
             return allNotificationsSuccessful;
         }
 

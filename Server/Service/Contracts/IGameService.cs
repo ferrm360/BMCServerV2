@@ -1,9 +1,7 @@
-﻿using Service.Results;
-using System;
+﻿using Service.DTO;
+using Service.Results;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Service.Contracts
@@ -11,19 +9,46 @@ namespace Service.Contracts
     [ServiceContract(CallbackContract = typeof(IGameCallback))]
     public interface IGameService
     {
+        /// <summary>
+        /// Initializes a new game session.
+        /// </summary>
+        /// <param name="lobbyId">Unique identifier of the lobby.</param>
+        /// <param name="players">List of player usernames.</param>
+        /// <returns>A Task with the operation response.</returns>
         [OperationContract]
-        OperationResponse InitializeGame(string lobbyId, string player1, string player2);
+        OperationResponse InitializeGame(string lobbyId, List<string> players);
 
+        /// <summary>
+        /// Marks a player as ready.
+        /// </summary>
+        /// <param name="lobbyId">Unique identifier of the lobby.</param>
+        /// <param name="player">Username of the player.</param>
+        /// <returns>A Task with the operation response.</returns>
         [OperationContract]
-        OperationResponse SubmitInitialMatrix(string lobbyId, string player, List<List<int>> matrix);
+        Task<OperationResponse> MarkPlayerReadyAsync(string lobbyId, string player);
 
+        /// <summary>
+        /// Starts the game session if all players are ready.
+        /// </summary>
+        /// <param name="lobbyId">Unique identifier of the lobby.</param>
+        /// <returns>A Task with the operation response.</returns>
         [OperationContract]
-        OperationResponse StartGame(string lobbyId, string player);
+        Task<OperationResponse> StartGameAsync(string lobbyId);
     }
 
     public interface IGameCallback
     {
+        /// <summary>
+        /// Notifies the client when the game has started.
+        /// </summary>
         [OperationContract(IsOneWay = true)]
         void OnGameStarted();
+
+        /// <summary>
+        /// Notifies the client when another player is ready.
+        /// </summary>
+        /// <param name="player">Username of the player who is ready.</param>
+        [OperationContract(IsOneWay = true)]
+        void OnPlayerReady(string player);
     }
 }

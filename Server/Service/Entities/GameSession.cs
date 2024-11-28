@@ -1,54 +1,83 @@
 ﻿using Service.Contracts;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Entities
 {
     public class GameSession
     {
-        public string Player1 { get; }
-        public string Player2 { get; }
-        private bool _player1Ready;
-        private bool _player2Ready;
-        private List<List<int>> _matrixPlayer1;
-        private List<List<int>> _matrixPlayer2;
-        private readonly IGameCallback _callbackPlayer1;
-        private readonly IGameCallback _callbackPlayer2;
+        private readonly ConcurrentDictionary<string, IGameCallback> _callbackChannels = new ConcurrentDictionary<string, IGameCallback>();
+        private readonly HashSet<string> _readyPlayers = new HashSet<string>();
+        private readonly List<string> _players = new List<string>();
 
-        public GameSession(string player1, string player2)
+        public void AddPlayer(string player)
         {
-            Player1 = player1;
-            Player2 = player2;
-            _callbackPlayer1 = OperationContext.Current.GetCallbackChannel<IGameCallback>();
-            _callbackPlayer2 = OperationContext.Current.GetCallbackChannel<IGameCallback>();
+            if (_players.Contains(player))
+                throw new InvalidOperationException($"Player {player} is already in the session.");
+
+            _players.Add(player);
         }
 
-        public void SetMatrix(string player, List<List<int>> matrix)
+        public void RegisterCallback(string player, IGameCallback callback)
         {
-            if (player == Player1)
-                _matrixPlayer1 = matrix;
-            else if (player == Player2)
-                _matrixPlayer2 = matrix;
+            if (!_players.Contains(player))
+                throw new InvalidOperationException($"Player {player} is not part of this session.");
+
+            _callbackChannels[player] = callback;
         }
 
-        public bool SetPlayerReady(string player)
+        public void MarkPlayerReady(string player)
         {
-            if (player == Player1)
-                _player1Ready = true;
-            else if (player == Player2)
-                _player2Ready = true;
+            if (!_players.Contains(player))
+                throw new InvalidOperationException($"Player {player} is not part of this session.");
 
-            return _player1Ready && _player2Ready;
+            _readyPlayers.Add(player);
         }
 
-        public void NotifyPlayersGameStarted()
+        public bool IsPlayerReady(string player)
         {
-            _callbackPlayer1?.OnGameStarted();
-            _callbackPlayer2?.OnGameStarted();
+            return _readyPlayers.Contains(player);
         }
+
+        public bool AreAllPlayersReady()
+        {
+            return _players.Count > 0 && _readyPlayers.Count == _players.Count;
+        }
+
+        public IEnumerable<string> GetPlayers()
+        {
+            return _players;
+        }
+
+        public IEnumerable<string> GetReadyPlayers()
+        {
+            return _readyPlayers;
+        }
+
+        public void NotifyGameStarted()
+        {
+            foreach (var callback in _callbackChannels.Values)
+            {
+                callback?.OnGameStarted();
+            }
+        }
+
+
+        public IEnumerable<IGameCallback> GetCallbacks()
+        {
+            return _callbackChannels.Values;
+        }
+
+        public bool TryGetCallback(string player, out IGameCallback callback)
+        {
+            return _callbackChannels.TryGetValue(player, out callback);
+        }
+
+        public void RemoveCallback(string player)
+        {
+            _callbackChannels.TryRemove(player, out _);
+        }
+
     }
 }
