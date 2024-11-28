@@ -14,5 +14,8 @@ namespace Service.Contracts
     {
         [OperationContract]
         OperationResponse RegisterGuestPlayer(string username);
+
+        [OperationContract]
+        OperationResponse LogoutGuestPlayer(string username);
     }
 }

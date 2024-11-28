@@ -72,5 +72,31 @@ namespace Service.Implements
             }
         }
 
+        public OperationResponse LogoutGuestPlayer(string username)
+        {
+            if (string.IsNullOrWhiteSpace(username))
+                return OperationResponse.Failure(ErrorMessages.InvalidUsername);
+
+            try
+            {
+                if (!_connectionManager.IsUserRegistered(username))
+                {
+                    return OperationResponse.Failure(ErrorMessages.UserNotConnected);
+                }
+
+                _connectionEventHandler.HandleDisconnection(username);
+                _connectionManager.UnregisterUser(username);
+
+                CustomLogger.Info($"Guest player {username} has logged out successfully.");
+
+                return OperationResponse.SuccessResult();
+            }
+            catch (Exception ex)
+            {
+                CustomLogger.Error("Unexpected error during guest player logout", ex);
+                return OperationResponse.Failure(ErrorMessages.GeneralException);
+            }
+        }
+
     }
 }
