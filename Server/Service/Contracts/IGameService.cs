@@ -34,6 +34,10 @@ namespace Service.Contracts
         /// <returns>A Task with the operation response.</returns>
         [OperationContract]
         Task<OperationResponse> StartGameAsync(string lobbyId);
+
+        [OperationContract]
+        Task<OperationResponse> AttackAsync(string lobbyId, string attacker, AttackPositionDTO attackPosition);
+
     }
 
     public interface IGameCallback
@@ -50,5 +54,12 @@ namespace Service.Contracts
         /// <param name="player">Username of the player who is ready.</param>
         [OperationContract(IsOneWay = true)]
         void OnPlayerReady(string player);
+
+        [OperationContract(IsOneWay = true)]
+        void OnAttackReceived(AttackPositionDTO attackPosition);
+
+        [OperationContract(IsOneWay = true)]
+        Task OnTurnChangedAsync(bool isPlayerTurn);
+
     }
 }
