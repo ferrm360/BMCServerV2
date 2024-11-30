@@ -33,6 +33,13 @@ namespace Service.Implements
                 return OperationResponse.Failure("Opponent not found.");
             }
 
+            if (gameSession.GetCurrentPlayer() != attacker)
+            {
+                Console.WriteLine($"El jugador {attacker} está intentando atacar fuera de su turno.");
+                return OperationResponse.Failure("It's not your turn.");
+            }
+
+
             if (gameSession.TryGetCallback(opponent, out var opponentCallback))
             {
                 try
@@ -40,7 +47,8 @@ namespace Service.Implements
                     opponentCallback.OnAttackReceived(attackPosition);
                     Console.WriteLine($"Ataque enviado a {opponent}: Posición X={attackPosition.X}, Y={attackPosition.Y}.");
 
-
+                    gameSession.RotateTurn();  // Cambia el turno después del ataque.
+                    Console.WriteLine("Despues de rotate");
                     return OperationResponse.SuccessResult("Attack sent.");
                 }
                 catch (Exception ex)
