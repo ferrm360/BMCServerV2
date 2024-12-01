@@ -1,4 +1,5 @@
 ﻿using Service.Contracts;
+using Service.DTO;
 using Service.Entities;
 using Service.Results;
 using Service.Utilities;
@@ -6,6 +7,7 @@ using Service.Utilities.Constans;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
 
@@ -14,7 +16,54 @@ namespace Service.Implements
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession, ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class GameService : IGameService
     {
-        private static readonly ConcurrentDictionary<string, GameSession> _activeGames = new ConcurrentDictionary<string, GameSession>();
+        public static readonly ConcurrentDictionary<string, GameSession> _activeGames = new ConcurrentDictionary<string, GameSession>();
+
+        public async Task<OperationResponse> AttackAsync(string lobbyId, string attacker, AttackPositionDTO attackPosition)
+        {
+            if (!_activeGames.TryGetValue(lobbyId, out var gameSession))
+            {
+                Console.WriteLine($"Lobby con ID {lobbyId} no encontrado.");
+                return OperationResponse.Failure("Game not found.");
+            }
+
+            var opponent = gameSession.GetOpponent(attacker);
+            if (opponent == null)
+            {
+                Console.WriteLine($"El atacante '{attacker}' no tiene un oponente en la lobby '{lobbyId}'.");
+                return OperationResponse.Failure("Opponent not found.");
+            }
+
+            if (gameSession.GetCurrentPlayer() != attacker)
+            {
+                Console.WriteLine($"El jugador {attacker} está intentando atacar fuera de su turno.");
+                return OperationResponse.Failure("It's not your turn.");
+            }
+
+
+            if (gameSession.TryGetCallback(opponent, out var opponentCallback))
+            {
+                try
+                {
+                    opponentCallback.OnAttackReceived(attackPosition);
+                    Console.WriteLine($"Ataque enviado a {opponent}: Posición X={attackPosition.X}, Y={attackPosition.Y}.");
+
+                    gameSession.RotateTurn();  // Cambia el turno después del ataque.
+                    Console.WriteLine("Despues de rotate");
+                    return OperationResponse.SuccessResult("Attack sent.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error notificando ataque a {opponent}: {ex.Message}");
+                    return OperationResponse.Failure("Failed to notify opponent.");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Callback para el oponente '{opponent}' no disponible en la lobby '{lobbyId}'.");
+                return OperationResponse.Failure("Opponent callback not available.");
+            }
+        }
+
 
         public OperationResponse InitializeGame(string lobbyId, List<string> players)
         {
@@ -36,6 +85,8 @@ namespace Service.Implements
                     return OperationResponse.Failure(GameMessages.CantAddingPlayer);
                 }
             }
+
+            var host = players.FirstOrDefault();
 
             _activeGames[lobbyId] = gameSession;
             PrintGameSessionsState();
@@ -63,7 +114,6 @@ namespace Service.Implements
                 {
                     Console.WriteLine($"Todos los jugadores están listos en la lobby {lobbyId}.");
 
-                    // Ejecutar los callbacks en paralelo para evitar bloqueos
                     var tasks = new List<Task>();
                     foreach (var registeredPlayer in gameSession.GetPlayers())
                     {
@@ -85,7 +135,7 @@ namespace Service.Implements
                         }
                     }
 
-                    await Task.WhenAll(tasks); // Espera a que todos los callbacks terminen
+                    await Task.WhenAll(tasks);
                     return OperationResponse.SuccessResult("AllPlayersReady");
                 }
             }
@@ -114,8 +164,7 @@ namespace Service.Implements
 
             CustomLogger.Info($"Juego iniciado para la lobby: {lobbyId}");
 
-            // Simular lógica de inicio del juego
-            await Task.Delay(100); // Por ejemplo, cargar recursos o configurar estados
+            await Task.Delay(100);
             return OperationResponse.SuccessResult();
         }
 
@@ -123,7 +172,7 @@ namespace Service.Implements
         {
             foreach (var player in gameSession.GetPlayers())
             {
-                if (player == readyPlayer) continue; // No notifiques al jugador actual
+                if (player == readyPlayer) continue;
 
                 if (gameSession.TryGetCallback(player, out var callback))
                 {
@@ -134,7 +183,7 @@ namespace Service.Implements
                     catch (Exception ex)
                     {
                         Console.WriteLine($"Error notificando al jugador {player}: {ex.Message}");
-                        gameSession.RemoveCallback(player); // Manejar desconexión
+                        gameSession.RemoveCallback(player);
                     }
                 }
             }

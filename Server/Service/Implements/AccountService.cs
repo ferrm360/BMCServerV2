@@ -8,7 +8,6 @@ using Service.Utilities.Helpers;
 using Service.Utilities;
 using Service.Utilities.Constans;
 using Service.Factories;
-using Service.Utilities.Mapper;
 using Service.Connection.Managers;
 using System.ServiceModel;
 
@@ -99,28 +98,41 @@ namespace Service.Implements
         public OperationResponse Login(string username, string password)
         {
             if (string.IsNullOrWhiteSpace(username))
+            {
                 return OperationResponse.Failure(ErrorMessages.InvalidUsername);
+            }
 
             if (string.IsNullOrWhiteSpace(password))
+            {
                 return OperationResponse.Failure(ErrorMessages.InvalidPassword);
+            }
 
             if (_connectionManager.IsUserRegistered(username))
+            {
                 return OperationResponse.Failure(ErrorMessages.UserAlreadyConnected);
+            }
             try
             {
                 var player = _playerRepository.GetByUsername(username);
                 if (player == null)
+                {
                     return OperationResponse.Failure(ErrorMessages.UserNotFound);
+                }
 
                 bool isPasswordValid = PasswordHelper.VerifyPassword(password, player.PasswordHash);
+
                 if (!isPasswordValid)
+                {
                     return OperationResponse.Failure(ErrorMessages.InvalidPassword);
+                }
 
                 if (OperationContext.Current?.Channel is IContextChannel channel)
                 {
                     bool registered = _connectionManager.RegisterUser(username, channel);
                     if (!registered)
+                    {
                         return OperationResponse.Failure(ErrorMessages.UserAlreadyConnected);
+                    }
 
                     _connectionEventHandler.RegisterChannelEvents(username, channel);
                 }
@@ -144,6 +156,7 @@ namespace Service.Implements
         {
             if (_connectionManager.IsUserRegistered(username))
             {
+                _connectionEventHandler.HandleDisconnection(username);
                 _connectionManager.UnregisterUser(username);
                 return OperationResponse.SuccessResult();
             }
