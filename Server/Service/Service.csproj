@@ -80,6 +80,7 @@
     <Compile Include="Contracts\IChatFriendService.cs" />
     <Compile Include="Contracts\IChatLobbyService.cs" />
     <Compile Include="Contracts\IChatService.cs" />
+    <Compile Include="Contracts\IEmailService.cs" />
     <Compile Include="Contracts\IFriendshipService.cs" />
     <Compile Include="Contracts\IGameService.cs" />
     <Compile Include="Contracts\IGuestPlayerService.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Contracts\IProfileService.cs" />
     <Compile Include="Contracts\IUserConnectionManager.cs" />
     <Compile Include="DTO\AttackPositionDTO.cs" />
+    <Compile Include="DTO\EmailDTO.cs" />
     <Compile Include="DTO\FriendRequestDTO.cs" />
     <Compile Include="DTO\GameBoardDTO.cs" />
     <Compile Include="DTO\JoinLobbyRequestDTO.cs" />
@@ -98,6 +100,9 @@
     <Compile Include="DTO\PlayerDTO.cs" />
     <Compile Include="DTO\PlayerProfileDTO.cs" />
     <Compile Include="DTO\PlayerScoresDTO.cs" />
+    <Compile Include="Email\Templates\ChangePasswordTemplate.cs" />
+    <Compile Include="Email\Templates\LobbyTemplate.cs" />
+    <Compile Include="Email\Templates\TemplateFactory.cs" />
     <Compile Include="Entities\GameSession.cs" />
     <Compile Include="Entities\Lobby.cs" />
     <Compile Include="Factories\EntityFactory.cs" />
@@ -106,6 +111,7 @@
     <Compile Include="Implements\ChatFriendService.cs" />
     <Compile Include="Implements\ChatLobbyService.cs" />
     <Compile Include="Implements\ChatService.cs" />
+    <Compile Include="Implements\EmailService.cs" />
     <Compile Include="Implements\FriendshipService.cs" />
     <Compile Include="Implements\GameService.cs" />
     <Compile Include="Implements\GuestPlayerService.cs" />
@@ -135,7 +141,6 @@
     <Compile Include="Utilities\Helpers\SqlErrorHandler.cs" />
     <Compile Include="Utilities\CustomLogger.cs" />
     <Compile Include="Utilities\Mapper\PlayerMapper.cs" />
-    <Compile Include="Utilities\NotificationService.cs" />
     <Compile Include="Utilities\Results\PlayerProfileResponse.cs" />
     <Compile Include="Utilities\Results\PlayerScoresResponse.cs" />
     <Compile Include="Utilities\Results\ProfileResponse.cs" />
@@ -151,8 +156,6 @@
       <Name>DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Email\EmailTemplates\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
