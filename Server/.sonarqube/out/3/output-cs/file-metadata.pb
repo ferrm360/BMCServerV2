@@ -1,0 +1,11 @@
+‚
+yC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\Services.Implements\ProfileServiceTest.csutf-8–
+ŠC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.csutf-8€
+wC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\Services.Implements\LobbyServiceTest.csutf-8†
+}C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\Services.Implements\ChatFriendServiceTests.csutf-8“
+‰C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\Service.Connection\Managers\ConnectionEventHandlerTest.csutf-8s
+jC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\Properties\AssemblyInfo.csutf-8‚
+yC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\Services.Implements\AccountServiceTest.csutf-8s
+jC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\Email\EmailServiceTests.csutf-8Ž
+„C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\Service.Connection\Managers\ConnectionManagerTest.csutf-8q
+hC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service.Test\DTO\GameBoardDTOTests.csutf-8

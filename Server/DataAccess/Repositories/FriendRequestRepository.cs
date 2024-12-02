@@ -78,7 +78,7 @@ namespace DataAccess.Repositories
         {
             try
             {
-                return _context.FriendRequest.Where(r => r.ReceiverPlayerID == receiverPlayerId).ToList();
+                return _context.FriendRequest.Where(r => r.ReceiverPlayerID == receiverPlayerId && r.RequestStatus == "Pending").ToList();
             }
             catch (SqlException)
             {
@@ -87,6 +87,25 @@ namespace DataAccess.Repositories
             catch (Exception ex)
             {
                 throw new DataAccessException("An unexpected error occurred while retrieving received friend requests.", ex);
+            }
+        }
+
+        public bool AreFriends(int player1Id, int player2Id)
+        {
+            try
+            {
+                return _context.FriendRequest.Any(r =>
+                    ((r.SenderPlayerID == player1Id && r.ReceiverPlayerID == player2Id) ||
+                     (r.SenderPlayerID == player2Id && r.ReceiverPlayerID == player1Id)) &&
+                    r.RequestStatus == "Accepted");
+            }
+            catch (SqlException ex)
+            {
+                throw new DataAccessException("Error occurred while checking friendship status.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessException("An unexpected error occurred while checking friendship status.", ex);
             }
         }
 

@@ -1,10 +1,12 @@
 ﻿using System;
-using System.IO;
 using System.ServiceModel;
+using Autofac;
+using Autofac.Integration.Wcf;
 using log4net;
 using log4net.Config;
+using Service;
+using Service.Contracts;
 using Service.Implements;
-
 
 namespace Host
 {
@@ -15,54 +17,87 @@ namespace Host
         static void Main(string[] args)
         {
             XmlConfigurator.Configure();
-
             logger.Info("Initializing the service host.");
             Console.WriteLine("Initializing services, press Enter to continue...");
             Console.ReadLine();
 
+            var container = ConfigureAutofac();
+
             try
             {
-                using (ServiceHost accountServiceHost = new ServiceHost(typeof(AccountService)))
-                using (ServiceHost chatServiceHost = new ServiceHost(typeof(ChatService)))
+                using (var scope = container.BeginLifetimeScope())
                 {
-                    accountServiceHost.Open();
-                    Console.WriteLine("AccountService is running...");
+                    var services = new[]
+                    {
+                        new ServiceDefinition(typeof(AccountService), typeof(IAccountService), "AccountService"),
+                        new ServiceDefinition(typeof(ProfileService), typeof(IProfileService), "ProfileService"),
+                        new ServiceDefinition(typeof(FriendshipService), typeof(IFriendshipService), "FriendshipService"),
+                        new ServiceDefinition(typeof(ChatService), typeof(IChatService), "ChatService"),
+                        new ServiceDefinition(typeof(LobbyService), typeof(ILobbyService), "LobbyService"),
+                        new ServiceDefinition(typeof(ChatFriendService), typeof(IChatFriendService), "ChatFriendService"),
+                        new ServiceDefinition(typeof(PlayerScoresService), typeof(IPlayerScoresService), "PlayerScoresService"),
+                        new ServiceDefinition(typeof(GameService), typeof(IGameService), "GameService"),
+                        new ServiceDefinition(typeof(ChatLobbyService), typeof(IChatLobbyService), "ChatLobbyService"),
+                        new ServiceDefinition(typeof(GuestPlayerService), typeof(IGuestPlayerService), "GuestPlayerService"),
+                        new ServiceDefinition(typeof(EmailService), typeof(IEmailService), "EmailService")
+                    };
 
-                    chatServiceHost.Open();
-                    logger.Info("ChatService started successfully.");
-                    Console.WriteLine("ChatService is running...");
-
-                    logger.Info("Both services are up and running.");
-                    Console.WriteLine("Services are up and running.");
-                    Console.WriteLine("Press Enter to terminate the services.");
+                    StartServices(services, scope);
+                    Console.WriteLine("All services are running. Press Enter to stop the services.");
                     Console.ReadLine();
                 }
             }
-            catch (AddressAccessDeniedException ex)
-            {
-                logger.Error("Address access error. Make sure the application has the necessary permissions." + ex.ToString());
-                Console.WriteLine("Error: " + ex.ToString());
-            }
-            catch (CommunicationObjectFaultedException ex)
-            {
-                logger.Error("Communication object faulted." + ex.ToString());
-                Console.WriteLine("Error: " + ex.ToString());
-            }
-            catch (TimeoutException ex)
-            {
-                logger.Error("Timeout while opening ChatService." + ex.ToString());
-                Console.WriteLine("Timeout: " + ex.Message);
-            }
             catch (Exception ex)
             {
-                logger.Fatal("Unexpected error in the host. "+ ex.ToString());
-                Console.WriteLine("Fatal error: " + ex.ToString());
+                logger.Fatal("An unexpected error occurred: " + ex);
+                Console.WriteLine("Error: " + ex.Message);
             }
             finally
             {
                 logger.Info("The service host has been closed.");
                 Console.WriteLine("Services terminated. Press Enter to exit.");
                 Console.ReadLine();
+            }
+        }
+
+        private static void StartServices(ServiceDefinition[] services, ILifetimeScope scope)
+        {
+            foreach (var service in services)
+            {
+                try
+                {
+                    var serviceHost = new ServiceHost(service.ServiceType);
+                    serviceHost.AddDependencyInjectionBehavior(service.ContractType, scope);
+                    serviceHost.Open();
+
+                    Console.WriteLine($"{service.DisplayName} is running. ✓");
+                }
+                catch (Exception ex)
+                {
+                    logger.Error($"Error setting up {service.DisplayName}: {ex.Message}");
+                    Console.WriteLine($"{service.DisplayName} failed to start. ✗");
+                }
+            }
+        }
+
+        private static IContainer ConfigureAutofac()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterModule<ServiceModule>();
+            return builder.Build();
+        }
+
+        private class ServiceDefinition
+        {
+            public Type ServiceType { get; }
+            public Type ContractType { get; }
+            public string DisplayName { get; }
+
+            public ServiceDefinition(Type serviceType, Type contractType, string displayName)
+            {
+                ServiceType = serviceType;
+                ContractType = contractType;
+                DisplayName = displayName;
             }
         }
     }

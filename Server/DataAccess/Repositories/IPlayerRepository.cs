@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DataAccess.Repositories
 {
@@ -11,7 +7,10 @@ namespace DataAccess.Repositories
         Player GetByUsername(string username);
         Player GetByEmail(string email);
         void Add(Player player);
+        void Update(Player player);
         void UpdatePasswordHash(string username,  string passwordHash);
         void Save();
+        IEnumerable<Player> GetPlayersByUsername(string username, int playerId);
+        IEnumerable<Player> GetPlayers(string username);    
     }
 }

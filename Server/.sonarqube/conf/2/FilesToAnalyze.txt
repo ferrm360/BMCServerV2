@@ -1,0 +1,5 @@
+﻿C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Host\Program.cs
+C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Host\Properties\AssemblyInfo.cs
+C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Host\App.config
+C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Host\emailSettings.config
+C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Host\packages.config

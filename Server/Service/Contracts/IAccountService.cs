@@ -8,8 +8,10 @@ namespace Service.Contracts
     public interface IAccountService
     {
         [OperationContract]
-        OperationResult Register(PlayerDTO player);
+        OperationResponse Register(PlayerDTO player);
         [OperationContract]
-        OperationResult Login(string username, string password);
-    }
+        OperationResponse Login(string username, string password);
+        [OperationContract]
+        OperationResponse Logout(string username); 
+     }
 }

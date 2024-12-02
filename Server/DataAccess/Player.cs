@@ -25,7 +25,7 @@ namespace DataAccess
             this.LobbyPlayers = new HashSet<LobbyPlayers>();
             this.PasswordResetRequests = new HashSet<PasswordResetRequests>();
             this.Profile = new HashSet<Profile>();
-            this.UserScores = new HashSet<PlayerScores>();
+            this.UserScores = new HashSet<UserScores>();
         }
     
         public int PlayerID { get; set; }
@@ -50,6 +50,6 @@ namespace DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Profile> Profile { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PlayerScores> UserScores { get; set; }
+        public virtual ICollection<UserScores> UserScores { get; set; }
     }
 }

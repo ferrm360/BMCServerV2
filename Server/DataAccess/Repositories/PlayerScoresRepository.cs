@@ -16,7 +16,7 @@ namespace DataAccess.Repositories
             _context = context;
         }
 
-        public PlayerScores GetScoresByPlayerId(int playerId)
+        public UserScores GetScoresByPlayerId(int playerId)
         {
             if (playerId <= 0)
             {
@@ -29,7 +29,7 @@ namespace DataAccess.Repositories
             }
             catch (SqlException)
             {
-                throw new;
+                throw;
             }
             catch (Exception ex)
             {
@@ -37,7 +37,7 @@ namespace DataAccess.Repositories
             }
         }
 
-        public IEnumerable<PlayerScores> GetTopScores(int top)
+        public IEnumerable<UserScores> GetTopScores(int top)
         {
             if (top <= 0)
             {
@@ -48,7 +48,7 @@ namespace DataAccess.Repositories
             {
                 return _context.UserScores.OrderByDescending(us => us.Wins).Take(top).ToList();
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
                 throw;
             }
@@ -114,7 +114,7 @@ namespace DataAccess.Repositories
             }
         }
 
-        public void AddPlayerScores(PlayerScores playerScores)
+        public void Add(UserScores playerScores)
         {
             if (playerScores == null)
             {
@@ -124,7 +124,6 @@ namespace DataAccess.Repositories
             try
             {
                 _context.UserScores.Add(playerScores);
-                Save();
             }
             catch (DbUpdateException ex)
             {
@@ -140,12 +139,12 @@ namespace DataAccess.Repositories
             }
         }
 
-        private void Update(PlayerScores scores)
+        private void Update(UserScores scores)
         {
             _context.Entry(scores).State = System.Data.Entity.EntityState.Modified;
         }
 
-        private void Save()
+        public void Save()
         {
             _context.SaveChanges();
         }
