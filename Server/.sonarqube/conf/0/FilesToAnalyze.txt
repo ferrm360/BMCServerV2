@@ -1,5 +1,4 @@
 ﻿C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\ChatMessages.cs
-C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Class1.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\FriendRequest.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\GameLobby.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\GuestPlayers.cs
@@ -24,7 +23,6 @@ C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Re
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\ProfileRepository.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\UserScores.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Utilities\DataAccessException.cs
-C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Utilities\ErrorMessagecs.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Model1.Context.tt
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Model1.tt
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Model1.edmx

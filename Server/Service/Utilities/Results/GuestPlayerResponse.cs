@@ -20,7 +20,7 @@ namespace Service.Utilities.Results
             };
         }
 
-        public static GuestPlayerResponse Failure(string errorMessage)
+        public static new GuestPlayerResponse Failure(string errorMessage)
         {
             return new GuestPlayerResponse
             {

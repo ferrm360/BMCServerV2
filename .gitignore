@@ -11,7 +11,7 @@
 *.sln.docstates
 
 
-.sonarqube/
+Server/.sonarqube/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

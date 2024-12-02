@@ -6,21 +6,34 @@ namespace Service.Email
 {
     public static class EmailConfigHelper
     {
+        private static Configuration GetEmailSettingsConfiguration()
+        {
+            var configMap = new ExeConfigurationFileMap
+            {
+                ExeConfigFilename = @"emailSettings.config"
+            };
+            return ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
+        }
+
         public static string GetFromAddress()
         {
-            return ConfigurationManager.AppSettings["EmailFromAddress"];
+            var emailConfig = GetEmailSettingsConfiguration();
+            return emailConfig.AppSettings.Settings["EmailFromAddress"]?.Value;
         }
+
 
         public static SmtpClient GetSmtpClient()
         {
+            var emailConfig = GetEmailSettingsConfiguration();
+
             var smtpClient = new SmtpClient
             {
-                Host = ConfigurationManager.AppSettings["SmtpHost"],
-                Port = int.Parse(ConfigurationManager.AppSettings["SmtpPort"]),
-                EnableSsl = bool.Parse(ConfigurationManager.AppSettings["EnableSsl"]),
+                Host = emailConfig.AppSettings.Settings["SmtpHost"]?.Value,
+                Port = int.Parse(emailConfig.AppSettings.Settings["SmtpPort"]?.Value ?? "25"),
+                EnableSsl = bool.Parse(emailConfig.AppSettings.Settings["EnableSsl"]?.Value ?? "false"),
                 Credentials = new NetworkCredential(
-                    ConfigurationManager.AppSettings["SmtpUsername"],
-                    ConfigurationManager.AppSettings["SmtpPassword"]
+                    emailConfig.AppSettings.Settings["SmtpUsername"]?.Value,
+                    emailConfig.AppSettings.Settings["SmtpPassword"]?.Value
                 )
             };
             return smtpClient;

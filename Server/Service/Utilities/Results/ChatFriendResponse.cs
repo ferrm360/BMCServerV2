@@ -13,7 +13,7 @@ namespace Service.Utilities.Results
             Messages = messages
         };
 
-        public static ChatFriendResponse Failure(string errorKey) => new ChatFriendResponse
+        public static new ChatFriendResponse Failure(string errorKey) => new ChatFriendResponse
         {
             IsSuccess = false,
             ErrorKey = errorKey,

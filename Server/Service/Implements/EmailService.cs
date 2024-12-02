@@ -8,16 +8,14 @@ namespace Service.Implements
 {
     public class EmailService : Contracts.IEmailService
     {
-        public OperationResponse SendEmail(EmailDTO emailDto)
+        public OperationResponse SendEmail(EmailDTO emailDTO)
         {
-            var operarionResponse = new OperationResponse();
-
             try
             {
                 var emailService = EmailServiceFactory.CreateEmailService();
-                var (subject, body) = TemplateFactory.GetTemplate(emailDto);
+                var (subject, body) = TemplateFactory.GetTemplate(emailDTO);
 
-                emailService.Send(emailDto.Recipient, subject, body);
+                emailService.Send(emailDTO.Recipient, subject, body);
 
                 return OperationResponse.SuccessResult("Email sent successfully.");
             }

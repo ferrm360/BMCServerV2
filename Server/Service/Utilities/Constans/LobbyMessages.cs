@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Service.Utilities.Constans
 {
-    public class LobbyMessages
+    public static class LobbyMessages
     {
         public const string LobbyNotFound = "Error.LobbyNotFound";
         public const string OnlyHostStart = "Info.OnlyHostStart";

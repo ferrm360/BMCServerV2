@@ -1,13 +1,4 @@
-›
-iC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Utilities\ErrorMessagecs.cs
-
-		 &
-
- /
-
- 9
-
- 9¾
+¾
 nC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Utilities\DataAccessException.cs
 
  $
@@ -170,7 +161,132 @@ mC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\R
 ·· 
 
 µµ 
-µµ Á
+µµ ‡
+uC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\IPlayerScoresRepository.cs
+
+ ,
+
+  ,
+
+1 4
+
+ &
+
++ 3
+
+		 
+
+		 '
+
+
+
+ 
+
+
+
+! )
+
+ 
+
+ (
+
+ Ë
+qC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\GameLobbyRepository.cs
+
+		 $t
+% -   -- @@ ss tt 
+ŽŽ 
+ŸŸ 
+¯¯ 
+/ 6 
+
+ (
+* / 7 <' ,
+
+&& '(
+&&/ 8((* 3))R [--N W
+--: ;--? @4
+99  PP #`` #pp #
+ˆˆ$ +(
+99% ,;; <<Z a@@L S
+@@: ;@@? @
+
+LL "
+LL' .PP$ +
+PP QQ- 2
+
+YY '
+YY, 3``$ +(
+YY< D[[* 2\\P Xdd) 1(
+`` aa aa% *dd 
+
+ll 
+ll$ +pp$ +
+pp qq ss. 3
+
+ T
+
+* /
+ƒƒ 
+„„7 <
+ˆˆ, 1
+‹‹. 3
+ŒŒ- 2
++ 0<
+
+ˆˆ !
+‰‰ !
+‹‹ !
+ŒŒ !
+ !
+
+››& 3
+
+««& 6
+
+¯¯0 1
+¯¯J KÌ
+rC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\IGameLobbyRepository.cs
+
+ )
+
+ 
+
+# (
+
+  
+
+( 1
+
+		 
+
+		 %
+
+
+
+ 
+
+
+
+  '
+
+  
+
+% ,
+
+5 =
+
+ 
+
+ $
+
+ 
+
+# (
+
+ ,
+
+ /Á
 tC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\LobbyPlayersRepository.cs
 
 
@@ -230,153 +346,32 @@ tC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\R
 
   "
 & (
-? Aö
-pC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\IProfileRepository.cs
-
- '
-
- $
-
-) 1
-
- 
-
-  
-
-		 
-
-		 #
+? A¢
+tC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\ChatMessagesRepository.cs
 
 
 
- 
+ '<
+% -  :: `` aa 
+2 9 
 
-
-
- &
+) B(
+G P 1 :O X(
+V _" +O X1 :2
+ " $> @" $> @
+ # %
 
-
-
-1 >
+,,) :2
+,,? G.. 00[ c;;2 :;;M U(
+,,M R33 55W \== 
+;; ;;! #;;> @
+<<' )<<- /
 
- ‡
-uC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\IPlayerScoresRepository.cs
-
- ,
-
-  ,
-
-1 4
-
- &
-
-+ 3
-
-		 
-
-		 '
-
-
-
- 
-
-
-
-! )
-
- 
-
- (
-
- ç
-uC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\ILobbyPlayersRepository.cs
-
- ,
-
- 
-
-" )
-
-/ 7
-
- "
-
-' .
-
-4 <
-
-		" 3
-
-		8 ?
-
-
-
- 
-
-
-
-! (
-
-
-
-. 6
-
- 
-
- $
-
- %
-
-* 1
-
- 
-
-$ +
-
-1 9
-
-B HÌ
-rC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\IGameLobbyRepository.cs
-
- )
-
- 
-
-# (
-
-  
-
-( 1
-
-		 
-
-		 %
-
-
-
- 
-
-
-
-  '
-
-  
-
-% ,
-
-5 =
-
- 
-
- $
-
- 
-
-# (
-
- ,
-
- /˜
+JJ 
+JJ# +LL ZZ '
+JJ1 ;LL! +[[! +
+JJD OQQ* 5\\" -
+XX ``* 1˜
 vC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\IFriendRequestRepository.cs
 
 		 -
@@ -425,7 +420,36 @@ vC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\R
 
 + 4
 
- û
+ ö
+pC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\IProfileRepository.cs
+
+ '
+
+ $
+
+) 1
+
+ 
+
+  
+
+		 
+
+		 #
+
+
+
+ 
+
+
+
+ &
+
+
+
+1 >
+
+ û
 uC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\IChatMessagesRepository.cs
 
  ,
@@ -448,62 +472,54 @@ uC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\R
 
 		* 4
 
-		= HË
-qC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\GameLobbyRepository.cs
+		= Hç
+uC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\ILobbyPlayersRepository.cs
 
-		 $t
-% -   -- @@ ss tt 
-ŽŽ 
-ŸŸ 
-¯¯ 
-/ 6 
+ ,
 
- (
-* / 7 <' ,
+ 
 
-&& '(
-&&/ 8((* 3))R [--N W
---: ;--? @4
-99  PP #`` #pp #
-ˆˆ$ +(
-99% ,;; <<Z a@@L S
-@@: ;@@? @
+" )
 
-LL "
-LL' .PP$ +
-PP QQ- 2
+/ 7
 
-YY '
-YY, 3``$ +(
-YY< D[[* 2\\P Xdd) 1(
-`` aa aa% *dd 
+ "
 
-ll 
-ll$ +pp$ +
-pp qq ss. 3
+' .
 
- T
+4 <
 
-* /
-ƒƒ 
-„„7 <
-ˆˆ, 1
-‹‹. 3
-ŒŒ- 2
-+ 0<
+		" 3
 
-ˆˆ !
-‰‰ !
-‹‹ !
-ŒŒ !
- !
+		8 ?
 
-››& 3
+
+
+ 
 
-««& 6
+
+
+! (
 
-¯¯0 1
-¯¯J Kà
+
+
+. 6
+
+ 
+
+ $
+
+ %
+
+* 1
+
+ 
+
+$ +
+
+1 9
+
+B Hà
 
 uC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\FriendRequestRepository.cs
 
@@ -599,33 +615,5 @@ uC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\R
 ÙÙ' 7
 
 ÖÖ 
-ÝÝ+ 5¢
-tC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\ChatMessagesRepository.cs
-
-
-
- '<
-% -  :: `` aa 
-2 9 
-
-) B(
-G P 1 :O X(
-V _" +O X1 :2
- " $> @" $> @
- # %
-
-,,) :2
-,,? G.. 00[ c;;2 :;;M U(
-,,M R33 55W \== 
-;; ;;! #;;> @
-<<' )<<- /
-
-JJ 
-JJ# +LL ZZ '
-JJ1 ;LL! +[[! +
-JJD OQQ* 5\\" -
-XX ``* 1j
-hC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Properties\AssemblyInfo.cse
-WC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Class1.cs
-
-		 
+ÝÝ+ 5j
+hC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Properties\AssemblyInfo.cs

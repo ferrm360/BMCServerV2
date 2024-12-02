@@ -139,7 +139,7 @@
     <Property Name="sonar.java.jvmframeworkconfig.activate">true</Property>
     <Property Name="sonar.updatecenter.url">https://downloads.sonarsource.com/sonarqube/update/update-center.properties</Property>
     <Property Name="sonar.core.id">147B411E-AZNNp38MCmbC7Nrv1V2T</Property>
-    <Property Name="sonar.core.startTime">21/11/2024 09:16:36 a. m.</Property>
+    <Property Name="sonar.core.startTime">01/12/2024 08:21:50 p. m.</Property>
   </ServerSettings>
   <LocalSettings>
     <Property Name="sonar.host.url">http://localhost:9000</Property>
@@ -152,22 +152,22 @@
       <AnalyzerPlugins>
         <AnalyzerPlugin Key="csharp" Version="9.32.0.97167" StaticResourceName="SonarAnalyzer-9.32.0.97167.zip">
           <AssemblyPaths>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\0\Google.Protobuf.dll</Path>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\0\SonarAnalyzer.CFG.dll</Path>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\0\SonarAnalyzer.CSharp.dll</Path>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\0\SonarAnalyzer.dll</Path>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\0\SonarAnalyzer.ShimLayer.dll</Path>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\0\THIRD-PARTY-NOTICES.txt</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\2\Google.Protobuf.dll</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\2\SonarAnalyzer.CFG.dll</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\2\SonarAnalyzer.CSharp.dll</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\2\SonarAnalyzer.dll</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\2\SonarAnalyzer.ShimLayer.dll</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\2\THIRD-PARTY-NOTICES.txt</Path>
           </AssemblyPaths>
         </AnalyzerPlugin>
         <AnalyzerPlugin Key="vbnet" Version="9.32.0.97167" StaticResourceName="SonarAnalyzer-9.32.0.97167.zip">
           <AssemblyPaths>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\1\Google.Protobuf.dll</Path>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\1\SonarAnalyzer.CFG.dll</Path>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\1\SonarAnalyzer.dll</Path>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\1\SonarAnalyzer.ShimLayer.dll</Path>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\1\SonarAnalyzer.VisualBasic.dll</Path>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\1\THIRD-PARTY-NOTICES.txt</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\3\Google.Protobuf.dll</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\3\SonarAnalyzer.CFG.dll</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\3\SonarAnalyzer.dll</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\3\SonarAnalyzer.ShimLayer.dll</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\3\SonarAnalyzer.VisualBasic.dll</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\3\THIRD-PARTY-NOTICES.txt</Path>
           </AssemblyPaths>
         </AnalyzerPlugin>
       </AnalyzerPlugins>
@@ -182,22 +182,22 @@
       <AnalyzerPlugins>
         <AnalyzerPlugin Key="csharp" Version="9.32.0.97167" StaticResourceName="SonarAnalyzer-9.32.0.97167.zip">
           <AssemblyPaths>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\0\Google.Protobuf.dll</Path>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\0\SonarAnalyzer.CFG.dll</Path>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\0\SonarAnalyzer.CSharp.dll</Path>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\0\SonarAnalyzer.dll</Path>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\0\SonarAnalyzer.ShimLayer.dll</Path>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\0\THIRD-PARTY-NOTICES.txt</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\2\Google.Protobuf.dll</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\2\SonarAnalyzer.CFG.dll</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\2\SonarAnalyzer.CSharp.dll</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\2\SonarAnalyzer.dll</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\2\SonarAnalyzer.ShimLayer.dll</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\2\THIRD-PARTY-NOTICES.txt</Path>
           </AssemblyPaths>
         </AnalyzerPlugin>
         <AnalyzerPlugin Key="vbnet" Version="9.32.0.97167" StaticResourceName="SonarAnalyzer-9.32.0.97167.zip">
           <AssemblyPaths>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\1\Google.Protobuf.dll</Path>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\1\SonarAnalyzer.CFG.dll</Path>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\1\SonarAnalyzer.dll</Path>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\1\SonarAnalyzer.ShimLayer.dll</Path>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\1\SonarAnalyzer.VisualBasic.dll</Path>
-            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\1\THIRD-PARTY-NOTICES.txt</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\3\Google.Protobuf.dll</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\3\SonarAnalyzer.CFG.dll</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\3\SonarAnalyzer.dll</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\3\SonarAnalyzer.ShimLayer.dll</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\3\SonarAnalyzer.VisualBasic.dll</Path>
+            <Path>C:\Users\neco3\AppData\Local\Temp\.sonarqube\resources\3\THIRD-PARTY-NOTICES.txt</Path>
           </AssemblyPaths>
         </AnalyzerPlugin>
       </AnalyzerPlugins>

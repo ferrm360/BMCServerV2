@@ -6,30 +6,72 @@
       "tool": {
         "name": "Compilador de Microsoft (R) Visual C#",
         "version": "4.11.0.0",
-        "fileVersion": "4.11.0-3.24365.8 (9e9c7c1d)",
+        "fileVersion": "4.11.0-3.24460.3 (5649376e)",
         "semanticVersion": "4.11.0",
         "language": "es-MX"
       },
       "results": [
         {
-          "ruleId": "CS0108",
+          "ruleId": "CS1998",
           "level": "warning",
-          "message": "'ChatFriendResponse.Failure(string)' oculta el miembro heredado 'OperationResponse.Failure(string)'. Use la palabra clave new si su intención era ocultarlo.",
+          "message": "El método asincrónico carece de operadores \"await\" y se ejecutará de forma sincrónica. Puede usar el operador 'await' para esperar llamadas API que no sean de bloqueo o 'await Task.Run(...)' para hacer tareas enlazadas a la CPU en un subproceso en segundo plano.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Utilities/Results/ChatFriendResponse.cs",
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/GameService.cs",
                 "region": {
-                  "startLine": 16,
-                  "startColumn": 42,
-                  "endLine": 16,
-                  "endColumn": 49
+                  "startLine": 21,
+                  "startColumn": 46,
+                  "endLine": 21,
+                  "endColumn": 57
                 }
               }
             }
           ],
           "properties": {
-            "warningLevel": 2
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1118",
+          "level": "warning",
+          "message": "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Email/Templates/ChangePasswordTemplate.cs",
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 18,
+                  "endLine": 9,
+                  "endColumn": 40
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1135",
+          "level": "warning",
+          "message": "Complete the task associated to this 'TODO' comment.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/AccountService.cs",
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 16,
+                  "endLine": 40,
+                  "endColumn": 20
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
           }
         },
         {
@@ -62,9 +104,9 @@
               "resultFile": {
                 "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/AccountService.cs",
                 "region": {
-                  "startLine": 42,
+                  "startLine": 47,
                   "startColumn": 16,
-                  "endLine": 42,
+                  "endLine": 47,
                   "endColumn": 20
                 }
               }
@@ -83,30 +125,9 @@
               "resultFile": {
                 "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/AccountService.cs",
                 "region": {
-                  "startLine": 48,
+                  "startLine": 53,
                   "startColumn": 16,
-                  "endLine": 48,
-                  "endColumn": 20
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1135",
-          "level": "warning",
-          "message": "Complete the task associated to this 'TODO' comment.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/AccountService.cs",
-                "region": {
-                  "startLine": 54,
-                  "startColumn": 16,
-                  "endLine": 54,
+                  "endLine": 53,
                   "endColumn": 20
                 }
               }
@@ -119,37 +140,16 @@
         {
           "ruleId": "S101",
           "level": "warning",
-          "message": "Rename class 'FriendRequestDTO' to match pascal case naming rules, consider using 'FriendRequestDto'.",
+          "message": "Rename class 'AttackPositionDTO' to match pascal case naming rules, consider using 'AttackPositionDto'.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/DTO/FriendRequestDTO.cs",
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/DTO/AttackPositionDTO.cs",
                 "region": {
                   "startLine": 11,
                   "startColumn": 18,
                   "endLine": 11,
-                  "endColumn": 34
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S101",
-          "level": "warning",
-          "message": "Rename class 'JoinLobbyRequestDTO' to match pascal case naming rules, consider using 'JoinLobbyRequestDto'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/DTO/JoinLobbyRequestDTO.cs",
-                "region": {
-                  "startLine": 11,
-                  "startColumn": 18,
-                  "endLine": 11,
-                  "endColumn": 37
+                  "endColumn": 35
                 }
               }
             }
@@ -180,18 +180,18 @@
           }
         },
         {
-          "ruleId": "S101",
+          "ruleId": "S1135",
           "level": "warning",
-          "message": "Rename class 'LobbyDTO' to match pascal case naming rules, consider using 'LobbyDto'.",
+          "message": "Complete the task associated to this 'TODO' comment.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/DTO/LobbyDTO.cs",
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/ProfileService.cs",
                 "region": {
-                  "startLine": 11,
-                  "startColumn": 18,
-                  "endLine": 11,
-                  "endColumn": 26
+                  "startLine": 241,
+                  "startColumn": 12,
+                  "endLine": 241,
+                  "endColumn": 16
                 }
               }
             }
@@ -201,18 +201,39 @@
           }
         },
         {
-          "ruleId": "S1134",
+          "ruleId": "S1135",
           "level": "warning",
-          "message": "Take the required action to fix the issue indicated by this 'FIXME' comment.",
+          "message": "Complete the task associated to this 'TODO' comment.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/GameService.cs",
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/UserConnectionManager.cs",
                 "region": {
-                  "startLine": 84,
-                  "startColumn": 12,
-                  "endLine": 84,
-                  "endColumn": 17
+                  "startLine": 9,
+                  "startColumn": 8,
+                  "endLine": 9,
+                  "endColumn": 12
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S101",
+          "level": "warning",
+          "message": "Rename class 'EmailDTO' to match pascal case naming rules, consider using 'EmailDto'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/DTO/EmailDTO.cs",
+                "region": {
+                  "startLine": 6,
+                  "startColumn": 18,
+                  "endLine": 6,
+                  "endColumn": 26
                 }
               }
             }
@@ -234,6 +255,90 @@
                   "startColumn": 22,
                   "endLine": 22,
                   "endColumn": 41
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S3597",
+          "level": "warning",
+          "message": "Add the 'ServiceContract' attribute to  this interface.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Contracts/IChatLobbyService.cs",
+                "region": {
+                  "startLine": 20,
+                  "startColumn": 22,
+                  "endLine": 20,
+                  "endColumn": 40
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S101",
+          "level": "warning",
+          "message": "Rename class 'FriendRequestDTO' to match pascal case naming rules, consider using 'FriendRequestDto'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/DTO/FriendRequestDTO.cs",
+                "region": {
+                  "startLine": 11,
+                  "startColumn": 18,
+                  "endLine": 11,
+                  "endColumn": 34
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1118",
+          "level": "warning",
+          "message": "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Utilities/Mapper/PlayerMapper.cs",
+                "region": {
+                  "startLine": 11,
+                  "startColumn": 18,
+                  "endLine": 11,
+                  "endColumn": 30
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S3597",
+          "level": "warning",
+          "message": "Add the 'ServiceContract' attribute to  this interface.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Contracts/IGameService.cs",
+                "region": {
+                  "startLine": 43,
+                  "startColumn": 22,
+                  "endLine": 43,
+                  "endColumn": 35
                 }
               }
             }
@@ -270,12 +375,75 @@
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Contracts/IChatLobbyService.cs",
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Contracts/ILobbyService.cs",
                 "region": {
-                  "startLine": 20,
+                  "startLine": 27,
                   "startColumn": 22,
-                  "endLine": 20,
-                  "endColumn": 40
+                  "endLine": 27,
+                  "endColumn": 36
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S101",
+          "level": "warning",
+          "message": "Rename class 'JoinLobbyRequestDTO' to match pascal case naming rules, consider using 'JoinLobbyRequestDto'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/DTO/JoinLobbyRequestDTO.cs",
+                "region": {
+                  "startLine": 11,
+                  "startColumn": 18,
+                  "endLine": 11,
+                  "endColumn": 37
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S101",
+          "level": "warning",
+          "message": "Rename class 'LobbyDTO' to match pascal case naming rules, consider using 'LobbyDto'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/DTO/LobbyDTO.cs",
+                "region": {
+                  "startLine": 11,
+                  "startColumn": 18,
+                  "endLine": 11,
+                  "endColumn": 26
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S101",
+          "level": "warning",
+          "message": "Rename class 'CreateLobbyRequestDTO' to match pascal case naming rules, consider using 'CreateLobbyRequestDto'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/DTO/CreateLobbyRequestDTO.cs",
+                "region": {
+                  "startLine": 11,
+                  "startColumn": 18,
+                  "endLine": 11,
+                  "endColumn": 39
                 }
               }
             }
@@ -327,18 +495,39 @@
           }
         },
         {
-          "ruleId": "S101",
+          "ruleId": "S2094",
           "level": "warning",
-          "message": "Rename class 'PlayerProfileDTO' to match pascal case naming rules, consider using 'PlayerProfileDto'.",
+          "message": "Remove this empty class, write its code or make it an \"interface\".",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/DTO/PlayerProfileDTO.cs",
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/UserConnectionManager.cs",
+                "region": {
+                  "startLine": 10,
+                  "startColumn": 20,
+                  "endLine": 10,
+                  "endColumn": 41
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S101",
+          "level": "warning",
+          "message": "Rename class 'PlayerDTO' to match pascal case naming rules, consider using 'PlayerDto'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/DTO/PlayerDTO.cs",
                 "region": {
                   "startLine": 11,
                   "startColumn": 18,
                   "endLine": 11,
-                  "endColumn": 34
+                  "endColumn": 27
                 }
               }
             }
@@ -371,16 +560,16 @@
         {
           "ruleId": "S101",
           "level": "warning",
-          "message": "Rename class 'PlayerDTO' to match pascal case naming rules, consider using 'PlayerDto'.",
+          "message": "Rename class 'PlayerProfileDTO' to match pascal case naming rules, consider using 'PlayerProfileDto'.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/DTO/PlayerDTO.cs",
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/DTO/PlayerProfileDTO.cs",
                 "region": {
                   "startLine": 11,
                   "startColumn": 18,
                   "endLine": 11,
-                  "endColumn": 27
+                  "endColumn": 34
                 }
               }
             }
@@ -390,18 +579,18 @@
           }
         },
         {
-          "ruleId": "S1135",
+          "ruleId": "S3887",
           "level": "warning",
-          "message": "Complete the task associated to this 'TODO' comment.",
+          "message": "Use an immutable collection or reduce the accessibility of the non-private readonly field '_activeGames'.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/ProfileService.cs",
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/GameService.cs",
                 "region": {
-                  "startLine": 241,
-                  "startColumn": 12,
-                  "endLine": 241,
-                  "endColumn": 16
+                  "startLine": 19,
+                  "startColumn": 32,
+                  "endLine": 19,
+                  "endColumn": 73
                 }
               }
             }
@@ -411,18 +600,39 @@
           }
         },
         {
-          "ruleId": "S3597",
+          "ruleId": "S2386",
           "level": "warning",
-          "message": "Add the 'ServiceContract' attribute to  this interface.",
+          "message": "Use an immutable collection or reduce the accessibility of the public static field '_activeGames'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/GameService.cs",
+                "region": {
+                  "startLine": 19,
+                  "startColumn": 32,
+                  "endLine": 19,
+                  "endColumn": 73
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S3598",
+          "level": "warning",
+          "message": "This method can't return any values because it is marked as one-way operation.",
           "locations": [
             {
               "resultFile": {
                 "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Contracts/IGameService.cs",
                 "region": {
-                  "startLine": 25,
-                  "startColumn": 22,
-                  "endLine": 25,
-                  "endColumn": 35
+                  "startLine": 62,
+                  "startColumn": 9,
+                  "endLine": 62,
+                  "endColumn": 13
                 }
               }
             }
@@ -432,144 +642,18 @@
           }
         },
         {
-          "ruleId": "S1135",
+          "ruleId": "S3400",
           "level": "warning",
-          "message": "Complete the task associated to this 'TODO' comment.",
+          "message": "Remove this method and declare a constant for this value.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/UserConnectionManager.cs",
-                "region": {
-                  "startLine": 9,
-                  "startColumn": 8,
-                  "endLine": 9,
-                  "endColumn": 12
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S3597",
-          "level": "warning",
-          "message": "Add the 'ServiceContract' attribute to  this interface.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Contracts/ILobbyService.cs",
-                "region": {
-                  "startLine": 27,
-                  "startColumn": 22,
-                  "endLine": 27,
-                  "endColumn": 36
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1118",
-          "level": "warning",
-          "message": "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Utilities/Constans/LobbyMessages.cs",
-                "region": {
-                  "startLine": 10,
-                  "startColumn": 18,
-                  "endLine": 10,
-                  "endColumn": 31
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S101",
-          "level": "warning",
-          "message": "Rename class 'CreateLobbyRequestDTO' to match pascal case naming rules, consider using 'CreateLobbyRequestDto'.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/DTO/CreateLobbyRequestDTO.cs",
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Email/Templates/ChangePasswordTemplate.cs",
                 "region": {
                   "startLine": 11,
-                  "startColumn": 18,
+                  "startColumn": 30,
                   "endLine": 11,
-                  "endColumn": 39
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S2094",
-          "level": "warning",
-          "message": "Remove this empty class, write its code or make it an \"interface\".",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/UserConnectionManager.cs",
-                "region": {
-                  "startLine": 10,
-                  "startColumn": 20,
-                  "endLine": 10,
-                  "endColumn": 41
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S2094",
-          "level": "warning",
-          "message": "Remove this empty class, write its code or make it an \"interface\".",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Utilities/NotificationService.cs",
-                "region": {
-                  "startLine": 9,
-                  "startColumn": 18,
-                  "endLine": 9,
-                  "endColumn": 37
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1118",
-          "level": "warning",
-          "message": "Add a 'protected' constructor or the 'static' keyword to the class declaration.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Utilities/Mapper/PlayerMapper.cs",
-                "region": {
-                  "startLine": 11,
-                  "startColumn": 18,
-                  "endLine": 11,
-                  "endColumn": 30
+                  "endColumn": 40
                 }
               }
             }
@@ -591,6 +675,27 @@
                   "startColumn": 33,
                   "endLine": 18,
                   "endColumn": 35
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S3400",
+          "level": "warning",
+          "message": "Remove this method and declare a constant for this value.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Email/Templates/LobbyTemplate.cs",
+                "region": {
+                  "startLine": 12,
+                  "startColumn": 30,
+                  "endLine": 12,
+                  "endColumn": 40
                 }
               }
             }
@@ -642,48 +747,6 @@
           }
         },
         {
-          "ruleId": "S2325",
-          "level": "warning",
-          "message": "Make 'PrintGameSessionsState' a static method.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/GameService.cs",
-                "region": {
-                  "startLine": 85,
-                  "startColumn": 22,
-                  "endLine": 85,
-                  "endColumn": 44
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S927",
-          "level": "warning",
-          "message": "Rename parameter 'receiverUsername' to 'reciveUsername' to match the interface declaration.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/FriendshipService.cs",
-                "region": {
-                  "startLine": 129,
-                  "startColumn": 82,
-                  "endLine": 129,
-                  "endColumn": 98
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
           "ruleId": "S2629",
           "level": "warning",
           "message": "Don't use string interpolation in logging message templates.",
@@ -726,18 +789,18 @@
           }
         },
         {
-          "ruleId": "S2325",
+          "ruleId": "S6602",
           "level": "warning",
-          "message": "Make 'ConvertImageUrlToBytes' a static method.",
+          "message": "\"Find\" method should be used instead of the \"FirstOrDefault\" extension method.",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/FriendshipService.cs",
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Entities/GameSession.cs",
                 "region": {
-                  "startLine": 252,
-                  "startColumn": 23,
-                  "endLine": 252,
-                  "endColumn": 45
+                  "startLine": 94,
+                  "startColumn": 29,
+                  "endLine": 94,
+                  "endColumn": 43
                 }
               }
             }
@@ -774,54 +837,12 @@
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/FriendshipService.cs",
-                "region": {
-                  "startLine": 269,
-                  "startColumn": 23,
-                  "endLine": 269,
-                  "endColumn": 63
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S112",
-          "level": "warning",
-          "message": "'System.Exception' should not be thrown by user code.",
-          "locations": [
-            {
-              "resultFile": {
                 "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/ProfileService.cs",
                 "region": {
                   "startLine": 259,
                   "startColumn": 23,
                   "endLine": 259,
                   "endColumn": 68
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S927",
-          "level": "warning",
-          "message": "Rename parameter 'ownerUsername' to 'loggedUsername' to match the interface declaration.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/FriendshipService.cs",
-                "region": {
-                  "startLine": 161,
-                  "startColumn": 93,
-                  "endLine": 161,
-                  "endColumn": 106
                 }
               }
             }
@@ -866,15 +887,98 @@
               "0": null
             }
           }
+        },
+        {
+          "ruleId": "S927",
+          "level": "warning",
+          "message": "Rename parameter 'receiverUsername' to 'reciveUsername' to match the interface declaration.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/FriendshipService.cs",
+                "region": {
+                  "startLine": 129,
+                  "startColumn": 82,
+                  "endLine": 129,
+                  "endColumn": 98
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S2325",
+          "level": "warning",
+          "message": "Make 'ConvertImageUrlToBytes' a static method.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/FriendshipService.cs",
+                "region": {
+                  "startLine": 252,
+                  "startColumn": 23,
+                  "endLine": 252,
+                  "endColumn": 45
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S927",
+          "level": "warning",
+          "message": "Rename parameter 'ownerUsername' to 'loggedUsername' to match the interface declaration.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/FriendshipService.cs",
+                "region": {
+                  "startLine": 161,
+                  "startColumn": 93,
+                  "endLine": 161,
+                  "endColumn": 106
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S112",
+          "level": "warning",
+          "message": "'System.Exception' should not be thrown by user code.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service/Implements/FriendshipService.cs",
+                "region": {
+                  "startLine": 269,
+                  "startColumn": 23,
+                  "endLine": 269,
+                  "endColumn": 63
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
         }
       ],
       "rules": {
-        "CS0108": {
-          "id": "CS0108",
-          "shortDescription": "El miembro oculta el miembro heredado. Falta una contraseña nueva",
-          "fullDescription": "Se declaró una variable con el mismo nombre que una variable de un tipo base. Sin embargo, no se usó la palabra clave new. Esta advertencia le informa de que debería usar new. La variable se declaró como si new se hubiera usado en la declaración.",
+        "CS1998": {
+          "id": "CS1998",
+          "shortDescription": "El método asincrónico carece de operadores \"await\" y se ejecutará de forma sincrónica",
           "defaultLevel": "warning",
-          "helpUri": "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS0108)",
+          "helpUri": "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS1998)",
           "properties": {
             "category": "Compiler",
             "isEnabledByDefault": true,
@@ -930,23 +1034,6 @@
             "tags": [
               "C#",
               "MainSourceScope",
-              "SonarWay"
-            ]
-          }
-        },
-        "S1134": {
-          "id": "S1134",
-          "shortDescription": "Track uses of \"FIXME\" tags",
-          "fullDescription": "FIXME tags are commonly used to mark places where a bug is suspected, but which the developer wants to deal with later.",
-          "defaultLevel": "warning",
-          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-1134",
-          "properties": {
-            "category": "Major Code Smell",
-            "isEnabledByDefault": true,
-            "tags": [
-              "C#",
-              "MainSourceScope",
-              "TestSourceScope",
               "SonarWay"
             ]
           }
@@ -1018,6 +1105,22 @@
             ]
           }
         },
+        "S2386": {
+          "id": "S2386",
+          "shortDescription": "Mutable fields should not be \"public static\"",
+          "fullDescription": "public static mutable fields of classes which are accessed directly should be protected to the degree possible. This can be done by reducing the accessibility of the field or by changing the return type to an immutable type.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-2386",
+          "properties": {
+            "category": "Minor Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
         "S2583": {
           "id": "S2583",
           "shortDescription": "Conditionally executed code should be reachable",
@@ -1051,6 +1154,22 @@
             ]
           }
         },
+        "S3400": {
+          "id": "S3400",
+          "shortDescription": "Methods should not return constants",
+          "fullDescription": "There’s no point in forcing the overhead of a method call for a method that always returns the same constant value. Even worse, the fact that a method call must be made will likely mislead developers who call the method thinking that something more is done. Declare a constant instead.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-3400",
+          "properties": {
+            "category": "Minor Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
         "S3597": {
           "id": "S3597",
           "shortDescription": "\"ServiceContract\" and \"OperationContract\" attributes should be used together",
@@ -1059,6 +1178,40 @@
           "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-3597",
           "properties": {
             "category": "Major Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "TestSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S3598": {
+          "id": "S3598",
+          "shortDescription": "One-way \"OperationContract\" methods should have \"void\" return type",
+          "fullDescription": "When declaring a Windows Communication Foundation (WCF) OperationContract method as one-way, that service method won’t return any result, not even an underlying empty confirmation message. These are fire-and-forget methods that are useful in event-like communication. Therefore, specifying a return type has no effect and can confuse readers.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-3598",
+          "properties": {
+            "category": "Major Bug",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "TestSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S3887": {
+          "id": "S3887",
+          "shortDescription": "Mutable, non-private fields should not be \"readonly\"",
+          "fullDescription": "Using the readonly keyword on a field means it can’t be changed after initialization. However, that’s only partly true when applied to collections or arrays. The readonly keyword enforces that another instance can’t be assigned to the field, but it cannot keep the contents from being updated. In practice, the field value can be changed, and the use of readonly on such a field is misleading, and you’re likely not getting the behavior you expect.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-3887",
+          "properties": {
+            "category": "Minor Bug",
             "isEnabledByDefault": true,
             "tags": [
               "C#",
@@ -1080,6 +1233,23 @@
             "tags": [
               "C#",
               "MainSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S6602": {
+          "id": "S6602",
+          "shortDescription": "\"Find\" method should be used instead of the \"FirstOrDefault\" extension",
+          "fullDescription": "Both the List.Find method and IEnumerable.FirstOrDefault method can be used to find the first element that satisfies a given condition in a collection. However, List.Find can be faster than IEnumerable.FirstOrDefault for List objects. For small collections, the performance difference may be minor, but for large collections, it can make a noticeable difference. The same applies for ImmutableList and arrays too.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-6602",
+          "properties": {
+            "category": "Minor Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "TestSourceScope",
               "SonarWay"
             ]
           }

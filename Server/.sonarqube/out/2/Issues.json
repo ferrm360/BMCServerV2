@@ -6,29 +6,163 @@
       "tool": {
         "name": "Compilador de Microsoft (R) Visual C#",
         "version": "4.11.0.0",
-        "fileVersion": "4.11.0-3.24365.8 (9e9c7c1d)",
+        "fileVersion": "4.11.0-3.24460.3 (5649376e)",
         "semanticVersion": "4.11.0",
         "language": "es-MX"
       },
       "results": [
         {
-          "ruleId": "CS2001",
-          "level": "error",
-          "message": "No se encontró el archivo de origen 'C:\\Users\\neco3\\source\\repos\\RepositorioServidor\\BMCServerV2\\Server\\Service.Test\\Utilities\\TestOperationContextScope.cs'."
+          "ruleId": "S3260",
+          "level": "warning",
+          "message": "Private classes which are not derived in the current assembly should be marked as 'sealed'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Host/Program.cs",
+                "region": {
+                  "startLine": 90,
+                  "startColumn": 23,
+                  "endLine": 90,
+                  "endColumn": 40
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6667",
+          "level": "warning",
+          "message": "Logging in a catch clause should pass the caught exception as a parameter.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Host/Program.cs",
+                "region": {
+                  "startLine": 77,
+                  "startColumn": 21,
+                  "endLine": 77,
+                  "endColumn": 90
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S6667",
+          "level": "warning",
+          "message": "Logging in a catch clause should pass the caught exception as a parameter.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Host/Program.cs",
+                "region": {
+                  "startLine": 52,
+                  "startColumn": 17,
+                  "endLine": 52,
+                  "endColumn": 68
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S2629",
+          "level": "warning",
+          "message": "Don't use string concatenation in logging message templates.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Host/Program.cs",
+                "region": {
+                  "startLine": 52,
+                  "startColumn": 30,
+                  "endLine": 52,
+                  "endColumn": 67
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S2629",
+          "level": "warning",
+          "message": "Don't use string interpolation in logging message templates.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Host/Program.cs",
+                "region": {
+                  "startLine": 77,
+                  "startColumn": 34,
+                  "endLine": 77,
+                  "endColumn": 89
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
         }
       ],
       "rules": {
-        "CS2001": {
-          "id": "CS2001",
-          "defaultLevel": "error",
-          "helpUri": "https://msdn.microsoft.com/query/roslyn.query?appId=roslyn&k=k(CS2001)",
+        "S2629": {
+          "id": "S2629",
+          "shortDescription": "Logging templates should be constant",
+          "fullDescription": "Logging arguments should not require evaluation in order to avoid unnecessary performance overhead. When passing concatenated strings or string interpolations directly into a logging method, the evaluation of these expressions occurs every time the logging method is called, regardless of the log level. This can lead to inefficient code execution and increased resource consumption.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-2629",
           "properties": {
-            "category": "Compiler",
+            "category": "Major Code Smell",
             "isEnabledByDefault": true,
             "tags": [
-              "Compiler",
-              "Telemetry",
-              "NotConfigurable"
+              "C#",
+              "MainSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S3260": {
+          "id": "S3260",
+          "shortDescription": "Non-derived \"private\" classes and records should be \"sealed\"",
+          "fullDescription": "Classes and records with either private or file access modifiers aren’t visible outside of their assemblies or files, so if they’re not extended inside their scope, they should be made explicitly non-extensible with the addition of the sealed keyword.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-3260",
+          "properties": {
+            "category": "Minor Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "SonarWay"
+            ]
+          }
+        },
+        "S6667": {
+          "id": "S6667",
+          "shortDescription": "Logging in a catch clause should pass the caught exception as a parameter.",
+          "fullDescription": "This rule raises an issue on logging calls inside a catch clause that does not pass the raised Exception.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-6667",
+          "properties": {
+            "category": "Minor Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "MainSourceScope",
+              "SonarWay"
             ]
           }
         }

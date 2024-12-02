@@ -86,8 +86,6 @@ namespace Service.Implements
                 }
             }
 
-            var host = players.FirstOrDefault();
-
             _activeGames[lobbyId] = gameSession;
             PrintGameSessionsState();
             return OperationResponse.SuccessResult();
@@ -168,28 +166,7 @@ namespace Service.Implements
             return OperationResponse.SuccessResult();
         }
 
-        private void NotifyPlayersReadyStatus(GameSession gameSession, string readyPlayer)
-        {
-            foreach (var player in gameSession.GetPlayers())
-            {
-                if (player == readyPlayer) continue;
-
-                if (gameSession.TryGetCallback(player, out var callback))
-                {
-                    try
-                    {
-                        callback.OnPlayerReady(readyPlayer);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Error notificando al jugador {player}: {ex.Message}");
-                        gameSession.RemoveCallback(player);
-                    }
-                }
-            }
-        }
-
-        private void PrintGameSessionsState()
+        private static void PrintGameSessionsState()
         {
             if (_activeGames.IsEmpty)
             {

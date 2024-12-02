@@ -56,7 +56,6 @@
     <Compile Include="ChatMessages.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="FriendRequest.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -112,7 +111,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Utilities\DataAccessException.cs" />
-    <Compile Include="Utilities\ErrorMessagecs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
