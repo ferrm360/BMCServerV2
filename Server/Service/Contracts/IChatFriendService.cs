@@ -22,6 +22,6 @@ namespace Service.Contracts
     public interface IChatFriendCallback
     {
         [OperationContract(IsOneWay = true)]
-        void ReceiveMessage(MessageFriendDTO message);
+        void ReceiveMessage(string sender, string receiver, string message);
     }
 }

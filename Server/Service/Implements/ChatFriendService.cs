@@ -62,7 +62,7 @@ namespace Service.Implements
                     _connectionManager.GetActiveUsers().TryGetValue(receiverUsername, out var receiverChannel))
                 {
                     var receiverCallback = receiverChannel.GetProperty<IChatFriendCallback>();
-                    receiverCallback?.ReceiveMessage(messageDto);
+                    receiverCallback?.ReceiveMessage(messageDto.SenderUsername, messageDto.ReceiverUsername,messageDto.Message);
                 }
 
                 return OperationResponse.SuccessResult();

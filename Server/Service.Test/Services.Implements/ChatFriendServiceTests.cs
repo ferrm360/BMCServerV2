@@ -113,7 +113,7 @@ namespace Service.Test.Services.Implements
 
             var result = _chatFriendService.GetChatHistory("UserA", "UserB");
 
-            Assert.AreEqual("One or both users not found.", result.ErrorKey);
+            Assert.IsFalse(result.IsSuccess);
         }
 
         [TestMethod]

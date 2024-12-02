@@ -87,6 +87,7 @@ namespace Service.Implements
             };
 
             return LobbyResponse.SuccessResult(lobbyDto);
+            
         }
 
         public LobbyResponse LeaveLobby(string lobbyId, string username)
