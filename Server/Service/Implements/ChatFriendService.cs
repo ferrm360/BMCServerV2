@@ -6,7 +6,6 @@ using Service.Results;
 using Service.Utilities.Constans;
 using Service.Utilities.Results;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 
@@ -48,12 +47,14 @@ namespace Service.Implements
 
             try
             {
-                _chatMessagesRepository.AddMessage(sender.PlayerID, receiver.PlayerID, message);
+                var formattedMessage = $"{senderUsername}: {message}";
+                _chatMessagesRepository.AddMessage(sender.PlayerID, receiver.PlayerID, formattedMessage);
 
                 var messageDto = new MessageFriendDTO
                 {
+                    ReceiverUsername = senderUsername,
                     SenderUsername = senderUsername,
-                    Message = message,
+                    Message = formattedMessage,
                     Timestamp = DateTime.Now
                 };
 

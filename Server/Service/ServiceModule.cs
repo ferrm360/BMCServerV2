@@ -22,7 +22,6 @@ namespace Service
             builder.RegisterType<GameService>().As<IGameService>().SingleInstance();
             builder.RegisterType<ChatLobbyService>().As<IChatLobbyService>().SingleInstance();
 
-
             builder.RegisterType<PlayerRepository>().As<IPlayerRepository>().InstancePerLifetimeScope();
             builder.RegisterType<ProfileRepository>().As<IProfileRepository>().InstancePerLifetimeScope();
             builder.RegisterType<PlayerScoresRepository>().As<IPlayerScoresRepository>().InstancePerLifetimeScope();
@@ -30,8 +29,7 @@ namespace Service
             builder.RegisterType<ChatMessagesRepository>().As<IChatMessagesRepository>().InstancePerLifetimeScope();
             builder.RegisterType<PlayerScoresRepository>().As<IPlayerScoresRepository>().InstancePerLifetimeScope();
             builder.RegisterType<GuestPlayerService>().As<IGuestPlayerService>().InstancePerLifetimeScope();
-
-
+            builder.RegisterType<EmailService>().As<IEmailService>().InstancePerLifetimeScope();
 
             builder.RegisterType<ValidationFriendshipService>().AsSelf().InstancePerLifetimeScope();
 

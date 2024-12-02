@@ -38,7 +38,8 @@ namespace Host
                         new ServiceDefinition(typeof(PlayerScoresService), typeof(IPlayerScoresService), "PlayerScoresService"),
                         new ServiceDefinition(typeof(GameService), typeof(IGameService), "GameService"),
                         new ServiceDefinition(typeof(ChatLobbyService), typeof(IChatLobbyService), "ChatLobbyService"),
-                        new ServiceDefinition(typeof(GuestPlayerService), typeof(IGuestPlayerService), "GuestPlayerService")
+                        new ServiceDefinition(typeof(GuestPlayerService), typeof(IGuestPlayerService), "GuestPlayerService"),
+                        new ServiceDefinition(typeof(EmailService), typeof(IEmailService), "EmailService")
                     };
 
                     StartServices(services, scope);
