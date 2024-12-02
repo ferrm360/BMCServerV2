@@ -22,7 +22,6 @@ namespace Service.Implements
         {
             if (!_activeGames.TryGetValue(lobbyId, out var gameSession))
             {
-                Console.WriteLine($"Lobby con ID {lobbyId} no encontrado.");
                 return OperationResponse.Failure("Game not found.");
             }
 
@@ -47,8 +46,7 @@ namespace Service.Implements
                     opponentCallback.OnAttackReceived(attackPosition);
                     Console.WriteLine($"Ataque enviado a {opponent}: Posición X={attackPosition.X}, Y={attackPosition.Y}.");
 
-                    gameSession.RotateTurn();  // Cambia el turno después del ataque.
-                    Console.WriteLine("Despues de rotate");
+                    gameSession.RotateTurnAsync();
                     return OperationResponse.SuccessResult("Attack sent.");
                 }
                 catch (Exception ex)
@@ -166,6 +164,8 @@ namespace Service.Implements
             return OperationResponse.SuccessResult();
         }
 
+
+
         private static void PrintGameSessionsState()
         {
             if (_activeGames.IsEmpty)
@@ -184,6 +184,47 @@ namespace Service.Implements
                     var isReady = gameSession.IsPlayerReady(player) ? "Sí" : "No";
                     Console.WriteLine($"  Jugador: {player} - Listo: {isReady}");
                 }
+            }
+        }
+
+        public async Task<OperationResponse> NotifyGameOverAsync(string lobbyId, string looser)
+        {
+            Console.WriteLine("Callback antes");
+            if (!_activeGames.TryGetValue(lobbyId, out var gameSession))
+            {
+                return OperationResponse.Failure("Game not found.");
+            }
+
+            Console.WriteLine($"{lobbyId} {looser}");
+            var opponent = gameSession.GetOpponent(looser);
+            if (opponent == null)
+            {
+                return OperationResponse.Failure("Opponent not found.");
+            }
+
+
+            Console.WriteLine("Callback antes");
+            if (gameSession.TryGetCallback(opponent, out var opponentCallback))
+            {
+                try
+                {
+                    var tasks = new List<Task>();
+                    Console.WriteLine("Callback despues");
+                    tasks.Add(Task.Run(() =>
+                    {
+                            opponentCallback.OnGameOver();
+                    }));
+                    await Task.WhenAll(tasks);
+                    return OperationResponse.SuccessResult();
+                }
+                catch (Exception ex) { 
+                    return OperationResponse.Failure(ex.ToString());
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Callback para el oponente '{opponent}' no disponible en la lobby '{lobbyId}'.");
+                return OperationResponse.Failure("No se recupero el callback");
             }
         }
     }

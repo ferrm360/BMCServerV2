@@ -38,6 +38,8 @@ namespace Service.Contracts
         [OperationContract]
         Task<OperationResponse> AttackAsync(string lobbyId, string attacker, AttackPositionDTO attackPosition);
 
+        [OperationContract]
+        Task<OperationResponse> NotifyGameOverAsync(string lobbyId, string looser);
     }
 
     public interface IGameCallback
@@ -61,5 +63,7 @@ namespace Service.Contracts
         [OperationContract(IsOneWay = true)]
         Task OnTurnChangedAsync(bool isPlayerTurn);
 
+        [OperationContract(IsOneWay = true)]
+        void OnGameOver();
     }
 }

@@ -21,7 +21,6 @@ namespace Service.Email
             return emailConfig.AppSettings.Settings["EmailFromAddress"]?.Value;
         }
 
-
         public static SmtpClient GetSmtpClient()
         {
             var emailConfig = GetEmailSettingsConfiguration();
