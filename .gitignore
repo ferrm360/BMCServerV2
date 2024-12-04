@@ -12,6 +12,7 @@
 
 
 Server/.sonarqube/
+.sonarqube/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

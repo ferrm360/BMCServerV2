@@ -189,13 +189,11 @@ namespace Service.Implements
 
         public async Task<OperationResponse> NotifyGameOverAsync(string lobbyId, string looser)
         {
-            Console.WriteLine("Callback antes");
             if (!_activeGames.TryGetValue(lobbyId, out var gameSession))
             {
                 return OperationResponse.Failure("Game not found.");
             }
 
-            Console.WriteLine($"{lobbyId} {looser}");
             var opponent = gameSession.GetOpponent(looser);
             if (opponent == null)
             {
@@ -203,7 +201,6 @@ namespace Service.Implements
             }
 
 
-            Console.WriteLine("Callback antes");
             if (gameSession.TryGetCallback(opponent, out var opponentCallback))
             {
                 try
