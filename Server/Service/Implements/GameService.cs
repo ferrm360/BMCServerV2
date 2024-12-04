@@ -17,13 +17,6 @@ namespace Service.Implements
     {
         public static readonly ConcurrentDictionary<string, GameSession> _activeGames = new ConcurrentDictionary<string, GameSession>();
 
-        private readonly LobbyService _lobbyService;
-
-        public GameService(LobbyService lobbyService)
-        {
-            _lobbyService = lobbyService ?? throw new ArgumentNullException(nameof(lobbyService));
-        }
-
         public async Task<OperationResponse> AttackAsync(string lobbyId, string attacker, AttackPositionDTO attackPosition)
         {
             if (!_activeGames.TryGetValue(lobbyId, out var gameSession))
@@ -217,9 +210,6 @@ namespace Service.Implements
                     {
                             opponentCallback.OnGameOver();
                     }));
-
-                    _activeGames.TryRemove(lobbyId, out _);
-                    _lobbyService.RemoveLobby(lobbyId);
 
                     await Task.WhenAll(tasks);
                     return OperationResponse.SuccessResult();
