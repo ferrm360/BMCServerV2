@@ -224,5 +224,44 @@ namespace Service.Implements
                 return OperationResponse.Failure("No se recupero el callback");
             }
         }
+
+        public async Task<OperationResponse> NotifyCellDead(string lobbyId, string looser, string cardName)
+        {
+            if (!_activeGames.TryGetValue(lobbyId, out var gameSession))
+            {
+                return OperationResponse.Failure("Game not found.");
+            }
+
+            var opponent = gameSession.GetOpponent(looser);
+            if (opponent == null)
+            {
+                return OperationResponse.Failure("Opponent not found.");
+            }
+
+
+            if (gameSession.TryGetCallback(opponent, out var opponentCallback))
+            {
+                try
+                {
+                    var tasks = new List<Task>();
+                    tasks.Add(Task.Run(() =>
+                    {
+                        opponentCallback.OnCellDead(cardName);
+                    }));
+                    await Task.WhenAll(tasks);
+                    return OperationResponse.SuccessResult();
+                }
+                catch (Exception ex)
+                {
+                    return OperationResponse.Failure(ex.ToString());
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Callback para el oponente '{opponent}' no disponible en la lobby '{lobbyId}'.");
+                return OperationResponse.Failure("No se recupero el callback");
+            }
+
+        }
     }
 }
