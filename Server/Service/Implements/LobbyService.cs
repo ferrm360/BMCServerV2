@@ -295,5 +295,18 @@ namespace Service.Implements
             return allNotificationsSuccessful;
         }
 
+        public void RemoveLobby(string lobbyId)
+        {
+            if (_activeLobbies.ContainsKey(lobbyId))
+            {
+                _activeLobbies.Remove(lobbyId);
+                Console.WriteLine($"Lobby {lobbyId} eliminada de los lobbies activos.");
+            }
+            else
+            {
+                Console.WriteLine($"Lobby {lobbyId} no encontrada.");
+            }
+        }
+
     }
 }

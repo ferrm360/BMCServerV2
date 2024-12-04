@@ -7,7 +7,6 @@ using Service.Utilities.Constans;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
 
@@ -17,6 +16,13 @@ namespace Service.Implements
     public class GameService : IGameService
     {
         public static readonly ConcurrentDictionary<string, GameSession> _activeGames = new ConcurrentDictionary<string, GameSession>();
+
+        private readonly LobbyService _lobbyService;
+
+        public GameService(LobbyService lobbyService)
+        {
+            _lobbyService = lobbyService ?? throw new ArgumentNullException(nameof(lobbyService));
+        }
 
         public async Task<OperationResponse> AttackAsync(string lobbyId, string attacker, AttackPositionDTO attackPosition)
         {
@@ -211,6 +217,10 @@ namespace Service.Implements
                     {
                             opponentCallback.OnGameOver();
                     }));
+
+                    _activeGames.TryRemove(lobbyId, out _);
+                    _lobbyService.RemoveLobby(lobbyId);
+
                     await Task.WhenAll(tasks);
                     return OperationResponse.SuccessResult();
                 }
@@ -227,7 +237,6 @@ namespace Service.Implements
 
         public async Task<OperationResponse> NotifyCellDeadAsync(CellDeadDTO cellDeadDTO)
         {
-            Console.WriteLine("Meow");
             if (!_activeGames.TryGetValue(cellDeadDTO.LobbyId, out var gameSession))
             {
                 return OperationResponse.Failure("Game not found.");
@@ -239,7 +248,6 @@ namespace Service.Implements
                 return OperationResponse.Failure("Opponent not found.");
             }
 
-            Console.WriteLine("Meowcallback");
             if (gameSession.TryGetCallback(opponent, out var opponentCallback))
             {
                 try
@@ -249,6 +257,7 @@ namespace Service.Implements
                     {
                         opponentCallback.OnCellDead(cellDeadDTO);
                     }));
+
                     await Task.WhenAll(tasks);
                     return OperationResponse.SuccessResult();
                 }
