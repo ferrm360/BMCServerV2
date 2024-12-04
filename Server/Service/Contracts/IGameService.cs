@@ -42,7 +42,7 @@ namespace Service.Contracts
         Task<OperationResponse> NotifyGameOverAsync(string lobbyId, string looser);
 
         [OperationContract]
-        Task<OperationResponse> NotifyCellDead(string lobbyId, string looser, string cardName);
+        Task<OperationResponse> NotifyCellDeadAsync(CellDeadDTO cellDeadDTO);
     }
 
     public interface IGameCallback
@@ -70,6 +70,6 @@ namespace Service.Contracts
         void OnGameOver();
 
         [OperationContract(IsOneWay = true)]
-        void OnCellDead(string cardName);
+        void OnCellDead(CellDeadDTO cellDeadDTO);
     }
 }

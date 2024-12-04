@@ -225,20 +225,21 @@ namespace Service.Implements
             }
         }
 
-        public async Task<OperationResponse> NotifyCellDead(string lobbyId, string looser, string cardName)
+        public async Task<OperationResponse> NotifyCellDeadAsync(CellDeadDTO cellDeadDTO)
         {
-            if (!_activeGames.TryGetValue(lobbyId, out var gameSession))
+            Console.WriteLine("Meow");
+            if (!_activeGames.TryGetValue(cellDeadDTO.LobbyId, out var gameSession))
             {
                 return OperationResponse.Failure("Game not found.");
             }
 
-            var opponent = gameSession.GetOpponent(looser);
+            var opponent = gameSession.GetOpponent(cellDeadDTO.Looser);
             if (opponent == null)
             {
                 return OperationResponse.Failure("Opponent not found.");
             }
 
-
+            Console.WriteLine("Meowcallback");
             if (gameSession.TryGetCallback(opponent, out var opponentCallback))
             {
                 try
@@ -246,7 +247,7 @@ namespace Service.Implements
                     var tasks = new List<Task>();
                     tasks.Add(Task.Run(() =>
                     {
-                        opponentCallback.OnCellDead(cardName);
+                        opponentCallback.OnCellDead(cellDeadDTO);
                     }));
                     await Task.WhenAll(tasks);
                     return OperationResponse.SuccessResult();
@@ -258,7 +259,7 @@ namespace Service.Implements
             }
             else
             {
-                Console.WriteLine($"Callback para el oponente '{opponent}' no disponible en la lobby '{lobbyId}'.");
+                Console.WriteLine($"Callback para el oponente '{opponent}' no disponible en la lobby '{cellDeadDTO.LobbyId}'.");
                 return OperationResponse.Failure("No se recupero el callback");
             }
 
