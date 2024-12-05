@@ -24,5 +24,7 @@ namespace Service.DTO
         public string Host { get; set; }
         [DataMember]
         public List<string> Players { get; set; } = new List<string>();
+        [DataMember]
+        public string Password { get; set; }
     }
 }

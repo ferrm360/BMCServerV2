@@ -186,14 +186,14 @@ namespace Service.Implements
             }
         }
 
-        public async Task<OperationResponse> NotifyGameOverAsync(string lobbyId, string looser)
+        public async Task<OperationResponse> NotifyGameOverAsync(string lobbyId, string loser)
         {
             if (!_activeGames.TryGetValue(lobbyId, out var gameSession))
             {
                 return OperationResponse.Failure("Game not found.");
             }
 
-            var opponent = gameSession.GetOpponent(looser);
+            var opponent = gameSession.GetOpponent(loser);
             if (opponent == null)
             {
                 return OperationResponse.Failure("Opponent not found.");
@@ -205,10 +205,9 @@ namespace Service.Implements
                 try
                 {
                     var tasks = new List<Task>();
-                    Console.WriteLine("Callback despues");
                     tasks.Add(Task.Run(() =>
                     {
-                            opponentCallback.OnGameOver();
+                            opponentCallback.OnGameOver(loser);
                     }));
 
                     await Task.WhenAll(tasks);

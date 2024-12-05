@@ -31,6 +31,5 @@
         public const string PlayerNotInLobby = "Error.PlayerNotInLobby";
 
         public const string ScoreNotFound = "Error.ScoreNotFound";
-
     }
 }

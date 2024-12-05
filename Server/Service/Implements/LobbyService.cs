@@ -9,6 +9,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.Threading.Tasks;
 
 namespace Service.Implements
 {
@@ -179,6 +180,7 @@ namespace Service.Implements
 
             foreach (var player in lobby.Players)
             {
+                Console.WriteLine(player);
                 if (player != playerLeft && _connectedPlayers.TryGetValue(player, out var callback))
                 {
                     try
@@ -227,9 +229,47 @@ namespace Service.Implements
             }
 
             lobby.RemovePlayer(targetUsername);
-            _connectedPlayers.TryRemove(targetUsername, out _);
 
-            NotifyPlayerLeft(lobby, targetUsername);
+            Task.Run(() =>
+            {
+                if (TryGetLobbyCallback(targetUsername, out var targetCallback))
+                {
+                    try
+                    {
+                        targetCallback.NotifyPlayerKicked();
+                        _connectedPlayers.TryRemove(targetUsername, out _);
+                        HandleClientDisconnect(targetUsername);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error notificando al jugador expulsado {targetUsername}: {ex.Message}");
+                        HandleClientDisconnect(targetUsername);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"El jugador {targetUsername} ya no está conectado.");
+                }
+            });
+
+            Task.Run(() =>
+            {
+                if (TryGetLobbyCallback(hostUsername, out var hostCallback))
+                {
+                    try
+                    {
+                        hostCallback.NotifyPlayerLeft(targetUsername, lobbyId);
+                        hostCallback.NotifyPlayerLeftMessage($"{targetUsername} has been kicked");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error notificando al host {hostUsername}: {ex.Message}");
+                        HandleClientDisconnect(hostUsername);
+                    }
+                }
+            });
 
             var lobbyDto = new LobbyDTO
             {
@@ -239,11 +279,13 @@ namespace Service.Implements
                 CurrentPlayers = lobby.Players.Count,
                 MaxPlayers = lobby.MaxPlayers,
                 Host = lobby.Host,
+                Password = lobby.Password,
                 Players = new List<string>(lobby.Players)
             };
 
             return LobbyResponse.SuccessResult(lobbyDto);
         }
+
 
         public OperationResponse StartGame(string lobbyId, string hostUsername)
         {
@@ -306,6 +348,11 @@ namespace Service.Implements
             {
                 Console.WriteLine($"Lobby {lobbyId} no encontrada.");
             }
+        }
+
+        private bool TryGetLobbyCallback(string player, out ILobbyCallback callback)
+        {
+            return _connectedPlayers.TryGetValue(player, out callback);
         }
 
     }

@@ -39,7 +39,7 @@ namespace Service.Contracts
         Task<OperationResponse> AttackAsync(string lobbyId, string attacker, AttackPositionDTO attackPosition);
 
         [OperationContract]
-        Task<OperationResponse> NotifyGameOverAsync(string lobbyId, string looser);
+        Task<OperationResponse> NotifyGameOverAsync(string lobbyId, string loser);
 
         [OperationContract]
         Task<OperationResponse> NotifyCellDeadAsync(CellDeadDTO cellDeadDTO);
@@ -67,7 +67,7 @@ namespace Service.Contracts
         Task OnTurnChangedAsync(bool isPlayerTurn);
 
         [OperationContract(IsOneWay = true)]
-        void OnGameOver();
+        void OnGameOver(string loser);
 
         [OperationContract(IsOneWay = true)]
         void OnCellDead(CellDeadDTO cellDeadDTO);

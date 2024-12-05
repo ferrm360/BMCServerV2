@@ -1,6 +1,7 @@
-﻿using System.Configuration;
-using System.Net.Mail;
+﻿using System;
+using System.Configuration;
 using System.Net;
+using System.Net.Mail;
 
 namespace Service.Email
 {
@@ -8,34 +9,69 @@ namespace Service.Email
     {
         private static Configuration GetEmailSettingsConfiguration()
         {
-            var configMap = new ExeConfigurationFileMap
+            try
             {
-                ExeConfigFilename = @"emailSettings.config"
-            };
-            return ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
+                // Usar el archivo de configuración por defecto
+                return ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error al cargar el archivo de configuración de correo.", ex);
+            }
         }
 
         public static string GetFromAddress()
         {
-            var emailConfig = GetEmailSettingsConfiguration();
-            return emailConfig.AppSettings.Settings["EmailFromAddress"]?.Value;
+            try
+            {
+                var emailConfig = GetEmailSettingsConfiguration();
+                string fromAddress = emailConfig.AppSettings.Settings["EmailFromAddress"]?.Value;
+
+                if (string.IsNullOrEmpty(fromAddress))
+                {
+                    throw new InvalidOperationException("La dirección 'EmailFromAddress' no está configurada en el archivo de configuración.");
+                }
+
+                return fromAddress;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error al obtener la dirección 'EmailFromAddress' desde la configuración.", ex);
+            }
         }
 
         public static SmtpClient GetSmtpClient()
         {
-            var emailConfig = GetEmailSettingsConfiguration();
-
-            var smtpClient = new SmtpClient
+            try
             {
-                Host = emailConfig.AppSettings.Settings["SmtpHost"]?.Value,
-                Port = int.Parse(emailConfig.AppSettings.Settings["SmtpPort"]?.Value ?? "25"),
-                EnableSsl = bool.Parse(emailConfig.AppSettings.Settings["EnableSsl"]?.Value ?? "false"),
-                Credentials = new NetworkCredential(
-                    emailConfig.AppSettings.Settings["SmtpUsername"]?.Value,
-                    emailConfig.AppSettings.Settings["SmtpPassword"]?.Value
-                )
-            };
-            return smtpClient;
+                var emailConfig = GetEmailSettingsConfiguration();
+
+                string smtpHost = emailConfig.AppSettings.Settings["SmtpHost"]?.Value;
+                string smtpPortString = emailConfig.AppSettings.Settings["SmtpPort"]?.Value;
+                string smtpUsername = emailConfig.AppSettings.Settings["SmtpUsername"]?.Value;
+                string smtpPassword = emailConfig.AppSettings.Settings["SmtpPassword"]?.Value;
+                bool enableSsl = bool.Parse(emailConfig.AppSettings.Settings["EnableSsl"]?.Value ?? "true");
+
+                if (string.IsNullOrEmpty(smtpHost) || string.IsNullOrEmpty(smtpUsername) || string.IsNullOrEmpty(smtpPassword))
+                {
+                    throw new InvalidOperationException("Faltan configuraciones importantes para el cliente SMTP.");
+                }
+
+                int smtpPort = string.IsNullOrEmpty(smtpPortString) ? 587 : int.Parse(smtpPortString);
+
+                var smtpClient = new SmtpClient(smtpHost)
+                {
+                    Port = smtpPort,
+                    Credentials = new NetworkCredential(smtpUsername, smtpPassword),
+                    EnableSsl = enableSsl
+                };
+
+                return smtpClient;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error al configurar el cliente SMTP desde la configuración.", ex);
+            }
         }
     }
 }
