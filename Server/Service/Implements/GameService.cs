@@ -7,7 +7,6 @@ using Service.Utilities.Constans;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
 
@@ -22,7 +21,6 @@ namespace Service.Implements
         {
             if (!_activeGames.TryGetValue(lobbyId, out var gameSession))
             {
-                Console.WriteLine($"Lobby con ID {lobbyId} no encontrado.");
                 return OperationResponse.Failure("Game not found.");
             }
 
@@ -47,8 +45,7 @@ namespace Service.Implements
                     opponentCallback.OnAttackReceived(attackPosition);
                     Console.WriteLine($"Ataque enviado a {opponent}: Posición X={attackPosition.X}, Y={attackPosition.Y}.");
 
-                    gameSession.RotateTurn();  // Cambia el turno después del ataque.
-                    Console.WriteLine("Despues de rotate");
+                    gameSession.RotateTurnAsync();
                     return OperationResponse.SuccessResult("Attack sent.");
                 }
                 catch (Exception ex)
@@ -166,6 +163,8 @@ namespace Service.Implements
             return OperationResponse.SuccessResult();
         }
 
+
+
         private static void PrintGameSessionsState()
         {
             if (_activeGames.IsEmpty)
@@ -185,6 +184,83 @@ namespace Service.Implements
                     Console.WriteLine($"  Jugador: {player} - Listo: {isReady}");
                 }
             }
+        }
+
+        public async Task<OperationResponse> NotifyGameOverAsync(string lobbyId, string loser)
+        {
+            if (!_activeGames.TryGetValue(lobbyId, out var gameSession))
+            {
+                return OperationResponse.Failure("Game not found.");
+            }
+
+            var opponent = gameSession.GetOpponent(loser);
+            if (opponent == null)
+            {
+                return OperationResponse.Failure("Opponent not found.");
+            }
+
+
+            if (gameSession.TryGetCallback(opponent, out var opponentCallback))
+            {
+                try
+                {
+                    var tasks = new List<Task>();
+                    tasks.Add(Task.Run(() =>
+                    {
+                            opponentCallback.OnGameOver(loser);
+                    }));
+
+                    await Task.WhenAll(tasks);
+                    return OperationResponse.SuccessResult();
+                }
+                catch (Exception ex) { 
+                    return OperationResponse.Failure(ex.ToString());
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Callback para el oponente '{opponent}' no disponible en la lobby '{lobbyId}'.");
+                return OperationResponse.Failure("No se recupero el callback");
+            }
+        }
+
+        public async Task<OperationResponse> NotifyCellDeadAsync(CellDeadDTO cellDeadDTO)
+        {
+            if (!_activeGames.TryGetValue(cellDeadDTO.LobbyId, out var gameSession))
+            {
+                return OperationResponse.Failure("Game not found.");
+            }
+
+            var opponent = gameSession.GetOpponent(cellDeadDTO.Looser);
+            if (opponent == null)
+            {
+                return OperationResponse.Failure("Opponent not found.");
+            }
+
+            if (gameSession.TryGetCallback(opponent, out var opponentCallback))
+            {
+                try
+                {
+                    var tasks = new List<Task>();
+                    tasks.Add(Task.Run(() =>
+                    {
+                        opponentCallback.OnCellDead(cellDeadDTO);
+                    }));
+
+                    await Task.WhenAll(tasks);
+                    return OperationResponse.SuccessResult();
+                }
+                catch (Exception ex)
+                {
+                    return OperationResponse.Failure(ex.ToString());
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Callback para el oponente '{opponent}' no disponible en la lobby '{cellDeadDTO.LobbyId}'.");
+                return OperationResponse.Failure("No se recupero el callback");
+            }
+
         }
     }
 }

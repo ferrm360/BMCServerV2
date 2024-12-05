@@ -18,7 +18,6 @@ namespace DataAccess.Repositories
             _context = context;
         }
 
-
         public Player GetByUsername(string username)
         {
             if (string.IsNullOrEmpty(username))

@@ -4,22 +4,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.Repositories;
+
 
 namespace Service.Email.Templates
 {
-    public static class TemplateFactory
+    public class TemplateFactory
     {
-        public static (string Subject, string Body) GetTemplate(EmailDTO emailDto)
+        private IPlayerRepository _playerRepository;
+
+        public TemplateFactory(IPlayerRepository playerRepository)
+        {
+            _playerRepository = playerRepository;
+        }
+
+
+        public (string Subject, string Body) GetTemplate(EmailDTO emailDto)
         {
             switch (emailDto.EmailType.ToLower())
             {
                 case "changepassword":
+
                     return (
                         ChangePasswordTemplate.GetSubject(),
                         ChangePasswordTemplate.GetBody(emailDto.Username, emailDto.VerificationCode)
                     );
 
                 case "lobbyinvite":
+                    string playerEmail = GetPlayerEmailByUsername(emailDto.Username);
+                    emailDto.Recipient = playerEmail;
+
                     return (
                         LobbyTemplate.GetSubject(),
                         LobbyTemplate.GetBody(emailDto)
@@ -35,5 +49,17 @@ namespace Service.Email.Templates
                     throw new ArgumentException("Unsupported email type.");
             }
         }
+
+        
+        private string GetPlayerEmailByUsername(string username)
+        {
+            var player = _playerRepository.GetByUsername(username);
+            if (player == null)
+            {
+                throw new ArgumentException($"Player with username {username} not found.");
+            }
+            return player.Email;
+        }
+        
     }
 }

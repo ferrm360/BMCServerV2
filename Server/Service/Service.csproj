@@ -141,7 +141,9 @@
     <Compile Include="Contracts\IProfileService.cs" />
     <Compile Include="Contracts\IUserConnectionManager.cs" />
     <Compile Include="DTO\AttackPositionDTO.cs" />
+    <Compile Include="DTO\CellDeadDto.cs" />
     <Compile Include="DTO\EmailDTO.cs" />
+    <Compile Include="DTO\FlipCardDTO.cs" />
     <Compile Include="DTO\FriendRequestDTO.cs" />
     <Compile Include="DTO\GameBoardDTO.cs" />
     <Compile Include="DTO\JoinLobbyRequestDTO.cs" />

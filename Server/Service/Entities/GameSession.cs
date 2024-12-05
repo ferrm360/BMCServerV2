@@ -99,46 +99,41 @@ namespace Service.Entities
             return _players[_currentTurnIndex];
         }
 
-        public void RotateTurn()
+
+        public async Task RotateTurnAsync()
         {
             var previousPlayer = _players[(_currentTurnIndex - 1 + _players.Count) % _players.Count];
             Console.WriteLine($"Notificando a {previousPlayer} que ya no es su turno.");
 
-            if (_gameCallbackChannels.TryGetValue(previousPlayer, out var previousCallback))
-            {
-                _ = Task.Run(async () =>
-                {
-                    try
-                    {
-                        await previousCallback.OnTurnChangedAsync(false);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Error al notificar a {previousPlayer}: {ex.Message}");
-                    }
-                });
-            }
+            var previousTask = NotifyPlayerTurnChangeAsync(previousPlayer, false);
 
             _currentTurnIndex = (_currentTurnIndex + 1) % _players.Count;
             string currentPlayer = GetCurrentPlayer();
 
             Console.WriteLine($"Es el turno de {currentPlayer}");
 
-            if (_gameCallbackChannels.TryGetValue(currentPlayer, out var currentCallback))
-            {
-                _ = Task.Run(async () =>
-                {
-                    try
-                    {
-                        await currentCallback.OnTurnChangedAsync(true);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Error al notificar a {currentPlayer}: {ex.Message}");
-                    }
-                });
-            }
+            var currentTask = NotifyPlayerTurnChangeAsync(currentPlayer, true);
 
+            await Task.WhenAll(previousTask, currentTask);
         }
+
+        private async Task NotifyPlayerTurnChangeAsync(string player, bool isPlayerTurn)
+        {
+            if (_gameCallbackChannels.TryGetValue(player, out var callback))
+            {
+                try
+                {
+                    await callback.OnTurnChangedAsync(isPlayerTurn);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al notificar a {player}: {ex.Message}");
+                    RemoveCallback(player);
+                }
+            }
+        }
+
+
     }
 }
+
