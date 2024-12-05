@@ -2,5 +2,5 @@ projectKey=ServerScan
 serverUrl=http://localhost:9000
 serverVersion=10.7.0.96327
 dashboardUrl=http://localhost:9000/dashboard?id=ServerScan
-ceTaskId=b63998ed-a9b3-4f1f-b910-de7dcde54aab
-ceTaskUrl=http://localhost:9000/api/ce/task?id=b63998ed-a9b3-4f1f-b910-de7dcde54aab
+ceTaskId=a64071ac-c163-4f8c-b2fe-5ec131cd80b7
+ceTaskUrl=http://localhost:9000/api/ce/task?id=a64071ac-c163-4f8c-b2fe-5ec131cd80b7

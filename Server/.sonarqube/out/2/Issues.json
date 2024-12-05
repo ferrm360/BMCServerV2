@@ -20,9 +20,9 @@
               "resultFile": {
                 "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Host/Program.cs",
                 "region": {
-                  "startLine": 90,
+                  "startLine": 94,
                   "startColumn": 23,
-                  "endLine": 90,
+                  "endLine": 94,
                   "endColumn": 40
                 }
               }
@@ -41,9 +41,9 @@
               "resultFile": {
                 "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Host/Program.cs",
                 "region": {
-                  "startLine": 77,
+                  "startLine": 81,
                   "startColumn": 21,
-                  "endLine": 77,
+                  "endLine": 81,
                   "endColumn": 90
                 }
               }
@@ -62,31 +62,10 @@
               "resultFile": {
                 "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Host/Program.cs",
                 "region": {
-                  "startLine": 52,
+                  "startLine": 53,
                   "startColumn": 17,
-                  "endLine": 52,
+                  "endLine": 53,
                   "endColumn": 68
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S2629",
-          "level": "warning",
-          "message": "Don't use string concatenation in logging message templates.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Host/Program.cs",
-                "region": {
-                  "startLine": 52,
-                  "startColumn": 30,
-                  "endLine": 52,
-                  "endColumn": 67
                 }
               }
             }
@@ -104,10 +83,31 @@
               "resultFile": {
                 "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Host/Program.cs",
                 "region": {
-                  "startLine": 77,
+                  "startLine": 81,
                   "startColumn": 34,
-                  "endLine": 77,
+                  "endLine": 81,
                   "endColumn": 89
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S2629",
+          "level": "warning",
+          "message": "Don't use string concatenation in logging message templates.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Host/Program.cs",
+                "region": {
+                  "startLine": 53,
+                  "startColumn": 30,
+                  "endLine": 53,
+                  "endColumn": 67
                 }
               }
             }

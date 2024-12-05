@@ -145,7 +145,6 @@
     <Compile Include="DTO\EmailDTO.cs" />
     <Compile Include="DTO\FlipCardDTO.cs" />
     <Compile Include="DTO\FriendRequestDTO.cs" />
-    <Compile Include="DTO\GameBoardDTO.cs" />
     <Compile Include="DTO\JoinLobbyRequestDTO.cs" />
     <Compile Include="DTO\LobbyDTO.cs" />
     <Compile Include="DTO\CreateLobbyRequestDTO.cs" />

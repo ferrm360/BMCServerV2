@@ -63,8 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\GameBoardDTOTests.cs" />
-    <Compile Include="Email\EmailServiceTests.cs" />
     <Compile Include="Service.Connection\Managers\ConnectionEventHandlerTest.cs" />
     <Compile Include="Service.Connection\Managers\ConnectionManagerTest.cs" />
     <Compile Include="Services.Implements\AccountServiceTest.cs" />
@@ -87,7 +85,10 @@
       <Name>Service</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DTO\" />
+    <Folder Include="Email\" />
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
