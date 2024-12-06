@@ -24,8 +24,8 @@ namespace Service.Test.Service.Connection.Managers
         [TestMethod]
         public void RegisterChannelEvents_ShouldUnregisterUser_OnClosedEvent()
         {
-            _connectionManager.RegisterUser("TestUser", _mockChannel.Object);
-            _connectionEventHandler.RegisterChannelEvents("TestUser", _mockChannel.Object);
+            _connectionManager.RegisterUser("Fer", _mockChannel.Object);
+            _connectionEventHandler.RegisterChannelEvents("Fer", _mockChannel.Object);
 
             _mockChannel.Raise(channel => channel.Closed += null, EventArgs.Empty);
 
@@ -35,12 +35,12 @@ namespace Service.Test.Service.Connection.Managers
         [TestMethod]
         public void RegisterChannelEvents_ShouldUnregisterUser_OnFaultedEvent()
         {
-            _connectionManager.RegisterUser("TestUser", _mockChannel.Object);
-            _connectionEventHandler.RegisterChannelEvents("TestUser", _mockChannel.Object);
+            _connectionManager.RegisterUser("Fer", _mockChannel.Object);
+            _connectionEventHandler.RegisterChannelEvents("Fer", _mockChannel.Object);
 
             _mockChannel.Raise(channel => channel.Faulted += null, EventArgs.Empty);
 
-            Assert.IsFalse(_connectionManager.IsUserRegistered("TestUser"));
+            Assert.IsFalse(_connectionManager.IsUserRegistered("Fer"));
         }
     }
 }

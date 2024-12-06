@@ -21,26 +21,26 @@ namespace Service.Test.Service.Connection.Managers
         [TestMethod]
         public void RegisterUser_ShouldAddUser_WhenUserIsNotRegistered()
         {
-            bool result = _connectionManager.RegisterUser("TestUser", _mockChannel.Object);
+            bool result = _connectionManager.RegisterUser("Fer", _mockChannel.Object);
             Assert.IsTrue(result);
-            Assert.IsTrue(_connectionManager.IsUserRegistered("TestUser"));
+            Assert.IsTrue(_connectionManager.IsUserRegistered("Fer"));
         }
 
         [TestMethod]
         public void RegisterUser_ShouldReturnFalse_WhenUserAlreadyRegistered()
         {
-            _connectionManager.RegisterUser("TestUser", _mockChannel.Object);
-            bool result = _connectionManager.RegisterUser("TestUser", _mockChannel.Object);
+            _connectionManager.RegisterUser("Fer", _mockChannel.Object);
+            bool result = _connectionManager.RegisterUser("Fer", _mockChannel.Object);
             Assert.IsFalse(result);
         }
 
         [TestMethod]
         public void UnregisterUser_ShouldRemoveUser_WhenUserIsRegistered()
         {
-            _connectionManager.RegisterUser("TestUser", _mockChannel.Object);
-            bool result = _connectionManager.UnregisterUser("TestUser");
+            _connectionManager.RegisterUser("Fer", _mockChannel.Object);
+            bool result = _connectionManager.UnregisterUser("Fer");
             Assert.IsTrue(result);
-            Assert.IsFalse(_connectionManager.IsUserRegistered("TestUser"));
+            Assert.IsFalse(_connectionManager.IsUserRegistered("Fer"));
         }
     }
 }

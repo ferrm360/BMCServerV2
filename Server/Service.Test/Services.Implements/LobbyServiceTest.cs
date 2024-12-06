@@ -5,7 +5,7 @@ using Service.Utilities.Constans;
 using Service.Utilities.Results;
 using System.Linq;
 
-namespace Service.Test.Services.Implements
+namespace ServiceTest.Services.Implements
 {
     [TestClass]
     public class LobbyServiceTests

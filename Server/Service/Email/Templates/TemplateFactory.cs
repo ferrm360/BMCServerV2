@@ -9,7 +9,7 @@ using DataAccess.Repositories;
 
 namespace Service.Email.Templates
 {
-    public class TemplateFactory
+    public class TemplateFactory : ITemplateFactory
     {
         private IPlayerRepository _playerRepository;
 
@@ -19,30 +19,30 @@ namespace Service.Email.Templates
         }
 
 
-        public (string Subject, string Body) GetTemplate(EmailDTO emailDto)
+        public (string Subject, string Body) GetTemplate(EmailDTO emailDTO)
         {
-            switch (emailDto.EmailType.ToLower())
+            switch (emailDTO.EmailType.ToLower())
             {
                 case "changepassword":
 
                     return (
                         ChangePasswordTemplate.GetSubject(),
-                        ChangePasswordTemplate.GetBody(emailDto.Username, emailDto.VerificationCode)
+                        ChangePasswordTemplate.GetBody(emailDTO.Username, emailDTO.VerificationCode)
                     );
 
                 case "lobbyinvite":
-                    string playerEmail = GetPlayerEmailByUsername(emailDto.Username);
-                    emailDto.Recipient = playerEmail;
+                    string playerEmail = GetPlayerEmailByUsername(emailDTO.Username);
+                    emailDTO.Recipient = playerEmail;
 
                     return (
                         LobbyTemplate.GetSubject(),
-                        LobbyTemplate.GetBody(emailDto)
+                        LobbyTemplate.GetBody(emailDTO)
                     );
 
                 case "custom":
                     return (
                         "Custom Message",
-                        emailDto.CustomBody ?? "No custom body provided."
+                        emailDTO.CustomBody ?? "No custom body provided."
                     );
 
                 default:

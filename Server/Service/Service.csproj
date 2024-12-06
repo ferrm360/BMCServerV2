@@ -108,8 +108,8 @@
       <HintPath>..\packages\System.Reflection.Metadata.1.6.0\lib\netstandard2.0\System.Reflection.Metadata.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -145,7 +145,6 @@
     <Compile Include="DTO\EmailDTO.cs" />
     <Compile Include="DTO\FlipCardDTO.cs" />
     <Compile Include="DTO\FriendRequestDTO.cs" />
-    <Compile Include="DTO\GameBoardDTO.cs" />
     <Compile Include="DTO\JoinLobbyRequestDTO.cs" />
     <Compile Include="DTO\LobbyDTO.cs" />
     <Compile Include="DTO\CreateLobbyRequestDTO.cs" />
@@ -154,6 +153,7 @@
     <Compile Include="DTO\PlayerDTO.cs" />
     <Compile Include="DTO\PlayerProfileDTO.cs" />
     <Compile Include="DTO\PlayerScoresDTO.cs" />
+    <Compile Include="Email\ITemplateFactory.cs" />
     <Compile Include="Email\Templates\ChangePasswordTemplate.cs" />
     <Compile Include="Email\Templates\LobbyTemplate.cs" />
     <Compile Include="Email\Templates\TemplateFactory.cs" />
@@ -172,7 +172,6 @@
     <Compile Include="Implements\LobbyService.cs" />
     <Compile Include="Implements\PlayerScoresService.cs" />
     <Compile Include="Implements\ProfileService.cs" />
-    <Compile Include="Implements\UserConnectionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceModule.cs" />
     <Compile Include="Utilities\Constans\LobbyMessages.cs" />
@@ -198,8 +197,10 @@
     <Compile Include="Utilities\Results\PlayerProfileResponse.cs" />
     <Compile Include="Utilities\Results\PlayerScoresResponse.cs" />
     <Compile Include="Utilities\Results\ProfileResponse.cs" />
-    <Compile Include="Utilities\Validators\ValidationAccountService.cs" />
-    <Compile Include="Utilities\Validators\ValidationFriendshipService.cs" />
+    <Compile Include="Utilities\Validators\AccountService\IValidationAccountService.cs" />
+    <Compile Include="Utilities\Validators\FriendshipService\IValidationFriendshipService.cs" />
+    <Compile Include="Utilities\Validators\AccountService\ValidationAccountService.cs" />
+    <Compile Include="Utilities\Validators\FriendshipService\ValidationFriendshipService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

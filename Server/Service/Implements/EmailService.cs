@@ -11,10 +11,13 @@ namespace Service.Implements
     public class EmailService : Contracts.IEmailService
     {
         private readonly IPlayerRepository _playerRepository;
+        private readonly ITemplateFactory _templateFactory;
 
-        public EmailService(IPlayerRepository playerRepository)
+
+        public EmailService(IPlayerRepository playerRepository, ITemplateFactory templateFactory)
         {
             _playerRepository = playerRepository;
+            _templateFactory = templateFactory;
         }
 
 
@@ -22,10 +25,9 @@ namespace Service.Implements
         {
             try
             {
-                var templateFactory = new TemplateFactory(_playerRepository);
 
                 var emailService = EmailServiceFactory.CreateEmailService();
-                var (subject, body) = templateFactory.GetTemplate(emailDTO);
+                var (subject, body) = _templateFactory.GetTemplate(emailDTO);
 
                 var smtpClient = EmailConfigHelper.GetSmtpClient();
                 var mailMessage = new MailMessage

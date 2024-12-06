@@ -21,6 +21,8 @@
 
         public const string LobbyNotFound = "Error.LobbyNotFound";
         public const string LobbyFull = "Error.LobbyFull";
+        public const string LobbyNameNull = "Error.LobbyNull";
+        public const string LobbyInvalidName = "Error.LobbyInvalidName";
         public const string InvalidLobbyPassword = "Error.InvalidLobbyPassword";
         public const string LobbyAlreadyExists = "Error.LobbyAlreadyExists";
         public const string UnauthorizedAccess = "Error.UnauthorizedAccess";
@@ -29,7 +31,11 @@
         public const string UserNotConnected = "Error.UserNotConnected";
         public const string NotLobbyHost = "Error.NotLobbyHost";
         public const string PlayerNotInLobby = "Error.PlayerNotInLobby";
+        public const string UsernameLengthInvalid = "Error.UsernameLengthInvalid";
 
         public const string ScoreNotFound = "Error.ScoreNotFound";
+        public const string InvalidEmailFormat = "Error.InvalidEmailFormat";
+        public const string PasswordTooShort = "Error.PasswordTooShort";
+        public const string UsernameContainsInvalidChars = "Error.UsernameContainsInvalidChars";
     }
 }

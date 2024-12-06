@@ -11,6 +11,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Service.Utilities.Results;
 using System.IO;
+using Service.Utilities.Validators.FriendshipService;
 
 namespace Service.Implements
 {
@@ -19,10 +20,10 @@ namespace Service.Implements
     {
         private readonly IPlayerRepository _playerRepository;
         private readonly IFriendRequestRepository _friendRequestRepository;
-        private readonly ValidationFriendshipService _validationService;
+        private readonly IValidationFriendshipService _validationService;
         private readonly IProfileRepository _profileRepository;
 
-        public FriendshipService(IPlayerRepository playerRepository, IFriendRequestRepository friendRequestRepository, ValidationFriendshipService validationService, IProfileRepository profileRepository)
+        public FriendshipService(IPlayerRepository playerRepository, IFriendRequestRepository friendRequestRepository, IValidationFriendshipService validationService, IProfileRepository profileRepository)
         {
             _playerRepository = playerRepository;
             _friendRequestRepository = friendRequestRepository;
@@ -140,6 +141,11 @@ namespace Service.Implements
 
             var sender = _playerRepository.GetByUsername(senderUsername);
             var receiver = _playerRepository.GetByUsername(receiverUsername);
+            if (sender == null || receiver == null)
+            {
+                return OperationResponse.Failure(ErrorMessages.InvalidUsername);
+            }
+
             var requestValidation = _validationService.ValidateFriendRequestDoesNotExist(sender.PlayerID, receiver.PlayerID);
             if (!requestValidation.IsSuccess) 
             { 
