@@ -1,6 +1,6 @@
-projectKey=BMCServer
+projectKey=ServerScan
 serverUrl=http://localhost:9000
 serverVersion=10.7.0.96327
-dashboardUrl=http://localhost:9000/dashboard?id=BMCServer
-ceTaskId=48655be4-bcf8-4b0c-9211-3e55328ed9fb
-ceTaskUrl=http://localhost:9000/api/ce/task?id=48655be4-bcf8-4b0c-9211-3e55328ed9fb
+dashboardUrl=http://localhost:9000/dashboard?id=ServerScan
+ceTaskId=10c432f1-8b65-4bea-9ee4-21ffba1acb89
+ceTaskUrl=http://localhost:9000/api/ce/task?id=10c432f1-8b65-4bea-9ee4-21ffba1acb89
