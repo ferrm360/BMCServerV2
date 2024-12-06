@@ -10,6 +10,7 @@ using Service.Utilities.Constans;
 using Service.Factories;
 using Service.Connection.Managers;
 using System.ServiceModel;
+using Service.Utilities.Validators.AccountService;
 
 namespace Service.Implements
 {
@@ -20,47 +21,59 @@ namespace Service.Implements
         private readonly IPlayerScoresRepository _scoreRepository;
         private readonly ConnectionManager _connectionManager;
         private readonly ConnectionEventHandler _connectionEventHandler;
+        private readonly IValidationAccountService _validationService;
+
 
         public AccountService(
             IPlayerRepository playerRepository,
             IProfileRepository profileRepository,
             IPlayerScoresRepository scoreRepository,
             ConnectionManager connectionManager,
-            ConnectionEventHandler connectionEventHandler)
+            ConnectionEventHandler connectionEventHandler,
+            IValidationAccountService validationService
+            )
         {
             _playerRepository = playerRepository;
             _profileRepository = profileRepository;
             _scoreRepository = scoreRepository;
             _connectionManager = connectionManager;
             _connectionEventHandler = connectionEventHandler;
+            _validationService = validationService; 
         }
 
         public OperationResponse Register(PlayerDTO player)
         {
-            if (string.IsNullOrWhiteSpace(player.Username))
+            var usernameValidationResult = _validationService.ValidateUsername(player.Username);
+            if (usernameValidationResult != null)
             {
-                return OperationResponse.Failure(ErrorMessages.InvalidUsername);
+                return OperationResponse.Failure(usernameValidationResult);
             }
 
-            if (string.IsNullOrWhiteSpace(player.Email))
+
+            var emailValidationResult = _validationService.ValidateEmail(player.Email);
+            if (emailValidationResult != null)
             {
-                return OperationResponse.Failure(ErrorMessages.InvalidEmail);
+                return OperationResponse.Failure(emailValidationResult);
             }
 
-            if (string.IsNullOrWhiteSpace(player.Password))
+            var passwordValidationResult = _validationService.ValidatePassword(player.Password);
+            if (passwordValidationResult != null)
             {
-                return OperationResponse.Failure(ErrorMessages.InvalidPassword);
+                return OperationResponse.Failure(passwordValidationResult);
             }
+
             try
             {
-                if (_playerRepository.GetByUsername(player.Username) != null)
+                var usernameExistenceValidation = _validationService.ValidatePlayerExistsByUsername(_playerRepository, player.Username);
+                if (usernameExistenceValidation != null)
                 {
-                    return OperationResponse.Failure(ErrorMessages.DuplicateUsername);
+                    return OperationResponse.Failure(usernameExistenceValidation);
                 }
 
-                if (_playerRepository.GetByEmail(player.Email) != null)
+                var emailExistenceValidation = _validationService.ValidatePlayerExistsByEmail(_playerRepository, player.Email);
+                if (emailExistenceValidation != null)
                 {
-                    return OperationResponse.Failure(ErrorMessages.DuplicateEmail);
+                    return OperationResponse.Failure(emailExistenceValidation);
                 }
 
                 string passwordHash = PasswordHelper.HashPassword(player.Password);
@@ -93,9 +106,10 @@ namespace Service.Implements
 
         public OperationResponse Login(string username, string password)
         {
-            if (string.IsNullOrWhiteSpace(username))
+            var usernameValidationResult = _validationService.ValidateUsername(username);
+            if (usernameValidationResult != null)
             {
-                return OperationResponse.Failure(ErrorMessages.InvalidUsername);
+                return OperationResponse.Failure(usernameValidationResult);
             }
 
             if (string.IsNullOrWhiteSpace(password))

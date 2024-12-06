@@ -58,7 +58,7 @@ namespace Service.Test.Services.Implements
 
             var result = _chatFriendService.SendMessageToFriend("UserA", "UserB", "Hello!");
 
-            Assert.AreEqual("Users are not friends.", result.ErrorKey);
+            Assert.AreEqual("Info.NoAreFriends", result.ErrorKey);
         }
 
         [TestMethod]

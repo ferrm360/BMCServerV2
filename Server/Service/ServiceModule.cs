@@ -5,6 +5,10 @@ using Service.Contracts;
 using DataAccess;
 using Service.Utilities.Validators;
 using Service.Connection.Managers;
+using Service.Utilities.Validators.FriendshipService;
+using Service.Email.Templates;
+using Service.Email;
+using Service.Utilities.Validators.AccountService;
 
 namespace Service
 {
@@ -29,9 +33,12 @@ namespace Service
             builder.RegisterType<ChatMessagesRepository>().As<IChatMessagesRepository>().InstancePerLifetimeScope();
             builder.RegisterType<PlayerScoresRepository>().As<IPlayerScoresRepository>().InstancePerLifetimeScope();
             builder.RegisterType<GuestPlayerService>().As<IGuestPlayerService>().InstancePerLifetimeScope();
-            builder.RegisterType<EmailService>().As<IEmailService>().InstancePerLifetimeScope();
+            builder.RegisterType<Implements.EmailService>().As<Contracts.IEmailService>().InstancePerLifetimeScope();
 
-            builder.RegisterType<ValidationFriendshipService>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<ValidationFriendshipService>().As<IValidationFriendshipService>().InstancePerLifetimeScope();
+            builder.RegisterType<TemplateFactory>().As<ITemplateFactory>().InstancePerLifetimeScope();
+            builder.RegisterType<ValidationAccountService>().As<IValidationAccountService>().InstancePerLifetimeScope();
+
 
             builder.RegisterType<BMCEntities>().AsSelf().InstancePerLifetimeScope();
 

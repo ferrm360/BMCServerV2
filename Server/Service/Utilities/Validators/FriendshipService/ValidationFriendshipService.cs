@@ -2,9 +2,9 @@
 using Service.Results;
 using Service.Utilities.Constans;
 
-namespace Service.Utilities.Validators
+namespace Service.Utilities.Validators.FriendshipService
 {
-    public class ValidationFriendshipService
+    public class ValidationFriendshipService : IValidationFriendshipService
     {
         private readonly IPlayerRepository _playerRepository;
         private readonly IFriendRequestRepository _friendRequestRepository;
