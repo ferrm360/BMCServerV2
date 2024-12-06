@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Test.Email
+namespace ServiceTest.Email
 {
     [TestClass]
     public class TemplateFactoryTests
@@ -50,7 +50,7 @@ namespace Service.Test.Email
                 Username = "FerRMZ"
             };
 
-            _mockPlayerRepository.Setup(repo => repo.GetByUsername("player1")).Returns(new Player { Email = "player1@example.com" });
+            _mockPlayerRepository.Setup(repo => repo.GetByUsername("FerRMZ")).Returns(new Player { Email = "neco2000@gmail.com" });
 
             var (subject, body) = _templateFactory.GetTemplate(emailDto);
 

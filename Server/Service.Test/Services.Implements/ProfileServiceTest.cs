@@ -6,7 +6,7 @@ using Service.Implements;
 using Service.Utilities.Constans;
 using Service.Utilities.Helpers;
 
-namespace Service.Test.Services.Implements
+namespace ServiceTest.Services.Implements
 {
     [TestClass]
     public class ProfileServiceTests

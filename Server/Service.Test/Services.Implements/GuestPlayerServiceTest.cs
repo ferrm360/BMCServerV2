@@ -12,7 +12,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Test.Services.Implements
+namespace ServiceTest.Services.Implements
 {
     [TestClass]
     public class GuestPlayerServiceTest
@@ -25,12 +25,10 @@ namespace Service.Test.Services.Implements
         [TestInitialize]
         public void Setup()
         {
-            // Crear mocks para las dependencias
             _mockPlayerRepository = new Mock<IPlayerRepository>();
             _mockConnectionManager = new Mock<ConnectionManager>();
             _mockConnectionEventHandler = new Mock<ConnectionEventHandler>();
 
-            // Crear el servicio con las dependencias mockeadas
             _guestPlayerService = new GuestPlayerService(
                 _mockPlayerRepository.Object,
                 _mockConnectionManager.Object,
@@ -39,100 +37,90 @@ namespace Service.Test.Services.Implements
         }
 
         [TestMethod]
-        public void RegisterGuestPlayer_InvalidUsername_ReturnsFailure()
+        public void RegisterGuestPlayer_ShouldReturnFailure_WhenUsernameIsNullOrEmpty()
         {
-            // Arrange
-            var invalidUsername = "   "; // Nombre de usuario inválido
-
-            // Act
-            var result = _guestPlayerService.RegisterGuestPlayer(invalidUsername);
-
-            // Assert
+            var result = _guestPlayerService.RegisterGuestPlayer("");
             Assert.IsFalse(result.IsSuccess);
             Assert.AreEqual(ErrorMessages.InvalidUsername, result.ErrorKey);
         }
 
         [TestMethod]
-        public void RegisterGuestPlayer_UserAlreadyConnected_ReturnsFailure()
+        public void RegisterGuestPlayer_ShouldReturnFailure_WhenUserAlreadyConnected()
         {
-            // Arrange
-            var username = "guest1";
-            _mockConnectionManager.Setup(cm => cm.IsUserRegistered(username)).Returns(true);
+            var username = "existingUsername";
+            _mockConnectionManager.Setup(m => m.IsUserRegistered(username)).Returns(true);
 
-            // Act
             var result = _guestPlayerService.RegisterGuestPlayer(username);
 
-            // Assert
             Assert.IsFalse(result.IsSuccess);
             Assert.AreEqual(ErrorMessages.UserAlreadyConnected, result.ErrorKey);
         }
 
         [TestMethod]
-        public void RegisterGuestPlayer_DuplicateUsername_ReturnsFailure()
+        public void RegisterGuestPlayer_ShouldReturnFailure_WhenUsernameAlreadyExistsInDatabase()
         {
-            // Arrange
-            var username = "guest1";
-            _mockConnectionManager.Setup(cm => cm.IsUserRegistered(username)).Returns(false);
-            _mockPlayerRepository.Setup(repo => repo.GetByUsername(username)).Returns(new Player()); 
+            var username = "existingUsername";
+            _mockConnectionManager.Setup(m => m.IsUserRegistered(username)).Returns(false);
+            _mockPlayerRepository.Setup(p => p.GetByUsername(username)).Returns(new Player());
 
-            // Act
             var result = _guestPlayerService.RegisterGuestPlayer(username);
 
-            // Assert
             Assert.IsFalse(result.IsSuccess);
             Assert.AreEqual(ErrorMessages.DuplicateUsername, result.ErrorKey);
         }
 
         [TestMethod]
-        public void RegisterGuestPlayer_Success_ReturnsSuccess()
+        public void RegisterGuestPlayer_ShouldReturnFailure_WhenRegisterUserFails()
         {
-            // Arrange
-            var username = "guest1";
-            _mockConnectionManager.Setup(cm => cm.IsUserRegistered(username)).Returns(false);
-            _mockPlayerRepository.Setup(repo => repo.GetByUsername(username)).Returns((Player)null);
-            _mockConnectionManager.Setup(cm => cm.RegisterUser(username, It.IsAny<IContextChannel>())).Returns(true);
+            var username = "newUser";
+            _mockConnectionManager.Setup(m => m.IsUserRegistered(username)).Returns(false);
+            _mockPlayerRepository.Setup(p => p.GetByUsername(username)).Returns((Player)null);
+            _mockConnectionManager.Setup(m => m.RegisterUser(username, It.IsAny<IContextChannel>())).Returns(false);
 
-            // Act
             var result = _guestPlayerService.RegisterGuestPlayer(username);
 
-            // Assert
+            Assert.IsFalse(result.IsSuccess);
+            Assert.AreEqual(ErrorMessages.UserAlreadyConnected, result.ErrorKey);
+        }
+
+        [TestMethod]
+        public void RegisterGuestPlayer_ShouldReturnSuccess_WhenUserIsRegisteredSuccessfully()
+        {
+            var username = "newUser";
+            _mockConnectionManager.Setup(m => m.IsUserRegistered(username)).Returns(false);
+            _mockPlayerRepository.Setup(p => p.GetByUsername(username)).Returns((Player)null);
+            _mockConnectionManager.Setup(m => m.RegisterUser(username, It.IsAny<IContextChannel>())).Returns(true);
+
+            var result = _guestPlayerService.RegisterGuestPlayer(username);
+
             Assert.IsTrue(result.IsSuccess);
         }
 
         [TestMethod]
-        public void LogoutGuestPlayer_InvalidUsername_ReturnsFailure()
+        public void LogoutGuestPlayer_ShouldReturnFailure_WhenUsernameIsNullOrEmpty()
         {
-            // Arrange
-            var invalidUsername = "   "; // Nombre de usuario inválido
-
-            // Act
-            var result = _guestPlayerService.LogoutGuestPlayer(invalidUsername);
-
-            // Assert
+            var result = _guestPlayerService.LogoutGuestPlayer("");
             Assert.IsFalse(result.IsSuccess);
             Assert.AreEqual(ErrorMessages.InvalidUsername, result.ErrorKey);
         }
 
         [TestMethod]
-        public void LogoutGuestPlayer_UserNotConnected_ReturnsFailure()
+        public void LogoutGuestPlayer_ShouldReturnFailure_WhenUserNotConnected()
         {
-            // Arrange
-            var username = "guest1";
-            _mockConnectionManager.Setup(cm => cm.IsUserRegistered(username)).Returns(false); // Usuario no conectado
+            var username = "notConnectedUser";
+            _mockConnectionManager.Setup(m => m.IsUserRegistered(username)).Returns(false);
 
-            // Act
             var result = _guestPlayerService.LogoutGuestPlayer(username);
 
-            // Assert
             Assert.IsFalse(result.IsSuccess);
             Assert.AreEqual(ErrorMessages.UserNotConnected, result.ErrorKey);
         }
 
         [TestMethod]
-        public void LogoutGuestPlayer_Success_ReturnsSuccess()
+        public void LogoutGuestPlayer_ShouldReturnSuccess_WhenUserLoggedOutSuccessfully()
         {
-            var username = "guest1";
-            _mockConnectionManager.Setup(cm => cm.IsUserRegistered(username)).Returns(true);
+            var username = "connectedUser";
+            _mockConnectionManager.Setup(m => m.IsUserRegistered(username)).Returns(true);
 
             var result = _guestPlayerService.LogoutGuestPlayer(username);
 
@@ -140,11 +128,11 @@ namespace Service.Test.Services.Implements
         }
 
         [TestMethod]
-        public void LogoutGuestPlayer_Exception_ReturnsFailure()
+        public void LogoutGuestPlayer_ShouldReturnFailure_WhenUnexpectedErrorOccurs()
         {
-            var username = "guest1";
-            _mockConnectionManager.Setup(cm => cm.IsUserRegistered(username)).Returns(true);
-            _mockConnectionEventHandler.Setup(handler => handler.HandleDisconnection(username)).Throws(new Exception("Unexpected error"));
+            var username = "anyUser";
+            _mockConnectionManager.Setup(m => m.IsUserRegistered(username)).Returns(true);
+            _mockConnectionEventHandler.Setup(m => m.HandleDisconnection(username)).Throws(new Exception());
 
             var result = _guestPlayerService.LogoutGuestPlayer(username);
 

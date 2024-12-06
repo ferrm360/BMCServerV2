@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.Test.Services.Implements
+namespace ServiceTest.Services.Implements
 {
     [TestClass]
     public class PlayerScoresServiceTest
@@ -32,7 +32,7 @@ namespace Service.Test.Services.Implements
         [TestMethod]
         public void GetScoresByUsername_PlayerNotFound_ReturnsFailure()
         {
-            var username = "player1";
+            var username = "FerRMZ";
             _mockPlayerRepository.Setup(repo => repo.GetByUsername(username)).Returns((Player)null);
 
             var result = _playerScoresService.GetScoresByUsername(username);
@@ -44,7 +44,7 @@ namespace Service.Test.Services.Implements
         [TestMethod]
         public void GetScoresByUsername_ScoresNotFound_ReturnsFailure()
         {
-            var username = "player1";
+            var username = "FerRMZ";
             var player = new Player { PlayerID = 1, Username = username };
             _mockPlayerRepository.Setup(repo => repo.GetByUsername(username)).Returns(player);
 
@@ -56,7 +56,7 @@ namespace Service.Test.Services.Implements
         [TestMethod]
         public void GetScoresByUsername_Success_ReturnsScores()
         {
-            var username = "player1";
+            var username = "FerRMZ";
             var player = new Player { PlayerID = 1, Username = username };
             var playerScores = new UserScores { PlayerID = 1, Wins = 5, Losses = 3 };
 
@@ -71,7 +71,7 @@ namespace Service.Test.Services.Implements
         [TestMethod]
         public void IncrementWins_PlayerNotFound_ReturnsFailure()
         {
-            var username = "player1";
+            var username = "FerRMZ";
             _mockPlayerRepository.Setup(repo => repo.GetByUsername(username)).Returns((Player)null);
 
             var result = _playerScoresService.IncrementWins(username);
@@ -83,7 +83,7 @@ namespace Service.Test.Services.Implements
         [TestMethod]
         public void IncrementWins_Success_IncrementsWins()
         {
-            var username = "player1";
+            var username = "FerRMZ";
             var player = new Player { PlayerID = 1, Username = username };
             _mockPlayerRepository.Setup(repo => repo.GetByUsername(username)).Returns(player);
             _mockScoreRepository.Setup(repo => repo.IncrementWins(player.PlayerID));
@@ -97,7 +97,7 @@ namespace Service.Test.Services.Implements
         [TestMethod]
         public void IncrementLosses_PlayerNotFound_ReturnsFailure()
         {
-            var username = "player1";
+            var username = "FerRMZ";
             _mockPlayerRepository.Setup(repo => repo.GetByUsername(username)).Returns((Player)null);
 
             var result = _playerScoresService.IncrementLosses(username);
@@ -109,7 +109,7 @@ namespace Service.Test.Services.Implements
         [TestMethod]
         public void IncrementLosses_Success_IncrementsLosses()
         {
-            var username = "player1";
+            var username = "FerRMZ";
             var player = new Player { PlayerID = 1, Username = username };
             _mockPlayerRepository.Setup(repo => repo.GetByUsername(username)).Returns(player);
             _mockScoreRepository.Setup(repo => repo.IncrementLosses(player.PlayerID));

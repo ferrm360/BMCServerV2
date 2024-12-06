@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{CF7FDFE2-D7A4-43A0-B170-99B05628F50D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Test", "Service.Test\Service.Test.csproj", "{078D76EF-D800-464B-AB72-3554116A9417}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceTest", "Service.Test\ServiceTest.csproj", "{078D76EF-D800-464B-AB72-3554116A9417}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
