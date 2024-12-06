@@ -2,6 +2,7 @@
 using Service.Results;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+
 namespace Service.Utilities.Results
 {
     [DataContract]

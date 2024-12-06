@@ -288,26 +288,22 @@ namespace Service.Implements
         {
             try
             {
-                // Buscar al jugador por username
                 var player = _playerRepository.GetByUsername(username);
                 if (player == null)
                 {
                     return "User not found.";
                 }
 
-                // Buscar el perfil asociado al jugador
                 var profile = _profileRepository.GetProfileByPlayerId(player.PlayerID);
                 if (profile == null)
                 {
                     return "Profile not found.";
                 }
 
-                // Devolver la biografía si está disponible
                 return profile.Bio ?? "No biography available.";
             }
             catch (Exception ex)
             {
-                // Loggear el error y devolver un mensaje de error genérico
                 CustomLogger.Error("Error retrieving biography", ex);
                 return "Error retrieving biography.";
             }
