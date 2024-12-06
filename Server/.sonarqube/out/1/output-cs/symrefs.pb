@@ -1,127 +1,33 @@
-‘
-~C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Validators\ValidationFriendshipService.cs
-
- ,
-		+ <  *2
-
-
-2 J $ (''# ;(( 7
-= M  0
-h ' >
-
-! B
-G U@ N
-[ kP `
-
-! 3
-; C9 A
-  
-
-%%! <
-%%A J''P Y((H Q
-''  **  
-(( **, 8ü
-aC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Email\IEmailService.cs
-
- "
-
- 
-
- "
-
-+ 2
-
-; ?É
-sC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Results\GuestPlayerResponse.cs2
-
-
- $ ) * - *
-  
-
-* 1
-9 A #
-
-. 5
-= I '∏
-nC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Constans\LobbyMessages.cs
+™
+ãC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Validators\AccountService\IValidationAccountService.cs
 
 
 
- %
+ .
 
- )
+ 
 
- )
+' /
 
- +
+ 
 
- /
+$ )
 
- '˚
-kC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Mapper\PlayerMapper.cs
+ 
 
- 
+' /
 
-  %(
-- 3 ! ! 
+ -
 
- %(
-0 9 $ $ !
-B N +ü
-oC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Helpers\SqlErrorHandler.cs
+@ P
 
-
-
- '
+Y a
 
- ,
-: < ∫
-tC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Results\PlayerScoresResponse.cs2
- % * + * +
- . 7. 7
- A I
- %@ F
+ *
 
-+ 8
-I OI O
+= M
 
-+ 2
-: BL T·
-{C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Validators\ValidationAccountService.cs
-
- )2
-+ <  ! !(( *
-: J  0
-
-! ;
-F L0 6- 3
-
-&&! 4
-&&< D((9 A
-&&M U/// 7(
-(( ** //9 ?443 9∏
-rC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Results\FriendListResponse.cs2
- # ( ) ( )
- , 5, 5
- ? G
- &> E
-
-) 6
-G NH O
-
-) 0
-8 @J R≠
-gC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Email\EmailServiceFactory.cs
-
- +
-
-$ 6
- 
-
-$ .
- 
-
-0 ;µ
+V [µ
 oC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Results\ProfileResponse.cs2
    % & % &
  ) 2) 2
@@ -132,82 +38,7 @@ oC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Util
 E LE L
 
 & -
-5 =G O™
-dC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\ChatService.cs
-
- <
-B Q   ## %% //) 8
-
-  <
-( 0- 5$ ,) 1J RK S
- . 6B J
-  .  
-
-* 0
-
-2 6
-
-+ 1
-
-3 7
-!! "; I< J(
-!!* 2##, 4%%' /'') 1
-++  '' (
-++' /--$ ,44, 4==F N
-++8 ?--0 7
--- 88: EÙ
-lC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\PlayerScoresService.cs
-
- $F
-1 A $$ -II  JJ  dd  ee  2
-+ <  .CC .^^ .
-$ 3 .
- .  0
-
-$ 7
-? G= E
-  $$B H2
-$$ %% ,, %-- !.. #
-** 11: C
-55 #664 @
-
-??! .
-??6 >CC= E
-CC DD II/ 5
-PP #QQ1 =
-
-ZZ! 0
-ZZ8 @^^= E
-^^ __ dd1 7
-kk #ll1 =Á
-uC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Results\PlayerProfileResponse.cs2
- & + , +   ,
- / 8  / 8
-   B J
-& -A H
- %T Z
-
-, 9
-Q XK R
-j p] c
-
-, 3
-; C  M Uæ
-`C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Email\EmailService.cs
-
- 
-		$ /  
-
-
-  , . :
-' 1 $
-: E &
-
- 
-  "< >
-+ 2@ G
-; ?I M
-  (ì
+5 =G Oì
 dC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\CustomLogger.cs
  $
 
@@ -231,7 +62,142 @@ dC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Util
 
 88  
 88( />>$ +BB! ((
-88; =<< >>; =>>I K¢
+88; =<< >>; =>>I Kæ
+xC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Results\FriendRequestListReponse.cs2
+ ) . / . /
+ 2 ;2 ;
+ E M
+& 4D R
+
+/ <
+T bU c
+
+/ 6
+> FP Xæ
+`C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Email\EmailService.cs
+
+ 
+		$ /  
+
+
+  , . :
+' 1 $
+: E &
+
+ 
+  "< >
++ 2@ G
+; ?I M
+  (˚
+kC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Mapper\PlayerMapper.cs
+
+ 
+
+  %(
+- 3 ! ! 
+
+ %(
+0 9 $ $ !
+B N +Á
+êC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Validators\FriendshipService\ValidationFriendshipService.cs
+
+ ,
+		+ <  *2
+
+
+2 J $ (''# ;(( 7
+= M  0
+h ' >
+
+! B
+G U@ N
+[ kP `
+
+! 3
+; C9 A
+  
+
+%%! <
+%%A J''P Y((H Q
+''  **  
+(( **, 8„
+äC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Validators\AccountService\ValidationAccountService.cs
+
+ )
+ +" 3
+ (// -
+
+ &(
+. 6* 2    '
+
+(( #(
+((+ 0*** /// 55$ )
+44 55 
+
+== &
+==. 6??* 2DD 
+
+LL 4
+LLG WNN  
+LL` hNN/ 7
+
+VV 1
+VVD TXX  
+VV] bXX, 1∏
+rC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Results\FriendListResponse.cs2
+ # ( ) ( )
+ , 5, 5
+ ? G
+ &> E
+
+) 6
+G NH O
+
+) 0
+8 @J RÙ
+ëC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Validators\FriendshipService\IValidationFriendshipService.cs
+
+
+
+ 1
+
+ ;
+
+@ N
+
+T d
+
+ ,
+
+4 <
+
+ 5
+
+: C∫
+tC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Results\PlayerScoresResponse.cs2
+ % * + * +
+ . 7. 7
+ A I
+ %@ F
+
++ 8
+I OI O
+
++ 2
+: BL TÁ
+uC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Results\PlayerProfileResponse.cs2
+ & + , +   ,
+ / 8  / 8
+   B J
+& -A H
+ %T Z
+
+, 9
+Q XK R
+j p] c
+
+, 3
+; C  M U¢
 nC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Helpers\PasswordHelper.cs
 
  &
@@ -243,21 +209,37 @@ nC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Util
  )
 1 96 >
 B P* 8
- & &Ü
-xC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Enumerations\FriendRequestStatus.cs
+ & &ü
+oC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Helpers\SqlErrorHandler.cs
 
-		 #≥
-mC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Results\LobbyResponse.cs2
-  # $ # $
- ' 0' 0
- : B
- 9 >
+
+
+ '
 
-$ 1
-; @A F
+ ,
+: < ü
+aC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Email\IEmailService.cs
 
-$ +
-3 ;E M·
+ "
+
+ 
+
+ "
+
++ 2
+
+; ?≠
+gC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Email\EmailServiceFactory.cs
+
+ +
+
+$ 6
+ 
+
+$ .
+ 
+
+0 ;·
 eC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Email\EmailConfigHelper.cs
 
  )
@@ -277,27 +259,18 @@ eC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Emai
 44 #77q }AAF R
 55 BB  )
 << @@ #
->> EE !æ
-xC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Results\FriendRequestListReponse.cs2
- ) . / . /
- 2 ;2 ;
- E M
-& 4D R
+>> EE !≥
+mC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Results\LobbyResponse.cs2
+  # $ # $
+ ' 0' 0
+ : B
+ 9 >
 
-/ <
-T bU c
+$ 1
+; @A F
 
-/ 6
-> FP Xå
-rC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Results\ChatFriendResponse.cs2
- # (_ q ,M _
-& .  
-
-) 6
-N V 
-
-- 4
-< D ·
+$ +
+3 ;E M·
 qC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Results\OperationResponse.csF
  " ' ( ' ( ' ((
 		 + 4+ 4+ 4
@@ -310,7 +283,35 @@ qC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Util
 = AD H
 
 ( /
-7 ?I Qã
+7 ?I Qπ
+kC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\GuestPlayerService.cs
+
+ #
++ <   //% 6<
++ =!! ** "55& 8RR 'XX "(
+0 G"" #99 +WW '
+ .    0
+ /!!! 2
+# 9""& <
+
+%%! 4<
+%%< D''* 2**4 <//E M55F N99B J
+// "00 "
+33I P55P W99L S
+55 #66 #
+AA #BB1 =
+
+KK! 2<
+KK: BMM* 2RR9 AWW< DXX2 :ZZ2 :å
+rC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Results\ChatFriendResponse.cs2
+		 # (_ q ,M _
+& .  
+
+) 6
+N V 
+
+- 4
+< D ã
 mC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Results\ImageResponse.cs2
   # $ # $
 		 ' 0' 0
@@ -325,143 +326,203 @@ mC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Util
 V ^p x
 
 $ +
-3 ;E MË
-dC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\GameService.cs
+3 ;E MÉ
+sC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Results\GuestPlayerResponse.cs2
+
+
+ $ ) * - *
+  
 
- n
-I U CC VV ]] 
-ññ 
-™™ 
-∞∞" .
-øø 
-ÂÂ 
+* 1
+9 A #
 
-- 8(
-@ G* 1` g;;g n2
-P X3 ;2 :""2 :$$0 8(
-l z--6 D..Q _..g u2
-; F &"" )) 00 <
-  ))+ 3..: B55D L;;@ H
-))= M-- $
+. 5
+= I 'g
+eC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Properties\AssemblyInfo.csø
 
-AA! /
-AA7 >CC) 0VV  
-AAM TII# *
-HH MM VV$ /
+gC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\AccountService.cs
 
-[[- A(
-[[I P]]* 1iiM TnnV ]4
-[[Y _ee- 3gg, 2ii- 3
-ãã@ FF
-]]; Fee gg ll qq5 @ss '$ /
-dd ee5 = 
-pp uu !
-ÖÖ' ,
-ssQ czz$ 6
+ F
++ <$$ CCd uII^ oUU !YY !~~ .(
+, >%% VV "ZZ "(
+1 A&& WW  [[  B
++ ='' xx "
+çç& 8
+ßß "
+™™ ",
+0 G(( #
+ìì +
+©© 'P
+3 E)) ..+ =55( :;;+ =CC2 DII/ Amm+ =
+ .$$  0
+ 0%%! 2
+$ 3&& .
+ /''! 2
+  # 9((& <
+!!& 7))! 2
 
-îî- ;$
+,,! )P
+,,4 :..O U55I O;;O UCCw }IIq wOOB HQQD J
+.. (// (111 I
+55 %66 %881 F
+;; (<< (>>1 I
+CC /DD /FF5 P
+II ,JJ ,LL5 M
+OO #QQL X(
+QQ  RRF RSSP \UU& 2
+RR !VV' 4
+SS &WW% 7
+aa #bb1 =
 
-îîC J
-ññ* 1
-††? F
+kk! &@
+kk. 6mmO Wxx4 <~~= E
+ççF N
+ììB J 
+kk? Gss* 2
+ÑÑE M
+mm (nn (pp1 I 
+~~  
+ÑÑO U
 
-ññ; F
-õõ  
+ÑÑ $
+ÜÜ $$
 
-®® 2WW "jj &$
+ããI P
+ççP W
+ììL S
 
-≥≥ 
-µµ' 2
-∑∑" -
+çç #
+éé #
 
-∑∑ 
-∏∏F M
+õõ #
+úú1 =
 
-ΩΩ- @$
+••! '0
 
-ΩΩH O
-øø* 1
-ﬁﬁg n$
+••/ 7
+ßß4 <
+©©< D
+™™2 :à
+nC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Constans\ErrorMessages.cs
 
-ΩΩX ]
-ƒƒ3 8
-““8 =$
+ %
 
-øø; F
-ƒƒ &
-ÀÀ 0
+ ,
 
-ƒƒ 
-≈≈ 
-ÀÀ+ 3
-ﬁﬁ@ H
+ -
 
-ÀÀ= M
-““ ,$
+ *
 
-œœ 
-–– 
-’’' ,
+ (
 
-„„- @<
+		 +
 
-„„M X
-ÂÂ* 5
-ÍÍ3 >
-˜˜4 ?
-ÑÑg r$
+
+
+ -
 
-ÂÂG R
-ÍÍ &
- 0
+ +
 
-ÍÍ 
-ÎÎ 
-+ 3
-ÑÑ@ H
+ (
 
-= M
-˜˜ ($
+ +
 
-ÙÙ 
-ıı 
-˙˙' ,‘
-[C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\ServiceModule.cs
+ )
 
- 
+ &
 
-  $‹
-6 =                   "" $$ && (( ∏
-bC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\PlayerProfileDTO.cs
+ .
 
- !
+ 5
 
- 
+ <
 
- 
+ &
 
-  
+ 0
 
- "
+ )
 
- !
+ %
 
- "√
-mC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Constans\GameMessages.cs
+ )
 
-		 $
+ ,
 
- (
+ 0
 
- 5
+ .
 
- ,
+ .
+
+ .
+
+ -
+
+ ,
+
+   (
+
+!! ,
+
+"" 1
+
+$$ )
+
+%% .
+
+&& ,
+
+'' 8∏
+nC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Constans\LobbyMessages.cs
+
+
+
+ %
+
+ )
+
+ )
 
  +
 
- ,
+ /
 
- *ë
+ '§
+rC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Constans\MessageChatFriend.cs
+
+		 )
+
+ *
+
+ '
+
+ ,Ë
+[C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\ServiceModule.cs
+
+ 
+
+  $
+6 =               !! "" ## $$ && '' (( ++ -- // Ô
+eC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\EmailService.cs
+
+ 
++ < 
+* : & 6
+. >  0
+Q ` .
+
+! *
+4 <C K))# +
+
+  
+ $$ %
+ "%% 
+   ++ 
+!! )) ++  +Ü
+xC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Enumerations\FriendRequestStatus.cs
+
+		 #ë
 gC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\ProfileService.cs
 
  ñ
@@ -470,7 +531,7 @@ gC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Impl
 ßß .
 ÃÃ .
 ãã .
-§§ .Ü
+££ .Ü
 , > II 0YY "ZZ "
 òò "
 ≠≠ 0
@@ -478,7 +539,7 @@ gC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Impl
 åå 0
 ìì "
 îî "
-´´ 0>
+©© 0>
   0 " 2* :PP/ ?
 ⁄⁄0 @
 0 @  0
@@ -607,15 +668,701 @@ gC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Impl
 üü &
 
 üü. 6
-§§= E$
+££= E$
 
+££ 
 §§ 
-•• 
-´´F L$
+©©F L$
 
-´´ 
-¨¨ 
-≤≤ ô
+©© 
+™™ 
+ØØ √
+mC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Constans\GameMessages.cs
+
+		 $
+
+ (
+
+ 5
+
+ ,
+
+ +
+
+ ,
+
+ *»
+ZC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\EmailDTO.cs
+
+ 
+
+		 
+
+ 
+
+ 
+
+ &
+
+ 
+
+ 
+
+ #
+
+  Ù
+lC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\PlayerScoresService.cs
+
+ $F
+1 A $$ -II  JJ  dd  ee  2
++ <  .CC .^^ .
+$ 3 .
+ .  0
+
+$ 7
+? G= E
+  $$B H2
+$$ %% ,, %-- !.. #
+** 11: C
+55 #664 @
+
+??! .
+??6 >CC= E
+CC DD II/ 5
+PP #QQ1 =
+
+ZZ! 0
+ZZ8 @^^= E
+^^ __ dd1 7
+kk #ll1 =§
+jC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\ChatFriendService.cs
+
+ "(
+1 H #33 'YY 6
+2 J $++ )<
++ < ## *$$ ,OO +PP +(
++ = == &>> &
+9 O& <
+: Q' >
+3 C  0
+3 D! 2
+
+!!! 42
+!!< J##9 G22* 877' 588% 32
+!!S c$$; K==8 H>>D THH> N
+!!l s22< C(
+## && ++5 ;333 9(
+$$ &&" *++F N33D L
+22 $33W g99 .(
+55 AA5 ?AAP ZAAl v
+>>^ m@@+ :
+@@ (AA $
+
+MM" 0
+MM8 AOO: C
+MMJ SPP: C
+OO RR YYQ X
+PP RR# *YYc j
+YY [[" *
+[[ bb8 C(
+[[2 3]]% &^^ __* +™
+\C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Entities\Lobby.cs
+
+		 
+
+ 
+
+ 
+  
+  %F
+ #    %% ** 
+ ! +  *
+
+ 
+
+ 
+# +% -
+4 <) 1
+
+ 
+% - $
+
+##  
+##( 0%% #
+
+(( Ë
+dC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\GameService.cs
+
+ n
+I U CC VV ]] 
+ññ 
+™™ 
+∞∞" .
+øø 
+ÂÂ 
+
+- 8(
+@ G* 1` g;;g n2
+P X3 ;2 :""2 :$$0 8(
+l z--6 D..Q _..g u2
+; F &"" )) 00 <
+  ))+ 3..: B55D L;;@ H
+))= M-- $
+
+AA! /
+AA7 >CC) 0VV  
+AAM TII# *
+HH MM VV$ /
+
+[[- A(
+[[I P]]* 1iiM TnnV ]4
+[[Y _ee- 3gg, 2ii- 3
+ãã@ FF
+]]; Fee gg ll qq5 @ss '$ /
+dd ee5 = 
+pp uu !
+ÖÖ' ,
+ssQ czz$ 6
+
+îî- ;$
+
+îîC J
+ññ* 1
+††? F
+
+ññ; F
+õõ  
+
+®® 2WW "jj &$
+
+≥≥ 
+µµ' 2
+∑∑" -
+
+∑∑ 
+∏∏F M
+
+ΩΩ- @$
+
+ΩΩH O
+øø* 1
+ﬁﬁg n$
+
+ΩΩX ]
+ƒƒ3 8
+““8 =$
+
+øø; F
+ƒƒ &
+ÀÀ 0
+
+ƒƒ 
+≈≈ 
+ÀÀ+ 3
+ﬁﬁ@ H
+
+ÀÀ= M
+““ ,$
+
+œœ 
+–– 
+’’' ,
+
+„„- @<
+
+„„M X
+ÂÂ* 5
+ÍÍ3 >
+˜˜4 ?
+ÑÑg r$
+
+ÂÂG R
+ÍÍ &
+ 0
+
+ÍÍ 
+ÎÎ 
++ 3
+ÑÑ@ H
+
+= M
+˜˜ ($
+
+ÙÙ 
+ıı 
+˙˙' ,ì
+aC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\PlayerScoresDTO.cs
+
+		  
+
+ 
+
+ 
+
+ ™
+dC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\ChatService.cs
+
+ <
+B Q   ## %% //) 8
+
+  <
+( 0- 5$ ,) 1J RK S
+ . 6B J
+  .  
+
+* 0
+
+2 6
+
++ 1
+
+3 7
+!! "; I< J(
+!!* 2##, 4%%' /'') 1
+++  '' (
+++' /--$ ,44, 4==F N
+++8 ?--0 7
+-- 88: E†
+bC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\FriendRequestDTO.cs
+
+ !
+
+ 
+
+ $
+
+ &
+
+ È
+eC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\LobbyService.cs
+
+ ê
+: H"" 22 EE hh tt 
+ìì *
+õõ &
+““ !
+‡‡ 
+¨¨ 
+ﬁﬁ 
+‡‡ h
+M enn $
+àà $
+ëë (
+®®+ C
+¿¿, D
+¯¯ 0
+ÀÀ ,
+ÎÎ +
+
+ (x
+? F* 1 , 3""9 @)) ** #++ "++/ 6,, // $11 #
+""* +""/ 0n
+'' 11 22  22, 166 77 88 !99! &:: ";; <<+ 0
+44 ??/ 7
+
+CC &P
+CC; BEE, 3JJ5 <OO &OO1 8TT #UU $WW( /Ç
+EEE JJJ JJ# (OO TT WW! &[[ \\ ]] !^^! &__ "`` aa+ 0
+YY cc/ 7
+
+ff '
+ff/ 6hh, 3tt& -(
+ff? Gmm 'nn/ 7pp$ ,n
+hh= Bmm pp "rr yy zz {{ !||! &}} "~~ + 0
+ww 
+ÇÇ/ 7 
+
+ÖÖ %// UU 0
+
+ÖÖ- 5
+àà, 4
+ããN V
+ååO W$
+
+áá 
+àà6 >
+ää2 :$
+
+ää 
+ãã 
+åå 
+
+ãã& ,
+
+ãã. 2
+
+åå' -
+
+åå/ 3l
+
+èè +
+ãã7 M
+åå8 N
+≤≤ .
+   .
+˘˘ .
+ˇˇ .
+ïï .
+‘‘ .<
+
+èè3 ;
+ëë3 ;
+ììY a
+ññ' /
+óó, 4H
+
+ìì 
+îî 
+ññ 
+óó% *
+ôô 
+õõ. 3
+
+ììA B
+ììF G
+
+°° )WW  0
+
+°°0 5
+££E J
+¶¶# (
+¨¨? D0
+
+°°> G
+££$ -
+®® '
+¨¨4 =$
+
+££ 
+§§ )
+≠≠; F$
+
+®®` h
+¨¨  
+≠≠  "
+
+∏∏ %pp 
+óó $0
+
+∏∏, 1
+∫∫E J
+ΩΩ# (
+ƒƒ> C0
+
+∏∏: D
+∫∫% /
+¿¿ (
+ƒƒ2 <$
+
+∫∫ 
+ªª *
+≈≈9 E$
+
+¿¿a i
+ƒƒ  
+≈≈  
+
+–– +`
+
+““0 5
+‘‘ 
+’’ 
+÷÷ !
+◊◊! &
+ÿÿ "
+ŸŸ 
+⁄⁄+ 0
+
+ﬁﬁ '$
+
+ﬁﬁ/ 6
+‡‡, 3
+ééF M<
+
+ﬁﬁ? K
+ÂÂ *
+ää( 4
+îîG S
+ïï/ ;Ñ
+
+ﬁﬁT b
+ÍÍ( 6
+ÔÔ -
+ÛÛ( 6
+¯¯; I
+˘˘/ =
+˛˛T b
+ˇˇ/ =
+ÑÑ4 B
+éé6 D
+èè@ Nê
+
+‡‡= B
+ÂÂ 
+ÍÍ 
+ÔÔ 
+úú 
+ùù 
+ûû !
+üü! &
+†† "
+°° 
+¢¢  
+££+ 0
+
+ÛÛ@ N
+˜˜ &$
+
+ää> J
+éé $
+èè $
+
+öö 
+¶¶/ 7
+
+™™! *
+
+™™2 9
+¨¨, 3
+
+™™B N
+±± *0
+
+¨¨= B
+±± 
+∂∂ 
+ªª( -
+
+√√ +
+ªª '0
+
+√√2 7
+««# (
+…… #
+œœ7 <$
+
+≈≈ +
+’’ 2
+ŸŸ -
+
+ÀÀI Q
+œœ  
+
+‹‹ <
+
+‹‹' .
+ﬁﬁ+ 2
+‡‡& -
+··+ 2
+ÂÂ+ 2$
+
+ÈÈ (
+ÛÛ '
+ää '
+
+ÈÈ0 6
+ÎÎ8 >
+
+ÈÈK S
+ÎÎD L˙
+jC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\FriendshipService.cs
+
+ "p
++ < 66 .YY .
+éé *
+èè ,
+´´ .
+±± /
+ÂÂ .
+ÎÎ /h
+2 J $&& ('' (<< 6__ 7vv (ww (
+úú (
+ùù (8
+6 H 
+ÑÑ# 5
+ââ% 7
+ïï$ 6 
+, > 
+≈≈" 4
+3 C  0
+^ u' >
+
+î •! 2
+
+∫ À! 2
+
+""! 4
+""9 B&&7 @
+
+22" /
+227 ?66= ENNc k
+66 77 <<J P(
+<< >> >>( /CC! (
+CC JJ8 B(
+CC0 6EE %FF %GG "
+
+UU( <
+UUD LYY= E
+YY ZZ __L R
+__ aa" *
+aa ii> I2
+aa2 9cc  'dd% ,ee' .ff $
+
+rr! 5
+rr: Dvv7 A
+
+ÇÇ! 2$
+
+ÇÇ: H
+ÑÑI W
+éé9 G$
+
+ÇÇQ a
+ââK [
+èè; K$
+
+ÑÑ  
+ÖÖ !
+ÜÜ '$
+
+ââ "
+ää #
+ãã )0
+
+éé 
+êê 
+ïïY _
+úú; A0
+
+èè 
+êê" *
+ïïj r
+úúL T$
+
+ïï !
+ññ "
+òò (
+
+ßß% =
+
+ßßE S
+±±E S$
+
+ßß\ i
+´´= J
+€€j w$
+
+´´ 
+¨¨ 
+±±U [0
+
+±± 
+≥≥ 
+≥≥( /
+ªª' .$
+
+∏∏ 
+√√ 
+◊◊H R$
+
+ππ 
+‘‘ #
+◊◊; F
+
+ΩΩ !
+√√# ,T
+
+≈≈ 
+∆∆ 
+ÃÃ' .
+ÕÕ" )
+ŒŒ' .
+œœ) 0
+––( /
+
+   &
+‘‘( 2
+
+··" 00
+
+··8 @
+ÂÂ= E
+ÎÎ; C
+˝˝c k
+
+ÂÂ 
+ÊÊ 0
+
+ÎÎ 
+ÌÌ 
+ÌÌ( /
+ÚÚ! (
+
+ÚÚ 
+˘˘8 B0
+
+ÚÚ0 6
+ÙÙ %
+ıı %
+ˆˆ "
+
+ÇÇ ,
+
+ÇÇ4 <
+ÜÜV ^$
+
+ÜÜ 
+áá  (
+ââ- 5±
+gC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\CreateLobbyRequestDTO.cs
+
+ &
+
+ 
+
+ 
+
+ 
+
+ 
+
+ »
+ZC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\LobbyDTO.cs
+
+ 
+
+ 
+
+ 
+
+ 
+
+ !
+
+ 
+
+ 
+
+ #
+
+ ˚
+iC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\ChatLobbyService.cs
+
+
+
+ !2
+o z    
+
+  
+( 0! )(
+9 @) 0 # 
+ - 5
+
+ 
+' .) 0
+7 ?%%0 8**B J
+H O%%: A
+: F!!) 5ô
 [C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\PlayerDTO.cs
 
  
@@ -626,308 +1373,144 @@ gC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Impl
 
  
 
- ¿
-nC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Constans\ErrorMessages.cs
+ ˚
+mC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Email\Templates\TemplateFactory.cs
 
- %
+  
+" 3 88 *
+1 A  0
 
- ,
+- 8P
+B J 7 ?J R""B J## ''. 6--  
+"" &##) 4
+66 /"") A
+667 ?889 A;;D L
+88 99 == î
+fC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Factories\IEntityFactory.cs
 
- -
+ #
 
- *
+ !
 
- (
+, 5
 
-		 +
+> J
+
+		 #
+
+		( 0
 
 
 
- -
-
- +
-
- (
-
- +
-
- )
-
- &
-
- .
-
- 5
-
- <
-
- &
-
- 0
-
- )
-
- %
-
- 0
-
- .
-
- .
-
- .
-
- -
-
- ,
-
- (
-
- ,
-
-!! )§
-rC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Constans\MessageChatFriend.cs
-
-		 )
-
- *
-
- '
-
- ,√
-eC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\LobbyService.cs
-
- ê
-: H (( ;; `` ll 
-ãã *
-ìì &
-   !
-ÿÿ 
-§§ 
-÷÷ 
-ÿÿ h
-M ^ff 
-ÄÄ 
-ââ !
-††+ <
-∏∏, =
- )
-√√ %
-„„ $
-
- (Z
-? F9 @    #!! "!!/ 6"" %% $'' #
-* +/ 0n
- '' ((  ((, 1,, -- .. !//! &00 "11 22+ 0
-** 55/ 7
-
-99 &P
-99; B;;, 3@@5 <EE &EE1 8JJ #KK $MM( /Ç
-;;E J@@ @@# (EE JJ MM! &QQ RR SS !TT! &UU "VV WW+ 0
-OO ZZ/ 7
-
-^^ '
-^^/ 6``, 3ll& -(
-^^? Gee 'ff( 0hh$ ,n
-``= Bee hh "jj qq rr ss !tt! &uu "vv ww+ 0
-oo zz/ 7
-}} %%% KK .
-}}- 5
-ÄÄ% -
-ÉÉN V
-ÑÑO W"
- 
-ÄÄ/ 7
-ÇÇ2 :$
-
-ÇÇ 
-ÉÉ 
-ÑÑ 
-
-ÉÉ& ,
-
-ÉÉ. 2
-
-ÑÑ' -
-
-ÑÑ/ 3l
-
-áá +
-ÉÉ7 M
-ÑÑ8 N
-™™ .
-¬¬ .
-ÒÒ .
-˜˜ .
-çç .
-ÃÃ .<
-
-áá3 ;
-ââ, 4
-ããY a
-éé' /
-èè, 4H
-
-ãã 
-åå 
-éé 
-èè% *
-ëë 
-ìì. 3
-
-ããA B
-ããF G
-
-ôô )MM  0
-
-ôô0 5
-õõE J
-ûû# (
-§§? D0
-
-ôô> G
-õõ$ -
-†† '
-§§4 =$
-
-õõ 
-úú )
-••; F$
-
-††Y a
-§§  
-••  "
-
-∞∞ %hh 
-èè $0
-
-∞∞, 1
-≤≤E J
-µµ# (
-ºº> C0
-
-∞∞: D
-≤≤% /
-∏∏ (
-ºº2 <$
-
-≤≤ 
-≥≥ *
-ΩΩ9 E$
-
-∏∏Z b
-ºº  
-ΩΩ  
-
-»» +`
-
-  0 5
-ÃÃ 
-ÕÕ 
-ŒŒ !
-œœ! &
-–– "
-—— 
-““+ 0
-
-÷÷ '$
-
-÷÷/ 6
-ÿÿ, 3
-ÜÜF M<
-
-÷÷? K
-›› *
-ÇÇ( 4
-ååG S
-çç/ ;Ñ
-
-÷÷T b
-‚‚( 6
-ÁÁ -
-ÎÎ( 6
-4 B
-ÒÒ/ =
-ˆˆT b
-˜˜/ =
-¸¸4 B
-ÜÜ6 D
-áá@ Nê
-
-ÿÿ= B
-›› 
-‚‚ 
-ÁÁ 
-îî 
-ïï 
-ññ !
-óó! &
-òò "
-ôô 
-öö  
-õõ+ 0
-
-ÎÎ@ N
-ÔÔ &$
-
-ÇÇ> J
-ÜÜ $
-áá $
-
-íí 
-ûû/ 7
-
-¢¢! *
-
-¢¢2 9
-§§, 3
-
-¢¢B N
-©© *0
-
-§§= B
-©© 
-ÆÆ 
-≥≥( -
-
-ªª +
-≥≥ '0
-
-ªª2 7
-øø# (
-¡¡ #
-««7 <$
-
-ΩΩ +
-ÕÕ 2
-—— -
-
-√√B J
-««  
-
-‘‘ <
-
-‘‘' .
-÷÷+ 2
-ÿÿ& -
-ŸŸ+ 2
-››+ 2$
-
-·· (
-ÎÎ '
-ÇÇ '
-
-··0 6
-„„1 7
-
-··K S
-„„= E|
-nC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\UserConnectionManager.cs
+ +
 
 
 
- (g
-eC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Properties\AssemblyInfo.csÎ
+0 8
+
+ )
+
+. 6
+
+< F
+
+ &
+
++ 3
+
+9 C
+
+L W
+
+ !
+
+) 2
+
+8 >
+
+G O
+
+ &
+
+. 6
+
+< D
+
+ 8
+
+= E
+
+N W†
+bC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\MessageFriendDTO.cs
+
+ !
+
+
+
+ $
+
+ &
+
+ 
+
+ !≥
+]C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\FlipCardDTO.cs
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ !≥
+eC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Factories\EntityFactory.cs
+
+ %
+
+
+
+ /
+
+
+: C $ !
+
+
+L X +
+
+ 1
+6 > #
+
+""! 9
+""> F&& #
+
+,,$ 7
+,,< D00! )
+,,J T11# -
+
+66# 4
+669 A:: #
+66G Q;; '
+66Z e<< )
+
+AA  /
+AA7 @EE %
+AAF LFF 
+AAU ]GG #
+
+KK# 4
+KK< DOO #
+
+KKJ R
+
+TT, F
+TTK SXX #
+TT\ eYY %Î
 bC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Entities\GameSession.cs
 
 
@@ -983,497 +1566,14 @@ bC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Enti
 ÇÇ> D
 ÉÉ# )
 xxK W~~6 B
-zzB J~~ "π
-kC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\GuestPlayerService.cs
-
- #
-+ <   //% 6<
-+ =!! ** "55& 8RR 'XX "(
-0 G"" #99 +WW '
- .    0
- /!!! 2
-# 9""& <
-
-%%! 4<
-%%< D''* 2**4 <//E M55F N99B J
-// "00 "
-33I P55P W99L S
-55 #66 #
-AA #BB1 =
-
-KK! 2<
-KK: BMM* 2RR9 AWW< DXX2 :ZZ2 :±
-gC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\CreateLobbyRequestDTO.cs
-
- &
-
- 
-
- 
-
- 
-
- 
-
- î
-fC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Factories\IEntityFactory.cs
-
- #
-
- !
-
-, 5
-
-> J
-
-		 #
-
-		( 0
-
-
-
- +
-
-
-
-0 8
-
- )
-
-. 6
-
-< F
-
- &
-
-+ 3
-
-9 C
-
-L W
-
- !
-
-) 2
-
-8 >
-
-G O
-
- &
-
-. 6
-
-< D
-
- 8
-
-= E
-
-N WŸ
-eC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\EmailService.cs
-
- 
-+ < : K
-. >  0
-
-! *
-4 <B J''# +
- #& 5
-
-  
- "" %
- "## 
- )) 
- '' ))  +Ç
+zzB J~~ "Ç
 \C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\MessageDTO.cs
 
  
 
  
 
- †
-bC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\MessageFriendDTO.cs
-
- !
-
-
-
- $
-
- &
-
- 
-
- !‚
-jC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\FriendshipService.cs
-
- "p
-+ < 55 .XX .
-çç *
-éé ,
-•• .
-´´ /
-ﬂﬂ .
-ÂÂ /h
-2 J $%% (&& (;; 6^^ 7uu (vv (
-ññ (
-óó (8
-5 G 
-ÉÉ# 5
-àà% 7
-èè$ 6 
-, > 
-øø" 4
-3 C  0
-^ u' >
-
-ì §! 2
-
-π  ! 2
-
-!!! 4
-!!9 B%%7 @
-
-11" /
-117 ?55= EMMc k
-55 66 ;;J P(
-;; == ==( /BB! (
-BB II8 B(
-BB0 6DD %EE %FF "
-
-TT( <
-TTD LXX= E
-XX YY ^^L R
-^^ ``" *
-`` hh> I2
-``2 9bb  'cc% ,dd' .ee $
-
-qq! 5
-qq: Duu7 A
-
-ÅÅ! 2$
-
-ÅÅ: H
-ÉÉI W
-çç9 G$
-
-ÅÅQ a
-ààK [
-éé; K$
-
-ÉÉ  
-ÑÑ !
-ÖÖ '$
-
-àà "
-ââ #
-ää )$
-
-çç 
-èèY _
-ññ; A$
-
-éé 
-èèj r
-ññL T$
-
-èè !
-êê "
-íí (
-
-°°% =
-
-°°E S
-´´E S$
-
-°°\ i
-••= J
-’’j w$
-
-•• 
-¶¶ 
-´´U [0
-
-´´ 
-≠≠ 
-≠≠( /
-µµ' .$
-
-≤≤ 
-ΩΩ 
-——H R$
-
-≥≥ 
-ŒŒ #
-——; F
-
-∑∑ !
-ΩΩ# ,T
-
-øø 
-¿¿ 
-∆∆' .
-««" )
-»»' .
-……) 0
-  ( /
-
-ƒƒ &
-ŒŒ( 2
-
-€€" 00
-
-€€8 @
-ﬂﬂ= E
-ÂÂ; C
-˜˜c k
-
-ﬂﬂ 
-‡‡ 0
-
-ÂÂ 
-ÁÁ 
-ÁÁ( /
-ÏÏ! (
-
-ÏÏ 
-ÛÛ8 B0
-
-ÏÏ0 6
-ÓÓ %
-ÔÔ %
- "
-
-¸¸ ,
-
-¸¸4 <
-ÄÄV ^$
-
-ÄÄ 
-ÅÅ  (
-ÉÉ- 5§
-jC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\ChatFriendService.cs
-
- "(
-1 H #33 'YY 6
-2 J $++ )<
-+ < ## *$$ ,OO +PP +(
-+ = == &>> &
-9 O& <
-: Q' >
-3 C  0
-3 D! 2
-
-!!! 42
-!!< J##9 G22* 877' 588% 32
-!!S c$$; K==8 H>>D THH> N
-!!l s22< C(
-## && ++5 ;333 9(
-$$ &&" *++F N33D L
-22 $33W g99 .(
-55 AA5 ?AAP ZAAl v
->>^ m@@+ :
-@@ (AA $
-
-MM" 0
-MM8 AOO: C
-MMJ SPP: C
-OO RR YYQ X
-PP RR# *YYc j
-YY [[" *
-[[ bb8 C(
-[[2 3]]% &^^ __* +˚
-iC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\ChatLobbyService.cs
-
-
-
- !2
-o z    
-
-  
-( 0! )(
-9 @) 0 # 
- - 5
-
- 
-' .) 0
-7 ?%%0 8**B J
-H O%%: A
-: F!!) 5ó
-eC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\JoinLobbyRequestDTO.cs
-
- $
-
- 
-
- 
-
- ≥
-eC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Factories\EntityFactory.cs
-
- %
-
-
-
- /
-
-
-: C $ !
-
-
-L X +
-
- 1
-6 > #
-
-""! 9
-""> F&& #
-
-,,$ 7
-,,< D00! )
-,,J T11# -
-
-66# 4
-669 A:: #
-66G Q;; '
-66Z e<< )
-
-AA  /
-AA7 @EE %
-AAF LFF 
-AAU ]GG #
-
-KK# 4
-KK< DOO #
-
-KKJ R
-
-TT, F
-TTK SXX #
-TT\ eYY %»
-ZC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\LobbyDTO.cs
-
- 
-
- 
-
- 
-
- 
-
- !
-
- 
-
- 
-
- #
-
- Ö
-gC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\AccountService.cs
-
- F
-+ < 88 %== %HH !LL !pp .(
-, >   II "MM "(
-1 A!! JJ  NN  @
-+ ="" jj "& 8
-ôô "
-úú ",
-0 G## #
-ÖÖ +
-õõ '
- .  0
- 0  ! 2
-$ 3!! .
- /""! 2
-# 9##& <
-
-&&! )P
-&&4 :((* 0--* 022* 0884 :==1 7BBB HDDD J
-BB #DDL X(
-DD  EEF RFFP \HH& 2
-EE !II' 4
-FF &JJ% 7
-TT #UU1 =
-
-^^! &>
-^^. 6``* 2jj4 <pp= EF N
-ÖÖB J
-^^? Gee* 2vvE M
-pp qq vvO U
-vv $xx $ 
-}}I PP W
-ÖÖL S
- #
-ÄÄ #
-
-çç #
-éé1 =
-
-óó! '0
-
-óó/ 7
-ôô4 <
-õõ< D
-úú2 :™
-\C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Entities\Lobby.cs
-
-		 
-
- 
-
- 
-  
-  %F
- #    %% ** 
- ! +  *
-
- 
-
- 
-# +% -
-4 <) 1
-
- 
-% - $
-
-##  
-##( 0%% #
-
-(( ì
-aC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\PlayerScoresDTO.cs
-
-		  
-
- 
-
- 
-
- †
-bC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\FriendRequestDTO.cs
-
- !
-
- 
-
- $
-
- &
-
- ˚
-mC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Email\Templates\TemplateFactory.cs
-
-  
-" 3 88 *
-1 A  0
-
-- 8P
-B J 7 ?J R""B J## ''. 6--  
-"" &##) 4
-66 /"") A
-667 ?889 A;;D L
-88 99 == ˇ
+ ˇ
 kC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Email\Templates\LobbyTemplate.cs
 
  %
@@ -1494,27 +1594,40 @@ tC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Emai
 
  $
 , 4 
-= M$ 4†
-nC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Contracts\IUserConnectionManager.cs
+= M$ 4ä
+dC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Email\ITemplateFactory.cs
 
- +
+
+
+ %
 
- 
+& 1
 
- $
+; Có
+eC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\JoinLobbyRequestDTO.cs
 
- ©
-kC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Contracts\IGuestPlayerService.cs
+ $
 
- (
+ 
 
- -
+ 
 
-5 =
+ ∏
+bC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\PlayerProfileDTO.cs
 
- +
+ !
 
-3 ;Ÿ
+ 
+
+ 
+
+  
+
+ "
+
+ !
+
+ "Ÿ
 eC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Contracts\ILobbyService.cs
 
  "
@@ -1576,23 +1689,57 @@ eC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Cont
 
 *** 1
 
--- Ω
-sC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Connection\Managers\ConnectionManager.cs
+-- …
+gC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Contracts\IAccountService.cs
 
- "2
-		G S   P \
+ $
 
-  
-( 0' /
-B I1 8
+ "
 
- $
-, 4, 4
+- 3
 
- "
-* 2* 2
+ 
 
-< J∏
+' /
+
+8 @
+
+  
+
+( 0©
+kC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Contracts\IGuestPlayerService.cs
+
+ (
+
+ -
+
+5 =
+
+ +
+
+3 ;¬
+lC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Contracts\IPlayerScoresService.cs
+
+ )
+
+ 0
+
+8 @
+
+ '
+
+/ 7
+
+ )
+
+1 9ã
+eC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Contracts\IEmailService.cs
+
+		 "
+
+ #
+
+- 5∏
 jC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Contracts\IFriendshipService.cs
 
  '
@@ -1627,48 +1774,29 @@ jC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Cont
 
 > L
 
-U c¬
-lC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Contracts\IPlayerScoresService.cs
+U cÙ
+dC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Contracts\IChatService.cs
 
- )
+ !
 
- 0
+		 
 
-8 @
+		  (
 
- '
+		1 8
 
-/ 7
+ 
 
- )
+! )
 
-1 9í
-jC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Contracts\IChatFriendService.cs
+ 
 
- '
+# +
+ )/ C
 
- -
+ 
 
-5 C
-
-L \
-
-e l
-
- )
-
-1 :
-
-C L
- (/ B
-
- 
-
-# )
-
-2 :
-
-C Jÿ
+# *ÿ
 dC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Contracts\IGameService.cs
 
 
@@ -1756,48 +1884,23 @@ iC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Cont
 
 # +
 
-4 ;ã
-eC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Contracts\IEmailService.cs
+4 ;Ω
+sC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Connection\Managers\ConnectionManager.cs
 
-		 "
+ "2
+		G S   P \
 
- #
+  
+( 0' /
+B I1 8
 
-- 5≥
-]C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\FlipCardDTO.cs
+ $
+, 4, 4
 
- 
+ "
+* 2* 2
 
- 
-
- 
-
- 
-
- 
-
- 
-
- !»
-ZC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\EmailDTO.cs
-
- 
-
-		 
-
- 
-
- 
-
- &
-
- 
-
- 
-
- #
-
-  ß
+< Jß
 ]C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\CellDeadDto.cs
 
  
@@ -1817,24 +1920,7 @@ cC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\
 
  
 
- …
-gC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Contracts\IAccountService.cs
-
- $
-
- "
-
-- 3
-
- 
-
-' /
-
-8 @
-
-  
-
-( 0Â
+ Â
 gC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Contracts\IProfileService.cs
 
  $
@@ -1877,29 +1963,42 @@ gC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Cont
 
  
 
-' /Ù
-dC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Contracts\IChatService.cs
+' /†
+nC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Contracts\IUserConnectionManager.cs
 
- !
+ +
 
-		 
+ 
 
-		  (
+ $
 
-		1 8
+ í
+jC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Contracts\IChatFriendService.cs
 
- 
+ '
 
-! )
+ -
 
- 
+5 C
 
-# +
- )/ C
+L \
 
- 
+e l
 
-# *¯
+ )
+
+1 :
+
+C L
+ (/ B
+
+ 
+
+# )
+
+2 :
+
+C J¯
 xC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Connection\Managers\ConnectionEventHandler.cs
 
  '

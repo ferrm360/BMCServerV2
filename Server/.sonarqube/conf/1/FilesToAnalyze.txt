@@ -25,6 +25,7 @@ C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\M
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\PlayerDTO.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\PlayerProfileDTO.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\DTO\PlayerScoresDTO.cs
+C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Email\ITemplateFactory.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Email\Templates\ChangePasswordTemplate.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Email\Templates\LobbyTemplate.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Email\Templates\TemplateFactory.cs
@@ -43,7 +44,6 @@ C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Imple
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\LobbyService.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\PlayerScoresService.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\ProfileService.cs
-C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Implements\UserConnectionManager.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Properties\AssemblyInfo.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\ServiceModule.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Constans\LobbyMessages.cs
@@ -69,8 +69,10 @@ C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utili
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Results\PlayerProfileResponse.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Results\PlayerScoresResponse.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Results\ProfileResponse.cs
-C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Validators\ValidationAccountService.cs
-C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Validators\ValidationFriendshipService.cs
+C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Validators\AccountService\IValidationAccountService.cs
+C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Validators\FriendshipService\IValidationFriendshipService.cs
+C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Validators\AccountService\ValidationAccountService.cs
+C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Utilities\Validators\FriendshipService\ValidationFriendshipService.cs
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\packages\MSTest.TestAdapter.3.6.1\build\_localization\es\Microsoft.Testing.Extensions.Telemetry.resources.dll
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\packages\MSTest.TestAdapter.3.6.1\build\_localization\es\Microsoft.Testing.Extensions.VSTestBridge.resources.dll
 C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\packages\MSTest.TestAdapter.3.6.1\build\_localization\es\Microsoft.Testing.Platform.resources.dll

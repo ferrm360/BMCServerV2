@@ -64,7 +64,104 @@ DataAccess
 
 . /
 } 
-} ¯=
+} ç
+oC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\IPlayerRepository.cs
+	namespace 	
+
+DataAccess
+ 
+. 
+Repositories !
+{ 
+public 
+
+	interface 
+IPlayerRepository &
+{ 
+Player 
+GetByUsername 
+( 
+string #
+username$ ,
+), -
+;- .
+Player 
+
+GetByEmail 
+( 
+string  
+email! &
+)& '
+;' (
+void		 
+Add		 
+(		 
+Player		 
+player		 
+)		 
+;		  
+void
+
+ 
+Update
+
+ 
+(
+
+ 
+Player
+
+ 
+player
+
+ !
+)
+
+! "
+;
+
+" #
+void 
+UpdatePasswordHash 
+(  
+string  &
+username' /
+,/ 0
+string2 8
+passwordHash9 E
+)E F
+;F G
+void 
+Save 
+( 
+) 
+; 
+IEnumerable 
+< 
+Player 
+>  
+GetPlayersByUsername 0
+(0 1
+string1 7
+username8 @
+,@ A
+intB E
+playerIdF N
+)N O
+;O P
+IEnumerable 
+< 
+Player 
+> 
+
+GetPlayers &
+(& '
+string' -
+username. 6
+)6 7
+;7 8
+} 
+} ¯=
 oC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\ProfileRepository.cs
 	namespace 	
 
@@ -1127,104 +1224,7 @@ UserScores
 ññ 	
 }
 óó 
-}òò ç
-oC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\IPlayerRepository.cs
-	namespace 	
-
-DataAccess
- 
-. 
-Repositories !
-{ 
-public 
-
-	interface 
-IPlayerRepository &
-{ 
-Player 
-GetByUsername 
-( 
-string #
-username$ ,
-), -
-;- .
-Player 
-
-GetByEmail 
-( 
-string  
-email! &
-)& '
-;' (
-void		 
-Add		 
-(		 
-Player		 
-player		 
-)		 
-;		  
-void
-
- 
-Update
-
- 
-(
-
- 
-Player
-
- 
-player
-
- !
-)
-
-! "
-;
-
-" #
-void 
-UpdatePasswordHash 
-(  
-string  &
-username' /
-,/ 0
-string2 8
-passwordHash9 E
-)E F
-;F G
-void 
-Save 
-( 
-) 
-; 
-IEnumerable 
-< 
-Player 
->  
-GetPlayersByUsername 0
-(0 1
-string1 7
-username8 @
-,@ A
-intB E
-playerIdF N
-)N O
-;O P
-IEnumerable 
-< 
-Player 
-> 
-
-GetPlayers &
-(& '
-string' -
-username. 6
-)6 7
-;7 8
-} 
-} Ωa
+}òò Ωa
 mC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\PlayerRepositoy.cs
 	namespace
 
@@ -3269,7 +3269,65 @@ AreFriends 
 ) 
 ; 
 } 
-} ∫f
+} ¬
+uC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\IChatMessagesRepository.cs
+	namespace 	
+
+DataAccess
+ 
+. 
+Repositories !
+{ 
+public 
+
+	interface #
+IChatMessagesRepository ,
+{ 
+IEnumerable 
+< 
+ChatMessages  
+>  !%
+GetMessagesBetweenPlayers" ;
+(; <
+int< ?
+	player1Id@ I
+,I J
+intK N
+	player2IdO X
+)X Y
+;Y Z
+IEnumerable 
+< 
+ChatMessages  
+>  !
+GetRecentMessages" 3
+(3 4
+int4 7
+playerId8 @
+,@ A
+intB E
+limitF K
+)K L
+;L M
+void		 
+
+AddMessage		 
+(		 
+int		 
+senderId		 $
+,		$ %
+int		& )
+
+receiverId		* 4
+,		4 5
+string		6 <
+messageText		= H
+)		H I
+;		I J
+}
+
+ 
+} ∫f
 qC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\GameLobbyRepository.cs
 	namespace 	
 
@@ -4211,65 +4269,7 @@ DataAccess
 ππ 	
 }
 ∫∫ 
-}ªª ¬
-uC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\IChatMessagesRepository.cs
-	namespace 	
-
-DataAccess
- 
-. 
-Repositories !
-{ 
-public 
-
-	interface #
-IChatMessagesRepository ,
-{ 
-IEnumerable 
-< 
-ChatMessages  
->  !%
-GetMessagesBetweenPlayers" ;
-(; <
-int< ?
-	player1Id@ I
-,I J
-intK N
-	player2IdO X
-)X Y
-;Y Z
-IEnumerable 
-< 
-ChatMessages  
->  !
-GetRecentMessages" 3
-(3 4
-int4 7
-playerId8 @
-,@ A
-intB E
-limitF K
-)K L
-;L M
-void		 
-
-AddMessage		 
-(		 
-int		 
-senderId		 $
-,		$ %
-int		& )
-
-receiverId		* 4
-,		4 5
-string		6 <
-messageText		= H
-)		H I
-;		I J
-}
-
- 
-} ®Å
+}ªª ®Å
 uC:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\DataAccess\Repositories\FriendRequestRepository.cs
 	namespace		 	
 
