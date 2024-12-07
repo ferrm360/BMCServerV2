@@ -4,36 +4,62 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.Repositories;
+
 
 namespace Service.Email.Templates
 {
-    public static class TemplateFactory
+    public class TemplateFactory : ITemplateFactory
     {
-        public static (string Subject, string Body) GetTemplate(EmailDTO emailDto)
+        private IPlayerRepository _playerRepository;
+
+        public TemplateFactory(IPlayerRepository playerRepository)
         {
-            switch (emailDto.EmailType.ToLower())
+            _playerRepository = playerRepository;
+        }
+
+
+        public (string Subject, string Body) GetTemplate(EmailDTO emailDTO)
+        {
+            switch (emailDTO.EmailType.ToLower())
             {
                 case "changepassword":
+
                     return (
                         ChangePasswordTemplate.GetSubject(),
-                        ChangePasswordTemplate.GetBody(emailDto.Username, emailDto.VerificationCode)
+                        ChangePasswordTemplate.GetBody(emailDTO.Username, emailDTO.VerificationCode)
                     );
 
                 case "lobbyinvite":
+                    string playerEmail = GetPlayerEmailByUsername(emailDTO.Username);
+                    emailDTO.Recipient = playerEmail;
+
                     return (
                         LobbyTemplate.GetSubject(),
-                        LobbyTemplate.GetBody(emailDto)
+                        LobbyTemplate.GetBody(emailDTO)
                     );
 
                 case "custom":
                     return (
                         "Custom Message",
-                        emailDto.CustomBody ?? "No custom body provided."
+                        emailDTO.CustomBody ?? "No custom body provided."
                     );
 
                 default:
                     throw new ArgumentException("Unsupported email type.");
             }
         }
+
+        
+        private string GetPlayerEmailByUsername(string username)
+        {
+            var player = _playerRepository.GetByUsername(username);
+            if (player == null)
+            {
+                throw new ArgumentException($"Player with username {username} not found.");
+            }
+            return player.Email;
+        }
+        
     }
 }

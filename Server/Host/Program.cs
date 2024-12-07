@@ -6,6 +6,7 @@ using log4net;
 using log4net.Config;
 using Service;
 using Service.Contracts;
+using Service.DTO;
 using Service.Implements;
 
 namespace Host
@@ -58,6 +59,9 @@ namespace Host
                 Console.WriteLine("Services terminated. Press Enter to exit.");
                 Console.ReadLine();
             }
+
+         
+
         }
 
         private static void StartServices(ServiceDefinition[] services, ILifetimeScope scope)

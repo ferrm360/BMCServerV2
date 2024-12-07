@@ -9,6 +9,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.Threading.Tasks;
 
 namespace Service.Implements
 {
@@ -16,10 +17,20 @@ namespace Service.Implements
     public class LobbyService : ILobbyService
     {
         private static readonly Dictionary<string, Lobby> _activeLobbies = new Dictionary<string, Lobby>();
-        private static readonly ConcurrentDictionary<string, ILobbyCallback> _connectedPlayers = new ConcurrentDictionary<string, ILobbyCallback>();
+        private static readonly ConcurrentDictionary<string, ILobbyCallback> _connectedPlayersInLobby = new ConcurrentDictionary<string, ILobbyCallback>();
 
         public LobbyResponse CreateLobby(CreateLobbyRequestDTO request)
         {
+            if (string.IsNullOrWhiteSpace(request.Name))
+            {
+                return LobbyResponse.Failure(ErrorMessages.LobbyNameNull);
+            }
+
+            if (request.Name.Length > 15 || request.Name.Length < 3)
+            {
+                return LobbyResponse.Failure(ErrorMessages.LobbyInvalidName);
+            }
+
             if (_activeLobbies.Values.Any(l => l.Name == request.Name))
             {
                 return LobbyResponse.Failure(ErrorMessages.DuplicateLobbyName);
@@ -85,9 +96,7 @@ namespace Service.Implements
                 Host = lobby.Host,
                 Players = new List<string>(lobby.Players)
             };
-
             return LobbyResponse.SuccessResult(lobbyDto);
-            
         }
 
         public LobbyResponse LeaveLobby(string lobbyId, string username)
@@ -98,7 +107,7 @@ namespace Service.Implements
             }
 
             lobby.RemovePlayer(username);
-            _connectedPlayers.TryRemove(username, out _);
+            _connectedPlayersInLobby.TryRemove(username, out _);
 
             NotifyPlayerLeft(lobby, username);
 
@@ -124,7 +133,7 @@ namespace Service.Implements
         private void RegisterCallback(string username)
         {
             var callback = OperationContext.Current.GetCallbackChannel<ILobbyCallback>();
-            _connectedPlayers.TryAdd(username, callback);
+            _connectedPlayersInLobby.TryAdd(username, callback);
 
             var contextChannel = (IContextChannel)callback;
             contextChannel.Closed += (sender, args) => HandleClientDisconnect(username);
@@ -133,7 +142,7 @@ namespace Service.Implements
 
         private void HandleClientDisconnect(string username)
         {
-            if (_connectedPlayers.TryRemove(username, out _))
+            if (_connectedPlayersInLobby.TryRemove(username, out _))
             {
                 var lobby = _activeLobbies.Values.FirstOrDefault(l => l.Players.Contains(username));
                 if (lobby != null)
@@ -156,7 +165,7 @@ namespace Service.Implements
 
             foreach (var player in lobby.Players)
             {
-                if (player != newPlayer && _connectedPlayers.TryGetValue(player, out var callback))
+                if (player != newPlayer && _connectedPlayersInLobby.TryGetValue(player, out var callback))
                 {
                     try
                     {
@@ -179,7 +188,8 @@ namespace Service.Implements
 
             foreach (var player in lobby.Players)
             {
-                if (player != playerLeft && _connectedPlayers.TryGetValue(player, out var callback))
+                Console.WriteLine(player);
+                if (player != playerLeft && _connectedPlayersInLobby.TryGetValue(player, out var callback))
                 {
                     try
                     {
@@ -227,9 +237,47 @@ namespace Service.Implements
             }
 
             lobby.RemovePlayer(targetUsername);
-            _connectedPlayers.TryRemove(targetUsername, out _);
 
-            NotifyPlayerLeft(lobby, targetUsername);
+            Task.Run(() =>
+            {
+                if (TryGetLobbyCallback(targetUsername, out var targetCallback))
+                {
+                    try
+                    {
+                        targetCallback.NotifyPlayerKicked();
+                        _connectedPlayersInLobby.TryRemove(targetUsername, out _);
+                        HandleClientDisconnect(targetUsername);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error notificando al jugador expulsado {targetUsername}: {ex.Message}");
+                        HandleClientDisconnect(targetUsername);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"El jugador {targetUsername} ya no está conectado.");
+                }
+            });
+
+            Task.Run(() =>
+            {
+                if (TryGetLobbyCallback(hostUsername, out var hostCallback))
+                {
+                    try
+                    {
+                        hostCallback.NotifyPlayerLeft(targetUsername, lobbyId);
+                        hostCallback.NotifyPlayerLeftMessage($"{targetUsername} has been kicked");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error notificando al host {hostUsername}: {ex.Message}");
+                        HandleClientDisconnect(hostUsername);
+                    }
+                }
+            });
 
             var lobbyDto = new LobbyDTO
             {
@@ -239,11 +287,13 @@ namespace Service.Implements
                 CurrentPlayers = lobby.Players.Count,
                 MaxPlayers = lobby.MaxPlayers,
                 Host = lobby.Host,
+                Password = lobby.Password,
                 Players = new List<string>(lobby.Players)
             };
 
             return LobbyResponse.SuccessResult(lobbyDto);
         }
+
 
         public OperationResponse StartGame(string lobbyId, string hostUsername)
         {
@@ -278,7 +328,7 @@ namespace Service.Implements
             {
                 if (player == lobby.Host) continue;
 
-                if (_connectedPlayers.TryGetValue(player, out var callback))
+                if (_connectedPlayersInLobby.TryGetValue(player, out var callback))
                 {
                     try
                     {
@@ -306,6 +356,11 @@ namespace Service.Implements
             {
                 Console.WriteLine($"Lobby {lobbyId} no encontrada.");
             }
+        }
+
+        private bool TryGetLobbyCallback(string player, out ILobbyCallback callback)
+        {
+            return _connectedPlayersInLobby.TryGetValue(player, out callback);
         }
 
     }

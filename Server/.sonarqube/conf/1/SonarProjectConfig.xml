@@ -4,5 +4,5 @@
   <ProjectPath>C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Service.csproj</ProjectPath>
   <FilesToAnalyzePath>C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\.sonarqube\conf\1\FilesToAnalyze.txt</FilesToAnalyzePath>
   <OutPath>C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\.sonarqube\out\1</OutPath>
-  <ProjectType>Product</ProjectType>
+  <ProjectType>Test</ProjectType>
 </SonarProjectConfig>

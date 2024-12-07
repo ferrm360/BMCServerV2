@@ -40,5 +40,9 @@ namespace Service.Contracts
 
         [OperationContract(IsOneWay = true)]
         void StartGameNotification(string lobbyId);
+
+        [OperationContract(IsOneWay = true)]
+        void NotifyPlayerKicked();
+
     }
 }

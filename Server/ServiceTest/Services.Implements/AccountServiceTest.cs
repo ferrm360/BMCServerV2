@@ -7,6 +7,7 @@ using Service.Contracts;
 using Service.DTO;
 using Service.Implements;
 using Service.Utilities.Helpers;
+using Service.Utilities.Validators.AccountService;
 using System;
 using System.ServiceModel;
 
@@ -21,6 +22,7 @@ namespace Service.Test.Services.Implements
         private ConnectionManager _connectionManager;
         private ConnectionEventHandler _connectionEventHandler;
         private IAccountService _accountService;
+        private Mock<IValidationAccountService> _validationAccountServiceMock;
 
         [TestInitialize]
         public void Setup()
@@ -28,6 +30,7 @@ namespace Service.Test.Services.Implements
             _playerRepositoryMock = new Mock<IPlayerRepository>();
             _profileRepositoryMock = new Mock<IProfileRepository>();
             _scoreRepositoryMock = new Mock<IPlayerScoresRepository>();
+            _validationAccountServiceMock = new Mock<IValidationAccountService>();
 
             _connectionManager = new ConnectionManager();
             _connectionEventHandler = new ConnectionEventHandler(_connectionManager);
@@ -37,15 +40,21 @@ namespace Service.Test.Services.Implements
                 _profileRepositoryMock.Object,
                 _scoreRepositoryMock.Object,
                 _connectionManager,
-                _connectionEventHandler);
+                _connectionEventHandler,
+                _validationAccountServiceMock.Object
+            );
         }
+
 
         [TestMethod]
         public void Register_ShouldReturnFailure_WhenUsernameExists()
         {
             var playerDTO = new PlayerDTO { Username = "FerRMZ", Email = "ferram@gmail.com", Password = "Fer20HVZRA6" };
 
-            _playerRepositoryMock.Setup(r => r.GetByUsername(It.IsAny<string>())).Returns(new Player());
+            _validationAccountServiceMock.Setup(v => v.ValidateUsername(playerDTO.Username)).Returns((string)null);
+            _validationAccountServiceMock.Setup(v => v.ValidateEmail(playerDTO.Email)).Returns((string)null);
+            _validationAccountServiceMock.Setup(v => v.ValidatePassword(playerDTO.Password)).Returns((string)null);
+            _validationAccountServiceMock.Setup(v => v.ValidatePlayerExistsByUsername(It.IsAny<IPlayerRepository>(), playerDTO.Username)).Returns("Error.DuplicateUsername");
 
             var result = _accountService.Register(playerDTO);
 
@@ -55,9 +64,12 @@ namespace Service.Test.Services.Implements
         [TestMethod]
         public void Register_ShouldReturnFailure_WhenEmailExists()
         {
-            var playerDTO = new PlayerDTO { Username = "-FerRM-", Email = "ferram@gmail.com", Password = "Fer112620HVZRA6" };
+            var playerDTO = new PlayerDTO { Username = "FerRMZ", Email = "ferram@gmail.com", Password = "Fer20HVZRA6" };
 
-            _playerRepositoryMock.Setup(r => r.GetByEmail(It.IsAny<string>())).Returns(new Player());
+            _validationAccountServiceMock.Setup(v => v.ValidateUsername(playerDTO.Username)).Returns((string)null);
+            _validationAccountServiceMock.Setup(v => v.ValidateEmail(playerDTO.Email)).Returns((string)null);
+            _validationAccountServiceMock.Setup(v => v.ValidatePassword(playerDTO.Password)).Returns((string)null);
+            _validationAccountServiceMock.Setup(v => v.ValidatePlayerExistsByEmail(It.IsAny<IPlayerRepository>(), playerDTO.Email)).Returns("Error.DuplicateEmail");
 
             var result = _accountService.Register(playerDTO);
 
@@ -68,6 +80,12 @@ namespace Service.Test.Services.Implements
         public void Register_ShouldReturnSuccess_WhenValidPlayer()
         {
             var playerDTO = new PlayerDTO { Username = "Fer2011", Email = "Fer2011@gmail.com", Password = "Fer112620HVZRA6" };
+
+            _validationAccountServiceMock.Setup(v => v.ValidateUsername(playerDTO.Username)).Returns((string)null);
+            _validationAccountServiceMock.Setup(v => v.ValidateEmail(playerDTO.Email)).Returns((string)null);
+            _validationAccountServiceMock.Setup(v => v.ValidatePassword(playerDTO.Password)).Returns((string)null);
+            _validationAccountServiceMock.Setup(v => v.ValidatePlayerExistsByUsername(It.IsAny<IPlayerRepository>(), playerDTO.Username)).Returns((string)null);  // No error
+            _validationAccountServiceMock.Setup(v => v.ValidatePlayerExistsByEmail(It.IsAny<IPlayerRepository>(), playerDTO.Email)).Returns((string)null);  // No error
 
             _playerRepositoryMock.Setup(r => r.GetByUsername(It.IsAny<string>())).Returns((Player)null);
             _playerRepositoryMock.Setup(r => r.GetByEmail(It.IsAny<string>())).Returns((Player)null);
@@ -82,6 +100,8 @@ namespace Service.Test.Services.Implements
         {
             var playerDTO = new PlayerDTO { Username = "", Email = "ferram@gmail.com", Password = "Fer20HVZRA6" };
 
+            _validationAccountServiceMock.Setup(v => v.ValidateUsername(playerDTO.Username)).Returns("Error.InvalidUsername");
+
             var result = _accountService.Register(playerDTO);
 
             Assert.AreEqual("Error.InvalidUsername", result.ErrorKey);
@@ -91,6 +111,8 @@ namespace Service.Test.Services.Implements
         public void Register_ShouldReturnFailure_WhenEmailIsInvalid()
         {
             var playerDTO = new PlayerDTO { Username = "FerRMZ", Email = "", Password = "Fer20HVZRA6" };
+
+            _validationAccountServiceMock.Setup(v => v.ValidateEmail(playerDTO.Email)).Returns("Error.InvalidEmail");
 
             var result = _accountService.Register(playerDTO);
 
@@ -102,10 +124,13 @@ namespace Service.Test.Services.Implements
         {
             var playerDTO = new PlayerDTO { Username = "FerRMZ", Email = "ferram@gmail.com", Password = "" };
 
+            _validationAccountServiceMock.Setup(v => v.ValidatePassword(playerDTO.Password)).Returns("Error.InvalidPassword");
+
             var result = _accountService.Register(playerDTO);
 
             Assert.AreEqual("Error.InvalidPassword", result.ErrorKey);
         }
+
 
         [TestMethod]
         public void Login_ShouldReturnFailure_WhenUserNotFound()
@@ -150,6 +175,8 @@ namespace Service.Test.Services.Implements
         {
             var username = "";
             var password = "323242ddfdMetFer";
+            _validationAccountServiceMock.Setup(v => v.ValidateUsername(username)).Returns("Error.InvalidUsername");
+
 
             var result = _accountService.Login(username, password);
 
@@ -199,7 +226,7 @@ namespace Service.Test.Services.Implements
         [TestMethod]
         public void Logout_ShouldReturnFailure_WhenUserIsNotRegistered()
         {
-            var username = "NonExistentUser";
+            var username = "Marla";
 
             var result = _accountService.Logout(username);
 

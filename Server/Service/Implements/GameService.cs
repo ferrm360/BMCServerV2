@@ -17,13 +17,6 @@ namespace Service.Implements
     {
         public static readonly ConcurrentDictionary<string, GameSession> _activeGames = new ConcurrentDictionary<string, GameSession>();
 
-        private readonly LobbyService _lobbyService;
-
-        public GameService(LobbyService lobbyService)
-        {
-            _lobbyService = lobbyService ?? throw new ArgumentNullException(nameof(lobbyService));
-        }
-
         public async Task<OperationResponse> AttackAsync(string lobbyId, string attacker, AttackPositionDTO attackPosition)
         {
             if (!_activeGames.TryGetValue(lobbyId, out var gameSession))
@@ -193,14 +186,14 @@ namespace Service.Implements
             }
         }
 
-        public async Task<OperationResponse> NotifyGameOverAsync(string lobbyId, string looser)
+        public async Task<OperationResponse> NotifyGameOverAsync(string lobbyId, string loser)
         {
             if (!_activeGames.TryGetValue(lobbyId, out var gameSession))
             {
                 return OperationResponse.Failure("Game not found.");
             }
 
-            var opponent = gameSession.GetOpponent(looser);
+            var opponent = gameSession.GetOpponent(loser);
             if (opponent == null)
             {
                 return OperationResponse.Failure("Opponent not found.");
@@ -212,14 +205,10 @@ namespace Service.Implements
                 try
                 {
                     var tasks = new List<Task>();
-                    Console.WriteLine("Callback despues");
                     tasks.Add(Task.Run(() =>
                     {
-                            opponentCallback.OnGameOver();
+                            opponentCallback.OnGameOver(loser);
                     }));
-
-                    _activeGames.TryRemove(lobbyId, out _);
-                    _lobbyService.RemoveLobby(lobbyId);
 
                     await Task.WhenAll(tasks);
                     return OperationResponse.SuccessResult();

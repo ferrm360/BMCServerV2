@@ -7,7 +7,7 @@ using Service.Implements;
 using System.Collections.Generic;
 using System;
 
-namespace Service.Test.Services.Implements
+namespace ServiceTest.Services.Implements
 {
     [TestClass]
     public class ChatFriendServiceTests
@@ -36,13 +36,13 @@ namespace Service.Test.Services.Implements
         [TestMethod]
         public void SendMessageToFriend_ShouldReturnSuccess_WhenUsersAreFriends()
         {
-            var sender = new Player { PlayerID = 1, Username = "UserA" };
-            var receiver = new Player { PlayerID = 2, Username = "UserB" };
-            _playerRepositoryMock.Setup(r => r.GetByUsername("UserA")).Returns(sender);
-            _playerRepositoryMock.Setup(r => r.GetByUsername("UserB")).Returns(receiver);
+            var sender = new Player { PlayerID = 1, Username = "FerRMZ" };
+            var receiver = new Player { PlayerID = 2, Username = "Marla" };
+            _playerRepositoryMock.Setup(r => r.GetByUsername("FerRMZ")).Returns(sender);
+            _playerRepositoryMock.Setup(r => r.GetByUsername("Marla")).Returns(receiver);
             _friendRequestRepositoryMock.Setup(r => r.AreFriends(1, 2)).Returns(true);
 
-            var result = _chatFriendService.SendMessageToFriend("UserA", "UserB", "Hello!");
+            var result = _chatFriendService.SendMessageToFriend("FerRMZ", "Marla", "Hello!");
 
             Assert.IsTrue(result.IsSuccess);
         }
@@ -50,25 +50,25 @@ namespace Service.Test.Services.Implements
         [TestMethod]
         public void SendMessageToFriend_ShouldReturnFailure_WhenUsersAreNotFriends()
         {
-            var sender = new Player { PlayerID = 1, Username = "UserA" };
-            var receiver = new Player { PlayerID = 2, Username = "UserB" };
-            _playerRepositoryMock.Setup(r => r.GetByUsername("UserA")).Returns(sender);
-            _playerRepositoryMock.Setup(r => r.GetByUsername("UserB")).Returns(receiver);
+            var sender = new Player { PlayerID = 1, Username = "FerRMZ" };
+            var receiver = new Player { PlayerID = 2, Username = "Marla" };
+            _playerRepositoryMock.Setup(r => r.GetByUsername("FerRMZ")).Returns(sender);
+            _playerRepositoryMock.Setup(r => r.GetByUsername("Marla")).Returns(receiver);
             _friendRequestRepositoryMock.Setup(r => r.AreFriends(1, 2)).Returns(false);
 
-            var result = _chatFriendService.SendMessageToFriend("UserA", "UserB", "Hello!");
+            var result = _chatFriendService.SendMessageToFriend("FerRMZ", "Marla", "Hello!");
 
-            Assert.AreEqual("Users are not friends.", result.ErrorKey);
+            Assert.AreEqual("Info.NoAreFriends", result.ErrorKey);
         }
 
         [TestMethod]
         public void SendMessageToFriend_ShouldReturnFailure_WhenReceiverNotFound()
         {
-            var sender = new Player { PlayerID = 1, Username = "UserA" };
-            _playerRepositoryMock.Setup(r => r.GetByUsername("UserA")).Returns(sender);
-            _playerRepositoryMock.Setup(r => r.GetByUsername("UserB")).Returns((Player)null);
+            var sender = new Player { PlayerID = 1, Username = "FerRMZ" };
+            _playerRepositoryMock.Setup(r => r.GetByUsername("FerRMZ")).Returns(sender);
+            _playerRepositoryMock.Setup(r => r.GetByUsername("Marla")).Returns((Player)null);
 
-            var result = _chatFriendService.SendMessageToFriend("UserA", "UserB", "Hello!");
+            var result = _chatFriendService.SendMessageToFriend("FerRMZ", "Marla", "Hello!");
 
             Assert.IsFalse(result.IsSuccess);
         }
@@ -76,14 +76,14 @@ namespace Service.Test.Services.Implements
         [TestMethod]
         public void SendMessageToFriend_ShouldReturnFailure_WhenExceptionOccurs()
         {
-            var sender = new Player { PlayerID = 1, Username = "UserA" };
-            var receiver = new Player { PlayerID = 2, Username = "UserB" };
-            _playerRepositoryMock.Setup(r => r.GetByUsername("UserA")).Returns(sender);
-            _playerRepositoryMock.Setup(r => r.GetByUsername("UserB")).Returns(receiver);
+            var sender = new Player { PlayerID = 1, Username = "FerRMZ" };
+            var receiver = new Player { PlayerID = 2, Username = "Marla" };
+            _playerRepositoryMock.Setup(r => r.GetByUsername("FerRMZ")).Returns(sender);
+            _playerRepositoryMock.Setup(r => r.GetByUsername("Marla")).Returns(receiver);
             _friendRequestRepositoryMock.Setup(r => r.AreFriends(1, 2)).Returns(true);
             _chatMessagesRepositoryMock.Setup(r => r.AddMessage(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>())).Throws(new Exception("DB error"));
 
-            var result = _chatFriendService.SendMessageToFriend("UserA", "UserB", "Hello!");
+            var result = _chatFriendService.SendMessageToFriend("FerRMZ", "Marla", "Hello!");
 
             Assert.IsFalse(result.IsSuccess);
         }
@@ -91,17 +91,17 @@ namespace Service.Test.Services.Implements
         [TestMethod]
         public void GetChatHistory_ShouldReturnSuccess_WithMessages()
         {
-            var player1 = new Player { PlayerID = 1, Username = "UserA" };
-            var player2 = new Player { PlayerID = 2, Username = "UserB" };
+            var player1 = new Player { PlayerID = 1, Username = "FerRMZ" };
+            var player2 = new Player { PlayerID = 2, Username = "Marla" };
             var messages = new List<ChatMessages>
             {
                 new ChatMessages { Player = player1, MessageText = "Hello!", Timestamp = DateTime.Now }
             };
-            _playerRepositoryMock.Setup(r => r.GetByUsername("UserA")).Returns(player1);
-            _playerRepositoryMock.Setup(r => r.GetByUsername("UserB")).Returns(player2);
+            _playerRepositoryMock.Setup(r => r.GetByUsername("FerRMZ")).Returns(player1);
+            _playerRepositoryMock.Setup(r => r.GetByUsername("Marla")).Returns(player2);
             _chatMessagesRepositoryMock.Setup(r => r.GetMessagesBetweenPlayers(1, 2)).Returns(messages);
 
-            var result = _chatFriendService.GetChatHistory("UserA", "UserB");
+            var result = _chatFriendService.GetChatHistory("FerRMZ", "Marla");
 
             Assert.IsTrue(result.IsSuccess);
         }
@@ -109,9 +109,9 @@ namespace Service.Test.Services.Implements
         [TestMethod]
         public void GetChatHistory_ShouldReturnFailure_WhenUsersNotFound()
         {
-            _playerRepositoryMock.Setup(r => r.GetByUsername("UserA")).Returns((Player)null);
+            _playerRepositoryMock.Setup(r => r.GetByUsername("FerRMZ")).Returns((Player)null);
 
-            var result = _chatFriendService.GetChatHistory("UserA", "UserB");
+            var result = _chatFriendService.GetChatHistory("FerRMZ", "Marla");
 
             Assert.IsFalse(result.IsSuccess);
         }
@@ -119,13 +119,13 @@ namespace Service.Test.Services.Implements
         [TestMethod]
         public void GetChatHistory_ShouldReturnFailure_WhenExceptionOccurs()
         {
-            var player1 = new Player { PlayerID = 1, Username = "UserA" };
-            var player2 = new Player { PlayerID = 2, Username = "UserB" };
-            _playerRepositoryMock.Setup(r => r.GetByUsername("UserA")).Returns(player1);
-            _playerRepositoryMock.Setup(r => r.GetByUsername("UserB")).Returns(player2);
+            var player1 = new Player { PlayerID = 1, Username = "FerRMZ" };
+            var player2 = new Player { PlayerID = 2, Username = "Marla" };
+            _playerRepositoryMock.Setup(r => r.GetByUsername("FerRMZ")).Returns(player1);
+            _playerRepositoryMock.Setup(r => r.GetByUsername("Marla")).Returns(player2);
             _chatMessagesRepositoryMock.Setup(r => r.GetMessagesBetweenPlayers(It.IsAny<int>(), It.IsAny<int>())).Throws(new Exception("DB error"));
 
-            var result = _chatFriendService.GetChatHistory("UserA", "UserB");
+            var result = _chatFriendService.GetChatHistory("FerRMZ", "Marla");
 
             Assert.AreEqual("Error retrieving chat history.", result.ErrorKey);
         }

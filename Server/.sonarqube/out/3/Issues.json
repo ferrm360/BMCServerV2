@@ -18,33 +18,12 @@
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service.Test/Services.Implements/ProfileServiceTest.cs",
+                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/ServiceTest/Services.Implements/FriendshipServiceTest.cs",
                 "region": {
-                  "startLine": 134,
+                  "startLine": 98,
                   "startColumn": 21,
-                  "endLine": 134,
-                  "endColumn": 85
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S2699",
-          "level": "warning",
-          "message": "Add at least one assertion to this test case.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/neco3/source/repos/RepositorioServidor/BMCServerV2/Server/Service.Test/Services.Implements/ProfileServiceTest.cs",
-                "region": {
-                  "startLine": 156,
-                  "startColumn": 21,
-                  "endLine": 156,
-                  "endColumn": 72
+                  "endLine": 98,
+                  "endColumn": 79
                 }
               }
             }

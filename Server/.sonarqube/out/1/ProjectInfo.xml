@@ -2,7 +2,7 @@
 <ProjectInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
   <ProjectName>Service</ProjectName>
   <ProjectLanguage>C#</ProjectLanguage>
-  <ProjectType>Product</ProjectType>
+  <ProjectType>Test</ProjectType>
   <ProjectGuid>cf7fdfe2-d7a4-43a0-b170-99b05628f50d</ProjectGuid>
   <FullPath>C:\Users\neco3\source\repos\RepositorioServidor\BMCServerV2\Server\Service\Service.csproj</FullPath>
   <IsExcluded>false</IsExcluded>

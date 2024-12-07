@@ -6,7 +6,7 @@ using Service.Implements;
 using Service.Utilities.Constans;
 using Service.Utilities.Helpers;
 
-namespace Service.Test.Services.Implements
+namespace ServiceTest.Services.Implements
 {
     [TestClass]
     public class ProfileServiceTests
@@ -131,13 +131,6 @@ namespace Service.Test.Services.Implements
         }
 
         [TestMethod]
-        public void GetProfileByUsername_ShouldReturnSuccess_WhenUserAndProfileExist()
-        {
-            // TODO corregir, verificar que sucede si se obtiene el perfil pero este no tiene una imagen o es una url incorrecta.
-            // Se puede agregar una validacion por si la url es nula, idealmente deberia ser una default.
-        }
-
-        [TestMethod]
         public void GetProfileImage_ShouldReturnFailure_WhenImageNotFound()
         {
             var username = "FerRMZ";
@@ -150,13 +143,6 @@ namespace Service.Test.Services.Implements
             var result = _profileService.GetProfileImage(username);
 
             Assert.AreEqual(ErrorMessages.ImageNotFound, result.ErrorKey);
-        }
-
-        [TestMethod]
-        public void GetProfileImage_ShouldReturnSuccess_WhenImageExists()
-        {
-            // TODO corregir, verificar que sucede si se obtiene el perfil pero este no tiene una imagen o es una url incorrecta.
-            // Se puede agregar una validacion por si la url es nula, idealmente deberia ser una default.
         }
     }
 }
