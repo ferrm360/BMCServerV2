@@ -1,6 +1,7 @@
 ﻿using System.ServiceModel;
 using Service.DTO;
 using Service.Results;
+using Service.Utilities.Results;
 
 namespace Service.Contracts
 {
@@ -10,7 +11,7 @@ namespace Service.Contracts
         [OperationContract]
         OperationResponse Register(PlayerDTO player);
         [OperationContract]
-        OperationResponse Login(string username, string password);
+        LoginResponse Login(string username, string password);
         [OperationContract]
         OperationResponse Logout(string username); 
      }

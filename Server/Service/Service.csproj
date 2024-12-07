@@ -185,6 +185,7 @@
     <Compile Include="Utilities\Results\GuestPlayerResponse.cs" />
     <Compile Include="Utilities\Results\ImageResponse.cs" />
     <Compile Include="Utilities\Results\LobbyResponse.cs" />
+    <Compile Include="Utilities\Results\LoginResponse.cs" />
     <Compile Include="Utilities\Results\OperationResponse.cs" />
     <Compile Include="Email\EmailConfigHelper.cs" />
     <Compile Include="Email\EmailService.cs" />

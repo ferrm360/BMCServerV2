@@ -3,6 +3,7 @@ using Service.DTO;
 using Service.Email;
 using Service.Email.Templates;
 using Service.Results;
+using Service.Utilities;
 using System;
 using System.Net.Mail;
 
@@ -46,6 +47,7 @@ namespace Service.Implements
                 return OperationResponse.SuccessResult("Email sent successfully.");
             }
             catch (Exception ex) {
+                CustomLogger.Fatal("Unexpected error during SendEmail", ex);
                 return OperationResponse.Failure($"Error while sending email: {ex.Message}");
             }
         }

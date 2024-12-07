@@ -11,6 +11,7 @@ using Service.Factories;
 using Service.Connection.Managers;
 using System.ServiceModel;
 using Service.Utilities.Validators.AccountService;
+using Service.Utilities.Results;
 
 namespace Service.Implements
 {
@@ -104,36 +105,36 @@ namespace Service.Implements
             }
         }
 
-        public OperationResponse Login(string username, string password)
+        public LoginResponse Login(string username, string password)
         {
             var usernameValidationResult = _validationService.ValidateUsername(username);
             if (usernameValidationResult != null)
             {
-                return OperationResponse.Failure(usernameValidationResult);
+                return LoginResponse.Failure(usernameValidationResult);
             }
 
             if (string.IsNullOrWhiteSpace(password))
             {
-                return OperationResponse.Failure(ErrorMessages.InvalidPassword);
+                return LoginResponse.Failure(ErrorMessages.InvalidPassword);
             }
 
             if (_connectionManager.IsUserRegistered(username))
             {
-                return OperationResponse.Failure(ErrorMessages.UserAlreadyConnected);
+                return LoginResponse.Failure(ErrorMessages.UserAlreadyConnected);
             }
             try
             {
                 var player = _playerRepository.GetByUsername(username);
                 if (player == null)
                 {
-                    return OperationResponse.Failure(ErrorMessages.UserNotFound);
+                    return LoginResponse.Failure(ErrorMessages.UserNotFound);
                 }
 
                 bool isPasswordValid = PasswordHelper.VerifyPassword(password, player.PasswordHash);
 
                 if (!isPasswordValid)
                 {
-                    return OperationResponse.Failure(ErrorMessages.InvalidPassword);
+                    return LoginResponse.Failure(ErrorMessages.InvalidPassword);
                 }
 
                 if (OperationContext.Current?.Channel is IContextChannel channel)
@@ -141,24 +142,24 @@ namespace Service.Implements
                     bool registered = _connectionManager.RegisterUser(username, channel);
                     if (!registered)
                     {
-                        return OperationResponse.Failure(ErrorMessages.UserAlreadyConnected);
+                        return LoginResponse.Failure(ErrorMessages.UserAlreadyConnected);
                     }
 
                     _connectionEventHandler.RegisterChannelEvents(username, channel);
                 }
 
-                return OperationResponse.SuccessResult();
+                return LoginResponse.SuccessResult(player.Email);
             }
             catch (SqlException ex)
             {
                 CustomLogger.Error("SQL error during login", ex);
                 string errorMessage = SqlErrorHandler.GetErrorMessage(ex);
-                return OperationResponse.Failure(errorMessage);
+                return LoginResponse.Failure(errorMessage);
             }
             catch (Exception ex)
             {
                 CustomLogger.Error("Unexpected error during login", ex);
-                return OperationResponse.Failure(ErrorMessages.GeneralException);
+                return LoginResponse.Failure(ErrorMessages.GeneralException);
             }
         }
 

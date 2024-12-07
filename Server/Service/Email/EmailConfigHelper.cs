@@ -11,7 +11,6 @@ namespace Service.Email
         {
             try
             {
-                // Usar el archivo de configuración por defecto
                 return ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             }
             catch (Exception ex)
