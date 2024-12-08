@@ -15,6 +15,9 @@ using Service.Utilities.Results;
 
 namespace Service.Implements
 {
+    /// <summary>
+    /// Provides functionality for user account management, including registration, login, and logout.
+    /// </summary>
     public class AccountService : IAccountService
     {
         private readonly IPlayerRepository _playerRepository;
@@ -24,7 +27,15 @@ namespace Service.Implements
         private readonly ConnectionEventHandler _connectionEventHandler;
         private readonly IValidationAccountService _validationService;
 
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AccountService"/> class.
+        /// </summary>
+        /// <param name="playerRepository">Repository for player data.</param>
+        /// <param name="profileRepository">Repository for profile data.</param>
+        /// <param name="scoreRepository">Repository for player scores.</param>
+        /// <param name="connectionManager">Manages user connections.</param>
+        /// <param name="connectionEventHandler">Handles connection events.</param>
+        /// <param name="validationService">Validation service for account-related operations.</param>
         public AccountService(
             IPlayerRepository playerRepository,
             IProfileRepository profileRepository,
@@ -42,6 +53,11 @@ namespace Service.Implements
             _validationService = validationService; 
         }
 
+        /// <summary>
+        /// Registers a new player account.
+        /// </summary>
+        /// <param name="player">The player information to register.</param>
+        /// <returns>An <see cref="OperationResponse"/> indicating the result of the operation.</returns>
         public OperationResponse Register(PlayerDTO player)
         {
             var usernameValidationResult = _validationService.ValidateUsername(player.Username);
@@ -105,6 +121,12 @@ namespace Service.Implements
             }
         }
 
+        /// <summary>
+        /// Authenticates a player using their username and password.
+        /// </summary>
+        /// <param name="username">The player's username.</param>
+        /// <param name="password">The player's password.</param>
+        /// <returns>A <see cref="LoginResponse"/> with the result of the operation.</returns>
         public LoginResponse Login(string username, string password)
         {
             var usernameValidationResult = _validationService.ValidateUsername(username);
@@ -163,6 +185,11 @@ namespace Service.Implements
             }
         }
 
+        /// <summary>
+        /// Logs out a player by their username.
+        /// </summary>
+        /// <param name="username">The player's username.</param>
+        /// <returns>An <see cref="OperationResponse"/> indicating the result of the operation.</returns>
         public OperationResponse Logout(string username)
         {
             if (_connectionManager.IsUserRegistered(username))

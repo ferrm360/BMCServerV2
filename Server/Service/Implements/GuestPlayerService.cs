@@ -34,6 +34,16 @@ namespace Service.Implements
             _connectionEventHandler = connectionEventHandler;
         }
 
+        /// <summary>
+        /// Registers a guest player and connects them to the service.
+        /// </summary>
+        /// <param name="username">The username of the guest player.</param>
+        /// <returns>An <see cref="OperationResponse"/> indicating the result of the operation.</returns>
+        /// <remarks>
+        /// This method checks for duplicate usernames, validates the username, and registers the user with the connection manager.
+        /// </remarks>
+        /// <exception cref="SqlException">Thrown when there is a database-related error.</exception>
+        /// <exception cref="Exception">Thrown for unexpected errors.</exception>
         public OperationResponse RegisterGuestPlayer(string username)
         {
             if (string.IsNullOrWhiteSpace(username))
@@ -72,6 +82,15 @@ namespace Service.Implements
             }
         }
 
+        /// <summary>
+        /// Logs out a guest player and disconnects them from the service.
+        /// </summary>
+        /// <param name="username">The username of the guest player to log out.</param>
+        /// <returns>An <see cref="OperationResponse"/> indicating the result of the operation.</returns>
+        /// <remarks>
+        /// This method unregisters the user from the connection manager and cleans up any associated resources.
+        /// </remarks>
+        /// <exception cref="Exception">Thrown for unexpected errors.</exception>
         public OperationResponse LogoutGuestPlayer(string username)
         {
             if (string.IsNullOrWhiteSpace(username))
