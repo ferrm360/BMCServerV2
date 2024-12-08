@@ -7,7 +7,7 @@ using Service.Implements;
 using System.Collections.Generic;
 using System;
 
-namespace ServiceTest.Services.Implements
+namespace ServiceTest.Implements
 {
     [TestClass]
     public class ChatFriendServiceTests

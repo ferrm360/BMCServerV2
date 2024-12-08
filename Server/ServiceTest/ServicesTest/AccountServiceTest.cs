@@ -11,7 +11,7 @@ using Service.Utilities.Validators.AccountService;
 using System;
 using System.ServiceModel;
 
-namespace Service.Test.Services.Implements
+namespace ServiceTest.Implements
 {
     [TestClass]
     public class AccountServiceTests
