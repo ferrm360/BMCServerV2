@@ -3,7 +3,7 @@ using Moq;
 using Service.Connection.Managers;
 using System.ServiceModel;
 
-namespace Service.Test.Service.Connection.Managers
+namespace ServiceTest.ConnectionTest.Managers
 {
     [TestClass]
     public class ConnectionManagerTest

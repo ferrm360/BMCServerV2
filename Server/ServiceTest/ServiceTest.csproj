@@ -11,7 +11,7 @@
     <ProjectGuid>{078D76EF-D800-464B-AB72-3554116A9417}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Service.Test</RootNamespace>
+    <RootNamespace>ServiceTest</RootNamespace>
     <AssemblyName>Service.Test</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -91,6 +91,7 @@
     </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.8.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -117,34 +118,125 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connected Services\GuestPlayerService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\LobbyService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="DTO\EmailServiceTest.cs" />
     <Compile Include="Email\TemplateFactoryTests.cs" />
-    <Compile Include="Service.Connection\Managers\ConnectionEventHandlerTest.cs" />
-    <Compile Include="Service.Connection\Managers\ConnectionManagerTest.cs" />
-    <Compile Include="Services.Implements\AccountServiceTest.cs" />
+    <Compile Include="ConnectionTest\Managers\ConnectionEventHandlerTest.cs" />
+    <Compile Include="ConnectionTest\Managers\ConnectionManagerTest.cs" />
+    <Compile Include="ServicesTest\AccountServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services.Implements\ChatFriendServiceTests.cs" />
-    <Compile Include="Services.Implements\FriendshipServiceTest.cs" />
-    <Compile Include="Services.Implements\GuestPlayerServiceTest.cs" />
-    <Compile Include="Services.Implements\LobbyServiceTest.cs" />
-    <Compile Include="Services.Implements\PlayerScoresServiceTest.cs" />
-    <Compile Include="Services.Implements\ProfileServiceTest.cs" />
+    <Compile Include="ServicesTest\ChatFriendServiceTests.cs" />
+    <Compile Include="ServicesTest\FriendshipServiceTest.cs" />
+    <Compile Include="ServicesTest\GuestPlayerServiceTest.cs" />
+    <Compile Include="ServicesTest\LobbyServiceTest.cs" />
+    <Compile Include="ServicesTest\PlayerScoresServiceTest.cs" />
+    <Compile Include="ServicesTest\ProfileServiceTest.cs" />
+    <Compile Include="Utilities\LobbyServiceClientCallback.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Connected Services\GuestPlayerService\GuestPlayerService.wsdl" />
+    <None Include="Connected Services\GuestPlayerService\GuestPlayerService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GuestPlayerService\GuestPlayerService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GuestPlayerService\GuestPlayerService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LobbyService\LobbyService.wsdl" />
+    <None Include="Connected Services\LobbyService\LobbyService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LobbyService\LobbyService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LobbyService\LobbyService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LobbyService\LobbyService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LobbyService\LobbyService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LobbyService\LobbyService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Service.DTO.LobbyDTO.datasource" />
+    <None Include="Properties\DataSources\Service.Results.ImageResponse.datasource" />
+    <None Include="Properties\DataSources\Service.Results.OperationResponse.datasource" />
+    <None Include="Properties\DataSources\Service.Utilities.Results.ChatFriendResponse.datasource" />
+    <None Include="Properties\DataSources\Service.Utilities.Results.FriendListResponse.datasource" />
+    <None Include="Properties\DataSources\Service.Utilities.Results.FriendRequestListReponse.datasource" />
+    <None Include="Properties\DataSources\Service.Utilities.Results.LobbyResponse.datasource" />
+    <None Include="Properties\DataSources\Service.Utilities.Results.LoginResponse.datasource" />
+    <None Include="Properties\DataSources\Service.Utilities.Results.PlayerProfileResponse.datasource" />
+    <None Include="Properties\DataSources\Service.Utilities.Results.PlayerScoresResponse.datasource" />
+    <None Include="Properties\DataSources\Service.Utilities.Results.ProfileResponse.datasource" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{d36bd91c-0a4f-43cc-b01c-0665410f30f7}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Host\Host.csproj">
+      <Project>{1edc9af2-347d-492b-8e1a-de1583e2c090}</Project>
+      <Name>Host</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Service\Service.csproj">
       <Project>{cf7fdfe2-d7a4-43a0-b170-99b05628f50d}</Project>
       <Name>Service</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\GuestPlayerService\" />
+    <WCFMetadataStorage Include="Connected Services\LobbyService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\LobbyService\LobbyService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\LobbyService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\LobbyService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\LobbyService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GuestPlayerService\GuestPlayerService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GuestPlayerService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GuestPlayerService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\GuestPlayerService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

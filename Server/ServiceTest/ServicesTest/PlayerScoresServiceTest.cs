@@ -10,8 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
-namespace ServiceTest.Services.Implements
+namespace ServiceTest.Implements
 {
     [TestClass]
     public class PlayerScoresServiceTest
@@ -119,5 +120,52 @@ namespace ServiceTest.Services.Implements
 
             Assert.IsTrue(result.IsSuccess);
         }
+
+        [TestMethod]
+        public void GetScoresByUsername_Success_MapsScoresCorrectly()
+        {
+            var username = "FerRMZ";
+            var player = new Player { PlayerID = 1, Username = username };
+            var playerScores = new UserScores { PlayerID = 1, Wins = 5, Losses = 3 };
+
+            _mockPlayerRepository.Setup(repo => repo.GetByUsername(username)).Returns(player);
+            _mockScoreRepository.Setup(repo => repo.GetScoresByPlayerId(player.PlayerID)).Returns(playerScores);
+
+            var result = _playerScoresService.GetScoresByUsername(username);
+
+            Assert.IsTrue(result.IsSuccess);
+        }
+
+        [TestMethod]
+        public void IncrementWins_Success_SavesCorrectly()
+        {
+            var username = "FerRMZ";
+            var player = new Player { PlayerID = 1, Username = username };
+
+            _mockPlayerRepository.Setup(repo => repo.GetByUsername(username)).Returns(player);
+            _mockScoreRepository.Setup(repo => repo.IncrementWins(player.PlayerID));
+            _mockScoreRepository.Setup(repo => repo.Save());
+
+            var result = _playerScoresService.IncrementWins(username);
+
+            Assert.IsTrue(result.IsSuccess);
+        }
+
+        [TestMethod]
+        public void IncrementLosses_Success_SavesCorrectly()
+        {
+            var username = "FerRMZ";
+            var player = new Player { PlayerID = 1, Username = username };
+
+            _mockPlayerRepository.Setup(repo => repo.GetByUsername(username)).Returns(player);
+            _mockScoreRepository.Setup(repo => repo.IncrementLosses(player.PlayerID));
+            _mockScoreRepository.Setup(repo => repo.Save());
+
+            var result = _playerScoresService.IncrementLosses(username);
+
+            Assert.IsTrue(result.IsSuccess);
+        }
+
+
     }
 }

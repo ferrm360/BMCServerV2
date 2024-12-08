@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="GuestPlayerService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IGuestPlayerService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="300000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8098/GuestPlayerService?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8098/GuestPlayerService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8098/GuestPlayerService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Service.Results" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IGuestPlayerService_RegisterGuestPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterGuestPlayer" />
+  </wsdl:message>
+  <wsdl:message name="IGuestPlayerService_RegisterGuestPlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterGuestPlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGuestPlayerService_LogoutGuestPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:LogoutGuestPlayer" />
+  </wsdl:message>
+  <wsdl:message name="IGuestPlayerService_LogoutGuestPlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LogoutGuestPlayerResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IGuestPlayerService">
+    <wsdl:operation name="RegisterGuestPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGuestPlayerService/RegisterGuestPlayer" message="tns:IGuestPlayerService_RegisterGuestPlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGuestPlayerService/RegisterGuestPlayerResponse" message="tns:IGuestPlayerService_RegisterGuestPlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LogoutGuestPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGuestPlayerService/LogoutGuestPlayer" message="tns:IGuestPlayerService_LogoutGuestPlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGuestPlayerService/LogoutGuestPlayerResponse" message="tns:IGuestPlayerService_LogoutGuestPlayer_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IGuestPlayerService" type="tns:IGuestPlayerService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IGuestPlayerService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="RegisterGuestPlayer">
+      <soap12:operation soapAction="http://tempuri.org/IGuestPlayerService/RegisterGuestPlayer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogoutGuestPlayer">
+      <soap12:operation soapAction="http://tempuri.org/IGuestPlayerService/LogoutGuestPlayer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GuestPlayerService">
+    <wsdl:port name="NetTcpBinding_IGuestPlayerService" binding="tns:NetTcpBinding_IGuestPlayerService">
+      <soap12:address location="net.tcp://localhost:8099/GuestPlayerService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:8099/GuestPlayerService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -4,7 +4,7 @@ using Service.Connection.Managers;
 using System;
 using System.ServiceModel;
 
-namespace Service.Test.Service.Connection.Managers
+namespace ServiceTest.ConnectionTest.Managers
 {
     [TestClass]
     public class ConnectionEventHandlerTest
