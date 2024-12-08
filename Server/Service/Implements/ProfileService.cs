@@ -14,6 +14,15 @@ using DataAccess.Utilities;
 
 namespace Service.Implements
 {
+    /// <summary>
+    /// Provides services related to user profiles, including updating profile data,
+    /// managing profile pictures, and retrieving profile information.
+    /// </summary>
+    /// <remarks>
+    /// This class interacts with repositories to handle profile and player data
+    /// and ensures that operations like password updates, username changes,
+    /// and profile picture management are performed securely.
+    /// </remarks>
     public class ProfileService : IProfileService
     {
         private readonly IPlayerRepository _playerRepository;
@@ -32,6 +41,13 @@ namespace Service.Implements
             }
         }
 
+        /// <summary>
+        /// Updates the password of a user.
+        /// </summary>
+        /// <param name="username">The username of the user.</param>
+        /// <param name="newPassword">The new password to set.</param>
+        /// <param name="oldPassword">The old password to verify.</param>
+        /// <returns>An <see cref="OperationResponse"/> indicating success or failure.</returns>
         public OperationResponse UpdatePassword(string username, string newPassword, string oldPassword)
         {
             try
@@ -60,6 +76,13 @@ namespace Service.Implements
             }
         }
 
+        /// <summary>
+        /// Updates the profile picture of a user.
+        /// </summary>
+        /// <param name="username">The username of the user.</param>
+        /// <param name="imageBytes">The binary data of the new image.</param>
+        /// <param name="fileName">The name of the image file.</param>
+        /// <returns>An <see cref="OperationResponse"/> indicating success or failure.</returns>
         public OperationResponse UpdateProfilePicture(string username, byte[] imageBytes, string fileName)
         {
             try
@@ -104,6 +127,12 @@ namespace Service.Implements
             }
         }
 
+        /// <summary>
+        /// Updates the username of a user.
+        /// </summary>
+        /// <param name="currentUsername">The current username of the user.</param>
+        /// <param name="newUsername">The new username to set.</param>
+        /// <returns>An <see cref="OperationResponse"/> indicating success or failure.</returns>
         public OperationResponse UpdateUsername(string currentUsername, string newUsername)
         {
             try
@@ -132,6 +161,12 @@ namespace Service.Implements
             }
         }
 
+        /// <summary>
+        /// Updates the profile of a user with new data.
+        /// </summary>
+        /// <param name="username">The username of the user.</param>
+        /// <param name="profile">The updated profile data.</param>
+        /// <returns>An <see cref="OperationResponse"/> indicating success or failure.</returns>
         public OperationResponse UpdateProfile(string username, Profile profile)
         {
             try
@@ -160,6 +195,11 @@ namespace Service.Implements
             }
         }
 
+        /// <summary>
+        /// Retrieves the profile of a user by their username.
+        /// </summary>
+        /// <param name="username">The username of the user.</param>
+        /// <returns>A <see cref="ProfileResponse"/> containing the profile data or an error message.</returns>
         public ProfileResponse GetProfileByUsername(string username)
         {
             try
@@ -197,6 +237,11 @@ namespace Service.Implements
             }
         }
 
+        /// <summary>
+        /// Retrieves the profile image of a user by their username.
+        /// </summary>
+        /// <param name="username">The username of the user.</param>
+        /// <returns>An <see cref="ImageResponse"/> containing the image data or an error message.</returns>
         public ImageResponse GetProfileImage(string username)
         {
             try
@@ -238,7 +283,14 @@ namespace Service.Implements
             }
         }
 
-        // TODO: Poner en utilidades
+        /// <summary>
+        /// Converts an image URL to a byte array.
+        /// </summary>
+        /// <param name="imageUrl">The URL of the image to convert.</param>
+        /// <returns>A byte array containing the image data.</returns>
+        /// <exception cref="FileNotFoundException">Thrown if the file is not found.</exception>
+        /// <exception cref="UnauthorizedAccessException">Thrown if access to the file is denied.</exception>
+        /// <exception cref="IOException">Thrown for general I/O errors.</exception>
         public byte[] ConvertImageUrlToBytes(string imageUrl)
         {
             try
@@ -260,6 +312,12 @@ namespace Service.Implements
             }
         }
 
+        /// <summary>
+        /// Updates the biography of a user.
+        /// </summary>
+        /// <param name="bio">The new biography text.</param>
+        /// <param name="username">The username of the user.</param>
+        /// <returns>An <see cref="OperationResponse"/> indicating success or failure.</returns>
         public OperationResponse UpdateBio(string bio, string username)
         {
             try
@@ -284,6 +342,11 @@ namespace Service.Implements
             }
         }
 
+        /// <summary>
+        /// Retrieves the biography of a user by their username.
+        /// </summary>
+        /// <param name="username">The username of the user.</param>
+        /// <returns>The biography text, or an error message if not found.</returns>
         public string GetBioByUsername(string username)
         {
             try
@@ -308,7 +371,5 @@ namespace Service.Implements
                 return "Error retrieving biography.";
             }
         }
-
-
     }
 }

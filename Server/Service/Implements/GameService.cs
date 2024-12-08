@@ -12,11 +12,26 @@ using System.Threading.Tasks;
 
 namespace Service.Implements
 {
+    /// <summary>
+    /// Provides game management services for multiplayer sessions.
+    /// </summary>
+    /// <remarks>
+    /// This class handles game initialization, player readiness, turn-based gameplay, 
+    /// and game termination logic. It interacts with game sessions, manages callbacks for 
+    /// real-time communication, and processes player actions such as attacks and game state updates.
+    /// </remarks>
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession, ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class GameService : IGameService
     {
         public static readonly ConcurrentDictionary<string, GameSession> _activeGames = new ConcurrentDictionary<string, GameSession>();
 
+        /// <summary>
+        /// Processes an attack action from a player in the game.
+        /// </summary>
+        /// <param name="lobbyId">The unique identifier of the game lobby.</param>
+        /// <param name="attacker">The username of the attacking player.</param>
+        /// <param name="attackPosition">The position being attacked.</param>
+        /// <returns>A Task containing the operation response.</returns>
         public async Task<OperationResponse> AttackAsync(string lobbyId, string attacker, AttackPositionDTO attackPosition)
         {
             if (!_activeGames.TryGetValue(lobbyId, out var gameSession))
@@ -27,13 +42,11 @@ namespace Service.Implements
             var opponent = gameSession.GetOpponent(attacker);
             if (opponent == null)
             {
-                Console.WriteLine($"El atacante '{attacker}' no tiene un oponente en la lobby '{lobbyId}'.");
                 return OperationResponse.Failure("Opponent not found.");
             }
 
             if (gameSession.GetCurrentPlayer() != attacker)
             {
-                Console.WriteLine($"El jugador {attacker} está intentando atacar fuera de su turno.");
                 return OperationResponse.Failure("It's not your turn.");
             }
 
@@ -50,18 +63,23 @@ namespace Service.Implements
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error notificando ataque a {opponent}: {ex.Message}");
+                    CustomLogger.Fatal($"Error notificando ataque a {opponent}: {ex.Message}");
                     return OperationResponse.Failure("Failed to notify opponent.");
                 }
             }
             else
             {
-                Console.WriteLine($"Callback para el oponente '{opponent}' no disponible en la lobby '{lobbyId}'.");
+                CustomLogger.Warn($"Callback para el oponente '{opponent}' no disponible en la lobby '{lobbyId}'.");
                 return OperationResponse.Failure("Opponent callback not available.");
             }
         }
 
-
+        /// <summary>
+        /// Initializes a new game session with the specified players.
+        /// </summary>
+        /// <param name="lobbyId">The unique identifier of the game lobby.</param>
+        /// <param name="players">A list of usernames for the players in the game.</param>
+        /// <returns>An OperationResponse indicating the success or failure of the operation.</returns>
         public OperationResponse InitializeGame(string lobbyId, List<string> players)
         {
             if (_activeGames.ContainsKey(lobbyId))
@@ -88,6 +106,12 @@ namespace Service.Implements
             return OperationResponse.SuccessResult();
         }
 
+        /// <summary>
+        /// Marks a player as ready for the game.
+        /// </summary>
+        /// <param name="lobbyId">The unique identifier of the game lobby.</param>
+        /// <param name="player">The username of the player to mark as ready.</param>
+        /// <returns>A Task containing the operation response.</returns>
         public async Task<OperationResponse> MarkPlayerReadyAsync(string lobbyId, string player)
         {
             if (!_activeGames.TryGetValue(lobbyId, out var gameSession))
@@ -102,13 +126,10 @@ namespace Service.Implements
 
                 gameSession.MarkPlayerReady(player);
 
-                Console.WriteLine($"Jugador {player} está listo en la lobby {lobbyId}.");
                 PrintGameSessionsState();
 
                 if (gameSession.AreAllPlayersReady())
                 {
-                    Console.WriteLine($"Todos los jugadores están listos en la lobby {lobbyId}.");
-
                     var tasks = new List<Task>();
                     foreach (var registeredPlayer in gameSession.GetPlayers())
                     {
@@ -118,12 +139,11 @@ namespace Service.Implements
                             {
                                 try
                                 {
-                                    Console.WriteLine($"Notificando a {registeredPlayer} que el juego ha comenzado.");
                                     registeredCallback.OnGameStarted();
                                 }
                                 catch (Exception ex)
                                 {
-                                    Console.WriteLine($"Error notificando inicio del juego al jugador {registeredPlayer}: {ex.Message}");
+                                    CustomLogger.Warn($"Error notificando inicio del juego al jugador {registeredPlayer}: {ex.Message}");
                                     gameSession.RemoveCallback(registeredPlayer);
                                 }
                             }));
@@ -136,15 +156,17 @@ namespace Service.Implements
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error al marcar al jugador {player} como listo: {ex.Message}");
                 return OperationResponse.Failure($"Error al marcar al jugador como listo: {ex.Message}");
             }
 
             return OperationResponse.SuccessResult("PlayerReady");
         }
 
-
-
+        /// <summary>
+        /// Starts the game session if all players are ready.
+        /// </summary>
+        /// <param name="lobbyId">The unique identifier of the game lobby.</param>
+        /// <returns>A Task containing the operation response.</returns>
         public async Task<OperationResponse> StartGameAsync(string lobbyId)
         {
             if (!_activeGames.TryGetValue(lobbyId, out var gameSession))
@@ -164,7 +186,9 @@ namespace Service.Implements
         }
 
 
-
+        /// <summary>
+        /// Prints the current state of all active game sessions for debugging purposes.
+        /// </summary>
         private static void PrintGameSessionsState()
         {
             if (_activeGames.IsEmpty)
@@ -186,6 +210,12 @@ namespace Service.Implements
             }
         }
 
+        /// <summary>
+        /// Notifies players about the end of the game.
+        /// </summary>
+        /// <param name="lobbyId">The unique identifier of the game lobby.</param>
+        /// <param name="loser">The username of the losing player.</param>
+        /// <returns>A Task containing the operation response.</returns>
         public async Task<OperationResponse> NotifyGameOverAsync(string lobbyId, string loser)
         {
             if (!_activeGames.TryGetValue(lobbyId, out var gameSession))
@@ -219,11 +249,15 @@ namespace Service.Implements
             }
             else
             {
-                Console.WriteLine($"Callback para el oponente '{opponent}' no disponible en la lobby '{lobbyId}'.");
-                return OperationResponse.Failure("No se recupero el callback");
+                return OperationResponse.Failure("Callback not retrieved");
             }
         }
 
+        /// <summary>
+        /// Notifies the opponent about a destroyed cell during the game.
+        /// </summary>
+        /// <param name="cellDeadDTO">Details of the destroyed cell and affected player.</param>
+        /// <returns>A Task containing the operation response.</returns>
         public async Task<OperationResponse> NotifyCellDeadAsync(CellDeadDTO cellDeadDTO)
         {
             if (!_activeGames.TryGetValue(cellDeadDTO.LobbyId, out var gameSession))
@@ -257,8 +291,8 @@ namespace Service.Implements
             }
             else
             {
-                Console.WriteLine($"Callback para el oponente '{opponent}' no disponible en la lobby '{cellDeadDTO.LobbyId}'.");
-                return OperationResponse.Failure("No se recupero el callback");
+                CustomLogger.Warn($"Callback para el oponente '{opponent}' no disponible en la lobby '{cellDeadDTO.LobbyId}'.");
+                return OperationResponse.Failure("Callback not retrieved");
             }
 
         }

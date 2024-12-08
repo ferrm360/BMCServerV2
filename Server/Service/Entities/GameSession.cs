@@ -1,8 +1,10 @@
 ﻿using Service.Contracts;
+using Service.Utilities;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Threading.Tasks;
 
 namespace Service.Entities
@@ -67,9 +69,24 @@ namespace Service.Entities
 
         public void NotifyGameStarted()
         {
-            foreach (var callback in _gameCallbackChannels.Values)
+            try
             {
-                callback?.OnGameStarted();
+                foreach (var callback in _gameCallbackChannels.Values)
+                {
+                    callback?.OnGameStarted();
+                }
+            }
+            catch (CommunicationException ex)
+            {
+                CustomLogger.Error($"Communication error when notifying game start: {ex.Message}");
+            }
+            catch (TimeoutException ex)
+            {
+                CustomLogger.Warn($"Timeout error when notifying game start: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                CustomLogger.Fatal($"Unexpected error when notifying game start: {ex.Message}");
             }
         }
 
@@ -125,9 +142,19 @@ namespace Service.Entities
                 {
                     await callback.OnTurnChangedAsync(isPlayerTurn);
                 }
+                catch (CommunicationException ex)
+                {
+                    CustomLogger.Error($"Communication error notifying {player}: {ex.Message}");
+                    RemoveCallback(player);
+                }
+                catch (TimeoutException ex)
+                {
+                    CustomLogger.Warn($"Timeout error notifying {player}: {ex.Message}");
+                    RemoveCallback(player);
+                }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error al notificar a {player}: {ex.Message}");
+                    CustomLogger.Fatal($"Unexpected error notifying {player}: {ex.Message}");
                     RemoveCallback(player);
                 }
             }

@@ -2,6 +2,7 @@
 using Service.DTO;
 using Service.Entities;
 using Service.Results;
+using Service.Utilities;
 using Service.Utilities.Constans;
 using Service.Utilities.Results;
 using System;
@@ -13,12 +14,38 @@ using System.Threading.Tasks;
 
 namespace Service.Implements
 {
+    /// <summary>
+    /// Manages operations related to multiplayer game lobbies.
+    /// </summary>
+    /// <remarks>
+    /// This service supports creating, joining, and leaving lobbies, as well as managing players,
+    /// starting games, and broadcasting notifications to connected players.
+    /// </remarks>
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession, ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class LobbyService : ILobbyService
     {
+        /// <summary>
+        /// Stores the active game lobbies.
+        /// </summary>
+        /// <remarks>
+        /// The key is the unique lobby ID, and the value is the <see cref="Lobby"/> object representing the lobby.
+        /// </remarks>
         private static readonly Dictionary<string, Lobby> _activeLobbies = new Dictionary<string, Lobby>();
+
+        /// <summary>
+        /// Stores the connected players in all lobbies along with their callback channels.
+        /// </summary>
+        /// <remarks>
+        /// The key is the username, and the value is the callback channel (<see cref="ILobbyCallback"/>) 
+        /// used to notify the player of events in their lobby.
+        /// </remarks>
         private static readonly ConcurrentDictionary<string, ILobbyCallback> _connectedPlayersInLobby = new ConcurrentDictionary<string, ILobbyCallback>();
 
+        /// <summary>
+        /// Creates a new game lobby.
+        /// </summary>
+        /// <param name="request">The details of the lobby to be created, including name, privacy settings, and host username.</param>
+        /// <returns>A <see cref="LobbyResponse"/> containing the created lobby's details or an error message.</returns>
         public LobbyResponse CreateLobby(CreateLobbyRequestDTO request)
         {
             if (string.IsNullOrWhiteSpace(request.Name))
@@ -63,7 +90,11 @@ namespace Service.Implements
             return LobbyResponse.SuccessResult(lobbyDto);
         }
 
-
+        /// <summary>
+        /// Allows a player to join an existing lobby.
+        /// </summary>
+        /// <param name="request">The details of the lobby to join, including the lobby ID, username, and optional password.</param>
+        /// <returns>A <see cref="LobbyResponse"/> containing the updated lobby's details or an error message.</returns>
         public LobbyResponse JoinLobby(JoinLobbyRequestDTO request)
         {
             if (!_activeLobbies.TryGetValue(request.LobbyId, out var lobby))
@@ -99,6 +130,12 @@ namespace Service.Implements
             return LobbyResponse.SuccessResult(lobbyDto);
         }
 
+        /// <summary>
+        /// Allows a player to leave a lobby they are part of.
+        /// </summary>
+        /// <param name="lobbyId">The unique identifier of the lobby.</param>
+        /// <param name="username">The username of the player leaving the lobby.</param>
+        /// <returns>A <see cref="LobbyResponse"/> containing the updated lobby's details or an error message.</returns>
         public LobbyResponse LeaveLobby(string lobbyId, string username)
         {
             if (!_activeLobbies.TryGetValue(lobbyId, out var lobby))
@@ -130,16 +167,38 @@ namespace Service.Implements
             return LobbyResponse.SuccessResult(lobbyDto);
         }
 
+        /// <summary>
+        /// Registers a player's callback channel for notifications.
+        /// </summary>
+        /// <param name="username">The username of the player being registered.</param>
         private void RegisterCallback(string username)
         {
-            var callback = OperationContext.Current.GetCallbackChannel<ILobbyCallback>();
-            _connectedPlayersInLobby.TryAdd(username, callback);
+            try
+            {
+                var callback = OperationContext.Current.GetCallbackChannel<ILobbyCallback>();
+                _connectedPlayersInLobby.TryAdd(username, callback);
 
-            var contextChannel = (IContextChannel)callback;
-            contextChannel.Closed += (sender, args) => HandleClientDisconnect(username);
-            contextChannel.Faulted += (sender, args) => HandleClientDisconnect(username);
+                var contextChannel = (IContextChannel)callback;
+                contextChannel.Closed += (sender, args) => HandleClientDisconnect(username);
+                contextChannel.Faulted += (sender, args) => HandleClientDisconnect(username);
+            }
+            catch (FaultException ex)
+            {
+                CustomLogger.Error($"FaultException occurred while registering callback for user {username}: {ex.Message}", ex);
+                throw new FaultException($"Failed to register callback for user {username}.");
+            }
+            catch (Exception ex)
+            {
+                CustomLogger.Error($"Unexpected error in RegisterCallback for user {username}: {ex.Message}", ex);
+                throw;
+            }
+
         }
 
+        /// <summary>
+        /// Handles client disconnection events and updates the lobby state accordingly.
+        /// </summary>
+        /// <param name="username">The username of the disconnected player.</param>
         private void HandleClientDisconnect(string username)
         {
             if (_connectedPlayersInLobby.TryRemove(username, out _))
@@ -158,6 +217,11 @@ namespace Service.Implements
             }
         }
 
+        /// <summary>
+        /// Sends a notification to all players in the lobby when a new player joins.
+        /// </summary>
+        /// <param name="lobby">The lobby where the event occurred.</param>
+        /// <param name="newPlayer">The username of the player who joined.</param>
         private void NotifyPlayersInLobby(Lobby lobby, string newPlayer)
         {
             string joinMessage = $"{newPlayer} has joined the lobby {lobby.Name}.";
@@ -181,6 +245,11 @@ namespace Service.Implements
             }
         }
 
+        /// <summary>
+        /// Sends a notification to all players in the lobby when a player leaves.
+        /// </summary>
+        /// <param name="lobby">The lobby where the event occurred.</param>
+        /// <param name="playerLeft">The username of the player who left.</param>
         private void NotifyPlayerLeft(Lobby lobby, string playerLeft)
         {
             string leaveMessage = $"{playerLeft} has left the lobby {lobby.Name}.";
@@ -205,6 +274,10 @@ namespace Service.Implements
             }
         }
 
+        /// <summary>
+        /// Retrieves a list of all active lobbies.
+        /// </summary>
+        /// <returns>A list of <see cref="LobbyDTO"/> objects representing the active lobbies.</returns>
         public List<LobbyDTO> GetAllLobbies()
         {
             return _activeLobbies.Values.Select(lobby => new LobbyDTO
@@ -219,6 +292,13 @@ namespace Service.Implements
             }).ToList();
         }
 
+        /// <summary>
+        /// Kicks a player out of a lobby.
+        /// </summary>
+        /// <param name="lobbyId">The unique identifier of the lobby.</param>
+        /// <param name="hostUsername">The username of the lobby's host.</param>
+        /// <param name="targetUsername">The username of the player to be kicked out.</param>
+        /// <returns>A <see cref="LobbyResponse"/> containing the updated lobby's details or an error message.</returns>
         public LobbyResponse KickPlayer(string lobbyId, string hostUsername, string targetUsername)
         {
             if (!_activeLobbies.TryGetValue(lobbyId, out var lobby))
@@ -294,7 +374,12 @@ namespace Service.Implements
             return LobbyResponse.SuccessResult(lobbyDto);
         }
 
-
+        /// <summary>
+        /// Starts a game in the specified lobby if all conditions are met.
+        /// </summary>
+        /// <param name="lobbyId">The unique identifier of the lobby.</param>
+        /// <param name="hostUsername">The username of the lobby's host.</param>
+        /// <returns>An <see cref="OperationResponse"/> indicating whether the game was successfully started.</returns>
         public OperationResponse StartGame(string lobbyId, string hostUsername)
         {
             if (!_activeLobbies.TryGetValue(lobbyId, out var lobby))
@@ -345,16 +430,19 @@ namespace Service.Implements
             return allNotificationsSuccessful;
         }
 
+        /// <summary>
+        /// Removes a lobby from the active lobby list.
+        /// </summary>
+        /// <param name="lobbyId">The unique identifier of the lobby to be removed.</param>
         public void RemoveLobby(string lobbyId)
         {
             if (_activeLobbies.ContainsKey(lobbyId))
             {
                 _activeLobbies.Remove(lobbyId);
-                Console.WriteLine($"Lobby {lobbyId} eliminada de los lobbies activos.");
             }
             else
             {
-                Console.WriteLine($"Lobby {lobbyId} no encontrada.");
+                CustomLogger.Warn($"Lobby {lobbyId} not found.");
             }
         }
 

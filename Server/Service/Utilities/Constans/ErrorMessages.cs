@@ -37,5 +37,7 @@
         public const string InvalidEmailFormat = "Error.InvalidEmailFormat";
         public const string PasswordTooShort = "Error.PasswordTooShort";
         public const string UsernameContainsInvalidChars = "Error.UsernameContainsInvalidChars";
+        public const string RequestNotFound = "Error.RequestNotFound";
+        public const string DatabaseError = "Error.DatabaseError";
     }
 }
