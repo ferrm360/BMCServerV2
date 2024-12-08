@@ -139,6 +139,11 @@ namespace DataAccess.Repositories
             }
         }
 
+        public void GetAllPlayersScores()
+        {
+            
+        }
+
         private void Update(UserScores scores)
         {
             _context.Entry(scores).State = System.Data.Entity.EntityState.Modified;
