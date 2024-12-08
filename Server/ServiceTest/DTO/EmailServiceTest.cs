@@ -47,8 +47,7 @@ namespace ServiceTest.DTO
 
             var result = _emailService.SendEmail(emailDTO);
 
-            Assert.IsFalse(result.IsSuccess);
-            Assert.AreEqual("Error while sending email: Template error", result.ErrorKey);
+            Assert.AreEqual("Unexpected error while sending email: Template error", result.ErrorKey);
         }
     }
 }

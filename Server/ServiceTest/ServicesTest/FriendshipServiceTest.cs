@@ -15,7 +15,7 @@ using Service.Utilities.Constans;
 using Service.DTO;
 using System.IO;
 
-namespace ServiceTest.Services.Implements
+namespace ServiceTest.Implements
 {
     [TestClass]
     public class FriendshipServiceTest
@@ -219,7 +219,7 @@ namespace ServiceTest.Services.Implements
         {
             var imageUrl = "non-existing-image.jpg";
 
-            Assert.ThrowsException<Exception>(() => _friendshipService.ConvertImageUrlToBytes(imageUrl));
+            Assert.ThrowsException<System.IO.FileNotFoundException>(() => _friendshipService.ConvertImageUrlToBytes(imageUrl));
         }
     }
 }

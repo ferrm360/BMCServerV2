@@ -12,10 +12,14 @@ using System.Collections.Generic;
 using Service.Utilities.Results;
 using System.IO;
 using Service.Utilities.Validators.FriendshipService;
+using System.Data.Entity.Infrastructure;
 
 namespace Service.Implements
 {
-    //TODO Corregir logger
+    /// <summary>
+    /// Service for managing friendship-related operations such as sending friend requests,
+    /// retrieving friend lists, and managing friend requests.
+    /// </summary>
     public class FriendshipService : IFriendshipService
     {
         private readonly IPlayerRepository _playerRepository;
@@ -23,6 +27,9 @@ namespace Service.Implements
         private readonly IValidationFriendshipService _validationService;
         private readonly IProfileRepository _profileRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FriendshipService"/> class.
+        /// </summary>
         public FriendshipService(IPlayerRepository playerRepository, IFriendRequestRepository friendRequestRepository, IValidationFriendshipService validationService, IProfileRepository profileRepository)
         {
             _playerRepository = playerRepository;
@@ -31,6 +38,10 @@ namespace Service.Implements
             _profileRepository = profileRepository;
         }
 
+        /// Accepts a friend request by its identifier.
+        /// </summary>
+        /// <param name="idRequest">The ID of the friend request to accept.</param>
+        /// <returns>An <see cref="OperationResponse"/> indicating the result of the operation.</returns>
         public OperationResponse AcceptFriendRequest(int idRequest)
         {
             try
@@ -40,13 +51,28 @@ namespace Service.Implements
 
                 return OperationResponse.SuccessResult();
             }
+            catch (InvalidOperationException ex)
+            {
+                CustomLogger.Error("Invalid operation in AcceptFriendRequest", ex);
+                return OperationResponse.Failure(ErrorMessages.RequestNotFound);
+            }
+            catch (DbUpdateException ex)
+            {
+                CustomLogger.Error("Database update failed in AcceptFriendRequest", ex);
+                return OperationResponse.Failure(ErrorMessages.DatabaseError);
+            }
             catch (Exception ex)
             {
-                CustomLogger.Error("AcceptFriend", ex);
+                CustomLogger.Error("Unexpected error in AcceptFriendRequest", ex);
                 return OperationResponse.Failure(ErrorMessages.GeneralException);
             }
         }
 
+        /// <summary>
+        /// Retrieves a list of friends for a given username.
+        /// </summary>
+        /// <param name="username">The username whose friends are to be retrieved.</param>
+        /// <returns>A <see cref="FriendListResponse"/> containing the friend list or an error message.</returns>
         public FriendListResponse GetFriendList(string username)
         {
             try
@@ -80,8 +106,11 @@ namespace Service.Implements
             }
         }
 
-
-
+        /// <summary>
+        /// Retrieves the list of received friend requests for a given username.
+        /// </summary>
+        /// <param name="username">The username for which to retrieve friend requests.</param>
+        /// <returns>A <see cref="FriendRequestListReponse"/> with the friend requests or an error message.</returns>
         public FriendRequestListReponse GetFriendRequestList(string username)
         {
             try
@@ -111,6 +140,11 @@ namespace Service.Implements
             }
         }
 
+        /// <summary>
+        /// Rejects a friend request by its identifier.
+        /// </summary>
+        /// <param name="idResponse">The ID of the friend request to reject.</param>
+        /// <returns>An <see cref="OperationResponse"/> indicating the result of the operation.</returns>
         public OperationResponse RejectFriendResponse(int idResponse)
         {
             try
@@ -127,6 +161,12 @@ namespace Service.Implements
             }
         }
 
+        /// <summary>
+        /// Sends a friend request from one user to another.
+        /// </summary>
+        /// <param name="senderUsername">The username of the sender.</param>
+        /// <param name="receiverUsername">The username of the receiver.</param>
+        /// <returns>An <see cref="OperationResponse"/> indicating the result of the operation.</returns>
         public OperationResponse SendFriendRequest(string senderUsername, string receiverUsername)
         {
             var senderValidation = _validationService.ValidateUserExists(senderUsername);
@@ -164,6 +204,12 @@ namespace Service.Implements
             }
         }
 
+        /// <summary>
+        /// Retrieves a list of players by their username and the username of the requester.
+        /// </summary>
+        /// <param name="playerUsername">The username of the player to search for.</param>
+        /// <param name="loggedUsername">The username of the requester.</param>
+        /// <returns>A PlayerProfileResponse containing the players and their profiles.</returns>
         public PlayerProfileResponse GetPlayersListByUsername(string playerUsername, string ownerUsername)
         {
             try
@@ -197,7 +243,6 @@ namespace Service.Implements
                     var profile = _profileRepository.GetProfileByPlayerId(friend.PlayerID);
                     if (profile != null)
                     {
-                        //byte[] imageBytes = ConvertImageUrlToBytes(profile.AvatarURL) ?? Array.Empty<byte>();
 
                         var profileDto = new PlayerProfileDTO
                         {
@@ -206,7 +251,6 @@ namespace Service.Implements
                             JoinDate = profile.JoinDate ?? DateTime.MinValue,
                             SingUpDate = profile.SignUpDate ?? DateTime.MinValue,
                             LastVisit = profile.LastVisit ?? DateTime.MinValue,
-                            //ProfileImage = imageBytes
                         };
 
                         profileDtos.Add(profileDto);
@@ -221,7 +265,11 @@ namespace Service.Implements
             }
         }
 
-
+        /// <summary>
+        /// Retrieves a list of all players except the specified user.
+        /// </summary>
+        /// <param name="username">The username of the user to exclude.</param>
+        /// <returns>A FriendListResponse containing the list of players.</returns>
         public FriendListResponse GetPlayersList(string username)
         {
             try
@@ -255,6 +303,14 @@ namespace Service.Implements
             }
         }
 
+        /// <summary>
+        /// Converts an image URL to a byte array.
+        /// </summary>
+        /// <param name="imageUrl">The URL of the image to convert.</param>
+        /// <returns>A byte array containing the image data.</returns>
+        /// <exception cref="FileNotFoundException">Thrown when the specified file is not found.</exception>
+        /// <exception cref="UnauthorizedAccessException">Thrown when access to the file is denied.</exception>
+        /// <exception cref="IOException">Thrown when an I/O error occurs while reading the file.</exception>
         public byte[] ConvertImageUrlToBytes(string imageUrl)
         {
             try
@@ -269,10 +325,25 @@ namespace Service.Implements
                     throw new FileNotFoundException("Image file not found.");
                 }
             }
+            catch (FileNotFoundException ex)
+            {
+                CustomLogger.Warn($"File not found in ConvertImageUrlToBytes: {ex.Message}");
+                throw;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                CustomLogger.Error($"Access denied in ConvertImageUrlToBytes: {ex.Message}");
+                throw new Exception("Unauthorized access while reading the image.");
+            }
+            catch (IOException ex)
+            {
+                CustomLogger.Error($"I/O error in ConvertImageUrlToBytes: {ex.Message}");
+                throw new Exception("I/O error while reading the image.");
+            }
             catch (Exception ex)
             {
-                CustomLogger.Error("Error converting image to bytes", ex);
-                throw new Exception("Error converting image.");
+                CustomLogger.Fatal("Unexpected error in ConvertImageUrlToBytes", ex);
+                throw;
             }
         }
 
