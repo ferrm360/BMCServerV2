@@ -115,24 +115,28 @@ namespace Service.Implements
             }
         }
 
-        public OperationResponse GetAllPlayerScores()
+        public PlayerScoreListResponse GetAllScores()
         {
             try
             {
                 var scores = _scoreRepository.GetAllPlayersScores();
-                var scoresDto = scores.Select(score => new PlayerScoresDTO
-                {
-                    PlayerId = score.PlayerID,
-                    PlayerName = _playerRepository.GetUsernameById(score.PlayerID),
-                    Wins = score.Wins,
-                    Losses = score.Losses,
-                });
-                return OperationResponse.SuccessResult(scoresDto);
+                
+                    var scoresDto = scores.Select(playerScore => new PlayerScoresDTO
+                    {
+                        PlayerId = playerScore.PlayerID,
+                        PlayerName = _playerRepository.GetUsernameById(playerScore.PlayerID),
+                        Wins = playerScore.Wins,
+                        Losses = playerScore.Losses,
+                    }).ToList();
+                
+                
+                return PlayerScoreListResponse.SuccessResult(scoresDto);
             } catch (SqlException ex)
             {
                 string errorMessage = SqlErrorHandler.GetErrorMessage(ex);
-                return OperationResponse.Failure(errorMessage);
+                return PlayerScoreListResponse.Failure(errorMessage);
             }
         }
+
     }
 }

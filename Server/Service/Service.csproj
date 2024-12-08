@@ -204,6 +204,7 @@
     <Compile Include="Utilities\CustomLogger.cs" />
     <Compile Include="Utilities\Mapper\PlayerMapper.cs" />
     <Compile Include="Utilities\Results\PlayerProfileResponse.cs" />
+    <Compile Include="Utilities\Results\PlayerScoreListResponse.cs" />
     <Compile Include="Utilities\Results\PlayerScoresResponse.cs" />
     <Compile Include="Utilities\Results\ProfileResponse.cs" />
     <Compile Include="Utilities\Validators\AccountService\IValidationAccountService.cs" />

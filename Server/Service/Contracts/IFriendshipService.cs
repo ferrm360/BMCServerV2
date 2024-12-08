@@ -27,5 +27,7 @@ namespace Service.Contracts
         FriendListResponse GetPlayersList(string username);
         [OperationContract]
         PlayerProfileResponse GetPlayersListByUsername(string playerUsername, string loggedUsername);
+        [OperationContract]
+        OperationResponse DeleteFriend(string currentPlayer, string friend);
     }
 }

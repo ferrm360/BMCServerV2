@@ -13,5 +13,7 @@ namespace Service.Contracts
         OperationResponse IncrementWins(string username);
         [OperationContract]
         OperationResponse IncrementLosses(string username);
+        [OperationContract]
+        PlayerScoreListResponse GetAllScores();
     }
 }
