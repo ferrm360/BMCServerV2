@@ -10,5 +10,6 @@ namespace DataAccess.Repositories
         void IncrementLosses(int playerId);
         void Add(UserScores playerScores);
         void Save();
+        List<UserScores> GetAllPlayersScores();
     }
 }

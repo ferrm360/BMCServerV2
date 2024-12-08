@@ -109,6 +109,37 @@ namespace DataAccess.Repositories
             }
         }
 
+        public void DeleteFriend(int currentPlayer, int friend)
+        {
+            try
+            {
+                var request = _context.FriendRequest
+                    .SingleOrDefault(r =>
+                    (r.SenderPlayerID == currentPlayer && r.ReceiverPlayerID == friend) ||
+                    (r.SenderPlayerID == friend && r.ReceiverPlayerID == currentPlayer));
+
+                if (request == null)
+                {
+                    throw new InvalidOperationException($"No friend request found with players {currentPlayer} + {friend}.");
+                }
+
+                request.RequestStatus = "Deleted";
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new DataAccessException("Error occurred while updating the database during request acceptance.", ex);
+            }
+            catch (SqlException sqlEx)
+            {
+                throw new DataAccessException("Error occurred while updating the database during request acceptance.", sqlEx);
+            }
+            catch (Exception ex)
+            {
+                throw new DataAccessException("An unexpected error occurred while deleting the friend request.", ex);
+            }
+
+        }
+
         public IEnumerable<FriendRequest> GetSentRequests(int senderPlayerId)
         {
             try

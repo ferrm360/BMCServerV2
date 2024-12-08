@@ -275,5 +275,28 @@ namespace Service.Implements
                 throw new Exception("Error converting image.");
             }
         }
+
+        public OperationResponse DeleteFriend(string currentUsername, string friendUsername)
+        {
+
+            try
+            {
+                var player = _playerRepository.GetByUsername(currentUsername);
+                var friend = _playerRepository.GetByUsername(friendUsername);
+                if (player == null || friend == null)
+                {
+                    return OperationResponse.Failure("UserNotFound");
+                }
+                _friendRequestRepository.DeleteFriend(player.PlayerID, friend.PlayerID);
+                _friendRequestRepository.Save();
+
+                return OperationResponse.SuccessResult();
+            }
+            catch (Exception ex)
+            {
+                CustomLogger.Error("DeleteFriend", ex);
+                return OperationResponse.Failure(ErrorMessages.GeneralException);
+            }
+        }
     }
 }

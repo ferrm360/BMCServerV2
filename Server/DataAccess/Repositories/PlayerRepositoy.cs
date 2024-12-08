@@ -60,6 +60,27 @@ namespace DataAccess.Repositories
             }
         }
 
+        public string GetUsernameById(int playerId)
+        {
+            if (playerId <= 0)
+            {
+                throw new ArgumentException("Player ID must be greater than zero.", nameof(playerId));
+            }
+
+            try
+            {
+                var username = _context.Player
+                .Where(player => player.PlayerID == playerId)
+                .Select(player => player.Username)
+                .FirstOrDefault();
+                return username;
+
+            } catch (SqlException ex)
+            {
+                throw new ArgumentException("An error ocurred while trying to retrieve the player usernaem", ex);
+            }
+        }
+
         public void Add(Player player)
         {
             if (player == null)

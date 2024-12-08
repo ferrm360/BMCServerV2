@@ -139,9 +139,41 @@ namespace DataAccess.Repositories
             }
         }
 
-        public void GetAllPlayersScores()
+        public List<UserScores> GetAllPlayersScores()
         {
-            
+            try
+            {
+                var query = from score in _context.UserScores
+                            join player in _context.Player
+                            on score.PlayerID equals player.PlayerID
+                            orderby score.Wins ascending
+                            select new
+                            {
+                                PlayerId = score.PlayerID,
+                                PlayerName = player.Username,
+                                Wins = score.Wins,
+                                Losses = score.Losses
+                            };
+                var result = query
+                    .ToList()
+                    .Select(a => new UserScores
+                    {
+                        PlayerID = a.PlayerId,
+                        Wins = a.Wins,
+                        Losses = a.Losses
+                    })
+                    .ToList();
+                return result;
+                
+            }
+            catch (SqlException sqlEx) 
+            {
+                throw new DataAccessException("SQL error ocurred while getting all the player scores", sqlEx);
+            }
+            catch (InvalidOperationException invEx)
+            {
+                throw new DataAccessException("SQL error ocurred while getting all the player scores", invEx);
+            }
         }
 
         private void Update(UserScores scores)

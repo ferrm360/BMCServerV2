@@ -7,6 +7,7 @@ using Service.Utilities.Helpers;
 using Service.Utilities.Results;
 using System;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace Service.Implements
 {
@@ -111,6 +112,26 @@ namespace Service.Implements
             {
                 Console.WriteLine($"Unexpected error: {ex.Message}");
                 return OperationResponse.Failure(ErrorMessages.GeneralException);
+            }
+        }
+
+        public OperationResponse GetAllPlayerScores()
+        {
+            try
+            {
+                var scores = _scoreRepository.GetAllPlayersScores();
+                var scoresDto = scores.Select(score => new PlayerScoresDTO
+                {
+                    PlayerId = score.PlayerID,
+                    PlayerName = _playerRepository.GetUsernameById(score.PlayerID),
+                    Wins = score.Wins,
+                    Losses = score.Losses,
+                });
+                return OperationResponse.SuccessResult(scoresDto);
+            } catch (SqlException ex)
+            {
+                string errorMessage = SqlErrorHandler.GetErrorMessage(ex);
+                return OperationResponse.Failure(errorMessage);
             }
         }
     }

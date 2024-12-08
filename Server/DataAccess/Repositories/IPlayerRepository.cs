@@ -12,5 +12,7 @@ namespace DataAccess.Repositories
         void Save();
         IEnumerable<Player> GetPlayersByUsername(string username, int playerId);
         IEnumerable<Player> GetPlayers(string username);    
+        string GetUsernameById(int playerId);
+        
     }
 }
