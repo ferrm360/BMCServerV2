@@ -39,5 +39,6 @@
         public const string UsernameContainsInvalidChars = "Error.UsernameContainsInvalidChars";
         public const string RequestNotFound = "Error.RequestNotFound";
         public const string DatabaseError = "Error.DatabaseError";
+        public const string FriendsAlready = "Error.AlreadyFriends";
     }
 }

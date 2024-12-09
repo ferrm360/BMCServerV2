@@ -185,24 +185,43 @@ namespace Service.Implements
             {
                 return OperationResponse.Failure(ErrorMessages.InvalidUsername);
             }
+            
 
             var requestValidation = _validationService.ValidateFriendRequestDoesNotExist(sender.PlayerID, receiver.PlayerID);
             if (!requestValidation.IsSuccess) 
             { 
                 return requestValidation; 
             }
+
             try
             {
-                _friendRequestRepository.SendFriendRequest(sender.PlayerID, receiver.PlayerID);
-                _friendRequestRepository.Save();
-                return OperationResponse.SuccessResult();
+                if (!_friendRequestRepository.AreFriends(sender.PlayerID, receiver.PlayerID))
+
+                {
+                    _friendRequestRepository.SendFriendRequest(sender.PlayerID, receiver.PlayerID);
+                    _friendRequestRepository.Save();
+                    return OperationResponse.SuccessResult();
+                }
+                else
+                {
+                    return OperationResponse.Failure(ErrorMessages.FriendsAlready);
+                }
+
             }
             catch (Exception ex)
             {
                 CustomLogger.Error("Failed to send friend request.", ex);
                 return OperationResponse.Failure(ErrorMessages.GeneralException);
             }
+
+
+
+
         }
+            
+                
+            
+       
 
         /// <summary>
         /// Retrieves a list of players by their username and the username of the requester.
